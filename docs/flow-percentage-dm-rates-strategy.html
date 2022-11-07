@@ -1,0 +1,3748 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 Flow-Percentage DM Rates Strategy | EPFR Strategy Notebooks</title>
+  <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 Flow-Percentage DM Rates Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
+  <meta name="github-repo" content="oliviablasz/EPFRNotebooks_v2" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 Flow-Percentage DM Rates Strategy | EPFR Strategy Notebooks" />
+  
+  <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="fx-strategy.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { font-weight: bold; } /* Alert */
+code span.an { font-style: italic; } /* Annotation */
+code span.cf { font-weight: bold; } /* ControlFlow */
+code span.co { font-style: italic; } /* Comment */
+code span.cv { font-style: italic; } /* CommentVar */
+code span.do { font-style: italic; } /* Documentation */
+code span.dt { text-decoration: underline; } /* DataType */
+code span.er { font-weight: bold; } /* Error */
+code span.in { font-style: italic; } /* Information */
+code span.kw { font-weight: bold; } /* Keyword */
+code span.pp { font-weight: bold; } /* Preprocessor */
+code span.wa { font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/comingsoon.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="epfr-library.html"><a href="epfr-library.html"><i class="fa fa-check"></i><b>2</b> EPFR Library</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="epfr-library.html"><a href="epfr-library.html#about"><i class="fa fa-check"></i><b>2.1</b> About</a></li>
+<li class="chapter" data-level="2.2" data-path="epfr-library.html"><a href="epfr-library.html#ftp"><i class="fa fa-check"></i><b>2.2</b> ftp.get()</a></li>
+<li class="chapter" data-level="2.3" data-path="epfr-library.html"><a href="epfr-library.html#compound.flows"><i class="fa fa-check"></i><b>2.3</b> compound.flows()</a></li>
+<li class="chapter" data-level="2.4" data-path="epfr-library.html"><a href="epfr-library.html#bbk"><i class="fa fa-check"></i><b>2.4</b> bbk()</a></li>
+<li class="chapter" data-level="2.5" data-path="epfr-library.html"><a href="epfr-library.html#bbk.matrix"><i class="fa fa-check"></i><b>2.5</b> bbk.matrix()</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="Filters.html"><a href="Filters.html"><i class="fa fa-check"></i><b>3</b> Filters</a></li>
+<li class="chapter" data-level="4" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html"><i class="fa fa-check"></i><b>4</b> Flow-Percentage Country Strategy</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#daily-percentage-flow"><i class="fa fa-check"></i><b>4.2</b> Daily Percentage Flow</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#aggregations"><i class="fa fa-check"></i><b>4.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="4.2.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#calculation"><i class="fa fa-check"></i><b>4.2.2</b> Calculation</a></li>
+<li class="chapter" data-level="4.2.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#flow-file"><i class="fa fa-check"></i><b>4.2.3</b> Flow File</a></li>
+<li class="chapter" data-level="4.2.4" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#return-file"><i class="fa fa-check"></i><b>4.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#strategy-implementation"><i class="fa fa-check"></i><b>4.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#compounding-flows"><i class="fa fa-check"></i><b>4.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="4.3.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#ranking-countries"><i class="fa fa-check"></i><b>4.3.2</b> Ranking Countries</a></li>
+<li class="chapter" data-level="4.3.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#model"><i class="fa fa-check"></i><b>4.3.3</b> Model</a></li>
+<li class="chapter" data-level="4.3.4" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#performance"><i class="fa fa-check"></i><b>4.3.4</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html"><i class="fa fa-check"></i><b>5</b> Multi-Asset Strategy</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#overview-1"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#daily-percentage-flow-1"><i class="fa fa-check"></i><b>5.2</b> Daily Percentage Flow</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#aggregations-1"><i class="fa fa-check"></i><b>5.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="5.2.2" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#calculation-1"><i class="fa fa-check"></i><b>5.2.2</b> Calculation</a></li>
+<li class="chapter" data-level="5.2.3" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#flow-file-1"><i class="fa fa-check"></i><b>5.2.3</b> Flow File</a></li>
+<li class="chapter" data-level="5.2.4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#return-file-1"><i class="fa fa-check"></i><b>5.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#strategy-implementation-1"><i class="fa fa-check"></i><b>5.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#compounding-flows-1"><i class="fa fa-check"></i><b>5.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="5.3.2" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#return-file-2"><i class="fa fa-check"></i><b>5.3.2</b> Return file</a></li>
+<li class="chapter" data-level="5.3.3" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#ranking-asset-classes"><i class="fa fa-check"></i><b>5.3.3</b> Ranking Asset Classes</a></li>
+<li class="chapter" data-level="5.3.4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#model-1"><i class="fa fa-check"></i><b>5.3.4</b> Model</a></li>
+<li class="chapter" data-level="5.3.5" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#performance-1"><i class="fa fa-check"></i><b>5.3.5</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="fx-strategy.html"><a href="fx-strategy.html"><i class="fa fa-check"></i><b>6</b> FX Strategy</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="fx-strategy.html"><a href="fx-strategy.html#overview-2"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="fx-strategy.html"><a href="fx-strategy.html#daily-percentage-flow-2"><i class="fa fa-check"></i><b>6.2</b> Daily Percentage Flow</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="fx-strategy.html"><a href="fx-strategy.html#aggregations-2"><i class="fa fa-check"></i><b>6.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="6.2.2" data-path="fx-strategy.html"><a href="fx-strategy.html#calculation-2"><i class="fa fa-check"></i><b>6.2.2</b> Calculation</a></li>
+<li class="chapter" data-level="6.2.3" data-path="fx-strategy.html"><a href="fx-strategy.html#flow-file-2"><i class="fa fa-check"></i><b>6.2.3</b> Flow File</a></li>
+<li class="chapter" data-level="6.2.4" data-path="fx-strategy.html"><a href="fx-strategy.html#return-file-3"><i class="fa fa-check"></i><b>6.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="fx-strategy.html"><a href="fx-strategy.html#strategy-implementation-2"><i class="fa fa-check"></i><b>6.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="fx-strategy.html"><a href="fx-strategy.html#compounding-flows-2"><i class="fa fa-check"></i><b>6.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="6.3.2" data-path="fx-strategy.html"><a href="fx-strategy.html#ranking-currencies"><i class="fa fa-check"></i><b>6.3.2</b> Ranking Currencies</a></li>
+<li class="chapter" data-level="6.3.3" data-path="fx-strategy.html"><a href="fx-strategy.html#model-2"><i class="fa fa-check"></i><b>6.3.3</b> Model</a></li>
+<li class="chapter" data-level="6.3.4" data-path="fx-strategy.html"><a href="fx-strategy.html#performance-2"><i class="fa fa-check"></i><b>6.3.4</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html"><i class="fa fa-check"></i><b>7</b> Flow-Percentage DM Rates Strategy</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#overview-3"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#daily-percentage-flow-3"><i class="fa fa-check"></i><b>7.2</b> Daily Percentage Flow</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#aggregations-3"><i class="fa fa-check"></i><b>7.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="7.2.2" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#calculation-3"><i class="fa fa-check"></i><b>7.2.2</b> Calculation</a></li>
+<li class="chapter" data-level="7.2.3" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#flow-file-3"><i class="fa fa-check"></i><b>7.2.3</b> Flow File</a></li>
+<li class="chapter" data-level="7.2.4" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#return-file-4"><i class="fa fa-check"></i><b>7.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#strategy-implementation-3"><i class="fa fa-check"></i><b>7.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#compounding-flows-3"><i class="fa fa-check"></i><b>7.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="7.3.2" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#ranking-countries-1"><i class="fa fa-check"></i><b>7.3.2</b> Ranking Countries</a></li>
+<li class="chapter" data-level="7.3.3" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#model-3"><i class="fa fa-check"></i><b>7.3.3</b> Model</a></li>
+<li class="chapter" data-level="7.3.4" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#performance-3"><i class="fa fa-check"></i><b>7.3.4</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://www.epfr.com/" target="blank">EPFR Global</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">EPFR Strategy Notebooks</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="flow-percentage-dm-rates-strategy" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> Flow-Percentage DM Rates Strategy<a href="flow-percentage-dm-rates-strategy.html#flow-percentage-dm-rates-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="overview-3" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Overview<a href="flow-percentage-dm-rates-strategy.html#overview-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span style="color: red;">The <em>Flow-Percentage DM Rates Strategy</em> is a bond based rotation strategy, which ranks different G10 10 Year Rates, based on a percentage flow indicator.</span></p>
+<p>This approach uses the stated allocations of bond funds with a cross-border focus and calculates percentage flow into G10 countries. In terms of twenty-day percentage flows, the top fifth of G10 10 year rates outperform the bottom fifth by around 22pbs per year.</p>
+<p>G10 Countries used in analysis are:
+1. United States
+2. Europe
+3. United Kingdom
+4. Japan
+5. Australia
+6. New Zealand
+7. Canada
+8. Switzerland
+9. Norway
+10. Sweden</p>
+<hr />
+</div>
+<div id="daily-percentage-flow-3" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Daily Percentage Flow<a href="flow-percentage-dm-rates-strategy.html#daily-percentage-flow-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <em>Flow-Percentage DM Rates Strategy</em> developed by EPFR Global is based on percentage flow into countries via cross-border bond funds. In this section, the reader will gain an understanding of the aggregations which can be used to create a signal as well as the methodology behind daily percentage flow calculations.</p>
+<hr />
+<div id="aggregations-3" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Aggregations<a href="flow-percentage-dm-rates-strategy.html#aggregations-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first step is defining a subset of data to capture in calculating our signal.</p>
+<p>This strategy requires;</p>
+<ul>
+<li><p>Bond funds with a cross-boarder focus. These are essentially any fund that has a mandate spanning more than one country. The vast majority of these will be global and regional funds.</p></li>
+<li><p>Funds must report both daily flows and country allocations, since these values are needed to calculate Daily Percentage Flow.</p></li>
+</ul>
+<p>Cross-border bond funds, which report their country allocations and their fund flows, are a subset of those that only report their fund flows to EPFR. The figure below shows EPFR’s coverage of this universe over time compared to our total coverage.</p>
+<center>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/oliviablasz/EPFRNotebooks_v1/main/png/coverage_ctryFI.png" width="250" alt="" />
+<p class="caption">Updated at the end of July each year</p>
+</div>
+</center>
+<p>Users looking for more specific detail can customize this aggregation even further using EPFR’s fund-level or share class-level granularity. Some good examples would be Active/Passive, ETF or Mutual funds, Institutional or Retail. Users can use these tags to different degrees in creating aggregated signals to backtest. Further detail about this is available in section <a href="Filters.html#Filters">3</a>.</p>
+<p>This can be achieved using fund-level flow files or reaching out to EPFR’s quant team for customized aggregations.</p>
+<hr />
+</div>
+<div id="calculation-3" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Calculation<a href="flow-percentage-dm-rates-strategy.html#calculation-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To begin calculating the Daily Percentage flow, we start with our subset of cross-border bond funds. To calculate the fund’s impact on a country, we scale a fund’s flow by multiplying it against its stated country allocation, which is available in EPFR’s Country Allocation Database, on that day. EPFR releases country allocations of all funds on the <span class="math inline">\(23^{\text{rd}}\)</span> of each month (or the next available business day) at a monthly frequency. Hence, our calculation assumes constant country allocation between two consecutive release dates within the month.</p>
+<p>We then apply the same procedure to all funds with a fund flow and country allocation information and then sum the flows for each country across all funds.</p>
+<p><span class="math display">\[\text{Total Impact}_{c,t} = \sum^{N}_{i=m}{\text{Flow}_i \times \text{Allocation}_i}\]</span>
+Where:</p>
+<ul>
+<li><span class="math inline">\(\text{Total Impact}\)</span> = the impact on a country <span class="math inline">\(c\)</span>, across all funds <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+</ul>
+<p>Additionally, we repeat the process across the same fund’s Assets held under Management (AuM), to get the total AuM held in a country.</p>
+<p><span class="math display">\[\text{Total AuM}_{c,t} = \sum^{N}_{i=m}{\text{AuM}_i \times \text{Allocation}_i}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\text{Total AuM}\)</span> = the assets held in a country <span class="math inline">\(c\)</span>, across all funds <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+</ul>
+<p>Finally, to find the daily percentage flow for a country, we divide the Total Impact by the Total AuM. Then we repeat this across all different countries for the entire history.</p>
+<p><span class="math display">\[\text{Percentage Flow}_{c,t} = \frac{\text{Total Impact}_{c,t}}{\text{Total AuM}_{c,t}}\]</span>
+Where:</p>
+<ul>
+<li><span class="math inline">\(\text{Percentage Flow}\)</span> = the scaled flow as a percentage into a country <span class="math inline">\(c\)</span>, across all funds <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+</ul>
+<hr />
+</div>
+<div id="flow-file-3" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Flow File<a href="flow-percentage-dm-rates-strategy.html#flow-file-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The users may create flow percentages for their desired country aggregations and granularity using the methodology described in the previous section.</p>
+<p>EPFR also provides a pre-calculated aggregation for its users for the <em>Flow-Percentage DM Strategy</em>. This file can be found on the FTP under the strategies folder. Please refer to the FTP Folder Structure section for the exact location of this file. This file contains daily cross-border bond fund flow data for 52 countries and is updated daily at 5:00 PM est. with a T+1 day lag.</p>
+<p>For this demonstration, we use the pre-calculated file <strong>FloPctCtry-B-daily.csv</strong>. Below shows a snippet of what this file contains.</p>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+AU
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+CA
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+CH
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+DE
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+GB
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+JP
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+NO
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+NZ
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+SE
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+US
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+20211201
+</td>
+<td style="text-align:right;">
+-0.0007020
+</td>
+<td style="text-align:right;">
+-0.0015174
+</td>
+<td style="text-align:right;">
+0.0004122
+</td>
+<td style="text-align:right;">
+-0.0010397
+</td>
+<td style="text-align:right;">
+-0.0006906
+</td>
+<td style="text-align:right;">
+-0.0001968
+</td>
+<td style="text-align:right;">
+0.0009049
+</td>
+<td style="text-align:right;">
+-0.0003805
+</td>
+<td style="text-align:right;">
+0.0001095
+</td>
+<td style="text-align:right;">
+-0.0023166
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211202
+</td>
+<td style="text-align:right;">
+-0.0004375
+</td>
+<td style="text-align:right;">
+-0.0002560
+</td>
+<td style="text-align:right;">
+-0.0002809
+</td>
+<td style="text-align:right;">
+-0.0009476
+</td>
+<td style="text-align:right;">
+-0.0004765
+</td>
+<td style="text-align:right;">
+0.0000392
+</td>
+<td style="text-align:right;">
+-0.0008211
+</td>
+<td style="text-align:right;">
+-0.0010253
+</td>
+<td style="text-align:right;">
+-0.0007682
+</td>
+<td style="text-align:right;">
+-0.0004119
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211203
+</td>
+<td style="text-align:right;">
+-0.0003314
+</td>
+<td style="text-align:right;">
+-0.0001907
+</td>
+<td style="text-align:right;">
+0.0003749
+</td>
+<td style="text-align:right;">
+0.0007579
+</td>
+<td style="text-align:right;">
+0.0000204
+</td>
+<td style="text-align:right;">
+-0.0007797
+</td>
+<td style="text-align:right;">
+-0.0002024
+</td>
+<td style="text-align:right;">
+0.0004397
+</td>
+<td style="text-align:right;">
+0.0001894
+</td>
+<td style="text-align:right;">
+-0.0009936
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211206
+</td>
+<td style="text-align:right;">
+0.0000657
+</td>
+<td style="text-align:right;">
+-0.0000962
+</td>
+<td style="text-align:right;">
+-0.0011922
+</td>
+<td style="text-align:right;">
+-0.0004092
+</td>
+<td style="text-align:right;">
+-0.0005934
+</td>
+<td style="text-align:right;">
+0.0005597
+</td>
+<td style="text-align:right;">
+-0.0000267
+</td>
+<td style="text-align:right;">
+-0.0003495
+</td>
+<td style="text-align:right;">
+-0.0002973
+</td>
+<td style="text-align:right;">
+-0.0013883
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211207
+</td>
+<td style="text-align:right;">
+-0.0003327
+</td>
+<td style="text-align:right;">
+-0.0001279
+</td>
+<td style="text-align:right;">
+-0.0005822
+</td>
+<td style="text-align:right;">
+-0.0005074
+</td>
+<td style="text-align:right;">
+-0.0003590
+</td>
+<td style="text-align:right;">
+0.0000254
+</td>
+<td style="text-align:right;">
+-0.0005952
+</td>
+<td style="text-align:right;">
+-0.0005382
+</td>
+<td style="text-align:right;">
+-0.0007128
+</td>
+<td style="text-align:right;">
+-0.0005743
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211208
+</td>
+<td style="text-align:right;">
+-0.0006319
+</td>
+<td style="text-align:right;">
+-0.0023702
+</td>
+<td style="text-align:right;">
+-0.0002574
+</td>
+<td style="text-align:right;">
+-0.0006398
+</td>
+<td style="text-align:right;">
+-0.0007982
+</td>
+<td style="text-align:right;">
+-0.0008411
+</td>
+<td style="text-align:right;">
+-0.0022261
+</td>
+<td style="text-align:right;">
+-0.0003871
+</td>
+<td style="text-align:right;">
+0.0003074
+</td>
+<td style="text-align:right;">
+-0.0012151
+</td>
+</tr>
+</tbody>
+</table>
+<p>We will download this file from the ftp using <code>ftp.get()</code>, more about this function can be referred to in section <a href="epfr-library.html#ftp">2.2</a>.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="flow-percentage-dm-rates-strategy.html#cb68-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="st">&quot;EPFRHistory/Strategies/daily/FloPctCtry-B-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
+<span id="cb68-2"><a href="flow-percentage-dm-rates-strategy.html#cb68-2" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">temp&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
+<span id="cb68-3"><a href="flow-percentage-dm-rates-strategy.html#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-4"><a href="flow-percentage-dm-rates-strategy.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
+<p>After downloading the csv file you will store it’s path as <code>flow.file</code>. A quick way to do this is shown below:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="flow-percentage-dm-rates-strategy.html#cb69-1" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\temp\\FloPctCtry-B-daily.csv</span></span></code></pre></div>
+<!-- ```{r, include=F} -->
+<!-- #flow.file <- strat.path("FloPctCtry-B", "daily") # PATH TO FLOW PERCENTAGE .csv FILE -->
+<!-- flow.file <- paste0(fcn.dir(),"\\New Model Concept\\DMRates\\csv\\FloPct-Ctry-B-daily.csv") -->
+<!-- ``` -->
+<hr />
+</div>
+<div id="return-file-4" class="section level3 hasAnchor" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Return File<a href="flow-percentage-dm-rates-strategy.html#return-file-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The return file for this strategy should contain daily bond returns for each of the countries in the flow file, which the user can find with their own resources.</p>
+<p>EPFR also provides Fund Return data, that can be used as a proxy to returns. To create a return file using EPFR daily flow data, the following equation can be used:</p>
+<p><span class="math display">\[\text{Fund Return}_{c,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_i}{\sum^{N}_{i=m} \text{Assets Start}_i}\]</span>
+Where:</p>
+<ul>
+<li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of country <span class="math inline">\(c\)</span>, across all funds <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+</ul>
+<p>For this demonstration, we will the file which has been locally named <em>g10rates.csv</em>.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="flow-percentage-dm-rates-strategy.html#cb70-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;g10rates.csv&quot;</span></span></code></pre></div>
+<!-- ```{r, include=F} -->
+<!-- ret.file <- paste0(fcn.dir(),"\\New Model Concept\\DMRates\\csv\\g10rates_raw.csv") # PATH TO FLOW PERCENTAGE .csv FILE             -->
+<!-- ``` -->
+<p>For your reference a snippet of our return file looks like this</p>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+AU
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+CA
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+CH
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+DE
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+GB
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+JP
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+NO
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+NZ
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+SE
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+US
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+20211201
+</td>
+<td style="text-align:right;">
+1.7300
+</td>
+<td style="text-align:right;">
+1.494
+</td>
+<td style="text-align:right;">
+-0.272
+</td>
+<td style="text-align:right;">
+-0.345
+</td>
+<td style="text-align:right;">
+0.820
+</td>
+<td style="text-align:right;">
+0.065
+</td>
+<td style="text-align:right;">
+1.488
+</td>
+<td style="text-align:right;">
+2.458
+</td>
+<td style="text-align:right;">
+0.147
+</td>
+<td style="text-align:right;">
+1.405
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211202
+</td>
+<td style="text-align:right;">
+1.6800
+</td>
+<td style="text-align:right;">
+1.505
+</td>
+<td style="text-align:right;">
+-0.306
+</td>
+<td style="text-align:right;">
+-0.372
+</td>
+<td style="text-align:right;">
+0.811
+</td>
+<td style="text-align:right;">
+0.063
+</td>
+<td style="text-align:right;">
+1.422
+</td>
+<td style="text-align:right;">
+2.423
+</td>
+<td style="text-align:right;">
+0.086
+</td>
+<td style="text-align:right;">
+1.446
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211203
+</td>
+<td style="text-align:right;">
+1.6100
+</td>
+<td style="text-align:right;">
+1.437
+</td>
+<td style="text-align:right;">
+-0.313
+</td>
+<td style="text-align:right;">
+-0.391
+</td>
+<td style="text-align:right;">
+0.747
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+<td style="text-align:right;">
+1.471
+</td>
+<td style="text-align:right;">
+2.390
+</td>
+<td style="text-align:right;">
+0.084
+</td>
+<td style="text-align:right;">
+1.345
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211206
+</td>
+<td style="text-align:right;">
+1.5825
+</td>
+<td style="text-align:right;">
+1.523
+</td>
+<td style="text-align:right;">
+-0.329
+</td>
+<td style="text-align:right;">
+-0.391
+</td>
+<td style="text-align:right;">
+0.738
+</td>
+<td style="text-align:right;">
+0.045
+</td>
+<td style="text-align:right;">
+1.440
+</td>
+<td style="text-align:right;">
+2.347
+</td>
+<td style="text-align:right;">
+0.071
+</td>
+<td style="text-align:right;">
+1.436
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211207
+</td>
+<td style="text-align:right;">
+1.6475
+</td>
+<td style="text-align:right;">
+1.579
+</td>
+<td style="text-align:right;">
+-0.318
+</td>
+<td style="text-align:right;">
+-0.377
+</td>
+<td style="text-align:right;">
+0.730
+</td>
+<td style="text-align:right;">
+0.056
+</td>
+<td style="text-align:right;">
+1.460
+</td>
+<td style="text-align:right;">
+2.418
+</td>
+<td style="text-align:right;">
+0.064
+</td>
+<td style="text-align:right;">
+1.476
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211208
+</td>
+<td style="text-align:right;">
+1.6200
+</td>
+<td style="text-align:right;">
+1.591
+</td>
+<td style="text-align:right;">
+-0.287
+</td>
+<td style="text-align:right;">
+-0.315
+</td>
+<td style="text-align:right;">
+0.775
+</td>
+<td style="text-align:right;">
+0.050
+</td>
+<td style="text-align:right;">
+1.517
+</td>
+<td style="text-align:right;">
+2.430
+</td>
+<td style="text-align:right;">
+0.096
+</td>
+<td style="text-align:right;">
+1.523
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
+<div id="strategy-implementation-3" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Strategy Implementation<a href="flow-percentage-dm-rates-strategy.html#strategy-implementation-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the flow and return files to our <em>R studio</em> work space.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="flow-percentage-dm-rates-strategy.html#cb71-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(flow.file, <span class="at">row.names =</span> <span class="dv">1</span>) <span class="co"># GET FLOW PERCENTAGE</span></span>
+<span id="cb71-2"><a href="flow-percentage-dm-rates-strategy.html#cb71-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(ret.file, <span class="at">row.names =</span> <span class="dv">1</span>)  <span class="co"># GET RETURN</span></span></code></pre></div>
+<p>We must now make sure our files only use G10 countries and have the same columns. We will also subset the flow file <span class="math inline">\(x\)</span> to use the same countries as <span class="math inline">\(y\)</span>.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="flow-percentage-dm-rates-strategy.html#cb72-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x[, <span class="fu">is.element</span>(<span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]],<span class="fu">dimnames</span>(y)[[<span class="dv">2</span>]])] <span class="co"># SUBSET TO G10 COUNTRIES           </span></span>
+<span id="cb72-2"><a href="flow-percentage-dm-rates-strategy.html#cb72-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[,<span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]]]           </span></code></pre></div>
+<p><em>* Note: subsetting can be also be done when creating the flow and return files</em></p>
+<div id="compounding-flows-3" class="section level3 hasAnchor" number="7.3.1">
+<h3><span class="header-section-number">7.3.1</span> Compounding Flows<a href="flow-percentage-dm-rates-strategy.html#compounding-flows-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we set up a variable for our look-back period, which can also be called a flow window. This variable will be the window of time we use to create a trailing compounded daily percentage flow. The look-back period we choose for our demonstrations is <strong>20 days</strong>.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="flow-percentage-dm-rates-strategy.html#cb73-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># FLOW WINDOW (IN WEEKDAYS) - 20 day look back period</span></span></code></pre></div>
+<p>Again, using a function from the <code>library('EPFR')</code>, <code>compound.flows()</code> compounds the daily percentage flow over the trailing <code>lookback</code> period for each country.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="flow-percentage-dm-rates-strategy.html#cb74-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, F) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+AU
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+CA
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+CH
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+DE
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+GB
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+JP
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+NO
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+NZ
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+SE
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+US
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+20211201
+</td>
+<td style="text-align:right;">
+-0.0140398
+</td>
+<td style="text-align:right;">
+-0.0303430
+</td>
+<td style="text-align:right;">
+0.0082447
+</td>
+<td style="text-align:right;">
+-0.0207913
+</td>
+<td style="text-align:right;">
+-0.0138116
+</td>
+<td style="text-align:right;">
+-0.0039352
+</td>
+<td style="text-align:right;">
+0.0180996
+</td>
+<td style="text-align:right;">
+-0.0076095
+</td>
+<td style="text-align:right;">
+0.0021904
+</td>
+<td style="text-align:right;">
+-0.0463225
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211202
+</td>
+<td style="text-align:right;">
+-0.0087503
+</td>
+<td style="text-align:right;">
+-0.0051208
+</td>
+<td style="text-align:right;">
+-0.0056184
+</td>
+<td style="text-align:right;">
+-0.0189494
+</td>
+<td style="text-align:right;">
+-0.0095304
+</td>
+<td style="text-align:right;">
+0.0007835
+</td>
+<td style="text-align:right;">
+-0.0164210
+</td>
+<td style="text-align:right;">
+-0.0205034
+</td>
+<td style="text-align:right;">
+-0.0153626
+</td>
+<td style="text-align:right;">
+-0.0082383
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211203
+</td>
+<td style="text-align:right;">
+-0.0066284
+</td>
+<td style="text-align:right;">
+-0.0038134
+</td>
+<td style="text-align:right;">
+0.0074981
+</td>
+<td style="text-align:right;">
+0.0151591
+</td>
+<td style="text-align:right;">
+0.0004079
+</td>
+<td style="text-align:right;">
+-0.0155935
+</td>
+<td style="text-align:right;">
+-0.0040488
+</td>
+<td style="text-align:right;">
+0.0087939
+</td>
+<td style="text-align:right;">
+0.0037885
+</td>
+<td style="text-align:right;">
+-0.0198695
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211206
+</td>
+<td style="text-align:right;">
+0.0013137
+</td>
+<td style="text-align:right;">
+-0.0019235
+</td>
+<td style="text-align:right;">
+-0.0238412
+</td>
+<td style="text-align:right;">
+-0.0081845
+</td>
+<td style="text-align:right;">
+-0.0118680
+</td>
+<td style="text-align:right;">
+0.0111940
+</td>
+<td style="text-align:right;">
+-0.0005341
+</td>
+<td style="text-align:right;">
+-0.0069902
+</td>
+<td style="text-align:right;">
+-0.0059450
+</td>
+<td style="text-align:right;">
+-0.0277629
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211207
+</td>
+<td style="text-align:right;">
+-0.0066546
+</td>
+<td style="text-align:right;">
+-0.0025586
+</td>
+<td style="text-align:right;">
+-0.0116425
+</td>
+<td style="text-align:right;">
+-0.0101484
+</td>
+<td style="text-align:right;">
+-0.0071789
+</td>
+<td style="text-align:right;">
+0.0005085
+</td>
+<td style="text-align:right;">
+-0.0119029
+</td>
+<td style="text-align:right;">
+-0.0107644
+</td>
+<td style="text-align:right;">
+-0.0142548
+</td>
+<td style="text-align:right;">
+-0.0114857
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211208
+</td>
+<td style="text-align:right;">
+-0.0126372
+</td>
+<td style="text-align:right;">
+-0.0473937
+</td>
+<td style="text-align:right;">
+-0.0051485
+</td>
+<td style="text-align:right;">
+-0.0127949
+</td>
+<td style="text-align:right;">
+-0.0159634
+</td>
+<td style="text-align:right;">
+-0.0168198
+</td>
+<td style="text-align:right;">
+-0.0445135
+</td>
+<td style="text-align:right;">
+-0.0077408
+</td>
+<td style="text-align:right;">
+0.0061490
+</td>
+<td style="text-align:right;">
+-0.0242992
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="ranking-countries-1" class="section level3 hasAnchor" number="7.3.2">
+<h3><span class="header-section-number">7.3.2</span> Ranking Countries<a href="flow-percentage-dm-rates-strategy.html#ranking-countries-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we sort the countries in each universe into five equal bins based on their 20-day Percentage Flow Compounded value for the selected holding period. To do this, we will use the function from <code>library('EPFR')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
+<p>The <code>bbk()</code> function requires our compounded daily percentage flow file, a return file, and our selected universe. Please refer to the library documentation for the complete list of parameters of this function.</p>
+<p>The first parameter we add is the number of bins we want to use. For our case, we want to use 5 because our strategy is to go long the top fifth and short the bottom fifth.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="flow-percentage-dm-rates-strategy.html#cb75-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
+<p>Since EPFR data is published with T+1 day lag and is released around 5:00 pm EST, we account for a T+2 day delay in our model since that is when one can trade on the information. Users interested in more timely signals can also use the T+2 Open Prices for backtesting purposes. EPFR also offers a Premium Daily offering, an earlier release of the end-of-day data covering a significant subset of fund-level flow information.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="flow-percentage-dm-rates-strategy.html#cb76-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data takes time to have</span></span></code></pre></div>
+<p>It is also important to note that this model will need to be re-balanced weekly. The day of the week the rebalancing occurs is at the discretion of the user. For this example we will set the day of the week to trade as <strong>Friday</strong>.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="flow-percentage-dm-rates-strategy.html#cb77-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
+<p>Additionally, we also evaluate the returns for different holding periods. The user can input return horizons that they are interested in here. For this example we define a return horizon for weekly, fortnightly, monthly, bi-monthly, quarterly, and semi-annually.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="flow-percentage-dm-rates-strategy.html#cb78-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
+<p>Now that we have defined all of our inputs, to rank the countries into quintiles by their 20-day percentage flow, we call function <code>bbk()</code> for a 1-week holding period.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="flow-percentage-dm-rates-strategy.html#cb79-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
+</div>
+<div id="model-3" class="section level3 hasAnchor" number="7.3.3">
+<h3><span class="header-section-number">7.3.3</span> Model<a href="flow-percentage-dm-rates-strategy.html#model-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!-- #### Flow % -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- z[["raw"]] -->
+<!-- ``` -->
+<!-- ```{r, echo=F} -->
+<!-- table <- as.data.frame(mat.to.xlModel(z[["raw"]], delay, hz[1], F)) -->
+<!-- table[ , c(3:length(table))] <- apply(table[ , c(3:length(table))], 2, function(x) as.numeric(as.character(x))) -->
+<!-- kbl(table, digits = 7)%>% -->
+<!--   kable_paper(c("striped", "hover"))%>% -->
+<!--   add_header_above(c("Dates" = 3, "Flow percentage compounded over trailing 20 days" = 10), bold = TRUE, color = "white", background = "grey") %>% -->
+<!--   row_spec(0, bold = T, color = "white", background = "grey") %>% -->
+<!--   column_spec(1:2, bold = T) %>% -->
+<!--   column_spec(3, bold = T, border_right = T) %>% -->
+<!--   scroll_box(width = "100%", height = "500px") -->
+<!-- ``` -->
+<!-- #### Rets -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- z[["raw.fwd.rets"]] -->
+<!-- ``` -->
+<!-- ```{r, echo=F} -->
+<!-- table <- as.data.frame(mat.to.xlModel(z[["raw.fwd.rets"]], delay, hz[1], F)) -->
+<!-- table[ , c(3:length(table))] <- apply(table[ , c(3:length(table))], 2, function(x) as.numeric(as.character(x))) -->
+<!-- kbl(table, digits = 7)%>% -->
+<!--   kable_paper(c("striped", "hover"))%>% -->
+<!--   add_header_above(c("Dates" = 3, "One-week ahead return (Friday to Friday)" = 10), bold = TRUE, color = "white", background = "grey") %>% -->
+<!--   row_spec(0, bold = T, color = "white", background = "grey") %>% -->
+<!--   column_spec(1:2, bold = T) %>% -->
+<!--   column_spec(3, bold = T, border_right = T) %>% -->
+<!--   scroll_box(width = "100%", height = "500px") -->
+<!-- ``` -->
+<p><strong>Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)</strong></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="flow-percentage-dm-rates-strategy.html#cb80-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+AU
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+CA
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+CH
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+DE
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+GB
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+JP
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+NO
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+NZ
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+SE
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+US
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+20211231
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211224
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211217
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211210
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211203
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+</tbody>
+</table>
+<!-- ```{r, echo=F} -->
+<!-- kbl(mat.to.xlModel(z[["bins"]], delay, hz[1], F))%>% -->
+<!--   kable_paper(c("striped", "hover"))%>% -->
+<!--   add_header_above(c("Dates" = 3, "Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)" = 10), bold = TRUE, color = "white", background = "grey") %>% -->
+<!--   row_spec(0, bold = T, color = "white", background = "grey") %>% -->
+<!--   column_spec(1:2, bold = T) %>% -->
+<!--   column_spec(3, bold = T, border_right = T) %>% -->
+<!--   #kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>% -->
+<!--   scroll_box(width = "100%", height = "500px") -->
+<!-- ``` -->
+<p><strong>Quintile Returns over the equal-weight universe</strong></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="flow-percentage-dm-rates-strategy.html#cb81-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q1
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q2
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q3
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q4
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q5
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+TxB
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+uRet
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+20211231
+</td>
+<td style="text-align:right;">
+51.442115
+</td>
+<td style="text-align:right;">
+-39.570908
+</td>
+<td style="text-align:right;">
+28.0605000
+</td>
+<td style="text-align:right;">
+6.266251
+</td>
+<td style="text-align:right;">
+-46.197958
+</td>
+<td style="text-align:right;">
+97.6400732
+</td>
+<td style="text-align:right;">
+7.4724679
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211224
+</td>
+<td style="text-align:right;">
+2.463720
+</td>
+<td style="text-align:right;">
+4.776837
+</td>
+<td style="text-align:right;">
+15.4648343
+</td>
+<td style="text-align:right;">
+-25.883092
+</td>
+<td style="text-align:right;">
+3.177701
+</td>
+<td style="text-align:right;">
+-0.7139815
+</td>
+<td style="text-align:right;">
+-0.8314551
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211217
+</td>
+<td style="text-align:right;">
+12.257956
+</td>
+<td style="text-align:right;">
+-9.276437
+</td>
+<td style="text-align:right;">
+6.5525480
+</td>
+<td style="text-align:right;">
+-8.296766
+</td>
+<td style="text-align:right;">
+-1.237302
+</td>
+<td style="text-align:right;">
+13.4952573
+</td>
+<td style="text-align:right;">
+9.7792957
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211210
+</td>
+<td style="text-align:right;">
+14.047904
+</td>
+<td style="text-align:right;">
+-4.970177
+</td>
+<td style="text-align:right;">
+5.6663565
+</td>
+<td style="text-align:right;">
+-9.253285
+</td>
+<td style="text-align:right;">
+-5.490799
+</td>
+<td style="text-align:right;">
+19.5387025
+</td>
+<td style="text-align:right;">
+0.2760121
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20211203
+</td>
+<td style="text-align:right;">
+3.469073
+</td>
+<td style="text-align:right;">
+-3.888138
+</td>
+<td style="text-align:right;">
+0.4014854
+</td>
+<td style="text-align:right;">
+-5.360392
+</td>
+<td style="text-align:right;">
+5.377972
+</td>
+<td style="text-align:right;">
+-1.9088995
+</td>
+<td style="text-align:right;">
+0.7659459
+</td>
+</tr>
+</tbody>
+</table>
+<!-- ```{r, echo=F} -->
+<!-- table <- mat.to.xlModel(z[["rets"]], delay, hz[1], F) -->
+<!-- kbl(table) %>% -->
+<!--   kable_paper(c("striped", "hover"))%>% -->
+<!--   add_header_above(c("Dates" = 3, "Quintile Returns over the equal-weight universe" = 7), bold = TRUE, color = "white", background = "grey") %>% -->
+<!--   row_spec(0, bold = T, color = "white", background = "grey") %>% -->
+<!--   column_spec(1:2, bold = T) %>% -->
+<!--   column_spec(3, bold = T, border_right = T) %>% -->
+<!--   scroll_box(width = "100%", height = "500px") -->
+<!-- ``` -->
+<hr />
+</div>
+<div id="performance-3" class="section level3 hasAnchor" number="7.3.4">
+<h3><span class="header-section-number">7.3.4</span> Performance<a href="flow-percentage-dm-rates-strategy.html#performance-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Performance over all holding periods</strong></p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="flow-percentage-dm-rates-strategy.html#cb82-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, <span class="dv">5</span>, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION           </span></span>
+<span id="cb82-2"><a href="flow-percentage-dm-rates-strategy.html#cb82-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-3"><a href="flow-percentage-dm-rates-strategy.html#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mat.ex.array3d</span>(<span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>)) <span class="co"># WRITE SUMMARIES            </span></span></code></pre></div>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q1
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q2
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q3
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q4
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q5
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+TxB
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+uRet
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="10">
+<td colspan="1" style="border-bottom: 1px solid;">
+<strong>Bi-Monthly</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnMn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+3.960461e+01
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnSd
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+4.433182e+02
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Sharpe
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+1.045168e+01
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+HitRate
+</td>
+<td style="text-align:right;">
+2.605259e+00
+</td>
+<td style="text-align:right;">
+-2.872722e+00
+</td>
+<td style="text-align:right;">
+7.812737e-01
+</td>
+<td style="text-align:right;">
+1.564067e+00
+</td>
+<td style="text-align:right;">
+3.191974e-01
+</td>
+<td style="text-align:right;">
+1.516095e+00
+</td>
+<td style="text-align:right;">
+-7.046664e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Beta
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Alpha
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DrawDn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+-1.258419e+03
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnBeg
+</td>
+<td style="text-align:right;">
+2.017503e+07
+</td>
+<td style="text-align:right;">
+2.014851e+07
+</td>
+<td style="text-align:right;">
+2.016947e+07
+</td>
+<td style="text-align:right;">
+2.015502e+07
+</td>
+<td style="text-align:right;">
+2.016955e+07
+</td>
+<td style="text-align:right;">
+2.016294e+07
+</td>
+<td style="text-align:right;">
+2.014724e+07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnN
+</td>
+<td style="text-align:right;">
+1.122222e+01
+</td>
+<td style="text-align:right;">
+2.488889e+01
+</td>
+<td style="text-align:right;">
+1.466667e+01
+</td>
+<td style="text-align:right;">
+1.755556e+01
+</td>
+<td style="text-align:right;">
+1.400000e+01
+</td>
+<td style="text-align:right;">
+1.855556e+01
+</td>
+<td style="text-align:right;">
+3.022222e+01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnTo
+</td>
+<td style="text-align:right;">
+4.142944e+02
+</td>
+<td style="text-align:right;">
+4.451478e+02
+</td>
+<td style="text-align:right;">
+4.500616e+02
+</td>
+<td style="text-align:right;">
+4.386741e+02
+</td>
+<td style="text-align:right;">
+4.089670e+02
+</td>
+<td style="text-align:right;">
+8.232614e+02
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+<tr grouplength="10">
+<td colspan="1" style="border-bottom: 1px solid;">
+<strong>Fortnightly</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnMn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+-2.237922e+02
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnSd
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+1.139407e+03
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Sharpe
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+-2.005806e+01
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+HitRate
+</td>
+<td style="text-align:right;">
+-1.370417e+00
+</td>
+<td style="text-align:right;">
+-2.876854e+00
+</td>
+<td style="text-align:right;">
+4.233981e+00
+</td>
+<td style="text-align:right;">
+1.112395e+00
+</td>
+<td style="text-align:right;">
+-1.827676e+00
+</td>
+<td style="text-align:right;">
+-6.630390e-02
+</td>
+<td style="text-align:right;">
+-4.757534e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Beta
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Alpha
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DrawDn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+-6.012032e+03
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnBeg
+</td>
+<td style="text-align:right;">
+2.020032e+07
+</td>
+<td style="text-align:right;">
+2.020037e+07
+</td>
+<td style="text-align:right;">
+2.017547e+07
+</td>
+<td style="text-align:right;">
+2.017542e+07
+</td>
+<td style="text-align:right;">
+2.015037e+07
+</td>
+<td style="text-align:right;">
+2.018102e+07
+</td>
+<td style="text-align:right;">
+2.016542e+07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnN
+</td>
+<td style="text-align:right;">
+7.500000e+00
+</td>
+<td style="text-align:right;">
+5.500000e+00
+</td>
+<td style="text-align:right;">
+2.050000e+01
+</td>
+<td style="text-align:right;">
+7.500000e+01
+</td>
+<td style="text-align:right;">
+8.050000e+01
+</td>
+<td style="text-align:right;">
+4.400000e+01
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnTo
+</td>
+<td style="text-align:right;">
+1.774081e+03
+</td>
+<td style="text-align:right;">
+1.918541e+03
+</td>
+<td style="text-align:right;">
+1.979709e+03
+</td>
+<td style="text-align:right;">
+1.998417e+03
+</td>
+<td style="text-align:right;">
+1.836994e+03
+</td>
+<td style="text-align:right;">
+3.611075e+03
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+<tr grouplength="10">
+<td colspan="1" style="border-bottom: 1px solid;">
+<strong>Monthly</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnMn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+Inf
+</td>
+<td style="text-align:right;">
+-9.517222e+01
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnSd
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+8.127343e+02
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Sharpe
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+2.960262e+00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+HitRate
+</td>
+<td style="text-align:right;">
+1.901996e-01
+</td>
+<td style="text-align:right;">
+-4.522156e+00
+</td>
+<td style="text-align:right;">
+2.283759e+00
+</td>
+<td style="text-align:right;">
+1.241410e+00
+</td>
+<td style="text-align:right;">
+-2.208088e+00
+</td>
+<td style="text-align:right;">
+3.526413e+00
+</td>
+<td style="text-align:right;">
+-5.408077e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Beta
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Alpha
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DrawDn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+-3.865981e+03
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnBeg
+</td>
+<td style="text-align:right;">
+2.020029e+07
+</td>
+<td style="text-align:right;">
+2.014819e+07
+</td>
+<td style="text-align:right;">
+2.018562e+07
+</td>
+<td style="text-align:right;">
+2.019059e+07
+</td>
+<td style="text-align:right;">
+2.016569e+07
+</td>
+<td style="text-align:right;">
+2.018551e+07
+</td>
+<td style="text-align:right;">
+2.018042e+07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnN
+</td>
+<td style="text-align:right;">
+1.025000e+01
+</td>
+<td style="text-align:right;">
+5.675000e+01
+</td>
+<td style="text-align:right;">
+1.125000e+01
+</td>
+<td style="text-align:right;">
+8.750000e+00
+</td>
+<td style="text-align:right;">
+4.100000e+01
+</td>
+<td style="text-align:right;">
+2.650000e+01
+</td>
+<td style="text-align:right;">
+2.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnTo
+</td>
+<td style="text-align:right;">
+9.131703e+02
+</td>
+<td style="text-align:right;">
+9.941024e+02
+</td>
+<td style="text-align:right;">
+9.856035e+02
+</td>
+<td style="text-align:right;">
+9.907440e+02
+</td>
+<td style="text-align:right;">
+9.430060e+02
+</td>
+<td style="text-align:right;">
+1.856176e+03
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+<tr grouplength="10">
+<td colspan="1" style="border-bottom: 1px solid;">
+<strong>Quarterly</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnMn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+-1.247657e+01
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnSd
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+4.706899e+02
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Sharpe
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+9.543250e+00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+HitRate
+</td>
+<td style="text-align:right;">
+2.623297e+00
+</td>
+<td style="text-align:right;">
+2.771777e+00
+</td>
+<td style="text-align:right;">
+2.367037e+00
+</td>
+<td style="text-align:right;">
+4.585436e+00
+</td>
+<td style="text-align:right;">
+-3.371847e-01
+</td>
+<td style="text-align:right;">
+6.367467e-01
+</td>
+<td style="text-align:right;">
+-1.009082e+01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Beta
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Alpha
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DrawDn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+-1.483752e+03
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnBeg
+</td>
+<td style="text-align:right;">
+2.016146e+07
+</td>
+<td style="text-align:right;">
+2.016596e+07
+</td>
+<td style="text-align:right;">
+2.017597e+07
+</td>
+<td style="text-align:right;">
+2.016994e+07
+</td>
+<td style="text-align:right;">
+2.016070e+07
+</td>
+<td style="text-align:right;">
+2.015836e+07
+</td>
+<td style="text-align:right;">
+2.013987e+07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnN
+</td>
+<td style="text-align:right;">
+1.492308e+01
+</td>
+<td style="text-align:right;">
+1.300000e+01
+</td>
+<td style="text-align:right;">
+7.615385e+00
+</td>
+<td style="text-align:right;">
+9.307692e+00
+</td>
+<td style="text-align:right;">
+1.438462e+01
+</td>
+<td style="text-align:right;">
+1.438462e+01
+</td>
+<td style="text-align:right;">
+2.207692e+01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnTo
+</td>
+<td style="text-align:right;">
+2.824934e+02
+</td>
+<td style="text-align:right;">
+3.066313e+02
+</td>
+<td style="text-align:right;">
+3.169761e+02
+</td>
+<td style="text-align:right;">
+3.143236e+02
+</td>
+<td style="text-align:right;">
+2.944297e+02
+</td>
+<td style="text-align:right;">
+5.769231e+02
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+<tr grouplength="10">
+<td colspan="1" style="border-bottom: 1px solid;">
+<strong>Semi-Annual</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnMn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+-1.217973e+01
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnSd
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+3.420400e+02
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Sharpe
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+1.742681e+00
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+HitRate
+</td>
+<td style="text-align:right;">
+-2.306745e+00
+</td>
+<td style="text-align:right;">
+4.078249e+00
+</td>
+<td style="text-align:right;">
+6.157635e-01
+</td>
+<td style="text-align:right;">
+-1.705191e-01
+</td>
+<td style="text-align:right;">
+1.970443e+00
+</td>
+<td style="text-align:right;">
+1.373626e-01
+</td>
+<td style="text-align:right;">
+-1.053903e+01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Beta
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Alpha
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DrawDn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+-1.121633e+03
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnBeg
+</td>
+<td style="text-align:right;">
+2.015262e+07
+</td>
+<td style="text-align:right;">
+2.016450e+07
+</td>
+<td style="text-align:right;">
+2.016902e+07
+</td>
+<td style="text-align:right;">
+2.015572e+07
+</td>
+<td style="text-align:right;">
+2.016339e+07
+</td>
+<td style="text-align:right;">
+2.014186e+07
+</td>
+<td style="text-align:right;">
+2.011220e+07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnN
+</td>
+<td style="text-align:right;">
+8.961538e+00
+</td>
+<td style="text-align:right;">
+6.461538e+00
+</td>
+<td style="text-align:right;">
+5.269231e+00
+</td>
+<td style="text-align:right;">
+7.653846e+00
+</td>
+<td style="text-align:right;">
+7.423077e+00
+</td>
+<td style="text-align:right;">
+1.080769e+01
+</td>
+<td style="text-align:right;">
+1.642308e+01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnTo
+</td>
+<td style="text-align:right;">
+1.486216e+02
+</td>
+<td style="text-align:right;">
+1.549829e+02
+</td>
+<td style="text-align:right;">
+1.603543e+02
+</td>
+<td style="text-align:right;">
+1.541919e+02
+</td>
+<td style="text-align:right;">
+1.520083e+02
+</td>
+<td style="text-align:right;">
+3.006300e+02
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+<tr grouplength="10">
+<td colspan="1" style="border-bottom: 1px solid;">
+<strong>Weekly</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnMn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+-2.953599e+02
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnSd
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+1.239273e+03
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Sharpe
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+-2.383333e+01
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+HitRate
+</td>
+<td style="text-align:right;">
+-2.803129e+00
+</td>
+<td style="text-align:right;">
+-2.549020e+00
+</td>
+<td style="text-align:right;">
+3.455020e+00
+</td>
+<td style="text-align:right;">
+3.594771e+00
+</td>
+<td style="text-align:right;">
+-1.697128e+00
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+<td style="text-align:right;">
+-4.367666e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Beta
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Alpha
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DrawDn
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+-8.287086e+03
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnBeg
+</td>
+<td style="text-align:right;">
+2.020011e+07
+</td>
+<td style="text-align:right;">
+2.020011e+07
+</td>
+<td style="text-align:right;">
+2.020011e+07
+</td>
+<td style="text-align:right;">
+2.020052e+07
+</td>
+<td style="text-align:right;">
+2.020011e+07
+</td>
+<td style="text-align:right;">
+2.019071e+07
+</td>
+<td style="text-align:right;">
+2.015023e+07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnN
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+6.000000e+01
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnTo
+</td>
+<td style="text-align:right;">
+3.536815e+03
+</td>
+<td style="text-align:right;">
+3.910183e+03
+</td>
+<td style="text-align:right;">
+3.988251e+03
+</td>
+<td style="text-align:right;">
+4.028982e+03
+</td>
+<td style="text-align:right;">
+3.655614e+03
+</td>
+<td style="text-align:right;">
+7.192428e+03
+</td>
+<td style="text-align:right;">
+0.000000e+00
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>Annualized mean one-week returns</strong></p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="flow-percentage-dm-rates-strategy.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], <span class="dv">5</span>, doW, T, <span class="dv">0</span>, delay, <span class="at">sprds =</span> T)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q1
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q2
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q3
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q4
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Q5
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+TxB
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+uRet
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+nPrds
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2007
+</td>
+<td style="text-align:right;">
+0.5033670
+</td>
+<td style="text-align:right;">
+-0.6138451
+</td>
+<td style="text-align:right;">
+0.3276700
+</td>
+<td style="text-align:right;">
+0.1173064
+</td>
+<td style="text-align:right;">
+-0.3026330
+</td>
+<td style="text-align:right;">
+0.8060000
+</td>
+<td style="text-align:right;">
+-0.0337912
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2008
+</td>
+<td style="text-align:right;">
+-0.2093356
+</td>
+<td style="text-align:right;">
+-0.1848356
+</td>
+<td style="text-align:right;">
+0.2229644
+</td>
+<td style="text-align:right;">
+0.2379644
+</td>
+<td style="text-align:right;">
+-0.0766856
+</td>
+<td style="text-align:right;">
+-0.1326500
+</td>
+<td style="text-align:right;">
+-1.3718144
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2009
+</td>
+<td style="text-align:right;">
+-0.6084222
+</td>
+<td style="text-align:right;">
+-0.2835722
+</td>
+<td style="text-align:right;">
+1.0324278
+</td>
+<td style="text-align:right;">
+-0.1407222
+</td>
+<td style="text-align:right;">
+0.0199278
+</td>
+<td style="text-align:right;">
+-0.6283500
+</td>
+<td style="text-align:right;">
+0.7055722
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2010
+</td>
+<td style="text-align:right;">
+-0.1813143
+</td>
+<td style="text-align:right;">
+0.1488366
+</td>
+<td style="text-align:right;">
+-0.2382200
+</td>
+<td style="text-align:right;">
+0.2213914
+</td>
+<td style="text-align:right;">
+-0.0399822
+</td>
+<td style="text-align:right;">
+-0.1413321
+</td>
+<td style="text-align:right;">
+-0.2631876
+</td>
+<td style="text-align:right;">
+53
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2011
+</td>
+<td style="text-align:right;">
+-0.5316200
+</td>
+<td style="text-align:right;">
+-0.6752200
+</td>
+<td style="text-align:right;">
+-0.1883200
+</td>
+<td style="text-align:right;">
+0.5611800
+</td>
+<td style="text-align:right;">
+0.8394300
+</td>
+<td style="text-align:right;">
+-1.3710500
+</td>
+<td style="text-align:right;">
+-1.3339800
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2012
+</td>
+<td style="text-align:right;">
+-0.1117867
+</td>
+<td style="text-align:right;">
+0.3275133
+</td>
+<td style="text-align:right;">
+-0.3790867
+</td>
+<td style="text-align:right;">
+0.1083133
+</td>
+<td style="text-align:right;">
+0.0031133
+</td>
+<td style="text-align:right;">
+-0.1149000
+</td>
+<td style="text-align:right;">
+-0.2274133
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2013
+</td>
+<td style="text-align:right;">
+-0.1958367
+</td>
+<td style="text-align:right;">
+0.0111633
+</td>
+<td style="text-align:right;">
+-0.1093367
+</td>
+<td style="text-align:right;">
+0.3628133
+</td>
+<td style="text-align:right;">
+-0.0899867
+</td>
+<td style="text-align:right;">
+-0.1058500
+</td>
+<td style="text-align:right;">
+0.8895367
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2014
+</td>
+<td style="text-align:right;">
+-0.2419333
+</td>
+<td style="text-align:right;">
+-0.3356333
+</td>
+<td style="text-align:right;">
+0.3821167
+</td>
+<td style="text-align:right;">
+-0.1591833
+</td>
+<td style="text-align:right;">
+0.3064667
+</td>
+<td style="text-align:right;">
+-0.5484000
+</td>
+<td style="text-align:right;">
+-1.0756667
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2015
+</td>
+<td style="text-align:right;">
+-0.1455556
+</td>
+<td style="text-align:right;">
+-0.2805556
+</td>
+<td style="text-align:right;">
+-0.0171556
+</td>
+<td style="text-align:right;">
+0.4684444
+</td>
+<td style="text-align:right;">
+-0.0194556
+</td>
+<td style="text-align:right;">
+-0.1261000
+</td>
+<td style="text-align:right;">
+-0.1212444
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2016
+</td>
+<td style="text-align:right;">
+-0.0479338
+</td>
+<td style="text-align:right;">
+-0.2000092
+</td>
+<td style="text-align:right;">
+0.3141040
+</td>
+<td style="text-align:right;">
+0.2351229
+</td>
+<td style="text-align:right;">
+-0.2966507
+</td>
+<td style="text-align:right;">
+0.2487170
+</td>
+<td style="text-align:right;">
+-0.1517266
+</td>
+<td style="text-align:right;">
+53
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2017
+</td>
+<td style="text-align:right;">
+0.1266778
+</td>
+<td style="text-align:right;">
+-0.3133222
+</td>
+<td style="text-align:right;">
+-0.2373222
+</td>
+<td style="text-align:right;">
+0.0766778
+</td>
+<td style="text-align:right;">
+0.3366778
+</td>
+<td style="text-align:right;">
+-0.2100000
+</td>
+<td style="text-align:right;">
+-0.0056778
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2018
+</td>
+<td style="text-align:right;">
+-0.1141722
+</td>
+<td style="text-align:right;">
+-0.0566722
+</td>
+<td style="text-align:right;">
+0.1923278
+</td>
+<td style="text-align:right;">
+-0.0126722
+</td>
+<td style="text-align:right;">
+-0.0186722
+</td>
+<td style="text-align:right;">
+-0.0955000
+</td>
+<td style="text-align:right;">
+-0.0833278
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2019
+</td>
+<td style="text-align:right;">
+-0.2295744
+</td>
+<td style="text-align:right;">
+0.1840256
+</td>
+<td style="text-align:right;">
+0.2881256
+</td>
+<td style="text-align:right;">
+0.1624256
+</td>
+<td style="text-align:right;">
+-0.3652244
+</td>
+<td style="text-align:right;">
+0.1356500
+</td>
+<td style="text-align:right;">
+-0.4894756
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020
+</td>
+<td style="text-align:right;">
+0.0838800
+</td>
+<td style="text-align:right;">
+-0.0709200
+</td>
+<td style="text-align:right;">
+0.2119300
+</td>
+<td style="text-align:right;">
+0.0063300
+</td>
+<td style="text-align:right;">
+-0.2312200
+</td>
+<td style="text-align:right;">
+0.3151000
+</td>
+<td style="text-align:right;">
+-0.4174300
+</td>
+<td style="text-align:right;">
+52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021
+</td>
+<td style="text-align:right;">
+-0.0849998
+</td>
+<td style="text-align:right;">
+-0.0329508
+</td>
+<td style="text-align:right;">
+-0.0682715
+</td>
+<td style="text-align:right;">
+0.2065926
+</td>
+<td style="text-align:right;">
+-0.0661621
+</td>
+<td style="text-align:right;">
+-0.0188377
+</td>
+<td style="text-align:right;">
+0.5731621
+</td>
+<td style="text-align:right;">
+53
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2022
+</td>
+<td style="text-align:right;">
+-0.6448000
+</td>
+<td style="text-align:right;">
+-0.1187333
+</td>
+<td style="text-align:right;">
+0.5936667
+</td>
+<td style="text-align:right;">
+-0.1274000
+</td>
+<td style="text-align:right;">
+0.2972667
+</td>
+<td style="text-align:right;">
+-0.9420667
+</td>
+<td style="text-align:right;">
+3.0567333
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="fx-strategy.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-DMRates.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -8,6 +8,7 @@ bbk.matrix
 Filters
 flow-percentage-country-strategy
 overview
+country-flows
 daily-percentage-flow
 aggregations
 calculation

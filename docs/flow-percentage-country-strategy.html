@@ -131,19 +131,20 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="4" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html"><i class="fa fa-check"></i><b>4</b> Flow-Percentage Country Strategy</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
-<li class="chapter" data-level="4.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#daily-percentage-flow"><i class="fa fa-check"></i><b>4.2</b> Daily Percentage Flow</a>
+<li class="chapter" data-level="4.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#country-flows"><i class="fa fa-check"></i><b>4.2</b> Country Flows</a></li>
+<li class="chapter" data-level="4.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#daily-percentage-flow"><i class="fa fa-check"></i><b>4.3</b> Daily Percentage Flow</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#aggregations"><i class="fa fa-check"></i><b>4.2.1</b> Aggregations</a></li>
-<li class="chapter" data-level="4.2.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#calculation"><i class="fa fa-check"></i><b>4.2.2</b> Calculation</a></li>
-<li class="chapter" data-level="4.2.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#flow-file"><i class="fa fa-check"></i><b>4.2.3</b> Flow File</a></li>
-<li class="chapter" data-level="4.2.4" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#return-file"><i class="fa fa-check"></i><b>4.2.4</b> Return File</a></li>
+<li class="chapter" data-level="4.3.1" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#aggregations"><i class="fa fa-check"></i><b>4.3.1</b> Aggregations</a></li>
+<li class="chapter" data-level="4.3.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#calculation"><i class="fa fa-check"></i><b>4.3.2</b> Calculation</a></li>
+<li class="chapter" data-level="4.3.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#flow-file"><i class="fa fa-check"></i><b>4.3.3</b> Flow File</a></li>
+<li class="chapter" data-level="4.3.4" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#return-file"><i class="fa fa-check"></i><b>4.3.4</b> Return File</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#strategy-implementation"><i class="fa fa-check"></i><b>4.3</b> Strategy Implementation</a>
+<li class="chapter" data-level="4.4" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#strategy-implementation"><i class="fa fa-check"></i><b>4.4</b> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#compounding-flows"><i class="fa fa-check"></i><b>4.3.1</b> Compounding Flows</a></li>
-<li class="chapter" data-level="4.3.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#ranking-countries"><i class="fa fa-check"></i><b>4.3.2</b> Ranking Countries</a></li>
-<li class="chapter" data-level="4.3.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#model"><i class="fa fa-check"></i><b>4.3.3</b> Model</a></li>
-<li class="chapter" data-level="4.3.4" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#performance"><i class="fa fa-check"></i><b>4.3.4</b> Performance</a></li>
+<li class="chapter" data-level="4.4.1" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#compounding-flows"><i class="fa fa-check"></i><b>4.4.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="4.4.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#ranking-countries"><i class="fa fa-check"></i><b>4.4.2</b> Ranking Countries</a></li>
+<li class="chapter" data-level="4.4.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#model"><i class="fa fa-check"></i><b>4.4.3</b> Model</a></li>
+<li class="chapter" data-level="4.4.4" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#performance"><i class="fa fa-check"></i><b>4.4.4</b> Performance</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html"><i class="fa fa-check"></i><b>5</b> Multi-Asset Strategy</a>
@@ -247,12 +248,18 @@ code span.wa { font-style: italic; } /* Warning */
 <p>This approach uses the stated allocations of equity funds with a cross-border focus and calculates percentage flow into countries. In terms of twenty-day percentage flows, the top fifth of ACWI countries outperform the bottom fifth by over 3% per year. The strategy works best in Emerging Markets, but adds value across the board.</p>
 <hr />
 </div>
-<div id="daily-percentage-flow" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Daily Percentage Flow<a href="flow-percentage-country-strategy.html#daily-percentage-flow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="country-flows" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Country Flows<a href="flow-percentage-country-strategy.html#country-flows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Country flows is a derived dataset that delivers flows to individual countries. It uses a proprietary algorithm to calculate these derivations. The procedure assumes fixed average country allocations across different cross-border mandates. It then uses fund-level flow data to calculate flows to individual countries. One advantage of this derivation is the broader coverage. EPFR’s Fund Flows Database has significant coverage across different regions and countries.</p>
+<p>In contrast, the Country Allocations Database is a subset of the fund flows dataset. Using fixed average country allocations allows us to include a broader range of cross-border funds in individual country flow calculations. Because of the more general assumptions, Country Flows Database is typically a better fit for macroeconomist &amp; strategists. A typical use case for a macroeconomist would be calculating a high-frequency proxy for those countries’ balance of payments statistics. On the other hand, when trying to create country rotation strategies, quantitative hedge funds rely on fund-level data. This lets them have a one-to-one match between the country allocations and fund-level flows.</p>
+<hr />
+</div>
+<div id="daily-percentage-flow" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Daily Percentage Flow<a href="flow-percentage-country-strategy.html#daily-percentage-flow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <em>Flow-Percentage Country Strategy</em> developed by EPFR Global is based on percentage flow into countries. In this section, the reader will gain an understanding of the aggregations which can be used to create a signal as well as the methodology behind daily percentage flow calculations.</p>
 <hr />
-<div id="aggregations" class="section level3 hasAnchor" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Aggregations<a href="flow-percentage-country-strategy.html#aggregations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="aggregations" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Aggregations<a href="flow-percentage-country-strategy.html#aggregations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first step is defining a subset of data to capture in calculating our signal.</p>
 <p>This strategy requires;</p>
 <ul>
@@ -271,8 +278,8 @@ code span.wa { font-style: italic; } /* Warning */
 <p>This can be achieved using fund-level flow files or reaching out to EPFR’s quant team for customized aggregations.</p>
 <hr />
 </div>
-<div id="calculation" class="section level3 hasAnchor" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> Calculation<a href="flow-percentage-country-strategy.html#calculation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="calculation" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Calculation<a href="flow-percentage-country-strategy.html#calculation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To begin calculating the Daily Percentage flow, we start with our subset of cross-border equity funds. To calculate the fund’s impact on a country, we scale a fund’s flow by multiplying it against its stated country allocation, which is available in EPFR’s Country Allocation Database, on that day. EPFR releases country allocations of all funds on the <span class="math inline">\(23^{\text{rd}}\)</span> of each month (or the next available business day) at a monthly frequency. Hence, our calculation assumes constant country allocation between two consecutive release dates within the month.</p>
 <p>We then apply the same procedure to all funds with a fund flow and country allocation information and then sum the flows for each country across all funds.</p>
 <p><span class="math display">\[\text{Total Impact}_{c,t} = \sum^{N}_{i=m}{\text{Flow}_i \times \text{Allocation}_i}\]</span>
@@ -294,8 +301,8 @@ Where:</p>
 </ul>
 <hr />
 </div>
-<div id="flow-file" class="section level3 hasAnchor" number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> Flow File<a href="flow-percentage-country-strategy.html#flow-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="flow-file" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Flow File<a href="flow-percentage-country-strategy.html#flow-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The users may create flow percentages for their desired country aggregations and granularity using the methodology described in the previous section.</p>
 <p>EPFR also provides a pre-calculated aggregation for its users for the <em>Daily Flow-Percentage Country Strategy</em>. This file can be found on the FTP under the strategies folder. Please refer to the FTP Folder Structure section for the exact location of this file. This file contains daily cross-border equity fund flow data for 52 countries and is updated daily at 5:00 PM est. with a T+1 day lag.</p>
 <p>For this demonstration, we use the pre-calculated file <strong>FloPctCtry-daily.csv</strong>. Below shows a snippet of what this file contains.</p>
@@ -1440,8 +1447,8 @@ KW
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="flow-percentage-country-strategy.html#cb14-1" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\temp\\FloPctCtry-daily.csv</span></span></code></pre></div>
 <hr />
 </div>
-<div id="return-file" class="section level3 hasAnchor" number="4.2.4">
-<h3><span class="header-section-number">4.2.4</span> Return File<a href="flow-percentage-country-strategy.html#return-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="return-file" class="section level3 hasAnchor" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Return File<a href="flow-percentage-country-strategy.html#return-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The return file for this strategy should contain daily equity returns for each of the countries in the flow file, which the user can find with their own resources.</p>
 <p>EPFR also provides Fund Return data, that can be used as a proxy to returns. To create a return file using EPFR daily flow data, the following equation can be used:</p>
 <p><span class="math display">\[\text{Fund Return}_{c,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_i}{\sum^{N}_{i=m} \text{Assets Start}_i}\]</span>
@@ -2546,8 +2553,8 @@ KW
 <hr />
 </div>
 </div>
-<div id="strategy-implementation" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Strategy Implementation<a href="flow-percentage-country-strategy.html#strategy-implementation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="strategy-implementation" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Strategy Implementation<a href="flow-percentage-country-strategy.html#strategy-implementation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the flow and return files to our <em>R studio</em> work space.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="flow-percentage-country-strategy.html#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(flow.file, <span class="at">row.names =</span> <span class="dv">1</span>) <span class="co"># GET FLOW PERCENTAGE</span></span>
 <span id="cb16-2"><a href="flow-percentage-country-strategy.html#cb16-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(ret.file, <span class="at">row.names =</span> <span class="dv">1</span>)  <span class="co"># GET RETURN</span></span></code></pre></div>
@@ -2558,8 +2565,8 @@ KW
 <p>We will also subset the return file <span class="math inline">\(y\)</span> to use the same countries as <span class="math inline">\(x\)</span>.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="flow-percentage-country-strategy.html#cb19-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[, <span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]]] <span class="co"># TOTAL RETURN INDEX</span></span></code></pre></div>
 <p><em>* Note: subsetting can be also be done when creating the flow and return files</em></p>
-<div id="compounding-flows" class="section level3 hasAnchor" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Compounding Flows<a href="flow-percentage-country-strategy.html#compounding-flows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="compounding-flows" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Compounding Flows<a href="flow-percentage-country-strategy.html#compounding-flows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we set up a variable for our look-back period, which can also be called a flow window. This variable will be the window of time we use to create a trailing compounded daily percentage flow. The look-back period we choose for our demonstrations is <strong>20 days</strong>.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="flow-percentage-country-strategy.html#cb20-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># FLOW WINDOW (IN WEEKDAYS) - 20 day look back period</span></span></code></pre></div>
 <p>Again, using a function from the <code>library('EPFR')</code>, <code>compound.flows()</code> compounds the daily percentage flow over the trailing <code>lookback</code> period for each country.</p>
@@ -3655,8 +3662,8 @@ KW
 </tbody>
 </table>
 </div>
-<div id="ranking-countries" class="section level3 hasAnchor" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Ranking Countries<a href="flow-percentage-country-strategy.html#ranking-countries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="ranking-countries" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Ranking Countries<a href="flow-percentage-country-strategy.html#ranking-countries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we sort the countries in each universe into five equal bins based on their 20-day Percentage Flow Compounded value for the selected holding period. To do this, we will use the function from <code>library('EPFR')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
 <p>Th <code>bbk()</code> function requires our compounded daily percentage flow file, a return file, and our selected universe. Please refer to the library documentation for the complete list of parameters of this function.</p>
 <p>The first parameter we add is the number of bins we want to use. For our case, we want to use 5 because our strategy is to go long the top fifth and short the bottom fifth.</p>
@@ -3670,8 +3677,8 @@ KW
 <p>Now that we have defined all of our inputs, to rank the countries into quintiles by their 20-day percentage flow, we call function <code>bbk()</code> for a 1-week holding period.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="flow-percentage-country-strategy.html#cb26-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay, idx)</span></code></pre></div>
 </div>
-<div id="model" class="section level3 hasAnchor" number="4.3.3">
-<h3><span class="header-section-number">4.3.3</span> Model<a href="flow-percentage-country-strategy.html#model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="model" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Model<a href="flow-percentage-country-strategy.html#model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)</strong></p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="flow-percentage-country-strategy.html#cb27-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
@@ -4593,8 +4600,8 @@ uRet
 </table>
 <hr />
 </div>
-<div id="performance" class="section level3 hasAnchor" number="4.3.4">
-<h3><span class="header-section-number">4.3.4</span> Performance<a href="flow-percentage-country-strategy.html#performance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="performance" class="section level3 hasAnchor" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Performance<a href="flow-percentage-country-strategy.html#performance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Performance over all holding periods</strong></p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="flow-percentage-country-strategy.html#cb29-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, <span class="dv">5</span>, doW, T, <span class="dv">0</span>, delay, idx)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
 <span id="cb29-2"><a href="flow-percentage-country-strategy.html#cb29-2" aria-hidden="true" tabindex="-1"></a></span>

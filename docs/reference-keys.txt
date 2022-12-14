@@ -1,14 +1,11 @@
 introduction
 epfr-library
 about
+strategy-functions
 ftp
-compound.flows
-bbk
-bbk.matrix
 Filters
 flow-percentage-country-strategy
 overview
-country-flows
 daily-percentage-flow
 aggregations
 calculation
@@ -17,7 +14,7 @@ return-file
 strategy-implementation
 compounding-flows
 ranking-countries
-model
+model-1
 performance
 multi-asset-strategy
 overview-1
@@ -30,7 +27,7 @@ strategy-implementation-1
 compounding-flows-1
 return-file-2
 ranking-asset-classes
-model-1
+model-2
 performance-1
 fx-strategy
 overview-2
@@ -42,7 +39,7 @@ return-file-3
 strategy-implementation-2
 compounding-flows-2
 ranking-currencies
-model-2
+model-3
 performance-2
 flow-percentage-dm-rates-strategy
 overview-3
@@ -54,7 +51,7 @@ return-file-4
 strategy-implementation-3
 compounding-flows-3
 ranking-countries-1
-model-3
+model-4
 performance-3
 activepassive-country-strategy
 overview-4
@@ -66,5 +63,7 @@ return-file-5
 strategy-implementation-4
 compounding-flows-4
 ranking-countries-2
-model-4
+model-5
 performance-4
+FAQ
+country-flows

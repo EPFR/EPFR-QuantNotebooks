@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Filters | EPFR Strategy Notebooks</title>
+  <title>9 FAQ | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Filters | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="9 FAQ | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Filters | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="9 FAQ | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="epfr-library.html"/>
-<link rel="next" href="flow-percentage-country-strategy.html"/>
+<link rel="prev" href="activepassive-country-strategy.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -253,33 +253,22 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="Filters" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">3</span> Filters<a href="Filters.html#Filters" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>EPFR has an extensive list of over two dozen filters that can be applied to our data sets, therefore the signals we can get can be fine-tuned.</p>
-<p>The data can be filtered by:</p>
-<ul>
-<li>Investor Type (retail or institutional)</li>
-<li>Share class</li>
-<li>Fund domicile</li>
-<li>Theme (ESG, Sharia, ect.)</li>
-<li>Currency of flows</li>
-<li>Individual managers</li>
-<li>Duration</li>
-<li>Style</li>
-<li>Sector</li>
-</ul>
-<div class="note">
-<p>Working with Cam &amp; Steve on adding some sort of tutorial/guide on this…</p>
-</div>
+<div id="FAQ" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> FAQ<a href="FAQ.html#FAQ" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="country-flows" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Country Flows<a href="FAQ.html#country-flows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Country flows is a derived dataset that delivers flows to individual countries. It uses a proprietary algorithm to calculate these derivations. The procedure assumes fixed average country allocations across different cross-border mandates. It then uses fund-level flow data to calculate flows to individual countries. One advantage of this derivation is the broader coverage. EPFR’s Fund Flows Database has significant coverage across different regions and countries.</p>
+<p>In contrast, the Country Allocations Database is a subset of the fund flows dataset. Using fixed average country allocations allows us to include a broader range of cross-border funds in individual country flow calculations. Because of the more general assumptions, Country Flows Database is typically a better fit for macroeconomist &amp; strategists. A typical use case for a macroeconomist would be calculating a high-frequency proxy for those countries’ balance of payments statistics. On the other hand, when trying to create country rotation strategies, quantitative hedge funds rely on fund-level data. This lets them have a one-to-one match between the country allocations and fund-level flows.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="epfr-library.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="flow-percentage-country-strategy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="activepassive-country-strategy.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -310,7 +299,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/02-Aggregations.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/99-FAQ.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

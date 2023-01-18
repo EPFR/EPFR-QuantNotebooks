@@ -122,13 +122,14 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="2" data-path="epfr-library.html"><a href="epfr-library.html"><i class="fa fa-check"></i><b>2</b> EPFR Library</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="epfr-library.html"><a href="epfr-library.html#about"><i class="fa fa-check"></i><b>2.1</b> About</a></li>
-<li class="chapter" data-level="2.2" data-path="epfr-library.html"><a href="epfr-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.2</b> Strategy Functions</a>
+<li class="chapter" data-level="2.2" data-path="epfr-library.html"><a href="epfr-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set up</a></li>
+<li class="chapter" data-level="2.3" data-path="epfr-library.html"><a href="epfr-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.3</b> Strategy Functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#compunding-flows"><i class="fa fa-check"></i>Compunding Flows</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#model"><i class="fa fa-check"></i>Model</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#example"><i class="fa fa-check"></i>Example</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="epfr-library.html"><a href="epfr-library.html#ftp"><i class="fa fa-check"></i><b>2.3</b> FTP Functions</a>
+<li class="chapter" data-level="2.4" data-path="epfr-library.html"><a href="epfr-library.html#ftp"><i class="fa fa-check"></i><b>2.4</b> FTP Functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#rcurl"><i class="fa fa-check"></i>RCurl</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#extract-ftp-file-path"><i class="fa fa-check"></i>Extract FTP File Path</a></li>
@@ -234,7 +235,7 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="9.1" data-path="FAQ.html"><a href="FAQ.html#country-flows"><i class="fa fa-check"></i><b>9.1</b> Country Flows</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://www.epfr.com/" target="blank">EPFR</a></li>
+<li><a href="https://epfr.com/" target="blank">EPFR</a></li>
 
 </ul>
 
@@ -259,10 +260,8 @@ code span.wa { font-style: italic; } /* Warning */
 <p>The EPFR Library has an extensive list of applicable functions for use on our data and will be used in this demonstration of our strategies.</p>
 <p>To install the library <code>EPFR</code>, <a href="https://github.com/EPFR/EPFR-Quant-Library-R">click here</a> to download zip from github or you can find code to do this below.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="epfr-library.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;devtools&quot;</span>)</span>
-<span id="cb1-2"><a href="epfr-library.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="epfr-library.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;EPFR/EPFR-Quant-Library-R&quot;</span>)</span>
-<span id="cb1-4"><a href="epfr-library.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="epfr-library.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;EPFR.r&quot;</span>)</span></code></pre></div>
+<span id="cb1-2"><a href="epfr-library.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;EPFR/EPFR-Quant-Library-R&quot;</span>)</span>
+<span id="cb1-3"><a href="epfr-library.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;EPFR.r&quot;</span>)</span></code></pre></div>
 <hr />
 <div id="about" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> About<a href="epfr-library.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -271,8 +270,26 @@ code span.wa { font-style: italic; } /* Warning */
 <!-- `ftp.get()`, `compound.flows()`, `bbk()`, bbk.matrix(), `Ctry.msci.members.rng()`, `Ctry.info()`, `ret.to.idx()`, `ret.idx.gaps.fix()`, `portfolio.beta.wrapper()`, `portfolio.residual()`, `mat.daily.to.monthly()`. -->
 <hr />
 </div>
-<div id="strategy-functions" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Strategy Functions<a href="epfr-library.html#strategy-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="set-up" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Set up<a href="epfr-library.html#set-up" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To use various functions in the EPFR library it will be helpful to set up a folder called <em>EPFR</em> in your computers C drive (i.e. <em>C://EPFR</em>). This is the default directory that is used throughout the library to find any files used to preform backtests.</p>
+<p>Some of the R functions built in this library are dependent on existing files that the user will need to download and store in the folder <em>EPFR</em> in order to avoid any challenges:</p>
+<ol style="list-style-type: decimal">
+<li>classif-Ctry.txt</li>
+<li>IndexReturns-Daily.csv</li>
+<li>MsciCtry2016.txt</li>
+<li>MsciCtryClassification.txt</li>
+</ol>
+<p>Inside of the folder EPFR it is suggested that the user follow the folder structure below:</p>
+<ul>
+<li>Add “daily” folder; to store EPFE daily cvs files.</li>
+<li>Add “monthly” folder; to store EPFR monthly csv files.</li>
+<li>Add “returns” folder; to store any return files used</li>
+</ul>
+<hr />
+</div>
+<div id="strategy-functions" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Strategy Functions<a href="epfr-library.html#strategy-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="compunding-flows" class="section level3 unnumbered hasAnchor">
 <h3>Compunding Flows<a href="epfr-library.html#compunding-flows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>EPFR’s function <code>compound.flows()</code> uses other functions within <code>library('EPFR')</code> to compute a rolling cumulative sum of flows over a trailing lookback period (typically we use 20 days).</p>
@@ -370,8 +387,8 @@ code span.wa { font-style: italic; } /* Warning */
 <hr />
 </div>
 </div>
-<div id="ftp" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> FTP Functions<a href="epfr-library.html#ftp" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ftp" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> FTP Functions<a href="epfr-library.html#ftp" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Below are some functions built in <code>library('EPFR)</code> that connect a local R workspace to FTP server for convince accessing and working directly with data. ()</p>
 <div id="rcurl" class="section level3 unnumbered hasAnchor">
 <h3>RCurl<a href="epfr-library.html#rcurl" class="anchor-section" aria-label="Anchor link to header"></a></h3>

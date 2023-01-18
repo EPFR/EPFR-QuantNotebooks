@@ -1,6 +1,7 @@
 introduction
 epfr-library
 about
+set-up
 strategy-functions
 ftp
 Filters

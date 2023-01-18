@@ -122,13 +122,14 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="2" data-path="epfr-library.html"><a href="epfr-library.html"><i class="fa fa-check"></i><b>2</b> EPFR Library</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="epfr-library.html"><a href="epfr-library.html#about"><i class="fa fa-check"></i><b>2.1</b> About</a></li>
-<li class="chapter" data-level="2.2" data-path="epfr-library.html"><a href="epfr-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.2</b> Strategy Functions</a>
+<li class="chapter" data-level="2.2" data-path="epfr-library.html"><a href="epfr-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set up</a></li>
+<li class="chapter" data-level="2.3" data-path="epfr-library.html"><a href="epfr-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.3</b> Strategy Functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#compunding-flows"><i class="fa fa-check"></i>Compunding Flows</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#model"><i class="fa fa-check"></i>Model</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#example"><i class="fa fa-check"></i>Example</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="epfr-library.html"><a href="epfr-library.html#ftp"><i class="fa fa-check"></i><b>2.3</b> FTP Functions</a>
+<li class="chapter" data-level="2.4" data-path="epfr-library.html"><a href="epfr-library.html#ftp"><i class="fa fa-check"></i><b>2.4</b> FTP Functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#rcurl"><i class="fa fa-check"></i>RCurl</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#extract-ftp-file-path"><i class="fa fa-check"></i>Extract FTP File Path</a></li>
@@ -234,7 +235,7 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="9.1" data-path="FAQ.html"><a href="FAQ.html#country-flows"><i class="fa fa-check"></i><b>9.1</b> Country Flows</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://www.epfr.com/" target="blank">EPFR</a></li>
+<li><a href="https://epfr.com/" target="blank">EPFR</a></li>
 
 </ul>
 
@@ -1129,13 +1130,13 @@ KWD
 </tr>
 </tbody>
 </table>
-<p>We will download this file from the ftp using <code>ftp.get()</code>, more about this function can be referred to in section <a href="epfr-library.html#ftp">2.3</a>.</p>
+<p>We will download this file from the ftp and store it in local folder <em>EPFR/daily</em> using <code>ftp.get()</code>, more about this function can be referred to in section <a href="epfr-library.html#ftp">2.4</a>.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="fx-strategy.html#cb54-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="st">&quot;EPFRHistory/Strategies/daily/FX-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb54-2"><a href="fx-strategy.html#cb54-2" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">temp&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
+<span id="cb54-2"><a href="fx-strategy.html#cb54-2" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
 <span id="cb54-3"><a href="fx-strategy.html#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb54-4"><a href="fx-strategy.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
 <p>After downloading the csv file you will store it’s path as <code>flow.file</code>. A quick way to do this is shown below:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="fx-strategy.html#cb55-1" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\temp\\FX-daily.csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="fx-strategy.html#cb55-1" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\daily\\FX-daily.csv</span></span></code></pre></div>
 <!-- ```{r, include=F} -->
 <!-- flow.file <- strat.path("FX", "daily") # PATH TO FLOW PERCENTAGE .csv FILE      -->
 <!-- ``` -->
@@ -1144,8 +1145,8 @@ KWD
 <div id="return-file-3" class="section level3 hasAnchor" number="6.2.4">
 <h3><span class="header-section-number">6.2.4</span> Return File<a href="fx-strategy.html#return-file-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The return file for this strategy should contain daily Exchange rates for each of the currencies in the flow file, which the user can find with their own resources.</p>
-<p>For this demonstration, we will the file which has been locally named <em>ExchRates.csv</em>.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="fx-strategy.html#cb56-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;ExchRates.csv&quot;</span></span></code></pre></div>
+<p>For this demonstration, we will the file, which is locally stored in the folder <em>EPFR/returns</em> and has been named <em>ExchRates.csv</em>.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="fx-strategy.html#cb56-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">ExchRates.csv&quot;</span></span></code></pre></div>
 <!-- ```{r, include=F} -->
 <!-- ret.file <- paste0(fcn.dir(), "\\New Model Concept\\FX\\FloMo\\csv\\ExchRates.csv") -->
 <!-- ``` -->
@@ -2046,7 +2047,10 @@ NA
 <span id="cb59-3"><a href="fx-strategy.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">is.element</span>(<span class="st">&quot;EM&quot;</span>, idx)) idx.curr <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(idx.curr, <span class="fu">c</span>(<span class="st">&quot;USD&quot;</span>, <span class="st">&quot;EUR&quot;</span>)) <span class="co"># ENSURE NO OVERLAP BETWEEN DEVELOPED AND EM CURRENCIES</span></span>
 <span id="cb59-4"><a href="fx-strategy.html#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb59-5"><a href="fx-strategy.html#cb59-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x[, <span class="fu">is.element</span>(<span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]], idx.curr)] <span class="co"># SUBSET TO CURRENCIES OF INTEREST     </span></span></code></pre></div>
-<p>We will also subset the return file <span class="math inline">\(y\)</span> to use the same currencies as <span class="math inline">\(x\)</span>. <span style="color: red;">Divide by XDR?</span></p>
+<p>We will also subset the return file <span class="math inline">\(y\)</span> to use the same currencies as <span class="math inline">\(x\)</span>.</p>
+<!-- commenting out but idk what this means  -->
+<!-- so fix??? -->
+<!-- <span style="color: red;">Divide by XDR?</span> -->
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="fx-strategy.html#cb60-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[, <span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]]]<span class="sc">/</span>y[, <span class="st">&quot;XDR&quot;</span>] <span class="co"># CURRENCIES OF INTEREST ON AN SDR BASE (OTHERWISE &lt;get.fwdRet&gt; THINKS THE USD NEVER TRADES!)     </span></span></code></pre></div>
 <p><em>* Note: subsetting can be also be done when creating the flow and return files</em></p>
 <div id="compounding-flows-2" class="section level3 hasAnchor" number="6.3.1">
@@ -3633,9 +3637,9 @@ uRet
 <div id="performance-2" class="section level3 hasAnchor" number="6.3.4">
 <h3><span class="header-section-number">6.3.4</span> Performance<a href="fx-strategy.html#performance-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Performance over all holding periods</strong></p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="fx-strategy.html#cb70-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, <span class="dv">5</span>, doW, T, <span class="dv">0</span>, delay, idx)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION      </span></span>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="fx-strategy.html#cb70-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay, idx)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION       </span></span>
 <span id="cb70-2"><a href="fx-strategy.html#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-3"><a href="fx-strategy.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(<span class="fu">mat.ex.array</span>(<span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>))) <span class="co"># WRITE SUMMARIES       </span></span></code></pre></div>
+<span id="cb70-3"><a href="fx-strategy.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES        </span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5729,6 +5733,35 @@ nPrds
 <tr>
 <td style="text-align:left;">
 2022
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2023
 </td>
 <td style="text-align:right;">
 NaN

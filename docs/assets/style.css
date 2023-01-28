@@ -1,5 +1,6 @@
   @import url('https://fonts.googleapis.com/css?family=Muli:400,400i,700&display=swap');
   @import url('https://fonts.googleapis.com/css?family=Prata&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 p.caption {
   color: #777;
@@ -41,23 +42,23 @@ pre code {
 /*------------- Body and header text---------------- */
 
 .book.font-family-1 {
-  font-family: 'Muli', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Prata', serif;
-  color: #2f5275;
+  font-family: 'Poppins', sans-serif;
+  color: #3a8bf5;
 }
 
 .title {
-  font-family: 'Prata', serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 3em !important;
-  color: #131f29;
+  color: #2c1f6e;
  }
 
 .subtitle {
-  font-family: 'Prata', serif;
-  color: #2c6793;
+  font-family: 'Poppins', sans-serif;
+  color: #2c1f6e;
 }
 
 /*--- LOGO ---*/
@@ -79,7 +80,7 @@ h1, h2, h3, h4 {
 }
 
 .summary{
-font-family: 'Muli', sans-serif;
+font-family: 'Poppins', sans-serif;
 }
 
 
@@ -91,25 +92,25 @@ font-family: 'Muli', sans-serif;
   padding-bottom: 8px;
   padding-left: 15px;
   padding-right: 15px;
-  color: #2f5175;
+  color: #2c1f6e;
 }
 
 
 .summary a:hover {
-  color: #778ca5 !important;
+  color: #3a8bf5 !important;
 } 
 
 
 .book .book-summary ul.summary li.active>a { /*active TOC links*/
-  color: #778ca5 !important;
+  color: #3a8bf5 !important;
   border-left: solid 4px;
-  border-color: #5699cc;
+  border-color: #7766f3;
   padding-left: 11px !important;
 }  
 
 li.appendix span, li.part span { /* for TOC part names */
   margin-top: 1em;
-  color: color: #1c3046 !important;
+  color: color: #3a8bf5 !important;
   opacity: 1 !important;
   text-transform: uppercase;
 }
@@ -164,7 +165,7 @@ visibility: hidden;
 
 .copy {
   width: inherit;
-  background-color: #e2e2e2 ;
+  background-color: #ffffff;
   border: none;
   border-radius: 2px;
   float: right;

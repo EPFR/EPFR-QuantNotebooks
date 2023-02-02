@@ -948,7 +948,7 @@ REst
 <p>Next, we set up a variable for our look-back period. This variable will be the window of time across which we smooth the signal for each country. The look-back period we choose for our demonstrations is <strong>12 months</strong>.</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="activepassive-sector-strategy.html#cb122-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># LOOKBACK (IN MONTHS)               </span></span></code></pre></div>
 <p>Now, using the function from the <code>library('EPFR.r')</code>, called <code>compound.flows()</code> we compute the moving sum of our signal over the trailing <code>lookback</code> period for each sector.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="activepassive-sector-strategy.html#cb123-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, T) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="activepassive-sector-strategy.html#cb123-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, T) <span class="co"># COMPUTE MOVING SUM</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -3032,176 +3032,176 @@ nPrds
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2017
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 7.711688
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 9.557112
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -2.1775306
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -9.2747591
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -4.7277456
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 12.439434
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 15.7540984
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2018
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.377588
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -7.694732
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.1371686
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.3522608
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4.7591303
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -2.381542
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -5.1400601
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2019
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -4.246400
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3.007191
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3.3275715
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -2.7355208
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -1.0166278
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -3.229772
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 26.1430030
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2020
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -5.902041
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 10.186102
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 20.3917711
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -20.8490506
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -14.0226669
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 8.120626
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 15.0043298
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2021
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -8.343109
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -2.905167
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.4959060
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5.9545347
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1.5498823
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -9.892991
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 26.2271579
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2022
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -17.332540
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5.415872
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -9.4795442
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 27.8263351
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -1.6903505
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -15.642190
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -10.1363090
 </td>
-<td style="text-align:right;">
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 12
 </td>
 </tr>

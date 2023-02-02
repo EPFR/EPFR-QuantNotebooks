@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks</title>
+  <title>9 Active/Passive Sector Strategy | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="9 Active/Passive Sector Strategy | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="9 Active/Passive Sector Strategy | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="flow-percentage-country-strategy.html"/>
-<link rel="next" href="activepassive-country-strategy.html"/>
+<link rel="prev" href="activepassive-country-strategy.html"/>
+<link rel="next" href="flow-percentage-dm-rates-strategy.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -291,67 +291,62 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-sector-strategy" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">7</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="overview-3" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Overview<a href="flow-percentage-sector-strategy.html#overview-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
-<!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
+<div id="activepassive-sector-strategy" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Active/Passive Sector Strategy<a href="activepassive-sector-strategy.html#activepassive-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="overview-5" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Overview<a href="activepassive-sector-strategy.html#overview-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <em>Active/Passive Sector Strategy</em> is an equity-based rotation strategy that ranks different sectors across a customized universe of geographic regions. This approach uses the stated monthly sector allocations of equity funds and EPFR’s fund classification to create an indicator.</p>
+<!-- In terms of twelve-month active over passive allocation, the top two sectors tend to outperform the bottom two sectors by about 5% per year. This strategy works well everywhere but is slightly weaker for Japan sector. -->
 <hr />
 </div>
-<div id="daily-percentage-flow-3" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Daily Percentage Flow<a href="flow-percentage-sector-strategy.html#daily-percentage-flow-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The <em>Flow-Percentage Sector Strategy</em> developed by EPFR is based on percentage flow into sectors weighted by the regional emphasis of each fund. In this section, the reader will gain an understanding of the aggregations which can be used to create a signal as well as the methodology behind daily percentage flow calculations.</p>
+<div id="activepassive-indicator-1" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Active/Passive Indicator<a href="activepassive-sector-strategy.html#activepassive-indicator-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The <em>Active/Passive Country Strategy</em> developed by EPFR Global use the ratio of average allocation of active over passive funds. This section aims to give the reader an understanding of the methodology for constructing the variables used in the strategy.</p>
 <hr />
-<div id="aggregations-3" class="section level3 hasAnchor" number="7.2.1">
-<h3><span class="header-section-number">7.2.1</span> Aggregations<a href="flow-percentage-sector-strategy.html#aggregations-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="aggregations-5" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Aggregations<a href="activepassive-sector-strategy.html#aggregations-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first step is defining a subset of data to capture in calculating our signal.</p>
-<p>This strategy requires;</p>
+<p>This strategy uses the following portions of the EPFR dataset;</p>
 <ul>
-<li><p>Active equity funds with a cross-border focus. These are essentially any active fund that has a mandate spanning more than one country.</p></li>
-<li><p>Funds must report both daily flows with monthly sector and region allocations, since these values are needed to calculate Daily Percentage Flow.</p></li>
+<li><p>Equity fund-level sector weightings, using the EPFR Sector Allocation database.</p></li>
+<li><p>Active/Passive tagging at the fund level, using EPFR’s fund classifications.</p></li>
 <li><p>Funds with a geographic mandate confined to the region of interest (e.g. for U.S. sector, we look only at funds that have a mandate to invest in the United States).</p></li>
 </ul>
 <hr />
-<p>Active cross-border equity funds, which report their sector allocations, region allocations and their fund flows, are a subset of those that only report their fund flows to EPFR. The figure below shows EPFR’s coverage of funds used to create this signal for a given region.</p>
+<p>Active and passive equity funds which report their sector allocations to EPFR have grown substantially over time. The figure below shows EPFR’s coverage for different regions each year.</p>
 <center>
 <div class="figure">
-<img src="https://raw.githubusercontent.com/EPFR/EPFR-QuantNotebooks/master/png/coverage_flopctsector.png" width="250" alt="" />
+<img src="https://raw.githubusercontent.com/EPFR/EPFR-QuantNotebooks/master/png/coverage_AISsector.png" width="250" alt="" />
 <p class="caption">Updated at the end of July each year</p>
 </div>
 </center>
-<p>Users looking for more specific detail can customize this aggregation even further using EPFR’s fund-level or share class-level granularity. Some good examples would be to consider only active, passive, ETFs or mutual funds, or only institutional or retail share class flows and assets. Users can use these tags to different degrees in creating aggregated signals to backtest. Further detail about this is available in section <a href="Filters.html#Filters">3</a>.</p>
+<p>Users looking for more specific detail can customize this aggregation even further using EPFR’s fund-level or share class-level granularity. Some good examples would be to consider only ETFs or mutual funds, geographic mandate, and fund domicile. Users can use these tags to different degrees in creating aggregated signals to backtest. Further detail about this is available in section <a href="Filters.html#Filters">3</a>.</p>
 <p>This can be achieved using fund-level flow files or reaching out to EPFR’s quant team for customized aggregations.</p>
 <hr />
 </div>
-<div id="calculation-3" class="section level3 hasAnchor" number="7.2.2">
-<h3><span class="header-section-number">7.2.2</span> Calculation<a href="flow-percentage-sector-strategy.html#calculation-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To begin calculating Daily Percentage flow, we start with our subset of active cross-border equity funds with a geographic mandate confined to the region of interest (e.g. for U.S. sector, we look only at funds that have a mandate to invest in the United States). To calculate the fund’s impact on a sector, we scale a fund’s flow by multiplying it against the product of its stated sector and region allocation, on that day. EPFR releases sector and region allocations of all funds on the <span class="math inline">\(23^{\text{rd}}\)</span> of each month (or the next available business day) at a monthly frequency. Hence, our calculation assumes constant country and sector weightings between two consecutive release dates within the month.</p>
-<p>We then apply the same procedure to all funds with a fund flow and allocation information and then sum the flows for each sector across all funds.</p>
-<p><span class="math display">\[\text{Total Impact}_{s,r,t} = \sum^{N}_{i=m}{\text{Flow}_i \times (\text{Sector Allocation}_i} \times \text{Region Allocation}_i)\]</span>
-Where:</p>
+<div id="calculation-5" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Calculation<a href="activepassive-sector-strategy.html#calculation-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To begin calculating the Active/Passive indicator, we first subset to those equity funds with a geographic mandate confined to the region of interest (e.g. for U.S. sector, we look only at funds that have a mandate to invest in the United States). Second, we divide funds into two different groups of active and passive funds. Then for each sector, we compute equally-weighted average allocations to that sector. These equal-weight averages are computed for both active and passive funds, shown below.</p>
+<p><span class="math display">\[\overline{\text{Active Allocation}}_{s,r,t} = \frac{\sum^{N}_{i=m}{\text{Allocation}_i}}{N}\]</span> Where:</p>
 <ul>
-<li><span class="math inline">\(\text{Total Impact}\)</span> = the impact on a sector <span class="math inline">\(s\)</span>, for region <span class="math inline">\(r\)</span>, across all active cross-border equity funds <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\overline{\text{Active Allocation}}\)</span> = the equally-weighted average allocations to a sector <span class="math inline">\(s\)</span>, within region <span class="math inline">\(r\)</span>, across all Active funds <span class="math inline">\(i\)</span>, for month <span class="math inline">\(t\)</span></li>
 </ul>
-<p>Additionally, we repeat the process across the same fund’s Assets held under Management (AuM), to get the total AuM held in a sector.</p>
-<p><span class="math display">\[\text{Total AuM}_{s,r,t} = \sum^{N}_{i=m}{\text{AuM}_i \times (\text{Sector Allocation}_i} \times \text{Region Allocation}_i)\]</span></p>
-<p>Where:</p>
+<p><span class="math display">\[\overline{\text{Passive Allocation}}_{s,r,t} = \frac{\sum^{N}_{i=m}{\text{Allocation}_i}}{N}\]</span> Where:</p>
 <ul>
-<li><span class="math inline">\(\text{Total AuM}\)</span> = the assets held in a sector <span class="math inline">\(s\)</span>, for region <span class="math inline">\(r\)</span>, across all active cross-border equity funds <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\overline{\text{Passive Allocation}}\)</span> = the equally-weighted average allocations to a sector <span class="math inline">\(s\)</span>, within region <span class="math inline">\(r\)</span>, across all Passive funds <span class="math inline">\(i\)</span>, for month <span class="math inline">\(t\)</span></li>
 </ul>
-<p>Finally, to find the daily percentage flow for a sector, we divide the Total Impact by the Total AuM. Then we repeat this across all different sectors for the entire history.</p>
-<p><span class="math display">\[\text{Percentage Flow}_{s,r,t} = \frac{\text{Total Impact}_{s,r,t}}{\text{Total AuM}_{s,r,t}}\]</span>
-Where:</p>
+<p>We then express the average allocation of active funds as percentage of that over passive funds to get our Active/Passive Indicator.</p>
+<p><span class="math display">\[\text{Active/Passive Indicatior}_{s,r,t} = \frac{\overline{\text{Active Allocation}}_{s,r,t}}{\overline{\text{Passive Allocation}_{s,r,t}}}\]</span> Where:</p>
 <ul>
-<li><span class="math inline">\(\text{Percentage Flow}\)</span> = the scaled flow as a percentage into a sector <span class="math inline">\(s\)</span>, for region <span class="math inline">\(r\)</span>, across all active cross-border equity funds <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\text{Active/Passive Indicatior}\)</span> = percentage of active/passive allocations to a sector <span class="math inline">\(s\)</span>, within region <span class="math inline">\(r\)</span>, across all Passive funds <span class="math inline">\(i\)</span>, for month <span class="math inline">\(t\)</span></li>
 </ul>
 <hr />
 </div>
-<div id="flow-file-3" class="section level3 hasAnchor" number="7.2.3">
-<h3><span class="header-section-number">7.2.3</span> Flow File<a href="flow-percentage-sector-strategy.html#flow-file-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The users may create flow percentages for their desired sector and country aggregations and granularity using the methodology described in the previous section.</p>
-<p>EPFR also provides pre-calculated aggregations for its users for the <em>Daily Flow-Percentage Sector Strategy</em>. These files can be found on the FTP under the strategies folder. There are 5 different flow percentage sector files available for different regions which include; Emerging Markets (EM), Japan (JP), United Kingdom (UK), Eurozone, and the United States (US). Please refer to the FTP Folder Structure section for the exact location of these files.</p>
-<p>For this demonstration, we will pick the US region so we will download the respective pre-calculated file named <strong>FloPctSector-US-daily.csv</strong>. This file contains daily active cross-border equity fund flow data for 12 sectors and is updated daily at 5:00 PM est. with a T+1 day lag. Below shows a snippet of what this file contains.</p>
+<div id="aggregate-indicator-file-1" class="section level3 hasAnchor" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> Aggregate Indicator File<a href="activepassive-sector-strategy.html#aggregate-indicator-file-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The users may create files for their desired active/passive sector aggregations and granularity using the methodology described in the previous section.</p>
+<p>EPFR also provides several pre-calculated aggregations for its users for the <em>Active/Passive Sector Strategy</em>. This file can be found on the FTP under the strategies folder. There are 5 different active/passive Sector files available for different regions which include; Emerging Markets (EM), Japan (JP), United Kingdom (UK), Eurozone, and the United States (US). Please refer to the FTP Folder Structure section for the exact location of these files.</p>
+<p>For this demonstration, we will pick the US region so we will download the respective pre-calculated file named <strong>ActPasSector-US-monthly.csv</strong>. This file contains monthly active/passive indicator data for 12 different sectors and is updated monthly at 5:00 PM est. with a T+23 day lag. Below shows a snippet of what this file contains.</p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -398,272 +393,273 @@ FinsExREst
 <tbody>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211201
+202101
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0833652
+-0.0637980
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.2180979
+-0.2202687
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1437463
+-0.1721876
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1476985
+-0.0164727
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0517319
+0.0643864
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1334976
+0.0395843
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1025957
+-0.0088637
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.3549075
+-0.0948848
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0105562
+0.9807852
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0425764
+-0.3727153
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0996954
+-0.5996213
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1631039
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211202
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1029233
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1952271
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1972524
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1445645
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0776143
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1341865
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1052204
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3002338
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0376111
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0542626
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1223098
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1517030
+0.1188923
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211203
+202102
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0270864
+-0.0730363
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0025913
+-0.2198530
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0170724
+-0.1553078
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0075179
+-0.0155420
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0306224
+0.0722404
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0107477
+0.0308475
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0213962
+-0.0136582
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0096622
+-0.0807512
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0076289
+1.0623121
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0012017
+-0.3760012
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0083182
+-0.6167318
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0126103
+0.1151879
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211206
+202103
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0367314
+-0.0628810
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0117145
+-0.2528666
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0377004
+-0.1095982
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0220489
+-0.0002645
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0156267
+0.0580836
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0228756
+0.0360855
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0113968
+-0.0090039
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0020527
+-0.0847648
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0374174
+1.0297702
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0054743
+-0.4092236
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0419278
+-0.6136573
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0156347
+0.1345456
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211207
+202104
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0021720
+-0.0581335
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0187280
+-0.2553426
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0542059
+-0.0970761
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0355337
+-0.0181953
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0307079
+0.0497760
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0086272
+0.0361092
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0269184
+-0.0001193
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0123226
+-0.0752884
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0031472
+1.1591137
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0070403
+-0.4293458
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1783900
+-0.6223375
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0106812
+0.1171848
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211208
+202105
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0870169
+-0.0571401
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0756015
+-0.2641775
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1409046
+-0.0560309
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0941919
+-0.0200383
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0582888
+0.0444436
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0801003
+0.0339608
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1290022
+0.0015365
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0458471
+-0.0782631
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0632813
+1.1865805
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0498153
+-0.4385528
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1267773
+-0.6142699
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0837055
+0.1074931
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+202106
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0621110
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.2724841
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0575555
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0158545
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0467179
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0227257
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0005435
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0663943
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1.2159542
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.4374606
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.6150119
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1169761
 </td>
 </tr>
 </tbody>
 </table>
-<p>We will download this file from the ftp and store it in local folder <em>EPFR/daily</em> using <code>ftp.get()</code>, more about this function can be referred to in section <a href="epfr-library.html#ftp">2.3</a>.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="flow-percentage-sector-strategy.html#cb82-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="st">&quot;/Strategies/daily/FloPctSector-US-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb82-2"><a href="flow-percentage-sector-strategy.html#cb82-2" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
-<span id="cb82-3"><a href="flow-percentage-sector-strategy.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-4"><a href="flow-percentage-sector-strategy.html#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
+<p>We will download this file from the ftp and store it in local folder <em>EPFR/monthly</em> using <code>ftp.get()</code>, more about this function can be referred to in section <a href="epfr-library.html#ftp">2.3</a>.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="activepassive-sector-strategy.html#cb117-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="st">&quot;EPFRHistory/Strategies/monthly/ActPasSector-US-monthly.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
+<span id="cb117-2"><a href="activepassive-sector-strategy.html#cb117-2" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">monthly&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
+<span id="cb117-3"><a href="activepassive-sector-strategy.html#cb117-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-4"><a href="activepassive-sector-strategy.html#cb117-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
 <p>After downloading the csv file you will store it’s path as <code>flow.file</code>. A quick way to do this is shown below:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="flow-percentage-sector-strategy.html#cb83-1" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\daily\\FloPctSector-US-daily.csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="activepassive-sector-strategy.html#cb118-1" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\monthly\\ActPasSector-US-monthly.csv</span></span></code></pre></div>
 <hr />
 </div>
-<div id="return-file-4" class="section level3 hasAnchor" number="7.2.4">
-<h3><span class="header-section-number">7.2.4</span> Return File<a href="flow-percentage-sector-strategy.html#return-file-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The return file for this strategy should contain daily equity returns for each of the sectors in the flow file, which the user can find with their own resources.</p>
-<p>EPFR also provides Fund Return data, that can be used as a proxy to equity market returns. To create a return file using EPFR daily flow data, the following equation can be used:</p>
-<p><span class="math display">\[\text{Sector Return}_{s,r,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_i}{\sum^{N}_{i=m} \text{Assets Start}_i}\]</span>
-Where:</p>
+<div id="return-file-6" class="section level3 hasAnchor" number="9.2.4">
+<h3><span class="header-section-number">9.2.4</span> Return File<a href="activepassive-sector-strategy.html#return-file-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The return file for this strategy should contain monthly equity returns for each of the sectors in the flow file, which the user can find using their own resources.</p>
+<p>EPFR also provides Fund Return data, that can be used as a proxy to returns. To create a return file using EPFR daily flow data, the following equation can be used:</p>
+<p><span class="math display">\[\text{Sector Return}_{s,r,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_i}{\sum^{N}_{i=m} \text{Assets Start}_i}\]</span></p>
+<p>Where:</p>
 <ul>
-<li><span class="math inline">\(\text{Sector Return}\)</span> = the return value of sector <span class="math inline">\(s\)</span>, for region <span class="math inline">\(r\)</span>, across all funds <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of sector <span class="math inline">\(s\)</span>, for region <span class="math inline">\(r\)</span>, across all funds <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
 </ul>
 <p>For this demonstration, we will use a file that has calculated total return indices, which is locally stored in the folder <em>EPFR/returns</em> and has been named <em>WeeklyRets.csv</em>.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="flow-percentage-sector-strategy.html#cb84-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">WeeklyRets.csv&quot;</span></span></code></pre></div>
+<p>However, since our flow file uses monthly data we will also want to ensure that our returns are also indexed by month. If your return file is indexed daily or weekly, you can use the function <code>mat.daily.to.monthly(, T)</code> from <code>library('EPFR.r')</code> when we implement the strategy.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="activepassive-sector-strategy.html#cb119-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">WeeklyRets.csv&quot;</span></span></code></pre></div>
 <p>For your reference a snippet of our return file looks like this</p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
@@ -708,230 +704,230 @@ REst
 <tbody>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211201
+202101
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-817.7962
+684.5959
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-425.7918
+378.3002
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-320.1739
+225.0627
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-288.0360
+216.4411
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-551.6620
+486.9658
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-532.1843
+453.2502
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-799.2990
+628.1774
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-517.4599
+430.6261
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-152.1217
+132.2829
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-335.1165
+309.0325
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1642.436
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211202
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-826.7988
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-429.5191
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-329.2890
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-296.3150
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-553.6747
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-547.5368
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-807.2954
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-527.9472
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-154.6462
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-339.5786
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1687.160
+1282.282
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211203
+202102
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-810.6849
+675.3966
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-435.4555
+373.1909
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-326.8461
+274.6267
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-291.3652
+241.1611
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-553.8848
+476.5785
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-546.5822
+480.3196
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-792.3028
+636.3133
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-526.7885
+446.9990
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-153.8167
+141.0181
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-342.7198
+290.0474
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1683.576
+1304.703
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211206
+202103
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-819.8093
+697.4850
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-442.3736
+403.6412
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-331.8846
+283.2412
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-295.3406
+255.1086
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-556.8487
+491.3746
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-555.4087
+520.5650
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-798.8958
+641.8550
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-534.5133
+481.6659
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-156.1249
+143.7514
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-348.3600
+320.1984
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1706.817
+1387.549
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211207
+202104
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-839.1720
+745.2148
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-443.3706
+412.8471
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-339.2438
+284.3949
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-300.9242
+272.6285
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-564.5825
+512.6640
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-561.2963
+540.0703
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-828.0123
+676.3408
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-542.5139
+508.0091
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-158.2545
+154.9783
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-350.9085
+333.3168
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1735.571
+1504.299
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211208
+202105
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-842.3109
+715.9099
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-441.6354
+420.4077
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-339.2408
+301.4291
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-299.5600
+285.0026
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-569.0600
+521.2059
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-562.8735
+556.1296
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-833.4384
+667.9515
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-544.7281
+533.6965
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-159.7151
+154.6105
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-350.8076
+325.3684
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1746.521
+1521.050
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+202106
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+745.9125
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+418.9596
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+314.6270
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+277.4183
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+536.8810
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+546.4074
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+717.5680
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+505.7880
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+159.7650
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+318.9016
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1566.956
 </td>
 </tr>
 </tbody>
@@ -939,59 +935,59 @@ REst
 <hr />
 </div>
 </div>
-<div id="strategy-implementation-3" class="section level2 hasAnchor" number="7.3">
-<h2><span class="header-section-number">7.3</span> Strategy Implementation<a href="flow-percentage-sector-strategy.html#strategy-implementation-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the flow and return files to our <em>R studio</em> work space.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="flow-percentage-sector-strategy.html#cb85-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># GET FLOW PERCENTAGE</span></span>
-<span id="cb85-2"><a href="flow-percentage-sector-strategy.html#cb85-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file)  <span class="co"># GET RETURN</span></span></code></pre></div>
+<div id="strategy-implementation-5" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Strategy Implementation<a href="activepassive-sector-strategy.html#strategy-implementation-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the aggregate indicator and return files to our <em>R studio</em> work space.</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="activepassive-sector-strategy.html#cb120-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># GET FLOW PERCENTAGE</span></span>
+<span id="cb120-2"><a href="activepassive-sector-strategy.html#cb120-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file)  <span class="co"># GET TOTAL RETURN INDEX</span></span></code></pre></div>
 <p>Next we will need to ensure that the data structure in <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are completely aligned, having the same column names in the same order. Below we will subset the columns of <span class="math inline">\(x\)</span> to use the same sectors, in the same order as <span class="math inline">\(y\)</span>.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="flow-percentage-sector-strategy.html#cb86-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[, <span class="fu">dimnames</span>(y)[[<span class="dv">2</span>]]]) <span class="co"># LINE UP INDICATORS WITH RETURNS </span></span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="activepassive-sector-strategy.html#cb121-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[, <span class="fu">dimnames</span>(y)[[<span class="dv">2</span>]]]) <span class="co"># LINE UP INDICATORS WITH RETURNS         </span></span></code></pre></div>
 <p><em>* Note: subsetting can be also be done when creating the flow and return files</em></p>
-<div id="compounding-flows-3" class="section level3 hasAnchor" number="7.3.1">
-<h3><span class="header-section-number">7.3.1</span> Compounding Flows<a href="flow-percentage-sector-strategy.html#compounding-flows-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Next, we set up a variable for our look-back period, which can also be called a flow window. This variable will be the window of time we use to create a trailing compounded daily percentage flow. The look-back period we choose for our demonstrations is <strong>20 days</strong>.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="flow-percentage-sector-strategy.html#cb87-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># FLOW WINDOW (IN WEEKDAYS) - 20 day look back period</span></span></code></pre></div>
-<p>Again, using a function from the <code>library('EPFR.r')</code>, <code>compound.flows()</code> compounds our daily percentage flow over the trailing <code>lookback</code> period for each sector.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="flow-percentage-sector-strategy.html#cb88-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, F) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
+<div id="moving-sum-of-signal-1" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Moving Sum of Signal<a href="activepassive-sector-strategy.html#moving-sum-of-signal-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we set up a variable for our look-back period. This variable will be the window of time across which we smooth the signal for each country. The look-back period we choose for our demonstrations is <strong>12 months</strong>.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="activepassive-sector-strategy.html#cb122-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># LOOKBACK (IN MONTHS)               </span></span></code></pre></div>
+<p>Now, using the function from the <code>library('EPFR.r')</code>, called <code>compound.flows()</code> we compute the moving sum of our signal over the trailing <code>lookback</code> period for each sector.</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="activepassive-sector-strategy.html#cb123-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, T) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 CDisc
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 CStpls
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Engy
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Fins
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 HCare
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Indls
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Tech
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Matls
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Telco
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Utes
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 REst
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 FinsExREst
 </th>
 </tr>
@@ -999,273 +995,272 @@ FinsExREst
 <tbody>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211201
+202101
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4390491
+-0.4735700
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1964883
+-2.327077
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.6182940
+-3.062768
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2447394
+-0.5151820
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2987653
+1.4002883
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4475582
+-0.0857377
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1637939
+0.0947229
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1862302
+-1.496734
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4351033
+9.936416
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3438049
+-4.467293
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1899183
+-5.745347
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3845799
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211202
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5566078
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3650312
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.9062582
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3623549
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3566058
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5557098
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2665497
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0889628
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4518981
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3503657
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0737508
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5026841
+1.321376
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211203
+202102
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5573817
+-0.5002813
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3203809
+-2.361257
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.6863400
+-3.086405
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3262608
+-0.4922969
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3376000
+1.3003387
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5037760
+-0.0426073
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2714612
+0.0860067
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0490416
+-1.445151
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4206566
+10.326747
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3184208
+-4.457706
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0936335
+-5.966139
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4614426
+1.294083
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211206
+202103
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5893786
+-0.5395913
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3344332
+-2.419586
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.6921895
+-2.919716
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3444711
+-0.4547395
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3464822
+1.1758053
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5202053
+0.0357162
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3034701
+0.0752598
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0531585
+-1.371862
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4570811
+10.680032
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2978923
+-4.481235
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0624542
+-6.227032
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4754157
+1.292012
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211207
+202104
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5224570
+-0.5573248
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2830498
+-2.481625
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5670383
+-2.709683
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3603478
+-0.4449437
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3692682
+1.0726513
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4765169
+0.1054424
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2757256
+0.0606366
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0024000
+-1.295267
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4252521
+11.079556
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2614197
+-4.509967
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1263808
+-6.510078
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4352266
+1.261132
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211208
+202105
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5988269
+-0.5661450
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3473726
+-2.551102
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.6506637
+-2.432670
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4243782
+-0.4336720
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4123538
+0.9747560
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5353726
+0.1591912
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4073963
+0.0400851
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0586562
+-1.245067
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4753376
+11.501825
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3037529
+-4.571354
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2264821
+-6.805457
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4876115
+1.236108
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+202106
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.6020430
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-2.628433
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-2.178943
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.3813995
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.8999248
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.2075319
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0052006
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-1.188308
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+11.968665
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-4.630049
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-7.086027
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1.270936
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="ranking-sectors" class="section level3 hasAnchor" number="7.3.2">
-<h3><span class="header-section-number">7.3.2</span> Ranking Sectors<a href="flow-percentage-sector-strategy.html#ranking-sectors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Next, we sort each of the sectors in our region into five equal bins based on their compounded 20-day percentage flow values for the selected holding period. To do this, we will use the function from <code>library('EPFR.r')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
-<p>The <code>bbk()</code> function requires our daily percentage flow data compounded over a desired period and total return index data. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
+<div id="ranking-sectors-1" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Ranking Sectors<a href="activepassive-sector-strategy.html#ranking-sectors-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, we sort each of the sectors in our region into five equal bins based on their moving 12-month cumulative signal values for the selected holding period. To do this, we will use the function from <code>library('EPFR.r')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
+<p>The <code>bbk()</code> function requires our summed Active/Passive indicator over a desired period and total return index data. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
 <p>The first parameter we add is the number of bins we want to use. For our case, we want to use 5 because our strategy is to go long the top fifth and short the bottom fifth.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="flow-percentage-sector-strategy.html#cb89-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
-<p>Since EPFR data is published with T+1 day lag and is released around 5:00 pm EST, we account for a T+2 day delay in our model since that is when one can trade on the information. Users interested in more timely signals can also use the T+2 Open Prices for backtesting purposes. Alternatively, EPFR’s Premium Daily offering collects an earlier release of end-of-day data which includes a significant subset of its original fund-level flow information.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="flow-percentage-sector-strategy.html#cb90-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data takes time to have</span></span></code></pre></div>
-<p>It is also important to note that this model will need to be re-balanced weekly. The day of the week the rebalancing occurs is at the discretion of the user. For this example we will set the day of the week to trade as <strong>Friday</strong>.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="flow-percentage-sector-strategy.html#cb91-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
-<p>Additionally, we also evaluate the returns for different holding periods. The user can input return horizons that they are interested in here. For this example we define a return horizon for weekly, fortnightly, monthly, bi-monthly, quarterly, and semi-annual rebalancing.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="flow-percentage-sector-strategy.html#cb92-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
-<p>Now that we have defined all of our inputs, to rank the sectors into quintiles by their 20-day percentage flow, we call function <code>bbk()</code> for a 1-week holding period.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="flow-percentage-sector-strategy.html#cb93-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="activepassive-sector-strategy.html#cb124-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
+<p>Since EPFR data is published with T+23 day lag and is released around 5:00 pm EST, we account for a T+1 month delay in our model since that is when one can trade on the information.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="activepassive-sector-strategy.html#cb125-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># DELAY IN KNOWING DATA (IN MONTHS)  </span></span></code></pre></div>
+<p>The day of the week the rebalancing occurs is at the discretion of the user, but for this example we will set the day of the week to trade as N/A. This allows the function <code>bbk()</code> to default to monthly returns, and not trade on a specific weekday at each rebalancing date if it does not fall on the final day of the month.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="activepassive-sector-strategy.html#cb126-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
+<p>Additionally, we also evaluate the returns for different holding periods. The user can input return horizons that they are interested in here. For this example we define a return horizon for monthly, quarterly, semi-annual, and annual rebalancing, but is it important to note that this model can be re-balanced as desired.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="activepassive-sector-strategy.html#cb127-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">12</span>) <span class="co"># RETURN HORIZON (IN MONTHS)</span></span></code></pre></div>
+<p>Now that we have defined all of our inputs, to rank the sectors into quintiles by their 12 month cumulative indicator, we call function <code>bbk()</code> for a 1-month holding period.</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="activepassive-sector-strategy.html#cb128-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
 </div>
-<div id="model-4" class="section level3 hasAnchor" number="7.3.3">
-<h3><span class="header-section-number">7.3.3</span> Model<a href="flow-percentage-sector-strategy.html#model-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Go long the top basket and short the bottom basket.</p>
-<p><strong>Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)</strong></p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="flow-percentage-sector-strategy.html#cb94-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
+<div id="model-6" class="section level3 hasAnchor" number="9.3.3">
+<h3><span class="header-section-number">9.3.3</span> Model<a href="activepassive-sector-strategy.html#model-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>12 month cumulative indicator ranked into quintiles (computed only where forward returns are available)</strong></p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="activepassive-sector-strategy.html#cb129-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1309,13 +1304,16 @@ REst
 <tbody>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211231
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
+202111
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1
@@ -1324,60 +1322,19 @@ REst
 2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211224
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
@@ -1385,10 +1342,13 @@ REst
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211217
+202110
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
@@ -1397,63 +1357,22 @@ REst
 1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
+1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211210
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
@@ -1461,16 +1380,25 @@ REst
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211203
+202109
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
+2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
@@ -1480,18 +1408,123 @@ REst
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+202108
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+202107
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+202106
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
@@ -1500,7 +1533,7 @@ REst
 </tbody>
 </table>
 <p><strong>Quintile Returns over the equal-weight universe</strong></p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="flow-percentage-sector-strategy.html#cb95-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="activepassive-sector-strategy.html#cb130-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1532,132 +1565,158 @@ uRet
 <tbody>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211231
+202111
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.5183077
+-2.9939602
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.1954528
+1.1662885
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.4161439
+-2.4233052
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.494909
+1.0027805
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.5946358
+4.4598490
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.1129435
+-7.453809
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.7471261
+5.522668
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211224
+202110
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.7288032
+-3.3083958
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.7834273
+-1.2757796
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.2369671
+3.5469627
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.076910
+-1.0506575
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.7907712
+0.3143890
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.5195744
+-3.622785
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.3941521
+-2.096167
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211217
+202109
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.2842972
+-1.8008807
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.7650757
+-0.7315002
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0081738
+1.9652256
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.029169
+0.1767659
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.0324648
+-0.5922234
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.3167621
+-1.208657
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.7860398
+6.821080
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211210
+202108
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.4640884
+-0.3445543
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.9110965
+-1.7855247
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2873910
+-1.3371586
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.308673
+6.3804142
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.6354254
+-2.2445974
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.0995138
+1.900043
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.1656642
+-3.935863
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20211203
+202107
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0444083
+2.4332903
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.6133919
+-0.7803306
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.4864981
+0.1932731
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.400920
+-2.7338549
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1021892
+0.7909855
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1465976
+1.642305
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.2579530
+2.374048
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+202106
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.1930827
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1.1449808
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.4154115
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-4.4595415
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2.8845261
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-3.077609
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1.685279
 </td>
 </tr>
 </tbody>
@@ -1665,571 +1724,42 @@ uRet
 <p><em>Def: TxB tells us top - bottom = Q1 - Q5 = overall portfolio returns</em></p>
 <hr />
 </div>
-<div id="performance-3" class="section level3 hasAnchor" number="7.3.4">
-<h3><span class="header-section-number">7.3.4</span> Performance<a href="flow-percentage-sector-strategy.html#performance-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="performance-5" class="section level3 hasAnchor" number="9.3.4">
+<h3><span class="header-section-number">9.3.4</span> Performance<a href="activepassive-sector-strategy.html#performance-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Go long the top basket and short the bottom basket.</p>
 <p><strong>Performance over all holding periods</strong></p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="flow-percentage-sector-strategy.html#cb96-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
-<span id="cb96-2"><a href="flow-percentage-sector-strategy.html#cb96-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb96-3"><a href="flow-percentage-sector-strategy.html#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="activepassive-sector-strategy.html#cb131-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, <span class="dv">5</span>, <span class="cn">NULL</span>, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION  </span></span>
+<span id="cb131-2"><a href="activepassive-sector-strategy.html#cb131-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-3"><a href="activepassive-sector-strategy.html#cb131-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mat.ex.array3d</span>(<span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>)) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Q1
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Q2
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Q3
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Q4
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 Q5
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 TxB
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 uRet
 </th>
 </tr>
 </thead>
 <tbody>
-<tr grouplength="10">
-<td colspan="1" style="border-bottom: 1px solid;">
-<strong>Bi-Monthly</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-AnnMn
-</td>
-<td style="text-align:right;">
-1.832044e+00
-</td>
-<td style="text-align:right;">
--3.117960e-01
-</td>
-<td style="text-align:right;">
-1.137509e+00
-</td>
-<td style="text-align:right;">
--1.741307e+00
-</td>
-<td style="text-align:right;">
--1.094680e+00
-</td>
-<td style="text-align:right;">
-2.926725e+00
-</td>
-<td style="text-align:right;">
-9.542760e+00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-AnnSd
-</td>
-<td style="text-align:right;">
-9.163747e+00
-</td>
-<td style="text-align:right;">
-7.614772e+00
-</td>
-<td style="text-align:right;">
-6.819565e+00
-</td>
-<td style="text-align:right;">
-7.574654e+00
-</td>
-<td style="text-align:right;">
-8.184239e+00
-</td>
-<td style="text-align:right;">
-1.435036e+01
-</td>
-<td style="text-align:right;">
-1.643828e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Sharpe
-</td>
-<td style="text-align:right;">
-1.938863e+01
-</td>
-<td style="text-align:right;">
--3.291781e+00
-</td>
-<td style="text-align:right;">
-1.689765e+01
-</td>
-<td style="text-align:right;">
--2.471684e+01
-</td>
-<td style="text-align:right;">
--1.384967e+01
-</td>
-<td style="text-align:right;">
-2.068234e+01
-</td>
-<td style="text-align:right;">
-5.857941e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-HitRate
-</td>
-<td style="text-align:right;">
-1.862949e+00
-</td>
-<td style="text-align:right;">
-1.192953e-01
-</td>
-<td style="text-align:right;">
-6.063254e+00
-</td>
-<td style="text-align:right;">
--3.334720e+00
-</td>
-<td style="text-align:right;">
--3.731447e-01
-</td>
-<td style="text-align:right;">
-2.727147e+00
-</td>
-<td style="text-align:right;">
-1.930365e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Beta
-</td>
-<td style="text-align:right;">
--4.162660e-02
-</td>
-<td style="text-align:right;">
--8.821100e-02
-</td>
-<td style="text-align:right;">
-5.190090e-02
-</td>
-<td style="text-align:right;">
--1.874500e-03
-</td>
-<td style="text-align:right;">
-6.675360e-02
-</td>
-<td style="text-align:right;">
--1.083803e-01
-</td>
-<td style="text-align:right;">
-1.000000e+00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Alpha
-</td>
-<td style="text-align:right;">
-2.223138e+00
-</td>
-<td style="text-align:right;">
-5.290142e-01
-</td>
-<td style="text-align:right;">
-6.546271e-01
-</td>
-<td style="text-align:right;">
--1.710497e+00
-</td>
-<td style="text-align:right;">
--1.751869e+00
-</td>
-<td style="text-align:right;">
-3.975007e+00
-</td>
-<td style="text-align:right;">
-0.000000e+00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-DrawDn
-</td>
-<td style="text-align:right;">
--2.893852e+01
-</td>
-<td style="text-align:right;">
--3.210194e+01
-</td>
-<td style="text-align:right;">
--2.882991e+01
-</td>
-<td style="text-align:right;">
--4.103388e+01
-</td>
-<td style="text-align:right;">
--5.517376e+01
-</td>
-<td style="text-align:right;">
--3.867573e+01
-</td>
-<td style="text-align:right;">
--5.265406e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-DDnBeg
-</td>
-<td style="text-align:right;">
-2.010720e+07
-</td>
-<td style="text-align:right;">
-2.010944e+07
-</td>
-<td style="text-align:right;">
-2.011967e+07
-</td>
-<td style="text-align:right;">
-2.011074e+07
-</td>
-<td style="text-align:right;">
-2.010511e+07
-</td>
-<td style="text-align:right;">
-2.012599e+07
-</td>
-<td style="text-align:right;">
-2.007096e+07
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-DDnN
-</td>
-<td style="text-align:right;">
-3.833333e+01
-</td>
-<td style="text-align:right;">
-2.588889e+01
-</td>
-<td style="text-align:right;">
-1.955556e+01
-</td>
-<td style="text-align:right;">
-5.333333e+01
-</td>
-<td style="text-align:right;">
-6.411111e+01
-</td>
-<td style="text-align:right;">
-2.677778e+01
-</td>
-<td style="text-align:right;">
-7.888889e+00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-AnnTo
-</td>
-<td style="text-align:right;">
-3.271429e+02
-</td>
-<td style="text-align:right;">
-3.978804e+02
-</td>
-<td style="text-align:right;">
-3.797673e+02
-</td>
-<td style="text-align:right;">
-4.225776e+02
-</td>
-<td style="text-align:right;">
-3.264176e+02
-</td>
-<td style="text-align:right;">
-6.535605e+02
-</td>
-<td style="text-align:right;">
-0.000000e+00
-</td>
-</tr>
-<tr grouplength="10">
-<td colspan="1" style="border-bottom: 1px solid;">
-<strong>Fortnightly</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-AnnMn
-</td>
-<td style="text-align:right;">
-2.273577e+00
-</td>
-<td style="text-align:right;">
--3.344613e-01
-</td>
-<td style="text-align:right;">
-1.537962e+00
-</td>
-<td style="text-align:right;">
-1.221035e-01
-</td>
-<td style="text-align:right;">
--3.253685e+00
-</td>
-<td style="text-align:right;">
-5.527262e+00
-</td>
-<td style="text-align:right;">
-9.698499e+00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-AnnSd
-</td>
-<td style="text-align:right;">
-9.465697e+00
-</td>
-<td style="text-align:right;">
-7.969427e+00
-</td>
-<td style="text-align:right;">
-6.754020e+00
-</td>
-<td style="text-align:right;">
-8.130816e+00
-</td>
-<td style="text-align:right;">
-8.476146e+00
-</td>
-<td style="text-align:right;">
-1.458031e+01
-</td>
-<td style="text-align:right;">
-1.769955e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Sharpe
-</td>
-<td style="text-align:right;">
-2.397568e+01
-</td>
-<td style="text-align:right;">
--4.211775e+00
-</td>
-<td style="text-align:right;">
-2.280524e+01
-</td>
-<td style="text-align:right;">
-1.707395e+00
-</td>
-<td style="text-align:right;">
--3.831948e+01
-</td>
-<td style="text-align:right;">
-3.784627e+01
-</td>
-<td style="text-align:right;">
-5.483200e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-HitRate
-</td>
-<td style="text-align:right;">
-2.271523e+00
-</td>
-<td style="text-align:right;">
-7.958159e-01
-</td>
-<td style="text-align:right;">
-1.780122e+00
-</td>
-<td style="text-align:right;">
-4.263622e-01
-</td>
-<td style="text-align:right;">
--4.109457e+00
-</td>
-<td style="text-align:right;">
-3.616852e+00
-</td>
-<td style="text-align:right;">
-1.245544e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Beta
-</td>
-<td style="text-align:right;">
-1.381100e-02
-</td>
-<td style="text-align:right;">
--4.562100e-02
-</td>
-<td style="text-align:right;">
-1.995370e-02
-</td>
-<td style="text-align:right;">
--2.372610e-02
-</td>
-<td style="text-align:right;">
-2.695400e-02
-</td>
-<td style="text-align:right;">
--1.314300e-02
-</td>
-<td style="text-align:right;">
-1.000000e+00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Alpha
-</td>
-<td style="text-align:right;">
-2.137941e+00
-</td>
-<td style="text-align:right;">
-1.083021e-01
-</td>
-<td style="text-align:right;">
-1.345125e+00
-</td>
-<td style="text-align:right;">
-3.536413e-01
-</td>
-<td style="text-align:right;">
--3.515982e+00
-</td>
-<td style="text-align:right;">
-5.653923e+00
-</td>
-<td style="text-align:right;">
-0.000000e+00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-DrawDn
-</td>
-<td style="text-align:right;">
--2.643360e+01
-</td>
-<td style="text-align:right;">
--5.196802e+01
-</td>
-<td style="text-align:right;">
--2.404667e+01
-</td>
-<td style="text-align:right;">
--3.099358e+01
-</td>
-<td style="text-align:right;">
--6.748342e+01
-</td>
-<td style="text-align:right;">
--3.963197e+01
-</td>
-<td style="text-align:right;">
--6.314218e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-DDnBeg
-</td>
-<td style="text-align:right;">
-2.021031e+07
-</td>
-<td style="text-align:right;">
-2.008557e+07
-</td>
-<td style="text-align:right;">
-2.017061e+07
-</td>
-<td style="text-align:right;">
-2.011537e+07
-</td>
-<td style="text-align:right;">
-2.009547e+07
-</td>
-<td style="text-align:right;">
-2.021031e+07
-</td>
-<td style="text-align:right;">
-2.007101e+07
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-DDnN
-</td>
-<td style="text-align:right;">
-2.050000e+01
-</td>
-<td style="text-align:right;">
-2.130000e+02
-</td>
-<td style="text-align:right;">
-1.025000e+02
-</td>
-<td style="text-align:right;">
-8.600000e+01
-</td>
-<td style="text-align:right;">
-3.360000e+02
-</td>
-<td style="text-align:right;">
-2.050000e+01
-</td>
-<td style="text-align:right;">
-3.650000e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-AnnTo
-</td>
-<td style="text-align:right;">
-8.709020e+02
-</td>
-<td style="text-align:right;">
-1.486593e+03
-</td>
-<td style="text-align:right;">
-1.418594e+03
-</td>
-<td style="text-align:right;">
-1.435616e+03
-</td>
-<td style="text-align:right;">
-8.565755e+02
-</td>
-<td style="text-align:right;">
-1.727477e+03
-</td>
-<td style="text-align:right;">
-0.000000e+00
-</td>
-</tr>
 <tr grouplength="10">
 <td colspan="1" style="border-bottom: 1px solid;">
 <strong>Monthly</strong>
@@ -2240,25 +1770,25 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:right;">
-2.576892e+00
+-6.143150e-02
 </td>
 <td style="text-align:right;">
--7.967097e-01
+1.838646
 </td>
 <td style="text-align:right;">
-8.547625e-01
+-3.727489e-01
 </td>
 <td style="text-align:right;">
--7.068334e-01
+2.216897e-01
 </td>
 <td style="text-align:right;">
--1.902808e+00
+-2.423653
 </td>
 <td style="text-align:right;">
-4.479700e+00
+2.362222
 </td>
 <td style="text-align:right;">
-9.614344e+00
+11.818369
 </td>
 </tr>
 <tr>
@@ -2266,25 +1796,25 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:right;">
-9.367391e+00
+5.998357e+00
 </td>
 <td style="text-align:right;">
-7.287145e+00
+6.071305
 </td>
 <td style="text-align:right;">
-6.692097e+00
+7.626258e+00
 </td>
 <td style="text-align:right;">
-8.125846e+00
+8.960121e+00
 </td>
 <td style="text-align:right;">
-8.112590e+00
+10.893781
 </td>
 <td style="text-align:right;">
-1.413394e+01
+14.254981
 </td>
 <td style="text-align:right;">
-1.744423e+01
+14.286133
 </td>
 </tr>
 <tr>
@@ -2292,25 +1822,25 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:right;">
-2.749630e+01
+-1.024139e+00
 </td>
 <td style="text-align:right;">
--1.112361e+01
+30.284195
 </td>
 <td style="text-align:right;">
-1.306623e+01
+-4.887703e+00
 </td>
 <td style="text-align:right;">
--8.773405e+00
+2.474182e+00
 </td>
 <td style="text-align:right;">
--2.329606e+01
+-22.248045
 </td>
 <td style="text-align:right;">
-3.199302e+01
+16.571202
 </td>
 <td style="text-align:right;">
-5.534194e+01
+82.726159
 </td>
 </tr>
 <tr>
@@ -2318,25 +1848,25 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:right;">
-7.968705e-01
+7.352941e-01
 </td>
 <td style="text-align:right;">
--1.859364e-01
+1.470588
 </td>
 <td style="text-align:right;">
-2.517990e+00
+1.470588e+00
 </td>
 <td style="text-align:right;">
--3.014827e+00
+-4.411765e+00
 </td>
 <td style="text-align:right;">
--2.148532e+00
+-2.205882
 </td>
 <td style="text-align:right;">
-2.891674e+00
+2.941177
 </td>
 <td style="text-align:right;">
-1.506508e+01
+17.883212
 </td>
 </tr>
 <tr>
@@ -2344,25 +1874,25 @@ HitRate
 Beta
 </td>
 <td style="text-align:right;">
--1.335830e-02
+NA
 </td>
 <td style="text-align:right;">
--5.905630e-02
+NA
 </td>
 <td style="text-align:right;">
-2.953090e-02
+NA
 </td>
 <td style="text-align:right;">
--8.115400e-03
+NA
 </td>
 <td style="text-align:right;">
-4.133730e-02
+NA
 </td>
 <td style="text-align:right;">
--5.469560e-02
+NA
 </td>
 <td style="text-align:right;">
-1.000000e+00
+1.000000
 </td>
 </tr>
 <tr>
@@ -2370,25 +1900,25 @@ Beta
 Alpha
 </td>
 <td style="text-align:right;">
-2.703839e+00
+NA
 </td>
 <td style="text-align:right;">
--2.285458e-01
+NA
 </td>
 <td style="text-align:right;">
-5.718861e-01
+NA
 </td>
 <td style="text-align:right;">
--6.262644e-01
+NA
 </td>
 <td style="text-align:right;">
--2.303043e+00
+NA
 </td>
 <td style="text-align:right;">
-5.006882e+00
+NA
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.000000
 </td>
 </tr>
 <tr>
@@ -2396,25 +1926,25 @@ Alpha
 DrawDn
 </td>
 <td style="text-align:right;">
--2.159776e+01
+-3.833103e+01
 </td>
 <td style="text-align:right;">
--3.398174e+01
+-12.681748
 </td>
 <td style="text-align:right;">
--2.603303e+01
+-3.047597e+01
 </td>
 <td style="text-align:right;">
--3.308932e+01
+-4.308415e+01
 </td>
 <td style="text-align:right;">
--5.845940e+01
+-39.030130
 </td>
 <td style="text-align:right;">
--3.441531e+01
+-35.841991
 </td>
 <td style="text-align:right;">
--5.909141e+01
+-23.959816
 </td>
 </tr>
 <tr>
@@ -2422,25 +1952,25 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:right;">
-2.018042e+07
+2.018020e+05
 </td>
 <td style="text-align:right;">
-2.007592e+07
+201805.000000
 </td>
 <td style="text-align:right;">
-2.009589e+07
+2.013120e+05
 </td>
 <td style="text-align:right;">
-2.009334e+07
+2.016060e+05
 </td>
 <td style="text-align:right;">
-2.009583e+07
+201109.000000
 </td>
 <td style="text-align:right;">
-2.021291e+07
+201802.000000
 </td>
 <td style="text-align:right;">
-2.007099e+07
+201912.000000
 </td>
 </tr>
 <tr>
@@ -2448,25 +1978,25 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:right;">
-3.225000e+01
+5.600000e+01
 </td>
 <td style="text-align:right;">
-1.332500e+02
+10.000000
 </td>
 <td style="text-align:right;">
-2.900000e+01
+2.500000e+01
 </td>
 <td style="text-align:right;">
-8.950000e+01
+5.200000e+01
 </td>
 <td style="text-align:right;">
-1.542500e+02
+113.000000
 </td>
 <td style="text-align:right;">
-8.500000e+00
+54.000000
 </td>
 <td style="text-align:right;">
-1.825000e+01
+3.000000
 </td>
 </tr>
 <tr>
@@ -2474,25 +2004,290 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:right;">
-6.428073e+02
+3.970588e+01
 </td>
 <td style="text-align:right;">
-8.930790e+02
+75.000000
 </td>
 <td style="text-align:right;">
-8.301736e+02
+6.911765e+01
 </td>
 <td style="text-align:right;">
-9.082334e+02
+6.176471e+01
 </td>
 <td style="text-align:right;">
-6.404294e+02
+22.058823
 </td>
 <td style="text-align:right;">
-1.283237e+03
+61.764706
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.000000
+</td>
+</tr>
+<tr grouplength="10">
+<td colspan="1" style="border-bottom: 1px solid;">
+<strong>Monthly2</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnMn
+</td>
+<td style="text-align:right;">
+1.495099e+00
+</td>
+<td style="text-align:right;">
+1.444599
+</td>
+<td style="text-align:right;">
+-1.683259e+00
+</td>
+<td style="text-align:right;">
+2.014717e+00
+</td>
+<td style="text-align:right;">
+-2.936259
+</td>
+<td style="text-align:right;">
+4.431358
+</td>
+<td style="text-align:right;">
+13.358013
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnSd
+</td>
+<td style="text-align:right;">
+9.661849e+00
+</td>
+<td style="text-align:right;">
+5.997652
+</td>
+<td style="text-align:right;">
+8.362015e+00
+</td>
+<td style="text-align:right;">
+1.347878e+01
+</td>
+<td style="text-align:right;">
+9.659831
+</td>
+<td style="text-align:right;">
+16.486748
+</td>
+<td style="text-align:right;">
+11.951524
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Sharpe
+</td>
+<td style="text-align:right;">
+1.572912e+01
+</td>
+<td style="text-align:right;">
+26.128701
+</td>
+<td style="text-align:right;">
+-2.556080e+01
+</td>
+<td style="text-align:right;">
+1.368780e+01
+</td>
+<td style="text-align:right;">
+-31.536443
+</td>
+<td style="text-align:right;">
+26.696237
+</td>
+<td style="text-align:right;">
+115.748326
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+HitRate
+</td>
+<td style="text-align:right;">
+2.803030e+00
+</td>
+<td style="text-align:right;">
+9.015151
+</td>
+<td style="text-align:right;">
+-1.537879e+01
+</td>
+<td style="text-align:right;">
+3.409091e+00
+</td>
+<td style="text-align:right;">
+-10.606061
+</td>
+<td style="text-align:right;">
+10.606061
+</td>
+<td style="text-align:right;">
+38.939394
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Beta
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Alpha
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DrawDn
+</td>
+<td style="text-align:right;">
+-2.249536e+01
+</td>
+<td style="text-align:right;">
+-12.026160
+</td>
+<td style="text-align:right;">
+-2.894447e+01
+</td>
+<td style="text-align:right;">
+-2.897705e+01
+</td>
+<td style="text-align:right;">
+-35.570947
+</td>
+<td style="text-align:right;">
+-22.145150
+</td>
+<td style="text-align:right;">
+-4.794102
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnBeg
+</td>
+<td style="text-align:right;">
+2.019565e+05
+</td>
+<td style="text-align:right;">
+201748.166667
+</td>
+<td style="text-align:right;">
+2.013315e+05
+</td>
+<td style="text-align:right;">
+2.013315e+05
+</td>
+<td style="text-align:right;">
+201214.833333
+</td>
+<td style="text-align:right;">
+201948.166667
+</td>
+<td style="text-align:right;">
+201998.166667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+DDnN
+</td>
+<td style="text-align:right;">
+2.500000e+00
+</td>
+<td style="text-align:right;">
+2.083333
+</td>
+<td style="text-align:right;">
+7.250000e+00
+</td>
+<td style="text-align:right;">
+5.500000e+00
+</td>
+<td style="text-align:right;">
+9.250000
+</td>
+<td style="text-align:right;">
+1.250000
+</td>
+<td style="text-align:right;">
+1.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+AnnTo
+</td>
+<td style="text-align:right;">
+3.102273e+01
+</td>
+<td style="text-align:right;">
+53.446970
+</td>
+<td style="text-align:right;">
+4.537879e+01
+</td>
+<td style="text-align:right;">
+4.246212e+01
+</td>
+<td style="text-align:right;">
+23.219697
+</td>
+<td style="text-align:right;">
+54.242424
+</td>
+<td style="text-align:right;">
+0.000000
 </td>
 </tr>
 <tr grouplength="10">
@@ -2505,25 +2300,25 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:right;">
-1.578371e+00
+-4.472660e-02
 </td>
 <td style="text-align:right;">
--1.770321e-01
+2.083985
 </td>
 <td style="text-align:right;">
-1.032795e+00
+-8.630254e-01
 </td>
 <td style="text-align:right;">
--2.112346e+00
+1.158214e+00
 </td>
 <td style="text-align:right;">
--4.173223e-01
+-2.908504
 </td>
 <td style="text-align:right;">
-1.995693e+00
+2.863777
 </td>
 <td style="text-align:right;">
-9.508234e+00
+12.348894
 </td>
 </tr>
 <tr>
@@ -2531,25 +2326,25 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:right;">
-8.606516e+00
+6.647672e+00
 </td>
 <td style="text-align:right;">
-7.529482e+00
+5.851506
 </td>
 <td style="text-align:right;">
-6.871076e+00
+7.901446e+00
 </td>
 <td style="text-align:right;">
-7.496150e+00
+9.162177e+00
 </td>
 <td style="text-align:right;">
-7.776709e+00
+9.590563
 </td>
 <td style="text-align:right;">
-1.309783e+01
+13.142070
 </td>
 <td style="text-align:right;">
-1.579752e+01
+11.344562
 </td>
 </tr>
 <tr>
@@ -2557,25 +2352,25 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:right;">
-1.837687e+01
+-7.780721e-01
 </td>
 <td style="text-align:right;">
--1.259716e+00
+35.434878
 </td>
 <td style="text-align:right;">
-1.548890e+01
+-1.093388e+01
 </td>
 <td style="text-align:right;">
--2.845500e+01
+1.257475e+01
 </td>
 <td style="text-align:right;">
--5.813096e+00
+-30.302422
 </td>
 <td style="text-align:right;">
-1.580097e+01
+21.797409
 </td>
 <td style="text-align:right;">
-6.070068e+01
+112.565158
 </td>
 </tr>
 <tr>
@@ -2583,25 +2378,25 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:right;">
-1.118659e+00
+3.703704e+00
 </td>
 <td style="text-align:right;">
-1.423750e-02
+9.680135
 </td>
 <td style="text-align:right;">
-5.227189e+00
+7.575758e-01
 </td>
 <td style="text-align:right;">
--4.354635e+00
+-1.430976e+00
 </td>
 <td style="text-align:right;">
--8.786560e-01
+-8.181818
 </td>
 <td style="text-align:right;">
-2.745800e+00
+9.696970
 </td>
 <td style="text-align:right;">
-2.188911e+01
+24.814815
 </td>
 </tr>
 <tr>
@@ -2609,25 +2404,25 @@ HitRate
 Beta
 </td>
 <td style="text-align:right;">
--8.737000e-03
+NA
 </td>
 <td style="text-align:right;">
--7.418250e-02
+NA
 </td>
 <td style="text-align:right;">
-4.666780e-02
+NA
 </td>
 <td style="text-align:right;">
--1.632050e-02
+NA
 </td>
 <td style="text-align:right;">
-3.149260e-02
+NA
 </td>
 <td style="text-align:right;">
--4.022960e-02
+NA
 </td>
 <td style="text-align:right;">
-1.000000e+00
+1.000000
 </td>
 </tr>
 <tr>
@@ -2635,25 +2430,25 @@ Beta
 Alpha
 </td>
 <td style="text-align:right;">
-1.661372e+00
+NA
 </td>
 <td style="text-align:right;">
-5.317113e-01
+NA
 </td>
 <td style="text-align:right;">
-5.911156e-01
+NA
 </td>
 <td style="text-align:right;">
--1.957916e+00
+NA
 </td>
 <td style="text-align:right;">
--7.215293e-01
+NA
 </td>
 <td style="text-align:right;">
-2.382902e+00
+NA
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.000000
 </td>
 </tr>
 <tr>
@@ -2661,25 +2456,25 @@ Alpha
 DrawDn
 </td>
 <td style="text-align:right;">
--2.611154e+01
+-3.549011e+01
 </td>
 <td style="text-align:right;">
--2.929329e+01
+-12.660286
 </td>
 <td style="text-align:right;">
--2.114470e+01
+-2.881974e+01
 </td>
 <td style="text-align:right;">
--4.207442e+01
+-3.253165e+01
 </td>
 <td style="text-align:right;">
--4.732410e+01
+-38.188660
 </td>
 <td style="text-align:right;">
--4.426822e+01
+-32.736738
 </td>
 <td style="text-align:right;">
--4.911552e+01
+-13.550549
 </td>
 </tr>
 <tr>
@@ -2687,25 +2482,25 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:right;">
-2.010591e+07
+2.018050e+05
 </td>
 <td style="text-align:right;">
-2.010072e+07
+201706.000000
 </td>
 <td style="text-align:right;">
-2.010992e+07
+2.012423e+05
 </td>
 <td style="text-align:right;">
-2.011298e+07
+2.015737e+05
 </td>
 <td style="text-align:right;">
-2.011768e+07
+201173.666667
 </td>
 <td style="text-align:right;">
-2.008751e+07
+201904.000000
 </td>
 <td style="text-align:right;">
-2.007164e+07
+201941.333333
 </td>
 </tr>
 <tr>
@@ -2713,25 +2508,25 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:right;">
-2.592308e+01
+1.800000e+01
 </td>
 <td style="text-align:right;">
-2.046154e+01
+5.666667
 </td>
 <td style="text-align:right;">
-1.338462e+01
+1.900000e+01
 </td>
 <td style="text-align:right;">
-3.869231e+01
+1.933333e+01
 </td>
 <td style="text-align:right;">
-3.884615e+01
+37.000000
 </td>
 <td style="text-align:right;">
-2.076923e+01
+13.666667
 </td>
 <td style="text-align:right;">
-5.692308e+00
+1.000000
 </td>
 </tr>
 <tr>
@@ -2739,25 +2534,25 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:right;">
-2.445308e+02
+3.575758e+01
 </td>
 <td style="text-align:right;">
-2.977586e+02
+67.104377
 </td>
 <td style="text-align:right;">
-2.704064e+02
+6.409652e+01
 </td>
 <td style="text-align:right;">
-2.910711e+02
+5.814815e+01
 </td>
 <td style="text-align:right;">
-2.360981e+02
+22.323232
 </td>
 <td style="text-align:right;">
-4.806289e+02
+58.080808
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.000000
 </td>
 </tr>
 <tr grouplength="10">
@@ -2770,25 +2565,25 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:right;">
-1.504210e+00
+4.166280e-02
 </td>
 <td style="text-align:right;">
-2.292275e-01
+1.999751
 </td>
 <td style="text-align:right;">
-6.771046e-01
+-1.355274e+00
 </td>
 <td style="text-align:right;">
--9.179643e-01
+1.414541e+00
 </td>
 <td style="text-align:right;">
--1.578442e+00
+-2.384265
 </td>
 <td style="text-align:right;">
-3.082652e+00
+2.425928
 </td>
 <td style="text-align:right;">
-9.781540e+00
+12.503261
 </td>
 </tr>
 <tr>
@@ -2796,25 +2591,25 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:right;">
-8.604652e+00
+7.752615e+00
 </td>
 <td style="text-align:right;">
-7.542431e+00
+5.963299
 </td>
 <td style="text-align:right;">
-6.674262e+00
+8.803318e+00
 </td>
 <td style="text-align:right;">
-7.752885e+00
+1.115272e+01
 </td>
 <td style="text-align:right;">
-7.906002e+00
+9.303171
 </td>
 <td style="text-align:right;">
-1.318452e+01
+13.765213
 </td>
 <td style="text-align:right;">
-1.649308e+01
+11.030169
 </td>
 </tr>
 <tr>
@@ -2822,25 +2617,25 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:right;">
-1.762781e+01
+5.783803e-01
 </td>
 <td style="text-align:right;">
-2.404560e+00
+34.886567
 </td>
 <td style="text-align:right;">
-1.083226e+01
+-1.592634e+01
 </td>
 <td style="text-align:right;">
--1.279656e+01
+1.262358e+01
 </td>
 <td style="text-align:right;">
--2.201893e+01
+-25.929579
 </td>
 <td style="text-align:right;">
-2.513455e+01
+17.589622
 </td>
 <td style="text-align:right;">
-5.975026e+01
+117.647725
 </td>
 </tr>
 <tr>
@@ -2848,25 +2643,25 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:right;">
-1.397849e+00
+1.911977e+00
 </td>
 <td style="text-align:right;">
-3.362283e+00
+12.554113
 </td>
 <td style="text-align:right;">
-5.132341e+00
+-8.766234e+00
 </td>
 <td style="text-align:right;">
--5.334988e-01
+3.968254e-01
 </td>
 <td style="text-align:right;">
--5.628619e+00
+-12.518038
 </td>
 <td style="text-align:right;">
-5.570720e+00
+11.796537
 </td>
 <td style="text-align:right;">
-2.358147e+01
+32.575758
 </td>
 </tr>
 <tr>
@@ -2874,25 +2669,25 @@ HitRate
 Beta
 </td>
 <td style="text-align:right;">
--2.027940e-02
+NA
 </td>
 <td style="text-align:right;">
--3.743210e-02
+NA
 </td>
 <td style="text-align:right;">
-3.829900e-02
+NA
 </td>
 <td style="text-align:right;">
--2.292780e-02
+NA
 </td>
 <td style="text-align:right;">
-2.297640e-02
+NA
 </td>
 <td style="text-align:right;">
--4.325590e-02
+NA
 </td>
 <td style="text-align:right;">
-1.000000e+00
+1.000000
 </td>
 </tr>
 <tr>
@@ -2900,25 +2695,25 @@ Beta
 Alpha
 </td>
 <td style="text-align:right;">
-1.703579e+00
+NA
 </td>
 <td style="text-align:right;">
-5.916641e-01
+NA
 </td>
 <td style="text-align:right;">
-3.179692e-01
+NA
 </td>
 <td style="text-align:right;">
--6.884712e-01
+NA
 </td>
 <td style="text-align:right;">
--1.823755e+00
+NA
 </td>
 <td style="text-align:right;">
-3.527334e+00
+NA
 </td>
 <td style="text-align:right;">
-0.000000e+00
+0.000000
 </td>
 </tr>
 <tr>
@@ -2926,25 +2721,25 @@ Alpha
 DrawDn
 </td>
 <td style="text-align:right;">
--3.023633e+01
+-3.029178e+01
 </td>
 <td style="text-align:right;">
--2.614659e+01
+-10.991802
 </td>
 <td style="text-align:right;">
--2.152683e+01
+-2.990268e+01
 </td>
 <td style="text-align:right;">
--3.398891e+01
+-2.813901e+01
 </td>
 <td style="text-align:right;">
--4.874314e+01
+-33.935402
 </td>
 <td style="text-align:right;">
--4.364457e+01
+-27.508005
 </td>
 <td style="text-align:right;">
--4.227398e+01
+-9.832897
 </td>
 </tr>
 <tr>
@@ -2952,25 +2747,25 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:right;">
-2.009552e+07
+2.018398e+05
 </td>
 <td style="text-align:right;">
-2.011570e+07
+201657.500000
 </td>
 <td style="text-align:right;">
-2.012101e+07
+2.012232e+05
 </td>
 <td style="text-align:right;">
-2.014960e+07
+2.015722e+05
 </td>
 <td style="text-align:right;">
-2.011796e+07
+201206.500000
 </td>
 <td style="text-align:right;">
-2.008537e+07
+202005.500000
 </td>
 <td style="text-align:right;">
-2.007162e+07
+201890.833333
 </td>
 </tr>
 <tr>
@@ -2978,25 +2773,25 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:right;">
-1.584615e+01
+7.833333e+00
 </td>
 <td style="text-align:right;">
-1.023077e+01
+3.833333
 </td>
 <td style="text-align:right;">
-8.500000e+00
+1.200000e+01
 </td>
 <td style="text-align:right;">
-1.219231e+01
+9.000000e+00
 </td>
 <td style="text-align:right;">
-1.934615e+01
+19.000000
 </td>
 <td style="text-align:right;">
-9.923077e+00
+4.333333
 </td>
 <td style="text-align:right;">
-2.769231e+00
+1.166667
 </td>
 </tr>
 <tr>
@@ -3004,297 +2799,32 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:right;">
-1.318900e+02
+3.582251e+01
 </td>
 <td style="text-align:right;">
-1.470182e+02
+64.069264
 </td>
 <td style="text-align:right;">
-1.379225e+02
+5.873016e+01
 </td>
 <td style="text-align:right;">
-1.509057e+02
+5.187590e+01
 </td>
 <td style="text-align:right;">
-1.267577e+02
+22.835498
 </td>
 <td style="text-align:right;">
-2.586476e+02
+58.658009
 </td>
 <td style="text-align:right;">
-0.000000e+00
-</td>
-</tr>
-<tr grouplength="10">
-<td colspan="1" style="border-bottom: 1px solid;">
-<strong>Weekly</strong>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-AnnMn
-</td>
-<td style="text-align:right;">
-2.942063e+00
-</td>
-<td style="text-align:right;">
--4.819068e-01
-</td>
-<td style="text-align:right;">
-9.461319e-01
-</td>
-<td style="text-align:right;">
-5.990781e-01
-</td>
-<td style="text-align:right;">
--3.516257e+00
-</td>
-<td style="text-align:right;">
-6.458320e+00
-</td>
-<td style="text-align:right;">
-9.967869e+00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-AnnSd
-</td>
-<td style="text-align:right;">
-9.796012e+00
-</td>
-<td style="text-align:right;">
-7.809095e+00
-</td>
-<td style="text-align:right;">
-6.851513e+00
-</td>
-<td style="text-align:right;">
-7.889613e+00
-</td>
-<td style="text-align:right;">
-8.484180e+00
-</td>
-<td style="text-align:right;">
-1.491635e+01
-</td>
-<td style="text-align:right;">
-1.864829e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Sharpe
-</td>
-<td style="text-align:right;">
-3.003328e+01
-</td>
-<td style="text-align:right;">
--6.171097e+00
-</td>
-<td style="text-align:right;">
-1.380909e+01
-</td>
-<td style="text-align:right;">
-7.593251e+00
-</td>
-<td style="text-align:right;">
--4.144487e+01
-</td>
-<td style="text-align:right;">
-4.329692e+01
-</td>
-<td style="text-align:right;">
-5.345192e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-HitRate
-</td>
-<td style="text-align:right;">
-4.289216e+00
-</td>
-<td style="text-align:right;">
--1.225490e+00
-</td>
-<td style="text-align:right;">
-2.328431e+00
-</td>
-<td style="text-align:right;">
--8.578431e-01
-</td>
-<td style="text-align:right;">
--3.308823e+00
-</td>
-<td style="text-align:right;">
-2.205882e+00
-</td>
-<td style="text-align:right;">
-7.352941e+00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Beta
-</td>
-<td style="text-align:right;">
-2.877460e-02
-</td>
-<td style="text-align:right;">
--2.917400e-03
-</td>
-<td style="text-align:right;">
--1.904120e-02
-</td>
-<td style="text-align:right;">
--1.582050e-02
-</td>
-<td style="text-align:right;">
-1.446820e-02
-</td>
-<td style="text-align:right;">
-1.430650e-02
-</td>
-<td style="text-align:right;">
-1.000000e+00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Alpha
-</td>
-<td style="text-align:right;">
-2.655242e+00
-</td>
-<td style="text-align:right;">
--4.528262e-01
-</td>
-<td style="text-align:right;">
-1.135932e+00
-</td>
-<td style="text-align:right;">
-7.567749e-01
-</td>
-<td style="text-align:right;">
--3.660474e+00
-</td>
-<td style="text-align:right;">
-6.315715e+00
-</td>
-<td style="text-align:right;">
-0.000000e+00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-DrawDn
-</td>
-<td style="text-align:right;">
--2.796851e+01
-</td>
-<td style="text-align:right;">
--4.807470e+01
-</td>
-<td style="text-align:right;">
--2.587081e+01
-</td>
-<td style="text-align:right;">
--2.744579e+01
-</td>
-<td style="text-align:right;">
--7.042005e+01
-</td>
-<td style="text-align:right;">
--4.103008e+01
-</td>
-<td style="text-align:right;">
--6.629411e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-DDnBeg
-</td>
-<td style="text-align:right;">
-2.021031e+07
-</td>
-<td style="text-align:right;">
-2.008121e+07
-</td>
-<td style="text-align:right;">
-2.018021e+07
-</td>
-<td style="text-align:right;">
-2.007062e+07
-</td>
-<td style="text-align:right;">
-2.008053e+07
-</td>
-<td style="text-align:right;">
-2.021031e+07
-</td>
-<td style="text-align:right;">
-2.007101e+07
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-DDnN
-</td>
-<td style="text-align:right;">
-4.100000e+01
-</td>
-<td style="text-align:right;">
-4.440000e+02
-</td>
-<td style="text-align:right;">
-2.150000e+02
-</td>
-<td style="text-align:right;">
-6.800000e+01
-</td>
-<td style="text-align:right;">
-6.660000e+02
-</td>
-<td style="text-align:right;">
-4.300000e+01
-</td>
-<td style="text-align:right;">
-7.300000e+01
-</td>
-</tr>
-<tr>
-<td style="text-align:left;padding-left: 2em;" indentlevel="1">
-AnnTo
-</td>
-<td style="text-align:right;">
-1.127941e+03
-</td>
-<td style="text-align:right;">
-2.306863e+03
-</td>
-<td style="text-align:right;">
-2.233578e+03
-</td>
-<td style="text-align:right;">
-2.271814e+03
-</td>
-<td style="text-align:right;">
-1.191667e+03
-</td>
-<td style="text-align:right;">
-2.319608e+03
-</td>
-<td style="text-align:right;">
-0.000000e+00
+0.000000
 </td>
 </tr>
 </tbody>
 </table>
 <hr />
 <p><strong>Annualized mean one-week returns</strong></p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="flow-percentage-sector-strategy.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS </span></span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="activepassive-sector-strategy.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], <span class="dv">5</span>, <span class="cn">NULL</span>, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -3329,147 +2859,31 @@ nPrds
 <tbody>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2007
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-13.3833968
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.823471
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.194816
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--14.9985896
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.5558261
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.8275707
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.8438374
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-31
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2008
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.5403471
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-16.135975
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.490483
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--11.9296098
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1565009
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.3838462
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--41.6457557
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-52
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2009
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5592424
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--9.877392
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.265249
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-18.1407065
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.5573074
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.1165498
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-31.8694477
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-52
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2010
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.5874555
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--12.034994
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.396005
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.0462839
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.9947504
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.5822059
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-15.5109106
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-53
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2011
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.8592508
+-7.528623
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.457331
+2.178565
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.610780
+-6.1989568
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.4000064
+5.1659417
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--8.4198605
+6.3830730
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.5606097
+-13.911696
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.5265473
+0.3888129
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-52
+4
 </td>
 </tr>
 <tr>
@@ -3477,144 +2891,144 @@ nPrds
 2012
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.3577592
+3.391394
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--4.446587
+2.482671
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-10.857321
+0.7329764
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.3728705
+-1.7888351
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.3956230
+-4.8182060
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.7533822
+8.209600
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-13.3348315
+14.8853283
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-52
+12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2013
 </td>
-<td style="text-align:right;">
-2.8682182
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5.102368
 </td>
-<td style="text-align:right;">
-0.001903
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3.302301
 </td>
-<td style="text-align:right;">
-5.258924
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2.8121580
 </td>
-<td style="text-align:right;">
-2.1159160
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.9549689
 </td>
-<td style="text-align:right;">
--10.2449610
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-12.1717957
 </td>
-<td style="text-align:right;">
-13.1131791
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+17.274163
 </td>
-<td style="text-align:right;">
-27.4838282
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+26.3276270
 </td>
-<td style="text-align:right;">
-52
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2014
 </td>
-<td style="text-align:right;">
-2.7956770
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+8.995095
 </td>
-<td style="text-align:right;">
--0.464612
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1.676569
 </td>
-<td style="text-align:right;">
-9.760950
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-14.2508159
 </td>
-<td style="text-align:right;">
-4.1025795
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1.3303236
 </td>
-<td style="text-align:right;">
--16.1945947
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2.2488283
 </td>
-<td style="text-align:right;">
-18.9902718
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+6.746267
 </td>
-<td style="text-align:right;">
-14.1591160
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+11.9889453
 </td>
-<td style="text-align:right;">
-52
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2015
 </td>
-<td style="text-align:right;">
--5.2526746
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+7.094490
 </td>
-<td style="text-align:right;">
--12.640805
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4.859498
 </td>
-<td style="text-align:right;">
--1.432772
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-11.7623275
 </td>
-<td style="text-align:right;">
-15.5124005
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.3296120
 </td>
-<td style="text-align:right;">
-3.8138509
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.5212724
 </td>
-<td style="text-align:right;">
--9.0665255
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+7.615762
 </td>
-<td style="text-align:right;">
--0.4601453
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1002956
 </td>
-<td style="text-align:right;">
-52
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2016
 </td>
-<td style="text-align:right;">
-0.9563796
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2.964784
 </td>
-<td style="text-align:right;">
--3.687865
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-9.775620
 </td>
-<td style="text-align:right;">
-3.175545
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5.6144986
 </td>
-<td style="text-align:right;">
--0.9451321
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-1.3093672
 </td>
-<td style="text-align:right;">
-1.1251826
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.8150639
 </td>
-<td style="text-align:right;">
--0.1688031
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2.149721
 </td>
-<td style="text-align:right;">
-12.4351274
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+13.6099627
 </td>
-<td style="text-align:right;">
-53
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+12
 </td>
 </tr>
 <tr>
@@ -3622,28 +3036,28 @@ nPrds
 2017
 </td>
 <td style="text-align:right;">
--0.1075664
+7.711688
 </td>
 <td style="text-align:right;">
--3.053412
+9.557112
 </td>
 <td style="text-align:right;">
-3.580559
+-2.1775306
 </td>
 <td style="text-align:right;">
--4.5257790
+-9.2747591
 </td>
 <td style="text-align:right;">
-2.3159196
+-4.7277456
 </td>
 <td style="text-align:right;">
--2.4234860
+12.439434
 </td>
 <td style="text-align:right;">
-15.7688550
+15.7540984
 </td>
 <td style="text-align:right;">
-52
+12
 </td>
 </tr>
 <tr>
@@ -3651,28 +3065,28 @@ nPrds
 2018
 </td>
 <td style="text-align:right;">
-7.5778822
+2.377588
 </td>
 <td style="text-align:right;">
-7.720015
+-7.694732
 </td>
 <td style="text-align:right;">
--2.911326
+0.1371686
 </td>
 <td style="text-align:right;">
--4.6468325
+0.3522608
 </td>
 <td style="text-align:right;">
--6.2840757
+4.7591303
 </td>
 <td style="text-align:right;">
-13.8619579
+-2.381542
 </td>
 <td style="text-align:right;">
--5.3335580
+-5.1400601
 </td>
 <td style="text-align:right;">
-52
+12
 </td>
 </tr>
 <tr>
@@ -3680,28 +3094,28 @@ nPrds
 2019
 </td>
 <td style="text-align:right;">
--4.3656134
+-4.246400
 </td>
 <td style="text-align:right;">
-12.403152
+3.007191
 </td>
 <td style="text-align:right;">
-1.708816
+3.3275715
 </td>
 <td style="text-align:right;">
--0.1104959
+-2.7355208
 </td>
 <td style="text-align:right;">
--10.4902669
+-1.0166278
 </td>
 <td style="text-align:right;">
-6.1246535
+-3.229772
 </td>
 <td style="text-align:right;">
-26.6368120
+26.1430030
 </td>
 <td style="text-align:right;">
-52
+12
 </td>
 </tr>
 <tr>
@@ -3709,28 +3123,28 @@ nPrds
 2020
 </td>
 <td style="text-align:right;">
-32.7979129
+-5.902041
 </td>
 <td style="text-align:right;">
-3.512916
+10.186102
 </td>
 <td style="text-align:right;">
--16.914186
+20.3917711
 </td>
 <td style="text-align:right;">
--3.6606204
+-20.8490506
 </td>
 <td style="text-align:right;">
--7.2789299
+-14.0226669
 </td>
 <td style="text-align:right;">
-40.0768428
+8.120626
 </td>
 <td style="text-align:right;">
-16.2594299
+15.0043298
 </td>
 <td style="text-align:right;">
-52
+12
 </td>
 </tr>
 <tr>
@@ -3738,28 +3152,28 @@ nPrds
 2021
 </td>
 <td style="text-align:right;">
--16.3797834
+-8.343109
 </td>
 <td style="text-align:right;">
--4.469089
+-2.905167
 </td>
 <td style="text-align:right;">
-1.589287
+2.4959060
 </td>
 <td style="text-align:right;">
-9.0885004
+5.9545347
 </td>
 <td style="text-align:right;">
-9.3764416
+1.5498823
 </td>
 <td style="text-align:right;">
--25.7562249
+-9.892991
 </td>
 <td style="text-align:right;">
-26.9310148
+26.2271579
 </td>
 <td style="text-align:right;">
-53
+12
 </td>
 </tr>
 <tr>
@@ -3767,62 +3181,34 @@ nPrds
 2022
 </td>
 <td style="text-align:right;">
-19.0281542
+-17.332540
 </td>
 <td style="text-align:right;">
--2.801442
+5.415872
 </td>
 <td style="text-align:right;">
-2.048544
+-9.4795442
 </td>
 <td style="text-align:right;">
--10.0539706
+27.8263351
 </td>
 <td style="text-align:right;">
--9.2455571
+-1.6903505
 </td>
 <td style="text-align:right;">
-28.2737113
+-15.642190
 </td>
 <td style="text-align:right;">
--9.9403553
+-10.1363090
 </td>
 <td style="text-align:right;">
-52
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-2023
-</td>
-<td style="text-align:right;">
--69.2724333
-</td>
-<td style="text-align:right;">
-56.109386
-</td>
-<td style="text-align:right;">
--56.574120
-</td>
-<td style="text-align:right;">
-51.6190241
-</td>
-<td style="text-align:right;">
-46.4052027
-</td>
-<td style="text-align:right;">
--115.6776360
-</td>
-<td style="text-align:right;">
-117.9336595
-</td>
-<td style="text-align:right;">
-2
+12
 </td>
 </tr>
 </tbody>
 </table>
 
+<p>output: html_document</p>
 </div>
 </div>
 </div>
@@ -3831,8 +3217,8 @@ nPrds
           </div>
         </div>
       </div>
-<a href="flow-percentage-country-strategy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="activepassive-country-strategy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="activepassive-country-strategy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="flow-percentage-dm-rates-strategy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -3863,7 +3249,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/05-FlowPctSector.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/08-ActPasSector_tempfinal.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

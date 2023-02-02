@@ -2,8 +2,8 @@ introduction
 epfr-library
 about
 set-up
-strategy-functions
 ftp
+strategy-functions
 Filters
 multi-asset-strategy
 overview
@@ -62,7 +62,7 @@ calculation-4
 aggregate-indicator-file
 return-file-5
 strategy-implementation-4
-compounding-flows-4
+smooth-signal
 ranking-countries-1
 model-5
 performance-4
@@ -74,7 +74,7 @@ calculation-5
 flow-file-4
 return-file-6
 strategy-implementation-5
-compounding-flows-5
+compounding-flows-4
 ranking-countries-2
 model-6
 performance-5

@@ -62,7 +62,7 @@ calculation-4
 aggregate-indicator-file
 return-file-5
 strategy-implementation-4
-moving-sum-of-signal
+moving-sum-of-indicator
 ranking-countries-1
 model-5
 performance-4
@@ -74,7 +74,7 @@ calculation-5
 aggregate-indicator-file-1
 return-file-6
 strategy-implementation-5
-moving-sum-of-signal-1
+moving-sum-of-indicator-1
 ranking-sectors-1
 model-6
 performance-5

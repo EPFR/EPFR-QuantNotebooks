@@ -224,7 +224,7 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#strategy-implementation-4"><i class="fa fa-check"></i><b>8.3</b> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#moving-sum-of-signal"><i class="fa fa-check"></i><b>8.3.1</b> Moving Sum of Signal</a></li>
+<li class="chapter" data-level="8.3.1" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#moving-sum-of-indicator"><i class="fa fa-check"></i><b>8.3.1</b> Moving Sum of Indicator</a></li>
 <li class="chapter" data-level="8.3.2" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#ranking-countries-1"><i class="fa fa-check"></i><b>8.3.2</b> Ranking Countries</a></li>
 <li class="chapter" data-level="8.3.3" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#model-5"><i class="fa fa-check"></i><b>8.3.3</b> Model</a></li>
 <li class="chapter" data-level="8.3.4" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#performance-4"><i class="fa fa-check"></i><b>8.3.4</b> Performance</a></li>
@@ -242,7 +242,7 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#strategy-implementation-5"><i class="fa fa-check"></i><b>9.3</b> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#moving-sum-of-signal-1"><i class="fa fa-check"></i><b>9.3.1</b> Moving Sum of Signal</a></li>
+<li class="chapter" data-level="9.3.1" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#moving-sum-of-indicator-1"><i class="fa fa-check"></i><b>9.3.1</b> Moving Sum of Indicator</a></li>
 <li class="chapter" data-level="9.3.2" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#ranking-sectors-1"><i class="fa fa-check"></i><b>9.3.2</b> Ranking Sectors</a></li>
 <li class="chapter" data-level="9.3.3" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#model-6"><i class="fa fa-check"></i><b>9.3.3</b> Model</a></li>
 <li class="chapter" data-level="9.3.4" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#performance-5"><i class="fa fa-check"></i><b>9.3.4</b> Performance</a></li>
@@ -295,7 +295,7 @@ code span.wa { font-style: italic; } /* Warning */
 <h1><span class="header-section-number">4</span> Multi-Asset Strategy<a href="multi-asset-strategy.html#multi-asset-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="overview" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Overview<a href="multi-asset-strategy.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This is a <em>Multi-Asset Strategy</em>, where we are essentially rotating between asset classes within the equity and bond universes. This approach uses fixed income and active equity funds to calculate percentage flow into asset classes.</p>
+<p>This is a <em>Multi-Asset Strategy</em>, where we are essentially rotating between asset classes within the equity and bond universes. This approach uses fixed income funds and active equity funds to calculate percentage flow into asset classes.</p>
 <!-- In terms of twenty-day percentage flows, the top fifth of asset classes outperform the bottom fifth by 10% per year. The strategy works well whether you consider only equity or fixed income asset classes. -->
 <hr />
 </div>
@@ -1722,16 +1722,16 @@ GLOFIX
 <span id="cb32-10"><a href="multi-asset-strategy.html#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co">#COMBINE RETURN FILES</span></span>
 <span id="cb32-11"><a href="multi-asset-strategy.html#cb32-11" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, z)[, <span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]]] <span class="co"># FINAL TOTAL-RETURN INDEX TABLE</span></span>
 <span id="cb32-12"><a href="multi-asset-strategy.html#cb32-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">max</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), T)})))<span class="sc">:</span><span class="fu">min</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), F)}))), ] <span class="co"># ENSURE ALL PIECES HAVE RETURN OVER THE SAME HORIZON</span></span></code></pre></div>
-<p>Then, to subset the flow file <span class="math inline">\(x\)</span> and return file <span class="math inline">\(y\)</span> to the selected universe <span class="math inline">\(idx\)</span> of asset classes, the function the following code is used.</p>
+<p>Then, to subset the flow file <span class="math inline">\(x\)</span> and return file <span class="math inline">\(y\)</span> to the selected universe <span class="math inline">\(idx\)</span> of asset classes, the following code is used.</p>
+<p>Next we will need to ensure that the data structure in <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are completely aligned, having the same column names in the same order. Below we will subset the columns of <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> to use the same asset classes based on what universe we are testing.</p>
+<!-- An additional step that we take when backtesting the entire multi asset universe is to make an adjustment to all daily flows, based on a regression between each asset classes 20-day flows and MSCI World index returns.  -->
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="multi-asset-strategy.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;Rgn&quot;</span>) { </span>
 <span id="cb33-2"><a href="multi-asset-strategy.html#cb33-2" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
 <span id="cb33-3"><a href="multi-asset-strategy.html#cb33-3" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
 <span id="cb33-4"><a href="multi-asset-strategy.html#cb33-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;FI&quot;</span>) {   </span>
 <span id="cb33-5"><a href="multi-asset-strategy.html#cb33-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(x)[<span class="dv">2</span>]]</span>
 <span id="cb33-6"><a href="multi-asset-strategy.html#cb33-6" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(y)[<span class="dv">2</span>]]</span>
-<span id="cb33-7"><a href="multi-asset-strategy.html#cb33-7" aria-hidden="true" tabindex="-1"></a>}  <span class="cf">else</span> <span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;Multi&quot;</span>) {</span>
-<span id="cb33-8"><a href="multi-asset-strategy.html#cb33-8" aria-hidden="true" tabindex="-1"></a>   x <span class="ot">&lt;-</span> <span class="fu">portfolio.residual</span>(x, <span class="fu">map.rname</span>(<span class="fu">portfolio.beta.wrapper</span>(y, <span class="st">&quot;ACWorld&quot;</span>, lookback), <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]]))</span>
-<span id="cb33-9"><a href="multi-asset-strategy.html#cb33-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb33-7"><a href="multi-asset-strategy.html#cb33-7" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
 <p><em>* Note: subsetting can be also be done when creating the flow and return files</em></p>
 </div>
 <div id="ranking-asset-classes" class="section level3 hasAnchor" number="4.3.3">
@@ -2271,7 +2271,7 @@ uRet
 </tr>
 </tbody>
 </table>
-<p><em>Def: TxB tells us top - bottom = Q1 - Q5 = overall portfolio returns</em></p>
+<p><em>Def: TxB represents summary statistics for the long short portfolio (top - bottom = Q1 - Q5 = overall portfolio returns)</em></p>
 <hr />
 </div>
 <div id="performance" class="section level3 hasAnchor" number="4.3.5">

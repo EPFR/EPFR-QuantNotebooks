@@ -224,7 +224,7 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#strategy-implementation-4"><i class="fa fa-check"></i><b>8.3</b> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#moving-sum-of-signal"><i class="fa fa-check"></i><b>8.3.1</b> Moving Sum of Signal</a></li>
+<li class="chapter" data-level="8.3.1" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#moving-sum-of-indicator"><i class="fa fa-check"></i><b>8.3.1</b> Moving Sum of Indicator</a></li>
 <li class="chapter" data-level="8.3.2" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#ranking-countries-1"><i class="fa fa-check"></i><b>8.3.2</b> Ranking Countries</a></li>
 <li class="chapter" data-level="8.3.3" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#model-5"><i class="fa fa-check"></i><b>8.3.3</b> Model</a></li>
 <li class="chapter" data-level="8.3.4" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#performance-4"><i class="fa fa-check"></i><b>8.3.4</b> Performance</a></li>
@@ -242,7 +242,7 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#strategy-implementation-5"><i class="fa fa-check"></i><b>9.3</b> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#moving-sum-of-signal-1"><i class="fa fa-check"></i><b>9.3.1</b> Moving Sum of Signal</a></li>
+<li class="chapter" data-level="9.3.1" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#moving-sum-of-indicator-1"><i class="fa fa-check"></i><b>9.3.1</b> Moving Sum of Indicator</a></li>
 <li class="chapter" data-level="9.3.2" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#ranking-sectors-1"><i class="fa fa-check"></i><b>9.3.2</b> Ranking Sectors</a></li>
 <li class="chapter" data-level="9.3.3" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#model-6"><i class="fa fa-check"></i><b>9.3.3</b> Model</a></li>
 <li class="chapter" data-level="9.3.4" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#performance-5"><i class="fa fa-check"></i><b>9.3.4</b> Performance</a></li>
@@ -2082,7 +2082,8 @@ NA
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="fx-strategy.html#cb48-1" aria-hidden="true" tabindex="-1"></a>y<span class="sc">$</span>CNY <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(y<span class="sc">$</span>CNH), y<span class="sc">$</span>CNY, y<span class="sc">$</span>CNH) <span class="co"># USE CNH WHENEVER POSSIBLE </span></span></code></pre></div>
 <p>We will also add a column for the U.S. Dollar (USD) as a benchmark column with value 1. All of the other exchange rates in the row will have the exhange rate of their currency versus 1 USD.</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="fx-strategy.html#cb49-1" aria-hidden="true" tabindex="-1"></a>y<span class="sc">$</span>USD <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">dim</span>(y)[<span class="dv">1</span>]) <span class="co"># ADD IN USD </span></span></code></pre></div>
-<p>To subset the flow file <span class="math inline">\(x\)</span> to the currencies in our selected universe <span class="math inline">\(idx\)</span>, we first use the functions <code>Ctry.msci.members.rng()</code> and <code>Ctry.info()</code> from <code>library('EPFR.r')</code>. Together these functions return a list of currencies corresponding to the countries in our selected universe <span class="math inline">\(idx\)</span>. Once we have this list we can subset <span class="math inline">\(x\)</span> to only include the currencies in our universe.</p>
+<p>By default, the FX flow percent file represents all the currencies included in the ACWI universe. However, if the user is testing within EM or G10 currencies, the flow file x and return file y must both be subset to the correct universe. This can be done by setting the <span class="math inline">\(idx\)</span> variable to your universe of interest, and running the code below which calls from functions contained in <code>library('EPFR')</code>. These functions help identify the correct members of the selected universe on a point-in-time basis.</p>
+<!-- To subset the flow file $x$ to the currencies in our selected universe $idx$, we first use the functions `Ctry.msci.members.rng()` and `Ctry.info()` from `library('EPFR.r')`. Together these functions return a list of currencies corresponding to the countries in our selected universe $idx$. Once we have this list we can subset $x$ to only include the currencies in our universe.  -->
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="fx-strategy.html#cb50-1" aria-hidden="true" tabindex="-1"></a>idx.curr <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">Ctry.info</span>(<span class="fu">Ctry.msci.members</span>(idx, <span class="st">&quot;&quot;</span>), <span class="st">&quot;Curr&quot;</span>)) <span class="co"># CURRENCY CLASSIFICATION 2016</span></span>
 <span id="cb50-2"><a href="fx-strategy.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (idx <span class="sc">!=</span> <span class="st">&quot;G10&quot;</span>) idx.curr <span class="ot">&lt;-</span> <span class="fu">union</span>(<span class="fu">Ctry.info</span>(<span class="fu">Ctry.msci</span>(idx)[, <span class="st">&quot;CCODE&quot;</span>], <span class="st">&quot;Curr&quot;</span>), idx.curr) <span class="cf">else</span> idx <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># CAPTURE INDEX CHANGES</span></span>
 <span id="cb50-3"><a href="fx-strategy.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">is.element</span>(<span class="st">&quot;EM&quot;</span>, idx)) idx.curr <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(idx.curr, <span class="fu">c</span>(<span class="st">&quot;USD&quot;</span>, <span class="st">&quot;EUR&quot;</span>)) <span class="co"># ENSURE NO OVERLAP BETWEEN DEVELOPED AND EM CURRENCIES</span></span>
@@ -3671,7 +3672,7 @@ uRet
 </tr>
 </tbody>
 </table>
-<p><em>Def: TxB tells us top - bottom = Q1 - Q5 = overall portfolio returns</em></p>
+<p><em>Def: TxB represents summary statistics for the long short portfolio (top - bottom = Q1 - Q5 = overall portfolio returns)</em></p>
 <hr />
 </div>
 <div id="performance-1" class="section level3 hasAnchor" number="5.3.4">

@@ -224,7 +224,7 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#strategy-implementation-4"><i class="fa fa-check"></i><b>8.3</b> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#moving-sum-of-signal"><i class="fa fa-check"></i><b>8.3.1</b> Moving Sum of Signal</a></li>
+<li class="chapter" data-level="8.3.1" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#moving-sum-of-indicator"><i class="fa fa-check"></i><b>8.3.1</b> Moving Sum of Indicator</a></li>
 <li class="chapter" data-level="8.3.2" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#ranking-countries-1"><i class="fa fa-check"></i><b>8.3.2</b> Ranking Countries</a></li>
 <li class="chapter" data-level="8.3.3" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#model-5"><i class="fa fa-check"></i><b>8.3.3</b> Model</a></li>
 <li class="chapter" data-level="8.3.4" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#performance-4"><i class="fa fa-check"></i><b>8.3.4</b> Performance</a></li>
@@ -242,7 +242,7 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#strategy-implementation-5"><i class="fa fa-check"></i><b>9.3</b> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#moving-sum-of-signal-1"><i class="fa fa-check"></i><b>9.3.1</b> Moving Sum of Signal</a></li>
+<li class="chapter" data-level="9.3.1" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#moving-sum-of-indicator-1"><i class="fa fa-check"></i><b>9.3.1</b> Moving Sum of Indicator</a></li>
 <li class="chapter" data-level="9.3.2" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#ranking-sectors-1"><i class="fa fa-check"></i><b>9.3.2</b> Ranking Sectors</a></li>
 <li class="chapter" data-level="9.3.3" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#model-6"><i class="fa fa-check"></i><b>9.3.3</b> Model</a></li>
 <li class="chapter" data-level="9.3.4" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#performance-5"><i class="fa fa-check"></i><b>9.3.4</b> Performance</a></li>
@@ -302,10 +302,10 @@ Where:</p>
 <ul>
 <li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of country <span class="math inline">\(c\)</span>, across all funds <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
 </ul>
-<p><span class="math display">\[\text{Sector Return}_{s,r,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_i}{\sum^{N}_{i=m} \text{Assets Start}_i}\]</span>
+<p><span class="math display">\[\text{Fund Return}_{s,r,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_i}{\sum^{N}_{i=m} \text{Assets Start}_i}\]</span>
 Where:</p>
 <ul>
-<li><span class="math inline">\(\text{Sector Return}\)</span> = the return value of sector <span class="math inline">\(s\)</span>, for region <span class="math inline">\(r\)</span>, across all funds <span class="math inline">\(i\)</span>, for week <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of sector <span class="math inline">\(s\)</span>, for region <span class="math inline">\(r\)</span>, across all funds <span class="math inline">\(i\)</span>, for week <span class="math inline">\(t\)</span></li>
 </ul>
 <p>For users who choose to use these readily available fund return files to follow along can can access them under the ftp folder:</p>
 <p><em>Disclaimer: EPFR Quant team uses 3rd party data providers to calculate returns in our usual presentations to showcase performances.</em></p>

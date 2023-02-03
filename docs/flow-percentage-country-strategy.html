@@ -224,7 +224,7 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#strategy-implementation-4"><i class="fa fa-check"></i><b>8.3</b> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#moving-sum-of-signal"><i class="fa fa-check"></i><b>8.3.1</b> Moving Sum of Signal</a></li>
+<li class="chapter" data-level="8.3.1" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#moving-sum-of-indicator"><i class="fa fa-check"></i><b>8.3.1</b> Moving Sum of Indicator</a></li>
 <li class="chapter" data-level="8.3.2" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#ranking-countries-1"><i class="fa fa-check"></i><b>8.3.2</b> Ranking Countries</a></li>
 <li class="chapter" data-level="8.3.3" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#model-5"><i class="fa fa-check"></i><b>8.3.3</b> Model</a></li>
 <li class="chapter" data-level="8.3.4" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#performance-4"><i class="fa fa-check"></i><b>8.3.4</b> Performance</a></li>
@@ -242,7 +242,7 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#strategy-implementation-5"><i class="fa fa-check"></i><b>9.3</b> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#moving-sum-of-signal-1"><i class="fa fa-check"></i><b>9.3.1</b> Moving Sum of Signal</a></li>
+<li class="chapter" data-level="9.3.1" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#moving-sum-of-indicator-1"><i class="fa fa-check"></i><b>9.3.1</b> Moving Sum of Indicator</a></li>
 <li class="chapter" data-level="9.3.2" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#ranking-sectors-1"><i class="fa fa-check"></i><b>9.3.2</b> Ranking Sectors</a></li>
 <li class="chapter" data-level="9.3.3" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#model-6"><i class="fa fa-check"></i><b>9.3.3</b> Model</a></li>
 <li class="chapter" data-level="9.3.4" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#performance-5"><i class="fa fa-check"></i><b>9.3.4</b> Performance</a></li>
@@ -2605,7 +2605,8 @@ KW
 <span id="cb66-2"><a href="flow-percentage-country-strategy.html#cb66-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file)  <span class="co"># GET RETURN</span></span></code></pre></div>
 <p>One of our first options is choosing the universe we want to use. EPFR has tested this signal within three different universes of countries ACWI (All Country World Index), EAFE (Europe, Australasia, and the Far East), and EM (Emerging Markets). For this example, we choose <strong>ACWI</strong>, which includes <a href="www.something.com">52 countries</a>.</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="flow-percentage-country-strategy.html#cb67-1" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="st">&quot;ACWI&quot;</span></span></code></pre></div>
-<p>To subset the flow file <span class="math inline">\(x\)</span> to the countries in our selected universe <span class="math inline">\(idx\)</span>, we use the function <code>Ctry.msci.members.rng()</code> from the <code>library('EPFR.r')</code>. This function returns a list of two letter country codes from our selected universe <span class="math inline">\(idx\)</span>.</p>
+<p>Depending on what universe <span class="math inline">\(idx\)</span> the user chooses to test, the flow file <span class="math inline">\(x\)</span> and return file <span class="math inline">\(y\)</span> must both be subset to the correct countries. Running the code below which calls from functions contained in <code>library('EPFR')</code>, helps identify the correct members of the selected universe on a point-in-time basis to subset on.</p>
+<!-- To subset the flow file $x$ to the country members in our selected universe $idx$, we use the function `Ctry.msci.members.rng()` from the `library('EPFR.r')`. These functions help identify the correct members of the selected universe $idx$ on a point-in-time basis.   -->
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="flow-percentage-country-strategy.html#cb68-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x[, <span class="fu">is.element</span>(<span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]], <span class="fu">Ctry.msci.members.rng</span>(idx, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]][<span class="dv">1</span>], <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]][<span class="fu">dim</span>(x)[<span class="dv">1</span>]]))] <span class="co"># SUBSET TO INDEX COUNTRIES</span></span></code></pre></div>
 <p>There are also a few more filters we must apply to our flow data since the return data set we are using does not provide sufficient data before the end of 2015 and does not include JO or MA.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="flow-percentage-country-strategy.html#cb69-1" aria-hidden="true" tabindex="-1"></a>startdate <span class="ot">&lt;-</span> <span class="st">&quot;20150512&quot;</span></span>
@@ -4649,7 +4650,7 @@ uRet
 </tr>
 </tbody>
 </table>
-<p><em>Def: TxB tells us top - bottom = Q1 - Q5 = overall portfolio returns</em></p>
+<p><em>Def: TxB represents summary statistics for the long short portfolio (top - bottom = Q1 - Q5 = overall portfolio returns)</em></p>
 <hr />
 </div>
 <div id="performance-2" class="section level3 hasAnchor" number="6.3.4">

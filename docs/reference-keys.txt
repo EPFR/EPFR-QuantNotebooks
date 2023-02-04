@@ -10,7 +10,7 @@ overview
 daily-percentage-flow
 aggregations
 calculation
-flow-file
+aggregate-flow-file
 return-file
 strategy-implementation
 compounding-flows
@@ -23,7 +23,7 @@ overview-1
 daily-percentage-flow-1
 aggregations-1
 calculation-1
-flow-file-1
+aggregate-flow-file-1
 return-file-2
 strategy-implementation-1
 compounding-flows-1
@@ -35,7 +35,7 @@ overview-2
 daily-percentage-flow-2
 aggregations-2
 calculation-2
-flow-file-2
+aggregate-flow-file-2
 return-file-3
 strategy-implementation-2
 compounding-flows-2
@@ -47,7 +47,7 @@ overview-3
 daily-percentage-flow-3
 aggregations-3
 calculation-3
-flow-file-3
+aggregate-flow-file-3
 return-file-4
 strategy-implementation-3
 compounding-flows-3
@@ -83,7 +83,7 @@ overview-6
 daily-percentage-flow-4
 aggregations-6
 calculation-6
-flow-file-4
+aggregate-flow-file-4
 return-file-7
 strategy-implementation-6
 compounding-flows-4

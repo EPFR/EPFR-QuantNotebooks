@@ -151,11 +151,13 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#strategy-implementation"><i class="fa fa-check"></i><b>4.3</b> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#compounding-flows"><i class="fa fa-check"></i><b>4.3.1</b> Compounding Flows</a></li>
-<li class="chapter" data-level="4.3.2" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#return-file-1"><i class="fa fa-check"></i><b>4.3.2</b> Return file</a></li>
-<li class="chapter" data-level="4.3.3" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#ranking-asset-classes"><i class="fa fa-check"></i><b>4.3.3</b> Ranking Asset Classes</a></li>
-<li class="chapter" data-level="4.3.4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#model-1"><i class="fa fa-check"></i><b>4.3.4</b> Model</a></li>
-<li class="chapter" data-level="4.3.5" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#performance"><i class="fa fa-check"></i><b>4.3.5</b> Performance</a></li>
+<li class="chapter" data-level="4.3.1" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#flow-file"><i class="fa fa-check"></i><b>4.3.1</b> Flow file</a></li>
+<li class="chapter" data-level="4.3.2" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#compounding-flows"><i class="fa fa-check"></i><b>4.3.2</b> Compounding Flows</a></li>
+<li class="chapter" data-level="4.3.3" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#return-file-1"><i class="fa fa-check"></i><b>4.3.3</b> Return file</a></li>
+<li class="chapter" data-level="4.3.4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#subset-files"><i class="fa fa-check"></i><b>4.3.4</b> Subset files</a></li>
+<li class="chapter" data-level="4.3.5" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#ranking-asset-classes"><i class="fa fa-check"></i><b>4.3.5</b> Ranking Asset Classes</a></li>
+<li class="chapter" data-level="4.3.6" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#model-1"><i class="fa fa-check"></i><b>4.3.6</b> Model</a></li>
+<li class="chapter" data-level="4.3.7" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#performance"><i class="fa fa-check"></i><b>4.3.7</b> Performance</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="fx-strategy.html"><a href="fx-strategy.html"><i class="fa fa-check"></i><b>5</b> FX Strategy</a>
@@ -295,20 +297,26 @@ code span.wa { font-style: italic; } /* Warning */
 <h1><span class="header-section-number">11</span> FAQ<a href="FAQ.html#FAQ" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="Rets" class="section level2 hasAnchor" number="11.1">
 <h2><span class="header-section-number">11.1</span> Returns Information<a href="FAQ.html#Rets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>When available, EPFR has provided fund return data which can be used as a proxy for the returns of each market that we’re backtesting. For demonstration purposes these files are used throughout this notebook to exhibit use cases. However, EPFR is not able to produce bond rates and these files will need to be sourced using 3rd party return data.</p>
-<p>Fund returns are calculated using EPFR country or sector daily flow data, with the following equations:</p>
+<p>When available, EPFR has provided daily fund return data which can be used as a proxy for the returns of each market that we’re backtesting. For demonstration purposes these files are used throughout this notebook to exhibit use cases. However, EPFR is not able to produce bond rates and these files will need to be sourced using 3rd party return data.</p>
+<p>For users who choose to use these readily available fund return files to follow along can can access them under the ftp folder <strong>Returns</strong>.</p>
+<p><em>Disclaimer: EPFR Quant team uses 3rd party data providers to calculate returns in our usual presentations to showcase performances.</em></p>
+<p>Fund returns are calculated using EPFR daily flow data, and can be recreated using following equations:</p>
+<p><span class="math display">\[\text{Fund Return}_{a,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_i}{\sum^{N}_{i=m} \text{Assets Start}_i}\]</span>
+Where:</p>
+<ul>
+<li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of asset class <span class="math inline">\(a\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+</ul>
 <p><span class="math display">\[\text{Fund Return}_{c,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_i}{\sum^{N}_{i=m} \text{Assets Start}_i}\]</span>
 Where:</p>
 <ul>
-<li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of country <span class="math inline">\(c\)</span>, across all funds <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of country <span class="math inline">\(c\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
 </ul>
 <p><span class="math display">\[\text{Fund Return}_{s,r,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_i}{\sum^{N}_{i=m} \text{Assets Start}_i}\]</span>
 Where:</p>
 <ul>
-<li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of sector <span class="math inline">\(s\)</span>, for region <span class="math inline">\(r\)</span>, across all funds <span class="math inline">\(i\)</span>, for week <span class="math inline">\(t\)</span></li>
+<li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of sector <span class="math inline">\(s\)</span>, for region <span class="math inline">\(r\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
 </ul>
-<p>For users who choose to use these readily available fund return files to follow along can can access them under the ftp folder:</p>
-<p><em>Disclaimer: EPFR Quant team uses 3rd party data providers to calculate returns in our usual presentations to showcase performances.</em></p>
+<p>However, depending on how the signal being tested is indexed, it is important that the return file is also indexed at the same frequency. For example if the signal being tested is limited to monthly granularity, it is important to ensure that returns are also indexed by month. In this case if the user chooses to use one of EPFR’s daily return files, the function <code>mat.daily.to.monthly(, T)</code> from <code>library('EPFR.r')</code> should be used to modify a daily return file to be indexed with monthly dates. This same process can also be done using <code>mat.daily.to.weekly</code> from <code>library('EPFR.r')</code> to modify a daily return file to be indexed with weekly dates.</p>
 <!-- On our usual presentation we use 3rd party data providers to calculate returns, but for demonstration purposes this notebook uses fund returns where available to showcase strategy performances.  -->
 </div>
 <div id="country-flows" class="section level2 hasAnchor" number="11.2">

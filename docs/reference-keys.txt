@@ -13,8 +13,10 @@ calculation
 aggregate-flow-file
 return-file
 strategy-implementation
+flow-file
 compounding-flows
 return-file-1
+subset-files
 ranking-asset-classes
 model-1
 performance

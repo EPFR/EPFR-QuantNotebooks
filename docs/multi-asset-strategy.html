@@ -133,6 +133,7 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="epfr-library.html"><a href="epfr-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.4</b> Strategy Functions</a>
 <ul>
+<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#total-return-index"><i class="fa fa-check"></i>Total Return Index</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#compunding-flows"><i class="fa fa-check"></i>Compunding Flows</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#model"><i class="fa fa-check"></i>Model</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#example"><i class="fa fa-check"></i>Example</a></li>
@@ -325,7 +326,7 @@ code span.wa { font-style: italic; } /* Warning */
 </div>
 </center>
 <p>Users looking for more specific detail can customize this aggregation even further using EPFR’s fund-level or share class-level granularity. Some good examples would be to consider only active, passive, ETFs or mutual funds, or only institutional or retail share class flows and assets. Users leverage these tags to different degrees in creating aggregated signals to backtest. Further detail about this is available in section <a href="Filters.html#Filters">3</a>.</p>
-<p>This can be achieved using fund-level flow files or reaching out to EPFR’s quant team for customized aggregations.</p>
+<p>This can be achieved using fund-level flow files or by reaching out to EPFR’s quant team for customized aggregations.</p>
 <hr />
 </div>
 <div id="daily-percentage-flow" class="section level3 hasAnchor" number="4.2.2">
@@ -835,25 +836,25 @@ GLOFIX
 </table>
 <hr />
 <p>To follow along the user can download the <em>Multi-Asset strategy</em> files using the code below, which contains ftp functions ( <a href="epfr-library.html#ftp">2.3</a> ) from <code>library('EPFR.r')</code>:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="multi-asset-strategy.html#cb24-1" aria-hidden="true" tabindex="-1"></a>file.Rgn <span class="ot">&lt;-</span> <span class="st">&quot;/Strategies/daily/MultiAsset-Rgn-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb24-2"><a href="multi-asset-strategy.html#cb24-2" aria-hidden="true" tabindex="-1"></a>file.FI <span class="ot">&lt;-</span> <span class="st">&quot;/Strategies/daily/MultiAsset-FI-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb24-3"><a href="multi-asset-strategy.html#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="multi-asset-strategy.html#cb24-4" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
-<span id="cb24-5"><a href="multi-asset-strategy.html#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="multi-asset-strategy.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.Rgn, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) </span>
-<span id="cb24-7"><a href="multi-asset-strategy.html#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.FI, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
-<p>After downloading the csv files you will store both of the paths together as <code>flow.file</code>. A quick way to do this is shown below:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="multi-asset-strategy.html#cb25-1" aria-hidden="true" tabindex="-1"></a>flow.file.Rgn <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.Rgn), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\daily\\MultiAsset-Rgn-daily.csv</span></span>
-<span id="cb25-2"><a href="multi-asset-strategy.html#cb25-2" aria-hidden="true" tabindex="-1"></a>flow.file.FI <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.FI), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\daily\\MultiAsset-FI-daily.csv</span></span>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="multi-asset-strategy.html#cb25-1" aria-hidden="true" tabindex="-1"></a>file.Rgn <span class="ot">&lt;-</span> <span class="st">&quot;/Strategies/daily/MultiAsset-Rgn-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
+<span id="cb25-2"><a href="multi-asset-strategy.html#cb25-2" aria-hidden="true" tabindex="-1"></a>file.FI <span class="ot">&lt;-</span> <span class="st">&quot;/Strategies/daily/MultiAsset-FI-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
 <span id="cb25-3"><a href="multi-asset-strategy.html#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="multi-asset-strategy.html#cb25-4" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="fu">c</span>(flow.file.Rgn, flow.file.FI)</span></code></pre></div>
+<span id="cb25-4"><a href="multi-asset-strategy.html#cb25-4" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
+<span id="cb25-5"><a href="multi-asset-strategy.html#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="multi-asset-strategy.html#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.Rgn, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) </span>
+<span id="cb25-7"><a href="multi-asset-strategy.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.FI, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
+<p>After downloading the csv files you will store both of the paths together as <code>flow.file</code>. A quick way to do this is shown below:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="multi-asset-strategy.html#cb26-1" aria-hidden="true" tabindex="-1"></a>flow.file.Rgn <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.Rgn), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\daily\\MultiAsset-Rgn-daily.csv</span></span>
+<span id="cb26-2"><a href="multi-asset-strategy.html#cb26-2" aria-hidden="true" tabindex="-1"></a>flow.file.FI <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.FI), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\daily\\MultiAsset-FI-daily.csv</span></span>
+<span id="cb26-3"><a href="multi-asset-strategy.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="multi-asset-strategy.html#cb26-4" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="fu">c</span>(flow.file.Rgn, flow.file.FI)</span></code></pre></div>
 <hr />
 </div>
 <div id="return-file" class="section level3 hasAnchor" number="4.2.4">
 <h3><span class="header-section-number">4.2.4</span> Return File<a href="multi-asset-strategy.html#return-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The return file for this strategy should contain daily fixed income and equity fund returns for the respective asset classes contained in the flow file, over the period of time the user wants to backtest.</p>
 <p>The user can choose to use return data found with their own resources, or they have the option to use files EPFR provides specifically for the <em>Multi-Asset strategy</em>, which are <strong>available in the user’s EPFR FTP connection under the Returns folder</strong> ( <a href="FAQ.html#Rets">11.1</a> ). The Return files that EPFR provides contain Fund Return data and can be used as a proxy to equity and fixed income market returns. The user can recreate these files using EPFR daily flow data with the following equation:</p>
-<p><span class="math display">\[\text{Fund Return}_{a,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,a,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,a,t}}\]</span>
+<p><span class="math display">\[\text{Fund Return}_{a,t} = 100 \times \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,a,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,a,t}}\]</span>
 Where:</p>
 <ul>
 <li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of an asset class <span class="math inline">\(a\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
@@ -1302,18 +1303,18 @@ GLOFIX
 </table>
 <hr />
 <p>To follow along the user can download the <em>Multi-Asset strategy return</em> files using the code below, which contains ftp functions ( <a href="epfr-library.html#ftp">2.3</a> ) from <code>library('EPFR.r')</code>:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="multi-asset-strategy.html#cb26-1" aria-hidden="true" tabindex="-1"></a>file.Rgn <span class="ot">&lt;-</span> <span class="st">&quot;/Returns/daily/PsuedoReturns-MultiAsset-Rgn-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb26-2"><a href="multi-asset-strategy.html#cb26-2" aria-hidden="true" tabindex="-1"></a>file.FI <span class="ot">&lt;-</span> <span class="st">&quot;/Returns/daily/PsuedoReturns-MultiAsset-FI-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb26-3"><a href="multi-asset-strategy.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="multi-asset-strategy.html#cb26-4" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
-<span id="cb26-5"><a href="multi-asset-strategy.html#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="multi-asset-strategy.html#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.Rgn, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) </span>
-<span id="cb26-7"><a href="multi-asset-strategy.html#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.FI, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
-<p>After downloading the csv files you will store both of the paths together as <code>ret.file</code>. A quick way to do this is shown below:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="multi-asset-strategy.html#cb27-1" aria-hidden="true" tabindex="-1"></a>ret.file.Rgn <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.Rgn), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-Rgn-daily.csv</span></span>
-<span id="cb27-2"><a href="multi-asset-strategy.html#cb27-2" aria-hidden="true" tabindex="-1"></a>ret.file.FI <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.FI), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-FI-daily.csv</span></span>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="multi-asset-strategy.html#cb27-1" aria-hidden="true" tabindex="-1"></a>file.Rgn <span class="ot">&lt;-</span> <span class="st">&quot;/Returns/daily/PsuedoReturns-MultiAsset-Rgn-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
+<span id="cb27-2"><a href="multi-asset-strategy.html#cb27-2" aria-hidden="true" tabindex="-1"></a>file.FI <span class="ot">&lt;-</span> <span class="st">&quot;/Returns/daily/PsuedoReturns-MultiAsset-FI-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
 <span id="cb27-3"><a href="multi-asset-strategy.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="multi-asset-strategy.html#cb27-4" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="fu">c</span>(ret.file.Rgn, ret.file.FI)</span></code></pre></div>
+<span id="cb27-4"><a href="multi-asset-strategy.html#cb27-4" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
+<span id="cb27-5"><a href="multi-asset-strategy.html#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="multi-asset-strategy.html#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.Rgn, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) </span>
+<span id="cb27-7"><a href="multi-asset-strategy.html#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.FI, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
+<p>After downloading the csv files you will store both of the paths together as <code>ret.file</code>. A quick way to do this is shown below:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="multi-asset-strategy.html#cb28-1" aria-hidden="true" tabindex="-1"></a>ret.file.Rgn <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.Rgn), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-Rgn-daily.csv</span></span>
+<span id="cb28-2"><a href="multi-asset-strategy.html#cb28-2" aria-hidden="true" tabindex="-1"></a>ret.file.FI <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.FI), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-FI-daily.csv</span></span>
+<span id="cb28-3"><a href="multi-asset-strategy.html#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="multi-asset-strategy.html#cb28-4" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="fu">c</span>(ret.file.Rgn, ret.file.FI)</span></code></pre></div>
 <hr />
 </div>
 </div>
@@ -1322,22 +1323,22 @@ GLOFIX
 <div id="flow-file" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Flow file<a href="multi-asset-strategy.html#flow-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the flow files to our <em>R studio</em> work space.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="multi-asset-strategy.html#cb28-1" aria-hidden="true" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file[<span class="dv">1</span>]) <span class="co"># C:\\EPFR\\daily\\MultiAsset-Rgn-daily.csv</span></span>
-<span id="cb28-2"><a href="multi-asset-strategy.html#cb28-2" aria-hidden="true" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file[<span class="dv">2</span>]) <span class="co"># C:\\EPFR\\daily\\MultiAsset-FI-daily.csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="multi-asset-strategy.html#cb29-1" aria-hidden="true" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file[<span class="dv">1</span>]) <span class="co"># C:\\EPFR\\daily\\MultiAsset-Rgn-daily.csv</span></span>
+<span id="cb29-2"><a href="multi-asset-strategy.html#cb29-2" aria-hidden="true" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file[<span class="dv">2</span>]) <span class="co"># C:\\EPFR\\daily\\MultiAsset-FI-daily.csv</span></span></code></pre></div>
 <p>The next step is to ensure both of our flow files have the same rows so that we can combine the two files, like we do below.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="multi-asset-strategy.html#cb29-1" aria-hidden="true" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> x.rgn[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES RGN MATCHES FI ROWS</span></span>
-<span id="cb29-2"><a href="multi-asset-strategy.html#cb29-2" aria-hidden="true" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> x.FI[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES FI MATCHES RGN ROWS</span></span>
-<span id="cb29-3"><a href="multi-asset-strategy.html#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="multi-asset-strategy.html#cb29-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x.rgn, x.FI) <span class="co"># COMBINES RGN AND FI DATA</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="multi-asset-strategy.html#cb30-1" aria-hidden="true" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> x.rgn[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES RGN MATCHES FI ROWS</span></span>
+<span id="cb30-2"><a href="multi-asset-strategy.html#cb30-2" aria-hidden="true" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> x.FI[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES FI MATCHES RGN ROWS</span></span>
+<span id="cb30-3"><a href="multi-asset-strategy.html#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="multi-asset-strategy.html#cb30-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x.rgn, x.FI) <span class="co"># COMBINES RGN AND FI DATA</span></span></code></pre></div>
 <p>One of the first options we have is choosing the universe we want to backtest. EPFR has tested this signal within two different universes of asset classes Rgn (7 Region Equity) and FI (Fixed Income). For this example, we choose <strong>Multi</strong>, which includes both of our equity and fixed income asset classes, but one can also choose to backtest within either the Rgn or FI universes separately.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="multi-asset-strategy.html#cb30-1" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="st">&quot;Multi&quot;</span> <span class="co"># Multi/Rgn/FI</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="multi-asset-strategy.html#cb31-1" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="st">&quot;Multi&quot;</span> <span class="co"># Multi/Rgn/FI</span></span></code></pre></div>
 </div>
 <div id="compounding-flows" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Compounding Flows<a href="multi-asset-strategy.html#compounding-flows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we set up a variable for our look-back period, which can also be called a flow window. This variable will be the window of time we use to create a trailing compounded daily percentage flow. The look-back period we choose for our demonstrations is <strong>20 days</strong>.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="multi-asset-strategy.html#cb31-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># FLOW WINDOW (IN WEEKDAYS) - 20 day look back period</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="multi-asset-strategy.html#cb32-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># FLOW WINDOW (IN WEEKDAYS) - 20 day look back period</span></span></code></pre></div>
 <p>Using a function from the <code>library('EPFR.r')</code>, <code>compound.flows()</code> compounds our daily percentage flow over the trailing <code>lookback</code> period for each asset class.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="multi-asset-strategy.html#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, F) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="multi-asset-strategy.html#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, F) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1738,47 +1739,47 @@ GLOFIX
 </div>
 <div id="return-file-1" class="section level3 hasAnchor" number="4.3.3">
 <h3><span class="header-section-number">4.3.3</span> Return file<a href="multi-asset-strategy.html#return-file-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We will then import our two total return files and modify them to be one data frame of total index returns indexed so that time moves forward. To do this we will use function <code>ret.to.idx()</code> from <code>library('EPFR.r')</code> which will translate these returns to a total return index. We also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file and <code>ret.idx.gaps.fix()</code> to replace any NA values.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="multi-asset-strategy.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RGN RETURNS</span></span>
-<span id="cb33-2"><a href="multi-asset-strategy.html#cb33-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.Rgn) <span class="co"># C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-Rgn-daily.csv</span></span>
-<span id="cb33-3"><a href="multi-asset-strategy.html#cb33-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX</span></span>
-<span id="cb33-4"><a href="multi-asset-strategy.html#cb33-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span>
-<span id="cb33-5"><a href="multi-asset-strategy.html#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-6"><a href="multi-asset-strategy.html#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co">#F.I. RETURNS</span></span>
-<span id="cb33-7"><a href="multi-asset-strategy.html#cb33-7" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.FI) <span class="co"># C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-FI-daily.csv</span></span>
-<span id="cb33-8"><a href="multi-asset-strategy.html#cb33-8" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(z, <span class="fu">dimnames</span>(y)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX   </span></span>
-<span id="cb33-9"><a href="multi-asset-strategy.html#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="multi-asset-strategy.html#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">#COMBINE RETURN FILES</span></span>
-<span id="cb33-11"><a href="multi-asset-strategy.html#cb33-11" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, z)[, <span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]]] <span class="co"># FINAL TOTAL-RETURN INDEX TABLE</span></span>
-<span id="cb33-12"><a href="multi-asset-strategy.html#cb33-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">max</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), T)})))<span class="sc">:</span><span class="fu">min</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), F)}))), ] <span class="co"># ENSURE ALL PIECES HAVE RETURN OVER THE SAME HORIZON</span></span></code></pre></div>
+<p>We will then import our two total return files and modify them to be one data frame of total index returns indexed so that time moves forward. To do this we will use function <code>ret.to.idx()</code> from <code>library('EPFR.r')</code> which will translate these returns to a total return index. We also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file and <code>ret.idx.gaps.fix()</code> to replace any NA values. Please refer to the library documentation for the complete list of parameters for these functions (tip: <code>?ret.to.idx()</code>,<code>?ret.idx.gaps.fix()</code> ).</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="multi-asset-strategy.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RGN RETURNS</span></span>
+<span id="cb34-2"><a href="multi-asset-strategy.html#cb34-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.Rgn) <span class="co"># C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-Rgn-daily.csv</span></span>
+<span id="cb34-3"><a href="multi-asset-strategy.html#cb34-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX</span></span>
+<span id="cb34-4"><a href="multi-asset-strategy.html#cb34-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span>
+<span id="cb34-5"><a href="multi-asset-strategy.html#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="multi-asset-strategy.html#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">#F.I. RETURNS</span></span>
+<span id="cb34-7"><a href="multi-asset-strategy.html#cb34-7" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.FI) <span class="co"># C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-FI-daily.csv</span></span>
+<span id="cb34-8"><a href="multi-asset-strategy.html#cb34-8" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(z, <span class="fu">dimnames</span>(y)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX   </span></span>
+<span id="cb34-9"><a href="multi-asset-strategy.html#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="multi-asset-strategy.html#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co">#COMBINE RETURN FILES</span></span>
+<span id="cb34-11"><a href="multi-asset-strategy.html#cb34-11" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, z)[, <span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]]] <span class="co"># FINAL TOTAL-RETURN INDEX TABLE</span></span>
+<span id="cb34-12"><a href="multi-asset-strategy.html#cb34-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">max</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), T)})))<span class="sc">:</span><span class="fu">min</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), F)}))), ] <span class="co"># ENSURE ALL PIECES HAVE RETURN OVER THE SAME HORIZON</span></span></code></pre></div>
 </div>
 <div id="subset-files" class="section level3 hasAnchor" number="4.3.4">
 <h3><span class="header-section-number">4.3.4</span> Subset files<a href="multi-asset-strategy.html#subset-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Then, to subset the flow file <span class="math inline">\(x\)</span> and return file <span class="math inline">\(y\)</span> to the selected universe <span class="math inline">\(idx\)</span> of asset classes, the following code is used. During this process, we also ensure that the data structure in <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are completely aligned, having the same column names in the same order.</p>
 <!-- An additional step that we take when backtesting the entire multi asset universe is to make an adjustment to all daily flows, based on a regression between each asset classes 20-day flows and MSCI World index returns.  -->
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="multi-asset-strategy.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;Rgn&quot;</span>) { </span>
-<span id="cb34-2"><a href="multi-asset-strategy.html#cb34-2" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
-<span id="cb34-3"><a href="multi-asset-strategy.html#cb34-3" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
-<span id="cb34-4"><a href="multi-asset-strategy.html#cb34-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;FI&quot;</span>) {   </span>
-<span id="cb34-5"><a href="multi-asset-strategy.html#cb34-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(x)[<span class="dv">2</span>]]</span>
-<span id="cb34-6"><a href="multi-asset-strategy.html#cb34-6" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(y)[<span class="dv">2</span>]]</span>
-<span id="cb34-7"><a href="multi-asset-strategy.html#cb34-7" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="multi-asset-strategy.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;Rgn&quot;</span>) { </span>
+<span id="cb35-2"><a href="multi-asset-strategy.html#cb35-2" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
+<span id="cb35-3"><a href="multi-asset-strategy.html#cb35-3" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
+<span id="cb35-4"><a href="multi-asset-strategy.html#cb35-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;FI&quot;</span>) {   </span>
+<span id="cb35-5"><a href="multi-asset-strategy.html#cb35-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(x)[<span class="dv">2</span>]]</span>
+<span id="cb35-6"><a href="multi-asset-strategy.html#cb35-6" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(y)[<span class="dv">2</span>]]</span>
+<span id="cb35-7"><a href="multi-asset-strategy.html#cb35-7" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
 <p><em>* Note: subsetting can be also be done when creating the flow and return files</em></p>
 </div>
 <div id="ranking-asset-classes" class="section level3 hasAnchor" number="4.3.5">
 <h3><span class="header-section-number">4.3.5</span> Ranking Asset Classes<a href="multi-asset-strategy.html#ranking-asset-classes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we sort each of the asset classes in our universe into five equal bins based on their compounded percentage flow values for the selected holding period. To do this, we will use the function from <code>library('EPFR.r')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
-<p>The <code>bbk()</code> function requires our daily percentage flow data compounded over a desired period, total return index data, and our selected universe. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
+<p>The <code>bbk()</code> function requires our daily percentage flow data compounded over a desired period and total return index data. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
 <p>The first parameter we add is the number of bins we want to use. For our case, we want to use 5 because our strategy is to go long the top fifth and short the bottom fifth.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="multi-asset-strategy.html#cb35-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="multi-asset-strategy.html#cb36-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
 <p>Since EPFR data is published with T+1 day lag and is released around 5:00 pm EST, we account for a T+2 day delay in our model. Users interested in more timely signals can also use the T+2 open prices for backtesting purposes. Alternatively, EPFR’s Premium Daily offering collects an earlier release of end-of-day data which includes a significant subset of its original fund-level flow information.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="multi-asset-strategy.html#cb36-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data takes time to have</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="multi-asset-strategy.html#cb37-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data takes time to have</span></span></code></pre></div>
 <p>It is also important to note that this model will need to be re-balanced weekly. The day of the week the rebalancing occurs is at the discretion of the user. For this example we will set the day of the week to trade as <strong>Friday</strong>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="multi-asset-strategy.html#cb37-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="multi-asset-strategy.html#cb38-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
 <p>Additionally, we also evaluate the returns for different holding periods. The user can input return horizons that they are interested in here. For this example we define a return horizon for weekly, fortnightly, monthly, bi-monthly, quarterly, and semi-annual rebalancing.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="multi-asset-strategy.html#cb38-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="multi-asset-strategy.html#cb39-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
 <p>Now that we have defined all of our inputs, to rank the asset classes into quintiles by their 20-day percentage flow, we call function <code>bbk()</code> for a 1-week holding period.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="multi-asset-strategy.html#cb39-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="multi-asset-strategy.html#cb40-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
 </div>
 <div id="model-1" class="section level3 hasAnchor" number="4.3.6">
 <h3><span class="header-section-number">4.3.6</span> Model<a href="multi-asset-strategy.html#model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1797,7 +1798,7 @@ GLOFIX
 <!-- datatable(head(mat.to.xlModel(z[["raw.fwd.rets"]], delay, hz[1], F)))  -->
 <!-- ``` -->
 <p><strong>Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)</strong></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="multi-asset-strategy.html#cb40-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="multi-asset-strategy.html#cb41-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1862,46 +1863,7 @@ GLOFIX
 20211231
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
@@ -1911,6 +1873,45 @@ GLOFIX
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
 </td>
 </tr>
 <tr>
@@ -1918,28 +1919,22 @@ GLOFIX
 20211224
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
+5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
+4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
@@ -1954,19 +1949,25 @@ GLOFIX
 4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
+2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
+3
 </td>
 </tr>
 <tr>
@@ -1974,34 +1975,10 @@ GLOFIX
 20211217
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
+4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
@@ -2010,19 +1987,43 @@ GLOFIX
 5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
+5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
 </td>
 </tr>
 <tr>
@@ -2030,43 +2031,7 @@ GLOFIX
 20211210
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
@@ -2075,10 +2040,46 @@ GLOFIX
 3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
 </td>
 </tr>
 <tr>
@@ -2086,25 +2087,16 @@ GLOFIX
 20211203
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
+3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
+4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
@@ -2113,7 +2105,22 @@ GLOFIX
 4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1
@@ -2125,22 +2132,16 @@ GLOFIX
 1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
+2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
+2
 </td>
 </tr>
 </tbody>
 </table>
 <p><strong>Quintile Returns over the equal-weight universe</strong></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="multi-asset-strategy.html#cb41-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="multi-asset-strategy.html#cb42-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2175,22 +2176,22 @@ uRet
 20211231
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.7607755
+0.1249790
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0852404
+0.3052653
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.6037578
+0.6507576
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.7473380
+-0.0476582
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4817365
+-1.1192127
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.2425120
+1.2441918
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -1.2013195
@@ -2201,22 +2202,22 @@ uRet
 20211224
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5751196
+-0.4963935
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1738560
+-0.0514727
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1233121
+-0.4842289
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.3480753
+0.1101106
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.4661392
+0.9024386
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.0412588
+-1.3988321
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.4471162
@@ -2227,22 +2228,22 @@ uRet
 20211217
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0700287
+-0.6718408
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4056082
+-0.1957258
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3467158
+-0.5137782
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.4147732
+0.7259480
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.2644672
+0.4786559
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1944385
+-1.1504967
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.2635537
@@ -2253,22 +2254,22 @@ uRet
 20211210
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.6923424
+0.8430931
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.2095814
+0.3226837
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.2435611
+0.3713474
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5157179
+-1.2436443
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5277215
+0.0135069
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.2200639
+0.8295862
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.5107398
@@ -2279,22 +2280,22 @@ uRet
 20211203
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.4315280
+-1.4335571
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.0438719
+-0.8409929
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0097634
+1.0926720
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.4828764
+0.9192147
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.3067026
+0.2365894
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1248254
+-1.6701466
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.7003021
@@ -2308,9 +2309,9 @@ uRet
 <div id="performance" class="section level3 hasAnchor" number="4.3.7">
 <h3><span class="header-section-number">4.3.7</span> Performance<a href="multi-asset-strategy.html#performance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Performance over all holding periods</strong></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="multi-asset-strategy.html#cb42-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
-<span id="cb42-2"><a href="multi-asset-strategy.html#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="multi-asset-strategy.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="multi-asset-strategy.html#cb43-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
+<span id="cb43-2"><a href="multi-asset-strategy.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="multi-asset-strategy.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2350,22 +2351,22 @@ uRet
 AnnMn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.280606e-01
+6.964404e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.026527e-01
+-2.245264e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.868803e-01
+8.237643e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.743213e-01
+1.122429e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.986049e+00
+-2.717408e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.514110e+00
+3.413848e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.854067e+00
@@ -2376,22 +2377,22 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.686655e+00
+7.567787e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.846886e+00
+4.653877e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.471247e+00
+5.268488e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.836181e+00
+5.513411e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.214445e+00
+6.228471e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.398493e+00
+1.145312e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 9.175470e+00
@@ -2402,22 +2403,22 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.027116e+01
+8.642336e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.704276e+01
+-5.359174e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.654363e+01
+1.434143e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--8.534610e+00
+2.049118e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.881332e+01
+-4.375746e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.493154e+01
+2.933058e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3.120821e+01
@@ -2428,22 +2429,22 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.689075e-01
+-2.856148e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.207477e+00
+-2.986764e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.253802e+00
+2.091315e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.584814e+00
+4.899570e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--8.469755e+00
+-8.864507e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.699176e+00
+5.035992e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1.335336e+01
@@ -2506,22 +2507,22 @@ NA
 DrawDn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.231990e+01
+-2.982440e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.508245e+01
+-2.128467e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.006664e+01
+-1.711858e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.118549e+01
+-1.695933e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.435812e+01
+-4.825980e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.954053e+01
+-3.086071e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -3.101945e+01
@@ -2532,22 +2533,22 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.012615e+07
+2.010717e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.012294e+07
+2.010286e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.008624e+07
+2.010060e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.008396e+07
+2.009402e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.008191e+07
+2.008299e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.014288e+07
+2.012516e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.007096e+07
@@ -2558,22 +2559,22 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.922222e+01
+5.611111e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.600000e+01
+4.611111e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.888889e+01
+2.611111e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.222222e+01
+1.611111e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.766667e+01
+7.033333e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.244444e+01
+4.200000e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 7.666667e+00
@@ -2584,22 +2585,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.647894e+02
+3.403241e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.026139e+02
+3.714082e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.493911e+02
+4.361843e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.070812e+02
+3.810135e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.797711e+02
+3.815236e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.445605e+02
+7.218477e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.000000e+00
@@ -2615,22 +2616,22 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.251462e+00
+9.824439e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.417914e+00
+-3.479813e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.296590e-01
+1.359567e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.579654e-01
+1.725155e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.227720e+00
+-4.178242e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.479182e+00
+5.160686e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.878926e+00
@@ -2641,22 +2642,22 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.463321e+00
+7.651087e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.009008e+00
+4.821186e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.849879e+00
+5.182535e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.723587e+00
+5.742676e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.154145e+00
+5.972647e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.092517e+00
+1.137167e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 8.345413e+00
@@ -2667,22 +2668,22 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.296212e+01
+1.302121e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.882142e+01
+-7.162752e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.419686e+01
+2.625864e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.182472e+01
+3.001720e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.297364e+01
+-7.010922e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.315282e+01
+4.571488e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3.450064e+01
@@ -2693,22 +2694,22 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.000000e+00
+1.262626e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.186869e+00
+-6.313131e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.893939e+00
+1.641414e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.000000e+00
+3.156566e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.828283e+00
+-7.196970e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.429293e+00
+3.282828e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1.153983e+01
@@ -2771,22 +2772,22 @@ NA
 DrawDn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.236177e+01
+-2.672701e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.857836e+01
+-2.370173e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.925588e+01
+-1.540766e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.947129e+01
+-1.462624e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.242117e+01
+-6.786596e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.362123e+01
+-2.864406e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -3.576917e+01
@@ -2797,22 +2798,22 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.011612e+07
+2.014551e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.007555e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.009062e+07
+2.011022e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.008047e+07
+2.020016e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.007581e+07
+2.007062e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.019061e+07
+2.013052e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.007106e+07
@@ -2823,22 +2824,22 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.620000e+02
+1.520000e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.050000e+01
+2.050000e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.950000e+01
+2.300000e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.200000e+02
+5.000000e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.610000e+02
+3.935000e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.550000e+01
+1.430000e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3.150000e+01
@@ -2849,22 +2850,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.063380e+03
+9.223810e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.449993e+03
+1.267201e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.765032e+03
+1.643760e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.445906e+03
+1.332791e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.078683e+03
+1.040436e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.142063e+03
+1.962817e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.000000e+00
@@ -2880,22 +2881,22 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.556037e-01
+8.206997e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.074856e+00
+-2.681330e-02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.673338e+00
+1.535742e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.054024e-01
+9.197658e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.054880e+00
+-3.547045e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.810484e+00
+4.367744e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.919293e+00
@@ -2906,22 +2907,22 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.703025e+00
+7.908491e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.061661e+00
+4.601224e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.583297e+00
+5.127774e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.596060e+00
+5.882166e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.161587e+00
+6.190455e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.532636e+00
+1.190753e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 8.820410e+00
@@ -2932,22 +2933,22 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.384317e+01
+1.036796e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.168641e+01
+-8.654348e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.103659e+01
+3.120428e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.327136e+01
+1.549819e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.020730e+01
+-5.738450e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.077084e+01
+3.678994e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3.313709e+01
@@ -2958,22 +2959,22 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.265831e+00
+-2.152874e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.532303e+00
+1.313900e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.307671e+00
+4.172435e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.517074e+00
+4.179485e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.127391e+01
+-8.989002e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.327232e+00
+2.784187e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1.081308e+01
@@ -3036,22 +3037,22 @@ NA
 DrawDn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.990382e+01
+-2.819560e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.596995e+01
+-1.874681e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.635772e+01
+-1.485217e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.699249e+01
+-1.821599e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.378384e+01
+-5.699718e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.563823e+01
+-2.513099e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -3.389934e+01
@@ -3062,22 +3063,22 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.012842e+07
+2.010572e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.010819e+07
+2.011579e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.011562e+07
+2.009591e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.007794e+07
+2.013536e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.007589e+07
+2.007062e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.016053e+07
+2.017569e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.007104e+07
@@ -3088,22 +3089,22 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.700000e+01
+1.205000e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.575000e+01
+6.875000e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.425000e+01
+4.075000e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.160000e+02
+1.850000e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.700000e+02
+1.947500e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.850000e+01
+3.650000e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1.675000e+01
@@ -3114,22 +3115,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.625605e+02
+6.831338e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.755632e+02
+7.962587e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.718505e+02
+9.368003e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.644524e+02
+8.003852e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.905173e+02
+7.505318e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.553078e+03
+1.433666e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.000000e+00
@@ -3145,22 +3146,22 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.845173e-01
+5.570317e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.794995e-01
+-5.947552e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.458470e-01
+6.850577e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.233709e-01
+1.191861e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.838536e+00
+-2.038231e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.323053e+00
+2.595263e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.948677e+00
@@ -3171,22 +3172,22 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.979057e+00
+7.824119e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.807720e+00
+4.680131e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.323023e+00
+5.435807e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.045031e+00
+5.180945e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.246715e+00
+6.112769e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.764461e+00
+1.149665e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 9.228914e+00
@@ -3197,22 +3198,22 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.068015e+00
+7.445884e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.481141e+01
+-1.173517e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.345123e+01
+1.270030e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.132971e+00
+2.338271e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.497125e+01
+-3.436900e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.902856e+01
+2.214126e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3.205937e+01
@@ -3223,22 +3224,22 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.345103e+00
+-4.798235e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.370744e+00
+-3.137873e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.123161e+00
+2.496847e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.089533e-01
+6.324086e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--9.543926e+00
+-7.103825e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.289618e+00
+1.469105e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1.598361e+01
@@ -3301,22 +3302,22 @@ NA
 DrawDn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.371920e+01
+-3.237754e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.815086e+01
+-2.282383e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.729125e+01
+-1.738520e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.181058e+01
+-1.566274e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.442094e+01
+-3.993908e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.055855e+01
+-3.271130e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -2.855401e+01
@@ -3327,22 +3328,22 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.012383e+07
+2.011521e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.011369e+07
+2.010440e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.010450e+07
+2.009230e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.008231e+07
+2.010214e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.008468e+07
+2.008147e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.013920e+07
+2.012382e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.007107e+07
@@ -3353,22 +3354,22 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.246154e+01
+3.553846e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.907692e+01
+3.200000e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.261538e+01
+2.092308e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.669231e+01
+1.076923e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.684615e+01
+4.823077e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.984615e+01
+2.469231e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4.692308e+00
@@ -3379,22 +3380,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.639288e+02
+2.504274e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.850273e+02
+2.676082e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.171445e+02
+3.029901e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.801828e+02
+2.656053e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.760011e+02
+2.712512e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.399299e+02
+5.216786e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.000000e+00
@@ -3410,22 +3411,22 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.744810e-02
+-9.757410e-02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--8.853910e-02
+-1.092049e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.139665e+00
+7.091710e-01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.469293e-01
+1.601336e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.590071e+00
+-1.290646e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.562623e+00
+1.193072e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3.130603e+00
@@ -3436,22 +3437,22 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.719410e+00
+7.471659e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.151840e+00
+4.981172e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.445908e+00
+5.741795e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.484217e+00
+5.465284e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.898570e+00
+6.532470e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.085143e+00
+1.109502e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 9.905354e+00
@@ -3462,22 +3463,22 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--4.156297e-01
+-1.706399e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.397536e+00
+-2.310834e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.077930e+01
+1.104803e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.561763e+00
+2.973609e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.974563e+01
+-2.137035e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.988518e+01
+1.047804e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3.163771e+01
@@ -3488,22 +3489,22 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.736516e+00
+-2.590628e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--4.712644e+00
+-8.850575e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.973475e+00
+4.151194e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.392573e+00
+9.345712e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.169761e+01
+-5.963749e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.781609e+00
+-1.312997e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1.752431e+01
@@ -3566,22 +3567,22 @@ NA
 DrawDn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.467921e+01
+-3.124580e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.942057e+01
+-2.927894e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.395949e+01
+-1.628113e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.769732e+01
+-1.368826e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.290273e+01
+-3.316058e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.414600e+01
+-3.972884e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -2.575678e+01
@@ -3592,22 +3593,22 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.011135e+07
+2.010598e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.011140e+07
+2.009441e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.011793e+07
+2.009799e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.009184e+07
+2.010122e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.008349e+07
+2.008802e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.011827e+07
+2.011291e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.007133e+07
@@ -3618,22 +3619,22 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.692308e+01
+1.780769e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.426923e+01
+2.103846e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.653846e+00
+7.923077e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.076923e+00
+6.000000e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.403846e+01
+1.700000e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.692308e+00
+1.361538e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.500000e+00
@@ -3644,22 +3645,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.400796e+02
+1.333716e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.479067e+02
+1.408952e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.582258e+02
+1.523873e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.458621e+02
+1.404730e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.417359e+02
+1.420660e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.818155e+02
+2.754377e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.000000e+00
@@ -3675,22 +3676,22 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.482130e+00
+1.471766e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.665591e+00
+-1.123683e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.183893e+00
+1.226289e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--9.406481e-01
+2.027664e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.634849e+00
+-3.904970e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.116979e+00
+5.376737e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.796159e+00
@@ -3701,22 +3702,22 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.440578e+00
+7.421563e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.167859e+00
+4.686022e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.915631e+00
+5.433662e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.955516e+00
+5.571100e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.083907e+00
+6.407825e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.731680e+00
+1.144701e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 8.038673e+00
@@ -3727,22 +3728,22 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.724214e+01
+1.983095e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.222980e+01
+-2.397946e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.001296e+01
+2.256837e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.898184e+01
+3.639611e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.149716e+01
+-6.094065e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.601340e+01
+4.697065e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3.478384e+01
@@ -3753,22 +3754,22 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.828499e+00
+1.197982e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.585120e+00
+-2.459016e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.711223e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.152585e-01
+3.720050e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.998739e+00
+-4.098361e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.368222e+00
+2.585120e+00
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 7.178841e+00
@@ -3831,22 +3832,22 @@ NA
 DrawDn
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.634423e+01
+-2.087517e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.997538e+01
+-3.217477e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.106995e+01
+-2.163814e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.161576e+01
+-1.751506e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.779001e+01
+-6.357411e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.279376e+01
+-2.212328e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -3.582700e+01
@@ -3857,22 +3858,22 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.012112e+07
+2.009071e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.007092e+07
+2.008011e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.010072e+07
+2.010012e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.008043e+07
+2.020021e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.008112e+07
+2.007061e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.018020e+07
+2.016021e+07
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.007103e+07
@@ -3883,22 +3884,22 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.980000e+02
+5.530000e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.900000e+01
+5.990000e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.120000e+02
+1.670000e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.150000e+02
+1.000000e+01
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.840000e+02
+7.890000e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.800000e+01
+1.380000e+02
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5.600000e+01
@@ -3909,22 +3910,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.427708e+03
+1.198489e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.203778e+03
+1.823929e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.006045e+03
+2.592359e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.257809e+03
+2.025315e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.491016e+03
+1.408060e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.918724e+03
+2.606549e+03
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.000000e+00
@@ -3934,7 +3935,7 @@ AnnTo
 </table>
 <hr />
 <p><strong>Annualized mean one-week returns</strong></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="multi-asset-strategy.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="multi-asset-strategy.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -3972,22 +3973,22 @@ nPrds
 2007
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.5262428
+-8.2783843
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.1621261
+8.6500620
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.3307199
+10.1803818
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.9439689
+0.6841124
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--12.392901
+-14.3915168
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-17.9191440
+6.1131324
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1.794936
@@ -4001,22 +4002,22 @@ nPrds
 2008
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-22.1485878
+31.5987962
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--15.8079587
+-10.8438837
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.5057877
+6.1654606
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.9325772
+-0.5349756
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.999672
+-22.5924443
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-19.1489155
+54.1912405
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -27.417418
@@ -4030,22 +4031,22 @@ nPrds
 2009
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1437382
+2.3072416
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.0957642
+-1.5192505
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-16.8652941
+14.8127670
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.5124604
+1.6921079
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--13.786771
+-17.3504851
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-13.9305089
+19.6577267
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 24.141740
@@ -4059,22 +4060,22 @@ nPrds
 2010
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.6395165
+0.1034079
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.4329699
+-1.9135083
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.7684875
+-0.8207898
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--10.1174228
+4.0712375
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.162067
+-2.1595904
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.8015833
+2.2629983
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 9.964876
@@ -4088,22 +4089,22 @@ nPrds
 2011
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.7583767
+-0.2695208
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.7937327
+-1.1922544
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--15.6605055
+-17.4413923
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.2891454
+8.9153149
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.908245
+7.4134992
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1498686
+-7.6830200
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -2.537112
@@ -4117,22 +4118,22 @@ nPrds
 2012
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.6443603
+0.1654326
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.2562635
+1.0434649
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.0180903
+0.9224258
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0584413
+0.3442689
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.045876
+-2.9381702
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.6902368
+3.1036028
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 9.883816
@@ -4146,22 +4147,22 @@ nPrds
 2013
 </td>
 <td style="text-align:right;">
--3.5021394
+2.3153071
 </td>
 <td style="text-align:right;">
-7.8707450
+1.6437289
 </td>
 <td style="text-align:right;">
-5.1453363
+3.6305776
 </td>
 <td style="text-align:right;">
--2.9599879
+-1.4792299
 </td>
 <td style="text-align:right;">
--8.190873
+-6.1652166
 </td>
 <td style="text-align:right;">
-4.6887335
+8.4805237
 </td>
 <td style="text-align:right;">
 4.569832
@@ -4175,22 +4176,22 @@ nPrds
 2014
 </td>
 <td style="text-align:right;">
-1.2558166
+-8.1588688
 </td>
 <td style="text-align:right;">
-2.1857787
+-0.4403193
 </td>
 <td style="text-align:right;">
-3.7878894
+-4.6239265
 </td>
 <td style="text-align:right;">
--3.5078164
+5.7383372
 </td>
 <td style="text-align:right;">
--3.280989
+5.7187714
 </td>
 <td style="text-align:right;">
-4.5368057
+-13.8776402
 </td>
 <td style="text-align:right;">
 4.051446
@@ -4204,22 +4205,22 @@ nPrds
 2015
 </td>
 <td style="text-align:right;">
-0.8312377
+-0.8347351
 </td>
 <td style="text-align:right;">
-1.8822919
+4.5037461
 </td>
 <td style="text-align:right;">
-1.2544472
+1.9260046
 </td>
 <td style="text-align:right;">
--1.5632083
+0.9329964
 </td>
 <td style="text-align:right;">
--2.511130
+-8.3402595
 </td>
 <td style="text-align:right;">
-3.3423673
+7.5055244
 </td>
 <td style="text-align:right;">
 -1.968191
@@ -4233,22 +4234,22 @@ nPrds
 2016
 </td>
 <td style="text-align:right;">
--2.0473366
+-0.3990189
 </td>
 <td style="text-align:right;">
-4.2822107
+-5.8795244
 </td>
 <td style="text-align:right;">
-2.6780787
+5.3115979
 </td>
 <td style="text-align:right;">
--1.1423927
+2.5878000
 </td>
 <td style="text-align:right;">
--4.817166
+-0.5236132
 </td>
 <td style="text-align:right;">
-2.7698295
+0.1245943
 </td>
 <td style="text-align:right;">
 5.941342
@@ -4262,22 +4263,22 @@ nPrds
 2017
 </td>
 <td style="text-align:right;">
-3.0046060
+-2.4383586
 </td>
 <td style="text-align:right;">
--0.5971810
+-4.2351856
 </td>
 <td style="text-align:right;">
--3.9675876
+0.1875269
 </td>
 <td style="text-align:right;">
-4.3296370
+4.3550233
 </td>
 <td style="text-align:right;">
--4.013626
+2.0910481
 </td>
 <td style="text-align:right;">
-7.0182325
+-4.5294067
 </td>
 <td style="text-align:right;">
 8.457597
@@ -4291,22 +4292,22 @@ nPrds
 2018
 </td>
 <td style="text-align:right;">
--5.2758622
+1.1679334
 </td>
 <td style="text-align:right;">
--5.6791875
+-8.6441774
 </td>
 <td style="text-align:right;">
--0.8303557
+8.0616976
 </td>
 <td style="text-align:right;">
-7.9286853
+-2.2113318
 </td>
 <td style="text-align:right;">
-3.106888
+5.2443813
 </td>
 <td style="text-align:right;">
--8.3827498
+-4.0764479
 </td>
 <td style="text-align:right;">
 -6.120206
@@ -4320,22 +4321,22 @@ nPrds
 2019
 </td>
 <td style="text-align:right;">
-0.0207033
+-6.6603744
 </td>
 <td style="text-align:right;">
--0.8478387
+-2.6852111
 </td>
 <td style="text-align:right;">
-2.0600647
+4.2526665
 </td>
 <td style="text-align:right;">
-2.4213320
+5.4692010
 </td>
 <td style="text-align:right;">
--4.178759
+-1.3042787
 </td>
 <td style="text-align:right;">
-4.1994624
+-5.3560957
 </td>
 <td style="text-align:right;">
 11.606858
@@ -4349,22 +4350,22 @@ nPrds
 2020
 </td>
 <td style="text-align:right;">
--2.8206326
+15.5190809
 </td>
 <td style="text-align:right;">
-8.7078981
+5.0178569
 </td>
 <td style="text-align:right;">
--0.2150123
+-9.8692589
 </td>
 <td style="text-align:right;">
--0.3029195
+-4.2767584
 </td>
 <td style="text-align:right;">
--8.170993
+-6.6379533
 </td>
 <td style="text-align:right;">
-5.3503606
+22.1570341
 </td>
 <td style="text-align:right;">
 5.327833
@@ -4378,22 +4379,22 @@ nPrds
 2021
 </td>
 <td style="text-align:right;">
-0.9551899
+-2.6047975
 </td>
 <td style="text-align:right;">
-9.4118101
+1.4823622
 </td>
 <td style="text-align:right;">
--5.0516511
+-1.1712028
 </td>
 <td style="text-align:right;">
--0.7864662
+5.9691667
 </td>
 <td style="text-align:right;">
--7.403997
+-6.1593715
 </td>
 <td style="text-align:right;">
-8.3591871
+3.5545741
 </td>
 <td style="text-align:right;">
 3.660437
@@ -4407,22 +4408,22 @@ nPrds
 2022
 </td>
 <td style="text-align:right;">
--8.3575713
+-7.3974268
 </td>
 <td style="text-align:right;">
--1.6001987
+2.8730472
 </td>
 <td style="text-align:right;">
-10.9420577
+2.5454652
 </td>
 <td style="text-align:right;">
--3.0838240
+-2.0101363
 </td>
 <td style="text-align:right;">
-3.660877
+3.7014137
 </td>
 <td style="text-align:right;">
--12.0184484
+-11.0988405
 </td>
 <td style="text-align:right;">
 -13.046450

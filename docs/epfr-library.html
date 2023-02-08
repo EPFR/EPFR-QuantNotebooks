@@ -133,6 +133,7 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="epfr-library.html"><a href="epfr-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.4</b> Strategy Functions</a>
 <ul>
+<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#total-return-index"><i class="fa fa-check"></i>Total Return Index</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#compunding-flows"><i class="fa fa-check"></i>Compunding Flows</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#model"><i class="fa fa-check"></i>Model</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#example"><i class="fa fa-check"></i>Example</a></li>
@@ -430,108 +431,137 @@ code span.wa { font-style: italic; } /* Warning */
 </div>
 <div id="strategy-functions" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> Strategy Functions<a href="epfr-library.html#strategy-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="total-return-index" class="section level3 unnumbered hasAnchor">
+<h3>Total Return Index<a href="epfr-library.html#total-return-index" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>EPFR’s function <code>ret.to.idx()</code> uses other functions within <code>library('EPFR.r')</code> to compute total-return index, from percentage returns. To calculate the total return index we sum 1 plus today’s percentage return multiplied by the previous days total-return index.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="epfr-library.html#cb14-1" aria-hidden="true" tabindex="-1"></a>ret.to.idx <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb14-2"><a href="epfr-library.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb14-3"><a href="epfr-library.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Name      : ret.to.idx</span></span>
+<span id="cb14-4"><a href="epfr-library.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Args      : x = a file of total returns indexed so that time runs forward</span></span>
+<span id="cb14-5"><a href="epfr-library.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Output    : computes a total-return index</span></span>
+<span id="cb14-6"><a href="epfr-library.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb14-7"><a href="epfr-library.html#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(<span class="fu">dim</span>(x))) {</span>
+<span id="cb14-8"><a href="epfr-library.html#cb14-8" aria-hidden="true" tabindex="-1"></a>        z <span class="ot">&lt;-</span> x</span>
+<span id="cb14-9"><a href="epfr-library.html#cb14-9" aria-hidden="true" tabindex="-1"></a>        w <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(z)</span>
+<span id="cb14-10"><a href="epfr-library.html#cb14-10" aria-hidden="true" tabindex="-1"></a>        n <span class="ot">&lt;-</span> <span class="fu">find.data</span>(w, T)</span>
+<span id="cb14-11"><a href="epfr-library.html#cb14-11" aria-hidden="true" tabindex="-1"></a>        m <span class="ot">&lt;-</span> <span class="fu">find.data</span>(w, F)</span>
+<span id="cb14-12"><a href="epfr-library.html#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (n <span class="sc">&gt;</span> <span class="dv">1</span>) n <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb14-13"><a href="epfr-library.html#cb14-13" aria-hidden="true" tabindex="-1"></a>        z[n] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb14-14"><a href="epfr-library.html#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> (n <span class="sc">&lt;</span> m) {</span>
+<span id="cb14-15"><a href="epfr-library.html#cb14-15" aria-hidden="true" tabindex="-1"></a>            n <span class="ot">&lt;-</span> n <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb14-16"><a href="epfr-library.html#cb14-16" aria-hidden="true" tabindex="-1"></a>            z[n] <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">zav</span>(z[n])<span class="sc">/</span><span class="dv">100</span>) <span class="sc">*</span> z[n <span class="sc">-</span> <span class="dv">1</span>]</span>
+<span id="cb14-17"><a href="epfr-library.html#cb14-17" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb14-18"><a href="epfr-library.html#cb14-18" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb14-19"><a href="epfr-library.html#cb14-19" aria-hidden="true" tabindex="-1"></a>        z <span class="ot">&lt;-</span> <span class="fu">fcn.mat.vec</span>(ret.to.idx, x,, T)</span>
+<span id="cb14-20"><a href="epfr-library.html#cb14-20" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-21"><a href="epfr-library.html#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb14-22"><a href="epfr-library.html#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co"># RETURN RESULT</span></span>
+<span id="cb14-23"><a href="epfr-library.html#cb14-23" aria-hidden="true" tabindex="-1"></a>z</span>
+<span id="cb14-24"><a href="epfr-library.html#cb14-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
 <div id="compunding-flows" class="section level3 unnumbered hasAnchor">
 <h3>Compunding Flows<a href="epfr-library.html#compunding-flows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>EPFR’s function <code>compound.flows()</code> uses other functions within <code>library('EPFR.r')</code> to compute a rolling cumulative sum of flows over a trailing lookback period (typically we use 20 days).</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="epfr-library.html#cb14-1" aria-hidden="true" tabindex="-1"></a>compound.flows <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">n =</span> F) {</span>
-<span id="cb14-2"><a href="epfr-library.html#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
-<span id="cb14-3"><a href="epfr-library.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Args      : x = a matrix/data-frame of percentage flows</span></span>
-<span id="cb14-4"><a href="epfr-library.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#       : y = number of trailing rows to compound/sum</span></span>
-<span id="cb14-5"><a href="epfr-library.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       : n = if T, flows get summed. Otherwise they get compounded.</span></span>
-<span id="cb14-6"><a href="epfr-library.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Output    : compounded flows over &lt;n&gt; trailing periods indexed by last day in the flow window</span></span>
-<span id="cb14-7"><a href="epfr-library.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
-<span id="cb14-8"><a href="epfr-library.html#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb14-9"><a href="epfr-library.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co"># FIND NA&#39;s : </span></span>
-<span id="cb14-10"><a href="epfr-library.html#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># creates new df with value of 1 for all non-NA flows, else NA</span></span>
-<span id="cb14-11"><a href="epfr-library.html#cb14-11" aria-hidden="true" tabindex="-1"></a>    h <span class="ot">&lt;-</span> <span class="fu">nonneg</span>(<span class="fu">mat.to.obs</span>(x)) </span>
-<span id="cb14-12"><a href="epfr-library.html#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb14-13"><a href="epfr-library.html#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># PRELIMINARIES : </span></span>
-<span id="cb14-14"><a href="epfr-library.html#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert all NA values to 0 in order to do computations</span></span>
-<span id="cb14-15"><a href="epfr-library.html#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to log form</span></span>
-<span id="cb14-16"><a href="epfr-library.html#cb14-16" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">zav</span>(x)</span>
-<span id="cb14-17"><a href="epfr-library.html#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>n) z <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">+</span> z<span class="sc">/</span><span class="dv">100</span>)</span>
-<span id="cb14-18"><a href="epfr-library.html#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb14-19"><a href="epfr-library.html#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ROLLING WINDOWS</span></span>
-<span id="cb14-20"><a href="epfr-library.html#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate rolling sum</span></span>
-<span id="cb14-21"><a href="epfr-library.html#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># reverse log form</span></span>
-<span id="cb14-22"><a href="epfr-library.html#cb14-22" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">mat.rollsum</span>(z, y)</span>
-<span id="cb14-23"><a href="epfr-library.html#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>n) z <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">exp</span>(z) <span class="sc">-</span> <span class="dv">100</span></span>
-<span id="cb14-24"><a href="epfr-library.html#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb14-25"><a href="epfr-library.html#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co"># ENSURE FINAL DATE IN EACH ROLLING WINDOW IS NON-NA</span></span>
-<span id="cb14-26"><a href="epfr-library.html#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># multiply compounded flow matrix by h (1/NA df)</span></span>
-<span id="cb14-27"><a href="epfr-library.html#cb14-27" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z <span class="sc">*</span> h</span>
-<span id="cb14-28"><a href="epfr-library.html#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb14-29"><a href="epfr-library.html#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co"># RETURN RESULT</span></span>
-<span id="cb14-30"><a href="epfr-library.html#cb14-30" aria-hidden="true" tabindex="-1"></a>    z</span>
-<span id="cb14-31"><a href="epfr-library.html#cb14-31" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="epfr-library.html#cb15-1" aria-hidden="true" tabindex="-1"></a>compound.flows <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">n =</span> F) {</span>
+<span id="cb15-2"><a href="epfr-library.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb15-3"><a href="epfr-library.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Args      : x = a matrix/data-frame of percentage flows</span></span>
+<span id="cb15-4"><a href="epfr-library.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#       : y = number of trailing rows to compound/sum</span></span>
+<span id="cb15-5"><a href="epfr-library.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       : n = if T, flows get summed. Otherwise they get compounded.</span></span>
+<span id="cb15-6"><a href="epfr-library.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Output    : compounded flows over &lt;n&gt; trailing periods indexed by last day in the flow window</span></span>
+<span id="cb15-7"><a href="epfr-library.html#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb15-8"><a href="epfr-library.html#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb15-9"><a href="epfr-library.html#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># FIND NA&#39;s : </span></span>
+<span id="cb15-10"><a href="epfr-library.html#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># creates new df with value of 1 for all non-NA flows, else NA</span></span>
+<span id="cb15-11"><a href="epfr-library.html#cb15-11" aria-hidden="true" tabindex="-1"></a>    h <span class="ot">&lt;-</span> <span class="fu">nonneg</span>(<span class="fu">mat.to.obs</span>(x)) </span>
+<span id="cb15-12"><a href="epfr-library.html#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb15-13"><a href="epfr-library.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># PRELIMINARIES : </span></span>
+<span id="cb15-14"><a href="epfr-library.html#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert all NA values to 0 in order to do computations</span></span>
+<span id="cb15-15"><a href="epfr-library.html#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to log form</span></span>
+<span id="cb15-16"><a href="epfr-library.html#cb15-16" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">zav</span>(x)</span>
+<span id="cb15-17"><a href="epfr-library.html#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>n) z <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">+</span> z<span class="sc">/</span><span class="dv">100</span>)</span>
+<span id="cb15-18"><a href="epfr-library.html#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb15-19"><a href="epfr-library.html#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ROLLING WINDOWS</span></span>
+<span id="cb15-20"><a href="epfr-library.html#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate rolling sum</span></span>
+<span id="cb15-21"><a href="epfr-library.html#cb15-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># reverse log form</span></span>
+<span id="cb15-22"><a href="epfr-library.html#cb15-22" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">mat.rollsum</span>(z, y)</span>
+<span id="cb15-23"><a href="epfr-library.html#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>n) z <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">exp</span>(z) <span class="sc">-</span> <span class="dv">100</span></span>
+<span id="cb15-24"><a href="epfr-library.html#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb15-25"><a href="epfr-library.html#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co"># ENSURE FINAL DATE IN EACH ROLLING WINDOW IS NON-NA</span></span>
+<span id="cb15-26"><a href="epfr-library.html#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># multiply compounded flow matrix by h (1/NA df)</span></span>
+<span id="cb15-27"><a href="epfr-library.html#cb15-27" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z <span class="sc">*</span> h</span>
+<span id="cb15-28"><a href="epfr-library.html#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb15-29"><a href="epfr-library.html#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="co"># RETURN RESULT</span></span>
+<span id="cb15-30"><a href="epfr-library.html#cb15-30" aria-hidden="true" tabindex="-1"></a>    z</span>
+<span id="cb15-31"><a href="epfr-library.html#cb15-31" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><em>Please refer to the library documentation for more details.</em></p>
 <hr />
 </div>
 <div id="model" class="section level3 unnumbered hasAnchor">
 <h3>Model<a href="epfr-library.html#model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>EPFR’s function <code>bbk()</code> creates a standardized backtest model based on our inputs (e.g. ranking factors into 5 equal baskets based on compounded flows).</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="epfr-library.html#cb15-1" aria-hidden="true" tabindex="-1"></a>bbk <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">floW =</span> <span class="dv">1</span>, <span class="at">retW =</span> <span class="dv">5</span>, <span class="at">nBin =</span> <span class="dv">5</span>, <span class="at">doW =</span> <span class="cn">NULL</span>, <span class="at">sum.flows =</span> F, <span class="at">lag =</span> <span class="dv">0</span>, <span class="at">delay =</span> <span class="dv">2</span>, <span class="at">idx =</span> <span class="cn">NULL</span>, <span class="at">prd.size =</span> <span class="dv">1</span>, <span class="at">sprds =</span> F) {</span>
-<span id="cb15-2"><a href="epfr-library.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
-<span id="cb15-3"><a href="epfr-library.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Args      : x = predictor indexed by yyyymmdd or yyyymm (compounded percentage flow)</span></span>
-<span id="cb15-4"><a href="epfr-library.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#       : y = total return index indexed by the same date format as &lt;x&gt; </span></span>
-<span id="cb15-5"><a href="epfr-library.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       : floW = number of &lt;prd.size&gt;&#39;s over which the predictor should be compounded/summed</span></span>
-<span id="cb15-6"><a href="epfr-library.html#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#       : retW = return window in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
-<span id="cb15-7"><a href="epfr-library.html#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#       : nBin = number of bins to divide the variable into</span></span>
-<span id="cb15-8"><a href="epfr-library.html#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#       : doW = day of the week you will trade on (5 = Fri)</span></span>
-<span id="cb15-9"><a href="epfr-library.html#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#       : sum.flows = T/F depending on whether &lt;x&gt; should be summed or compounded</span></span>
-<span id="cb15-10"><a href="epfr-library.html#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#       : lag = predictor lag in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
-<span id="cb15-11"><a href="epfr-library.html#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#       : delay = delay in knowing data in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
-<span id="cb15-12"><a href="epfr-library.html#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">#       : idx = the index within which you are trading</span></span>
-<span id="cb15-13"><a href="epfr-library.html#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#       : prd.size = size of each period in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
-<span id="cb15-14"><a href="epfr-library.html#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#       : sprds = T/F depending on whether spread changes, rather than returns, are needed</span></span>
-<span id="cb15-15"><a href="epfr-library.html#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Output    : standard model output</span></span>
-<span id="cb15-16"><a href="epfr-library.html#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
-<span id="cb15-17"><a href="epfr-library.html#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb15-18"><a href="epfr-library.html#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co"># GET DATA</span></span>
-<span id="cb15-19"><a href="epfr-library.html#cb15-19" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">bbk.data</span>(x, y, floW, sum.flows, lag, delay, doW, retW, idx, prd.size, sprds)</span>
-<span id="cb15-20"><a href="epfr-library.html#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb15-21"><a href="epfr-library.html#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co"># BIN RETURNS</span></span>
-<span id="cb15-22"><a href="epfr-library.html#cb15-22" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">bbk.bin.xRet</span>(x<span class="sc">$</span>x, x<span class="sc">$</span>fwdRet, nBin, T, T), mat.reverse)</span>
-<span id="cb15-23"><a href="epfr-library.html#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb15-24"><a href="epfr-library.html#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co"># SUMMARY</span></span>
-<span id="cb15-25"><a href="epfr-library.html#cb15-25" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">c</span>(z, <span class="fu">bbk.summ</span>(z<span class="sc">$</span>rets, z<span class="sc">$</span>bins, retW, <span class="fu">ifelse</span>(<span class="fu">is.null</span>(doW), <span class="dv">1</span>, <span class="dv">5</span>)))</span>
-<span id="cb15-26"><a href="epfr-library.html#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb15-27"><a href="epfr-library.html#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="co"># RETURN RESULT</span></span>
-<span id="cb15-28"><a href="epfr-library.html#cb15-28" aria-hidden="true" tabindex="-1"></a>    z</span>
-<span id="cb15-29"><a href="epfr-library.html#cb15-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="epfr-library.html#cb16-1" aria-hidden="true" tabindex="-1"></a>bbk <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">floW =</span> <span class="dv">1</span>, <span class="at">retW =</span> <span class="dv">5</span>, <span class="at">nBin =</span> <span class="dv">5</span>, <span class="at">doW =</span> <span class="cn">NULL</span>, <span class="at">sum.flows =</span> F, <span class="at">lag =</span> <span class="dv">0</span>, <span class="at">delay =</span> <span class="dv">2</span>, <span class="at">idx =</span> <span class="cn">NULL</span>, <span class="at">prd.size =</span> <span class="dv">1</span>, <span class="at">sprds =</span> F) {</span>
+<span id="cb16-2"><a href="epfr-library.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb16-3"><a href="epfr-library.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Args      : x = predictor indexed by yyyymmdd or yyyymm (compounded percentage flow)</span></span>
+<span id="cb16-4"><a href="epfr-library.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#       : y = total return index indexed by the same date format as &lt;x&gt; </span></span>
+<span id="cb16-5"><a href="epfr-library.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       : floW = number of &lt;prd.size&gt;&#39;s over which the predictor should be compounded/summed</span></span>
+<span id="cb16-6"><a href="epfr-library.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#       : retW = return window in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb16-7"><a href="epfr-library.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#       : nBin = number of bins to divide the variable into</span></span>
+<span id="cb16-8"><a href="epfr-library.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#       : doW = day of the week you will trade on (5 = Fri)</span></span>
+<span id="cb16-9"><a href="epfr-library.html#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#       : sum.flows = T/F depending on whether &lt;x&gt; should be summed or compounded</span></span>
+<span id="cb16-10"><a href="epfr-library.html#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#       : lag = predictor lag in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb16-11"><a href="epfr-library.html#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co">#       : delay = delay in knowing data in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb16-12"><a href="epfr-library.html#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#       : idx = the index within which you are trading</span></span>
+<span id="cb16-13"><a href="epfr-library.html#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#       : prd.size = size of each period in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb16-14"><a href="epfr-library.html#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#       : sprds = T/F depending on whether spread changes, rather than returns, are needed</span></span>
+<span id="cb16-15"><a href="epfr-library.html#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Output    : standard model output</span></span>
+<span id="cb16-16"><a href="epfr-library.html#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb16-17"><a href="epfr-library.html#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb16-18"><a href="epfr-library.html#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># GET DATA</span></span>
+<span id="cb16-19"><a href="epfr-library.html#cb16-19" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">bbk.data</span>(x, y, floW, sum.flows, lag, delay, doW, retW, idx, prd.size, sprds)</span>
+<span id="cb16-20"><a href="epfr-library.html#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb16-21"><a href="epfr-library.html#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co"># BIN RETURNS</span></span>
+<span id="cb16-22"><a href="epfr-library.html#cb16-22" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">bbk.bin.xRet</span>(x<span class="sc">$</span>x, x<span class="sc">$</span>fwdRet, nBin, T, T), mat.reverse)</span>
+<span id="cb16-23"><a href="epfr-library.html#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb16-24"><a href="epfr-library.html#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># SUMMARY</span></span>
+<span id="cb16-25"><a href="epfr-library.html#cb16-25" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">c</span>(z, <span class="fu">bbk.summ</span>(z<span class="sc">$</span>rets, z<span class="sc">$</span>bins, retW, <span class="fu">ifelse</span>(<span class="fu">is.null</span>(doW), <span class="dv">1</span>, <span class="dv">5</span>)))</span>
+<span id="cb16-26"><a href="epfr-library.html#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb16-27"><a href="epfr-library.html#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co"># RETURN RESULT</span></span>
+<span id="cb16-28"><a href="epfr-library.html#cb16-28" aria-hidden="true" tabindex="-1"></a>    z</span>
+<span id="cb16-29"><a href="epfr-library.html#cb16-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><em>Please refer to the library documentation for more details.</em></p>
 <hr />
 </div>
 <div id="example" class="section level3 unnumbered hasAnchor">
 <h3>Example<a href="epfr-library.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Step 0: Download &amp; read files from ftp (ref. <a href="epfr-library.html#ftp">2.3</a> )</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="epfr-library.html#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># Flow file</span></span>
-<span id="cb16-2"><a href="epfr-library.html#cb16-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file) <span class="co"># Return file</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="epfr-library.html#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># Flow file</span></span>
+<span id="cb17-2"><a href="epfr-library.html#cb17-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file) <span class="co"># Return file</span></span></code></pre></div>
 <p>Step 1: Ensure that x and y the same column names and order</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="epfr-library.html#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[, <span class="fu">dimnames</span>(y)[[<span class="dv">2</span>]]]) <span class="co"># LINE UP INDICATORS WITH RETURNS </span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="epfr-library.html#cb18-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[, <span class="fu">dimnames</span>(y)[[<span class="dv">2</span>]]]) <span class="co"># LINE UP INDICATORS WITH RETURNS </span></span></code></pre></div>
 <p>Step 2: Compound (or Sum Flows) over lookback period (<span class="math inline">\(y\)</span>)</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="epfr-library.html#cb18-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, <span class="at">y =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p>EPFR’s function <code>compound.flows()</code> uses other functions within <code>library('EPFR.r')</code> to either compound, or compute a rolling cumulative sum of flows, over a trailing lookback period (typically we use y = 20 days).</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="epfr-library.html#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, <span class="at">y =</span> <span class="dv">20</span>)</span></code></pre></div>
 <p>Step 3: Define variables</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="epfr-library.html#cb19-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS OR MONTHS) - holding periods</span></span>
-<span id="cb19-2"><a href="epfr-library.html#cb19-2" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># Number of bins (to sort)</span></span>
-<span id="cb19-3"><a href="epfr-library.html#cb19-3" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># Day of the week to trade on</span></span>
-<span id="cb19-4"><a href="epfr-library.html#cb19-4" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># Delay in getting the data (able to trade on data @ T+2)</span></span>
-<span id="cb19-5"><a href="epfr-library.html#cb19-5" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Optional: Universe that is being used for signal (e.g. ACWI/EM/EAFE/G10)</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="epfr-library.html#cb20-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS OR MONTHS) - holding periods</span></span>
+<span id="cb20-2"><a href="epfr-library.html#cb20-2" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># Number of bins (to sort)</span></span>
+<span id="cb20-3"><a href="epfr-library.html#cb20-3" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># Day of the week to trade on</span></span>
+<span id="cb20-4"><a href="epfr-library.html#cb20-4" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># Delay in getting the data (able to trade on data @ T+2)</span></span>
+<span id="cb20-5"><a href="epfr-library.html#cb20-5" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Optional: Universe that is being used for signal (e.g. ACWI/EM/EAFE/G10)</span></span></code></pre></div>
 <p>Step 4: Create standardized backtest model</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="epfr-library.html#cb20-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay, idx)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="epfr-library.html#cb21-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay, idx)</span></code></pre></div>
 <p>Step 5: Evaluate output</p>
-<p><span class="math inline">\(Z\)</span> has 4 different outputs that you can view. Within the final “rets” output, the overall portfolio will go long the top quintile and short the bottom, and the returns of each individual quintile are also presented in the output.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="epfr-library.html#cb21-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;raw&quot;</span>]] <span class="co"># Flow percentage compounded over trailing 20 days</span></span>
-<span id="cb21-2"><a href="epfr-library.html#cb21-2" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;raw.fwd.rets&quot;</span>]] <span class="co"># One-week ahead return (Friday to Friday)</span></span>
-<span id="cb21-3"><a href="epfr-library.html#cb21-3" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]] <span class="co"># Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)</span></span>
-<span id="cb21-4"><a href="epfr-library.html#cb21-4" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]] <span class="co"># Quintile Returns over the equal-weight universe, *column TxB tells us top - bottom = Q1 - Q5 = overall portfolio returns</span></span></code></pre></div>
+<p><span class="math inline">\(Z\)</span> has 4 different outputs that you can view. Within the final “rets” output, the overall portfolio will go long the top quintile and short the bottom, however the returns of each individual quintile are also presented</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="epfr-library.html#cb22-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;raw&quot;</span>]] <span class="co"># Flow percentage compounded over trailing 20 days</span></span>
+<span id="cb22-2"><a href="epfr-library.html#cb22-2" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;raw.fwd.rets&quot;</span>]] <span class="co"># One-week ahead return (Friday to Friday)</span></span>
+<span id="cb22-3"><a href="epfr-library.html#cb22-3" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]] <span class="co"># Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)</span></span>
+<span id="cb22-4"><a href="epfr-library.html#cb22-4" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]] <span class="co"># Quintile Returns over the equal-weight universe, *column TxB tells us top - bottom = Q1 - Q5 = overall portfolio returns</span></span></code></pre></div>
 <p>Step 6: Re-balance as needed</p>
 <p>Strategies need to be rebalanced and the below code outputs summary statistics across 6 different rebalancing options found in <span class="math inline">\(hz\)</span>. Depending on how the signal we are backtesting is indexed, holding periods can be specified in a daily or monthly format. For this example we have a daily signal and <span class="math inline">\(hz\)</span> contains options for a weekly (5 days), fortnightly (10 days), monthly (20 days), bi-monthly (45 days), quarterly (65 days), and semi-annual (130 days) rebalanced portfolio.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="epfr-library.html#cb22-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
-<span id="cb22-2"><a href="epfr-library.html#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="epfr-library.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="epfr-library.html#cb23-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
+<span id="cb23-2"><a href="epfr-library.html#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="epfr-library.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
 <p>Step 7: Find the mean one-week returns per calendar year</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="epfr-library.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], <span class="dv">5</span>, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="epfr-library.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], <span class="dv">5</span>, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm</span></code></pre></div>
 
 </div>
 </div>

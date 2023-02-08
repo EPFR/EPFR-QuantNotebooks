@@ -133,6 +133,7 @@ code span.wa { font-style: italic; } /* Warning */
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="epfr-library.html"><a href="epfr-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.4</b> Strategy Functions</a>
 <ul>
+<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#total-return-index"><i class="fa fa-check"></i>Total Return Index</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#compunding-flows"><i class="fa fa-check"></i>Compunding Flows</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#model"><i class="fa fa-check"></i>Model</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#example"><i class="fa fa-check"></i>Example</a></li>
@@ -312,8 +313,8 @@ code span.wa { font-style: italic; } /* Warning */
 <ul>
 <li><p>Equity fund-level sector weightings, using the EPFR Sector Allocation database.</p></li>
 <li><p>Equity fund-level country weightings, using the EPFR Country Allocation database.</p></li>
-<li><p>Active/Passive tagging at the fund level, using EPFR’s fund classifications.</p></li>
 <li><p>Funds with a geographic mandate confined to the country or region of interest (e.g. for U.S. sector, we look only at funds that have a mandate to invest in the United States).</p></li>
+<li><p>Active/Passive tagging at the fund level, using EPFR’s fund classifications.</p></li>
 </ul>
 <hr />
 <p>Active and passive equity funds which report their sector allocations to EPFR have grown substantially over time. The figure below shows EPFR’s coverage over time of funds used to create this signal for different countries and regions.</p>
@@ -329,13 +330,13 @@ code span.wa { font-style: italic; } /* Warning */
 </div>
 <div id="activepassive-indicator-1" class="section level3 hasAnchor" number="9.2.2">
 <h3><span class="header-section-number">9.2.2</span> Active/Passive Indicator<a href="activepassive-sector-strategy.html#activepassive-indicator-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To begin calculating the Active/Passive indicator, we start with our subset of active and passive equity funds with a geographic mandate confined to the country or region of interest (e.g. for U.S. sector, we look only at funds that have a mandate to invest in the United States). First, we calculate a fund’s weighting to each sector, within our region or country of interest, as the product of its stated sector and country allocation.</p>
+<p>To begin calculating the Active/Passive indicator, we start with our subset of active and passive equity funds with a geographic mandate confined to the country or region of interest. First, we calculate a fund’s weighting to each sector, within our region or country of interest, as the product of its stated sector and country allocation.</p>
 <p><span class="math display">\[\text{Fund Weight}_{i,s,r,m} = \text{Sector Allocation}_{i,s,m} \times \text{Country Allocation}_{i,r,m}\]</span></p>
 <p>Where:</p>
 <ul>
 <li><span class="math inline">\(\text{Fund Weight}\)</span> = weighting to sector <span class="math inline">\(s\)</span>, within country or region <span class="math inline">\(r\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for month <span class="math inline">\(m\)</span></li>
 </ul>
-<p>Then, for each sector, we compute equally-weighted average allocations to that sector, within our country or region. These equal-weight averages are computed separately across active and passive funds, shown below.</p>
+<p>Then, for each sector, we compute equally-weighted average allocations, within our country or region. These equal-weight averages are computed separately across active and passive funds, shown below.</p>
 <p><span class="math display">\[\overline{\text{Active Allocation}}_{s,r,m} = \frac{\sum^{N}_{i=n}{\text{Fund Weight}_{i,s,r,m}}}{N}\]</span></p>
 <p>Where:</p>
 <ul>
@@ -656,12 +657,12 @@ FinsExREst
 </table>
 <hr />
 <p>To follow along the user can download the <em>Active/Passive Sector Strategy</em> files using the code below, which contains ftp functions ( <a href="epfr-library.html#ftp">2.3</a> ) from <code>library('EPFR.r')</code>:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="activepassive-sector-strategy.html#cb123-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="st">&quot;EPFRHistory/Strategies/monthly/ActPasSector-US-monthly.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb123-2"><a href="activepassive-sector-strategy.html#cb123-2" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">monthly&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
-<span id="cb123-3"><a href="activepassive-sector-strategy.html#cb123-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-4"><a href="activepassive-sector-strategy.html#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="activepassive-sector-strategy.html#cb124-1" aria-hidden="true" tabindex="-1"></a>file <span class="ot">&lt;-</span> <span class="st">&quot;EPFRHistory/Strategies/monthly/ActPasSector-US-monthly.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
+<span id="cb124-2"><a href="activepassive-sector-strategy.html#cb124-2" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">monthly&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
+<span id="cb124-3"><a href="activepassive-sector-strategy.html#cb124-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-4"><a href="activepassive-sector-strategy.html#cb124-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
 <p>After downloading the csv file you will store it’s path as <code>indicator.file</code>. A quick way to do this is shown below:</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="activepassive-sector-strategy.html#cb124-1" aria-hidden="true" tabindex="-1"></a>indicator.file <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES INDICATOR FILE PATH, C:\\EPFR\\monthly\\ActPasSector-US-monthly.csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="activepassive-sector-strategy.html#cb125-1" aria-hidden="true" tabindex="-1"></a>indicator.file <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES INDICATOR FILE PATH, C:\\EPFR\\monthly\\ActPasSector-US-monthly.csv</span></span></code></pre></div>
 <hr />
 </div>
 <div id="return-file-6" class="section level3 hasAnchor" number="9.2.4">
@@ -950,32 +951,32 @@ REst
 </table>
 <hr />
 <p>To follow along the user can download the <em>US Sector Return</em> file using the code below, which contains ftp functions ( <a href="epfr-library.html#ftp">2.3</a> ) from <code>library('EPFR.r')</code>:</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="activepassive-sector-strategy.html#cb125-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;/Returns/daily/PsuedoReturns-Sector-US-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb125-2"><a href="activepassive-sector-strategy.html#cb125-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb125-3"><a href="activepassive-sector-strategy.html#cb125-3" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
-<span id="cb125-4"><a href="activepassive-sector-strategy.html#cb125-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb125-5"><a href="activepassive-sector-strategy.html#cb125-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(ret.file, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="activepassive-sector-strategy.html#cb126-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;/Returns/daily/PsuedoReturns-Sector-US-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
+<span id="cb126-2"><a href="activepassive-sector-strategy.html#cb126-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-3"><a href="activepassive-sector-strategy.html#cb126-3" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
+<span id="cb126-4"><a href="activepassive-sector-strategy.html#cb126-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-5"><a href="activepassive-sector-strategy.html#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(ret.file, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) </span></code></pre></div>
 <p>After downloading the csv file you will store it’s path as <code>ret.file</code>. A quick way to do this is shown below:</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="activepassive-sector-strategy.html#cb126-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(ret.file), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\returns\\PsuedoReturns-Sector-US-daily.csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="activepassive-sector-strategy.html#cb127-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(ret.file), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\returns\\PsuedoReturns-Sector-US-daily.csv</span></span></code></pre></div>
 <hr />
 </div>
 </div>
 <div id="strategy-implementation-5" class="section level2 hasAnchor" number="9.3">
 <h2><span class="header-section-number">9.3</span> Strategy Implementation<a href="activepassive-sector-strategy.html#strategy-implementation-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the aggregate indicator and return files to our <em>R studio</em> work space.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="activepassive-sector-strategy.html#cb127-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(indicator.file) <span class="co"># GET ACTIVE/PASSIVE INDICATOR C:\\EPFR\\monthly\\ActPasSector-US-monthly.csv</span></span>
-<span id="cb127-2"><a href="activepassive-sector-strategy.html#cb127-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file)  <span class="co"># GET TOTAL RETURN INDEX C:\\EPFR\\returns\\PsuedoReturns-Sector-US-daily.csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="activepassive-sector-strategy.html#cb128-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(indicator.file) <span class="co"># GET ACTIVE/PASSIVE INDICATOR C:\\EPFR\\monthly\\ActPasSector-US-monthly.csv</span></span>
+<span id="cb128-2"><a href="activepassive-sector-strategy.html#cb128-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file)  <span class="co"># GET TOTAL RETURN INDEX C:\\EPFR\\returns\\PsuedoReturns-Sector-US-daily.csv</span></span></code></pre></div>
 <p>Before we the data is ready, we will first need to apply the <code>mat.daily.to.monthly()</code> function to ensure that return data is correctly indexed by month, as mentioned previously (help: <code>?mat.daily.to.monthly()</code>).</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="activepassive-sector-strategy.html#cb128-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.daily.to.monthly</span>(y, T)</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="activepassive-sector-strategy.html#cb129-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.daily.to.monthly</span>(y, T)</span></code></pre></div>
 <p>Now, we will need to ensure that the data structure in <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are completely aligned, having the same column names in the same order. Below we will subset the columns of <span class="math inline">\(x\)</span> to use the same sectors, in the same order as <span class="math inline">\(y\)</span>.</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="activepassive-sector-strategy.html#cb129-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[, <span class="fu">dimnames</span>(y)[[<span class="dv">2</span>]]]) <span class="co"># LINE UP INDICATORS WITH RETURNS         </span></span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="activepassive-sector-strategy.html#cb130-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[, <span class="fu">dimnames</span>(y)[[<span class="dv">2</span>]]]) <span class="co"># LINE UP INDICATORS WITH RETURNS         </span></span></code></pre></div>
 <p><em>* Note: subsetting can be also be done when creating the indicator and return files</em></p>
 <div id="moving-sum-of-indicator-1" class="section level3 hasAnchor" number="9.3.1">
 <h3><span class="header-section-number">9.3.1</span> Moving Sum of Indicator<a href="activepassive-sector-strategy.html#moving-sum-of-indicator-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we set up a variable for our look-back period. This variable will be the window of time across which we smooth the signal for each country. The look-back period we choose for our demonstrations is <strong>12 months</strong>.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="activepassive-sector-strategy.html#cb130-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># LOOKBACK (IN MONTHS)               </span></span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="activepassive-sector-strategy.html#cb131-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># LOOKBACK (IN MONTHS)               </span></span></code></pre></div>
 <p>Now, using the function from the <code>library('EPFR.r')</code>, called <code>compound.flows()</code> we compute the moving sum of our signal over the trailing <code>lookback</code> period for each sector.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="activepassive-sector-strategy.html#cb131-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, T) <span class="co"># COMPUTE MOVING SUM</span></span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="activepassive-sector-strategy.html#cb132-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, T) <span class="co"># COMPUTE MOVING SUM</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1274,20 +1275,20 @@ FinsExREst
 <p>Next, we sort each of the sectors in our country or region into five equal bins based on the last 12-month Active/Passive Indicator values for the selected holding period. To do this, we will use the function from <code>library('EPFR.r')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
 <p>The <code>bbk()</code> function requires our 12-month Active/Passive indicator and total return index data. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
 <p>The first parameter we add is the number of bins we want to use. For our case, we want to use 5 because our strategy is to go long the top fifth and short the bottom fifth.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="activepassive-sector-strategy.html#cb132-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="activepassive-sector-strategy.html#cb133-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
 <p>Since EPFR data is published with T+23 day lag and is released around 5:00 pm EST, we account for a T+1 month delay in our model.</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="activepassive-sector-strategy.html#cb133-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># DELAY IN KNOWING DATA (IN MONTHS)  </span></span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="activepassive-sector-strategy.html#cb134-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># DELAY IN KNOWING DATA (IN MONTHS)  </span></span></code></pre></div>
 <p>The day of the week the rebalancing occurs is at the discretion of the user, but for this example we will set the day of the week to trade as <strong>N/A</strong>.This allows the <code>bbk()</code> function to default to monthly-indexed returns, and avoids trading on a specific weekday on each rebalancing date.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="activepassive-sector-strategy.html#cb134-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="activepassive-sector-strategy.html#cb135-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
 <p>Additionally, we also evaluate the returns for different holding periods. The user can input return horizons that they are interested in here. For this example we define a return horizon for monthly, quarterly, semi-annual, and annual rebalancing, but is it important to note that this model can be re-balanced as desired.</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="activepassive-sector-strategy.html#cb135-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">12</span>) <span class="co"># RETURN HORIZON (IN MONTHS)</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="activepassive-sector-strategy.html#cb136-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">12</span>) <span class="co"># RETURN HORIZON (IN MONTHS)</span></span></code></pre></div>
 <p>Now that we have defined all of our inputs, to rank the sectors into quintiles by their 12-month Active/Passive indicator, we call function <code>bbk()</code> for a 1-month holding period.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="activepassive-sector-strategy.html#cb136-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="activepassive-sector-strategy.html#cb137-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
 </div>
 <div id="model-6" class="section level3 hasAnchor" number="9.3.3">
 <h3><span class="header-section-number">9.3.3</span> Model<a href="activepassive-sector-strategy.html#model-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>12 month cumulative indicator ranked into quintiles (computed only where forward returns are available)</strong></p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="activepassive-sector-strategy.html#cb137-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="activepassive-sector-strategy.html#cb138-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1560,7 +1561,7 @@ REst
 </tbody>
 </table>
 <p><strong>Quintile Returns over the equal-weight universe</strong></p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="activepassive-sector-strategy.html#cb138-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="activepassive-sector-strategy.html#cb139-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1755,9 +1756,9 @@ uRet
 <h3><span class="header-section-number">9.3.4</span> Performance<a href="activepassive-sector-strategy.html#performance-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Go long the top basket and short the bottom basket.</p>
 <p><strong>Performance over all holding periods</strong></p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="activepassive-sector-strategy.html#cb139-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, <span class="dv">5</span>, <span class="cn">NULL</span>, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION  </span></span>
-<span id="cb139-2"><a href="activepassive-sector-strategy.html#cb139-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-3"><a href="activepassive-sector-strategy.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mat.ex.array3d</span>(<span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>)) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="activepassive-sector-strategy.html#cb140-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, <span class="dv">5</span>, <span class="cn">NULL</span>, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION  </span></span>
+<span id="cb140-2"><a href="activepassive-sector-strategy.html#cb140-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb140-3"><a href="activepassive-sector-strategy.html#cb140-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mat.ex.array3d</span>(<span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>)) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2851,7 +2852,7 @@ AnnTo
 </table>
 <hr />
 <p><strong>Annualized mean one-week returns</strong></p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="activepassive-sector-strategy.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], <span class="dv">5</span>, <span class="cn">NULL</span>, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="activepassive-sector-strategy.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], <span class="dv">5</span>, <span class="cn">NULL</span>, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>

@@ -312,12 +312,336 @@ code span.wa { font-style: italic; } /* Warning */
 </ul>
 <hr />
 <p>Active and passive equity funds which report their country allocations to EPFR have grown substantially over time. The figure below shows EPFR’s coverage over time of active versus passive funds used to create this signal.</p>
-<center>
-<div class="figure">
-<img src="https://raw.githubusercontent.com/EPFR/EPFR-QuantNotebooks/master/png/coverage_AISctry.png" width="250" alt="" />
-<p class="caption">Updated at the end of July each year</p>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;">
+<thead>
+<tr>
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: white !important;padding-right: 4px; padding-left: 4px; background-color: #2c1f6e !important;" colspan="4">
+<div style="TRUE">
+AUM ($BB) of Equity funds reporting country allocations
 </div>
-</center>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+Active
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+Passive
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2002
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+138
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+140
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2003
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+128
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+3
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+131
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2004
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+170
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+9
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+179
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2005
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+267
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+18
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+286
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2006
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+406
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+63
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+469
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2007
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+521
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+106
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+627
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2008
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+438
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+104
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+542
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2009
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+366
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+86
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+452
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2010
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+429
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+103
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+532
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2011
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+534
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+130
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+663
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2012
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+454
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+121
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+576
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2013
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+609
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+372
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+981
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2014
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+777
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+539
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,317
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2015
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+780
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+678
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,458
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2016
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+700
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+769
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,470
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2017
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+879
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,119
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,998
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2018
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+998
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,324
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2,322
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2019
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,181
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,417
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2,599
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2020
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,070
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,488
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2,558
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2021
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,459
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2,121
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+3,581
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2022
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,024
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+1,971
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2,995
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<sup>*</sup> Updated at the end of July each year
+</td>
+</tr>
+</tfoot>
+</table>
+<!-- <center> -->
+<!-- ![Updated at the end of July each year](https://raw.githubusercontent.com/EPFR/EPFR-QuantNotebooks/master/png/coverage_AISctry.png){width=250px} -->
+<!-- </center> -->
 <p>Users looking for more specific detail can customize this aggregation even further using EPFR’s fund-level or share class-level granularity. Some good examples would be to consider only ETFs or mutual funds, geographic mandate, and fund domicile. Users can leverage these tags to different degrees in creating aggregated signals to backtest. Further detail about this is available in section <a href="Filters.html#Filters">3</a>.</p>
 <p>This can be achieved using fund-level allocation files or reaching out to EPFR’s quant team for customized aggregations.</p>
 <hr />

@@ -2,7 +2,6 @@ introduction
 epfr-library
 about
 set-up
-ftp
 strategy-functions
 Filters
 multi-asset-strategy

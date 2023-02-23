@@ -123,15 +123,7 @@ code span.wa { font-style: italic; } /* Warning */
 <ul>
 <li class="chapter" data-level="2.1" data-path="epfr-library.html"><a href="epfr-library.html#about"><i class="fa fa-check"></i><b>2.1</b> About</a></li>
 <li class="chapter" data-level="2.2" data-path="epfr-library.html"><a href="epfr-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set up</a></li>
-<li class="chapter" data-level="2.3" data-path="epfr-library.html"><a href="epfr-library.html#ftp"><i class="fa fa-check"></i><b>2.3</b> FTP Functions</a>
-<ul>
-<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#rcurl"><i class="fa fa-check"></i>RCurl</a></li>
-<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#extract-ftp-file-path"><i class="fa fa-check"></i>Extract FTP File Path</a></li>
-<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#extract-ftp-file-name"><i class="fa fa-check"></i>Extract FTP File Name</a></li>
-<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#download-ftp-file"><i class="fa fa-check"></i>Download FTP file</a></li>
-<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#examples"><i class="fa fa-check"></i>Examples</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="epfr-library.html"><a href="epfr-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.4</b> Strategy Functions</a>
+<li class="chapter" data-level="2.3" data-path="epfr-library.html"><a href="epfr-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.3</b> Strategy Functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#total-return-index"><i class="fa fa-check"></i>Total Return Index</a></li>
 <li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#compunding-flows"><i class="fa fa-check"></i>Compunding Flows</a></li>
@@ -359,7 +351,7 @@ Where:</p>
 <div id="aggregate-flow-file" class="section level3 hasAnchor" number="4.2.3">
 <h3><span class="header-section-number">4.2.3</span> Aggregate Flow File<a href="multi-asset-strategy.html#aggregate-flow-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Users may create flow percentages for their desired equity and/or fixed income asset class aggregations and granularity using the methodology described in the previous section.</p>
-<p>Users also have the option to use the <em>Multi-Asset strategy</em> files EPFR provides, which are updated daily and weekly at 5:00 PM est. with a T+1 day lag, and are <strong>available in the user’s EPFR FTP connection under the strategies folder</strong>. There are two different types of <em>Multi-Asset strategy</em> files for fixed income and (active) equity funds, which both contain aggregate percentage flow data. Below is the list of asset classes in each file:</p>
+<p>Users also have the option to use the <em>Multi-Asset strategy</em> files EPFR provides, which are updated daily at 5:00 PM est. with a T+1 day lag, and are <strong>available in the user’s EPFR FTP connection under the strategies folder</strong>. There are two different types of <em>Multi-Asset strategy</em> files for fixed income and (active) equity funds, which both contain aggregate percentage flow data. Below is the list of asset classes in each file:</p>
 <div align="center">
 Asset Classes
 </div>
@@ -397,9 +389,9 @@ Asset Classes
 </div>
 </div>
 <hr />
-<p>For this demonstration, we will be using the files <strong>MultiAsset-Rgn-daily.csv</strong> and <strong>MultiAsset-FI-daily.csv</strong>, which have been downloaded from the ftp and stored in our local folder under <em>EPFR/daily</em>.</p>
+<p>For this demonstration, we will be using the files <code>MultiAsset-Rgn-daily.csv</code> and <code>MultiAsset-FI-daily.csv</code>, which can be downloaded from the users ftp under the folder <code>Strategies/daily</code> and can be stored in the users local folder <code>EPFR/daily</code>.</p>
 <p>Below shows a snippet of what these files contain:</p>
-<p><strong>MultiAsset-Rgn-daily.csv</strong></p>
+<p><code>Strategies/daily/MultiAsset-Rgn-daily.csv</code></p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -587,7 +579,7 @@ USA
 </tr>
 </tbody>
 </table>
-<p><strong>MultiAsset-FI-daily.csv</strong></p>
+<p><code>Strategies/daily/MultiAsset-FI-daily.csv</code></p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -839,19 +831,25 @@ GLOFIX
 </tbody>
 </table>
 <hr />
-<p>To follow along the user can download the <em>Multi-Asset strategy</em> files using the code below, which contains ftp functions ( <a href="epfr-library.html#ftp">2.3</a> ) from <code>library('EPFR.r')</code>:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="multi-asset-strategy.html#cb26-1" aria-hidden="true" tabindex="-1"></a>file.Rgn <span class="ot">&lt;-</span> <span class="st">&quot;/Strategies/daily/MultiAsset-Rgn-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb26-2"><a href="multi-asset-strategy.html#cb26-2" aria-hidden="true" tabindex="-1"></a>file.FI <span class="ot">&lt;-</span> <span class="st">&quot;/Strategies/daily/MultiAsset-FI-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb26-3"><a href="multi-asset-strategy.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="multi-asset-strategy.html#cb26-4" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
-<span id="cb26-5"><a href="multi-asset-strategy.html#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="multi-asset-strategy.html#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.Rgn, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) </span>
-<span id="cb26-7"><a href="multi-asset-strategy.html#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.FI, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
-<p>After downloading the csv files you will store both of the paths together as <code>flow.file</code>. A quick way to do this is shown below:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="multi-asset-strategy.html#cb27-1" aria-hidden="true" tabindex="-1"></a>flow.file.Rgn <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.Rgn), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\daily\\MultiAsset-Rgn-daily.csv</span></span>
-<span id="cb27-2"><a href="multi-asset-strategy.html#cb27-2" aria-hidden="true" tabindex="-1"></a>flow.file.FI <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.FI), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\daily\\MultiAsset-FI-daily.csv</span></span>
-<span id="cb27-3"><a href="multi-asset-strategy.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="multi-asset-strategy.html#cb27-4" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="fu">c</span>(flow.file.Rgn, flow.file.FI)</span></code></pre></div>
+<p>For convince save the paths to the flow files you choose to use as <code>flow.file.rgn</code> and <code>flow.file.FI</code> respectively, example shown below:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="multi-asset-strategy.html#cb15-1" aria-hidden="true" tabindex="-1"></a>flow.file.rgn <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily</span><span class="sc">\\</span><span class="st">MultiAsset-Rgn-daily.csv&quot;</span></span>
+<span id="cb15-2"><a href="multi-asset-strategy.html#cb15-2" aria-hidden="true" tabindex="-1"></a>flow.file.FI <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily</span><span class="sc">\\</span><span class="st">MultiAsset-FI-daily.csv&quot;</span></span></code></pre></div>
+<!-- --- -->
+<!-- To follow along the user can download the _Multi-Asset strategy_ files named `MultiAsset-Rgn-daily.csv` and `MultiAsset-FI-daily.csv` which are located on the users ftp under the folder `Strategies/daily` and store in your local folder `EPFR`. -->
+<!-- To follow along the user can download the _Multi-Asset strategy_ files using the code below, which contains ftp functions ( \@ref(ftp) ) from `library('EPFR.r')`:  -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- file.Rgn <- "/Strategies/daily/MultiAsset-Rgn-daily.csv" # PATH TO .csv FILE -->
+<!-- file.FI <- "/Strategies/daily/MultiAsset-FI-daily.csv" # PATH TO .csv FILE -->
+<!-- fldr <- "C:\\EPFR\\daily" # LOCAL FOLDER -->
+<!-- ftp.get(file.Rgn, fldr, "filetransport.epfrglobal.com", w = "username", h = "password", "ftp")  -->
+<!-- ftp.get(file.FI, fldr, "filetransport.epfrglobal.com", w = "username", h = "password", "ftp") # DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS -->
+<!-- ``` -->
+<!-- After downloading the csv files you will store both of the paths together as `flow.file`. A quick way to do this is shown below: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- flow.file.Rgn <- paste(fldr, ftp.file(file.Rgn), sep = "\\") # STORES FLOW FILE PATH, C:\\EPFR\\daily\\MultiAsset-Rgn-daily.csv -->
+<!-- flow.file.FI <- paste(fldr, ftp.file(file.FI), sep = "\\") # STORES FLOW FILE PATH, C:\\EPFR\\daily\\MultiAsset-FI-daily.csv -->
+<!-- flow.file <- c(flow.file.Rgn, flow.file.FI) -->
+<!-- ``` -->
 <hr />
 </div>
 <div id="return-file" class="section level3 hasAnchor" number="4.2.4">
@@ -864,9 +862,9 @@ Where:</p>
 <li><span class="math inline">\(\text{Fund Return}\)</span> = the percentage return of an asset class <span class="math inline">\(a\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
 </ul>
 <hr />
-<p>For this demonstration, we will be using the files <strong>PsuedoReturns-MultiAsset-Rgn-daily.csv</strong> and <strong>PsuedoReturns-MultiAsset-FI-daily.csv</strong>, which have been downloaded from the ftp and stored in our local folder under <em>EPFR/returns</em>.</p>
-<p>Below shows a snippet of what the return files contain:</p>
-<p><strong>PsuedoReturns-MultiAsset-Rgn-daily.csv</strong></p>
+<p>For this demonstration, we will be using the files <code>PsuedoReturns-MultiAsset-Rgn-daily.csv</code> and <code>PsuedoReturns-MultiAsset-FI-daily.csv</code>, which can be downloaded from the users ftp under the folder <code>Returns/daily</code> and can be stored in the users local folder <code>EPFR/returns</code>.</p>
+<p>Below shows a snippet of what these files contain:</p>
+<p><code>Returns/daily/PsuedoReturns-MultiAsset-Rgn-daily.csv</code></p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1054,7 +1052,7 @@ USA
 </tr>
 </tbody>
 </table>
-<p><strong>PsuedoReturns-MultiAsset-FI-daily.csv</strong></p>
+<p><code>Returns/daily/PsuedoReturns-MultiAsset-FI-daily.csv</code></p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1306,19 +1304,25 @@ GLOFIX
 </tbody>
 </table>
 <hr />
-<p>To follow along the user can download the <em>Multi-Asset strategy return</em> files using the code below, which contains ftp functions ( <a href="epfr-library.html#ftp">2.3</a> ) from <code>library('EPFR.r')</code>:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="multi-asset-strategy.html#cb28-1" aria-hidden="true" tabindex="-1"></a>file.Rgn <span class="ot">&lt;-</span> <span class="st">&quot;/Returns/daily/PsuedoReturns-MultiAsset-Rgn-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb28-2"><a href="multi-asset-strategy.html#cb28-2" aria-hidden="true" tabindex="-1"></a>file.FI <span class="ot">&lt;-</span> <span class="st">&quot;/Returns/daily/PsuedoReturns-MultiAsset-FI-daily.csv&quot;</span> <span class="co"># PATH TO .csv FILE</span></span>
-<span id="cb28-3"><a href="multi-asset-strategy.html#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="multi-asset-strategy.html#cb28-4" aria-hidden="true" tabindex="-1"></a>fldr <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns&quot;</span> <span class="co"># LOCAL FOLDER</span></span>
-<span id="cb28-5"><a href="multi-asset-strategy.html#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-6"><a href="multi-asset-strategy.html#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.Rgn, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) </span>
-<span id="cb28-7"><a href="multi-asset-strategy.html#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp.get</span>(file.FI, fldr, <span class="st">&quot;filetransport.epfrglobal.com&quot;</span>, <span class="at">w =</span> <span class="st">&quot;username&quot;</span>, <span class="at">h =</span> <span class="st">&quot;password&quot;</span>, <span class="st">&quot;ftp&quot;</span>) <span class="co"># DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS</span></span></code></pre></div>
-<p>After downloading the csv files you will store both of the paths together as <code>ret.file</code>. A quick way to do this is shown below:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="multi-asset-strategy.html#cb29-1" aria-hidden="true" tabindex="-1"></a>ret.file.Rgn <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.Rgn), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-Rgn-daily.csv</span></span>
-<span id="cb29-2"><a href="multi-asset-strategy.html#cb29-2" aria-hidden="true" tabindex="-1"></a>ret.file.FI <span class="ot">&lt;-</span> <span class="fu">paste</span>(fldr, <span class="fu">ftp.file</span>(file.FI), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>) <span class="co"># STORES FLOW FILE PATH, C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-FI-daily.csv</span></span>
-<span id="cb29-3"><a href="multi-asset-strategy.html#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="multi-asset-strategy.html#cb29-4" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="fu">c</span>(ret.file.Rgn, ret.file.FI)</span></code></pre></div>
+<p>For convince save the paths to the return files you choose to use as <code>ret.file.rgn</code> and <code>ret.file.FI</code> respectively, example shown below:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="multi-asset-strategy.html#cb16-1" aria-hidden="true" tabindex="-1"></a>ret.file.rgn <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-MultiAsset-Rgn-daily.csv&quot;</span></span>
+<span id="cb16-2"><a href="multi-asset-strategy.html#cb16-2" aria-hidden="true" tabindex="-1"></a>ret.file.FI <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-MultiAsset-FI-daily.csv&quot;</span></span></code></pre></div>
+<!-- --- -->
+<!-- To follow along the user can download the _Multi-Asset strategy return_ files named `PsuedoReturns-MultiAsset-Rgn-daily.csv` and `PsuedoReturns-MultiAsset-FI-daily.csv` which are located on the users ftp under the folder `Returns/daily` and store in your local folder `EPFR`. -->
+<!-- To follow along the user can download the _Multi-Asset strategy return_ files using the code below, which contains ftp functions ( \@ref(ftp) ) from `library('EPFR.r')`:  -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- file.Rgn <- "/Returns/daily/PsuedoReturns-MultiAsset-Rgn-daily.csv" # PATH TO .csv FILE -->
+<!-- file.FI <- "/Returns/daily/PsuedoReturns-MultiAsset-FI-daily.csv" # PATH TO .csv FILE -->
+<!-- fldr <- "C:\\EPFR\\returns" # LOCAL FOLDER -->
+<!-- ftp.get(file.Rgn, fldr, "filetransport.epfrglobal.com", w = "username", h = "password", "ftp")  -->
+<!-- ftp.get(file.FI, fldr, "filetransport.epfrglobal.com", w = "username", h = "password", "ftp") # DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS -->
+<!-- ``` -->
+<!-- After downloading the csv files you will store both of the paths together as `ret.file`. A quick way to do this is shown below: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ret.file.Rgn <- paste(fldr, ftp.file(file.Rgn), sep = "\\") # STORES FLOW FILE PATH, C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-Rgn-daily.csv -->
+<!-- ret.file.FI <- paste(fldr, ftp.file(file.FI), sep = "\\") # STORES FLOW FILE PATH, C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-FI-daily.csv -->
+<!-- ret.file <- c(ret.file.Rgn, ret.file.FI) -->
+<!-- ``` -->
 <hr />
 </div>
 </div>
@@ -1327,22 +1331,22 @@ GLOFIX
 <div id="flow-file" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Flow file<a href="multi-asset-strategy.html#flow-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the flow files to our <em>R studio</em> work space.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="multi-asset-strategy.html#cb30-1" aria-hidden="true" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file[<span class="dv">1</span>]) <span class="co"># C:\\EPFR\\daily\\MultiAsset-Rgn-daily.csv</span></span>
-<span id="cb30-2"><a href="multi-asset-strategy.html#cb30-2" aria-hidden="true" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file[<span class="dv">2</span>]) <span class="co"># C:\\EPFR\\daily\\MultiAsset-FI-daily.csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="multi-asset-strategy.html#cb17-1" aria-hidden="true" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file.rgn) <span class="co"># GET RGN FLOW PERCENTAGE C:\\EPFR\\daily\\MultiAsset-Rgn-daily.csv</span></span>
+<span id="cb17-2"><a href="multi-asset-strategy.html#cb17-2" aria-hidden="true" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file.FI) <span class="co"># GET FI FLOW PERCENTAGE C:\\EPFR\\daily\\MultiAsset-FI-daily.csv</span></span></code></pre></div>
 <p>The next step is to ensure both of our flow files have the same rows so that we can combine the two files, like we do below.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="multi-asset-strategy.html#cb31-1" aria-hidden="true" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> x.rgn[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES RGN MATCHES FI ROWS</span></span>
-<span id="cb31-2"><a href="multi-asset-strategy.html#cb31-2" aria-hidden="true" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> x.FI[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES FI MATCHES RGN ROWS</span></span>
-<span id="cb31-3"><a href="multi-asset-strategy.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="multi-asset-strategy.html#cb31-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x.rgn, x.FI) <span class="co"># COMBINES RGN AND FI DATA</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="multi-asset-strategy.html#cb18-1" aria-hidden="true" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> x.rgn[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES RGN MATCHES FI ROWS</span></span>
+<span id="cb18-2"><a href="multi-asset-strategy.html#cb18-2" aria-hidden="true" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> x.FI[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES FI MATCHES RGN ROWS</span></span>
+<span id="cb18-3"><a href="multi-asset-strategy.html#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="multi-asset-strategy.html#cb18-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x.rgn, x.FI) <span class="co"># COMBINES RGN AND FI DATA</span></span></code></pre></div>
 <p>One of the first options we have is choosing the universe we want to backtest. EPFR has tested this signal within two different universes of asset classes Rgn (7 Region Equity) and FI (Fixed Income). For this example, we choose <strong>Multi</strong>, which includes both of our equity and fixed income asset classes, but one can also choose to backtest within either the Rgn or FI universes separately.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="multi-asset-strategy.html#cb32-1" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="st">&quot;Multi&quot;</span> <span class="co"># Multi/Rgn/FI</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="multi-asset-strategy.html#cb19-1" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="st">&quot;Multi&quot;</span> <span class="co"># Multi/Rgn/FI</span></span></code></pre></div>
 </div>
 <div id="compounding-flows" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Compounding Flows<a href="multi-asset-strategy.html#compounding-flows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we set up a variable for our look-back period, which can also be called a flow window. This variable will be the window of time we use to create a trailing compounded daily percentage flow. The look-back period we choose for our demonstrations is <strong>20 days</strong>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="multi-asset-strategy.html#cb33-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># FLOW WINDOW (IN WEEKDAYS) - 20 day look back period</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="multi-asset-strategy.html#cb20-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># FLOW WINDOW (IN WEEKDAYS) - 20 day look back period</span></span></code></pre></div>
 <p>Using a function from the <code>library('EPFR.r')</code>, <code>compound.flows()</code> compounds our daily percentage flow over the trailing <code>lookback</code> period for each asset class.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="multi-asset-strategy.html#cb34-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, F) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="multi-asset-strategy.html#cb21-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, F) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1744,30 +1748,30 @@ GLOFIX
 <div id="total-return-index-1" class="section level3 hasAnchor" number="4.3.3">
 <h3><span class="header-section-number">4.3.3</span> Total Return Index<a href="multi-asset-strategy.html#total-return-index-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We will then import our two total return files and modify them to be one data frame of total index returns indexed so that time moves forward. To do this we will use function <code>ret.to.idx()</code> from <code>library('EPFR.r')</code>. We also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file and <code>ret.idx.gaps.fix()</code> to replace any NA values. Please refer to the library documentation for the complete list of parameters for these functions (tip: <code>?ret.to.idx()</code>,<code>?ret.idx.gaps.fix()</code> ).</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="multi-asset-strategy.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RGN RETURNS</span></span>
-<span id="cb35-2"><a href="multi-asset-strategy.html#cb35-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.Rgn) <span class="co"># C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-Rgn-daily.csv</span></span>
-<span id="cb35-3"><a href="multi-asset-strategy.html#cb35-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX</span></span>
-<span id="cb35-4"><a href="multi-asset-strategy.html#cb35-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span>
-<span id="cb35-5"><a href="multi-asset-strategy.html#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="multi-asset-strategy.html#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co">#F.I. RETURNS</span></span>
-<span id="cb35-7"><a href="multi-asset-strategy.html#cb35-7" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.FI) <span class="co"># C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-FI-daily.csv</span></span>
-<span id="cb35-8"><a href="multi-asset-strategy.html#cb35-8" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(z, <span class="fu">dimnames</span>(y)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX   </span></span>
-<span id="cb35-9"><a href="multi-asset-strategy.html#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-10"><a href="multi-asset-strategy.html#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#COMBINE RETURN FILES</span></span>
-<span id="cb35-11"><a href="multi-asset-strategy.html#cb35-11" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, z)[, <span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]]] <span class="co"># FINAL TOTAL-RETURN INDEX TABLE</span></span>
-<span id="cb35-12"><a href="multi-asset-strategy.html#cb35-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">max</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), T)})))<span class="sc">:</span><span class="fu">min</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), F)}))), ] <span class="co"># ENSURE ALL PIECES HAVE RETURN OVER THE SAME HORIZON</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="multi-asset-strategy.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RGN RETURNS</span></span>
+<span id="cb22-2"><a href="multi-asset-strategy.html#cb22-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.rgn) <span class="co"># GET RGN PERCENTAGE RETURNS C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-Rgn-daily.csv</span></span>
+<span id="cb22-3"><a href="multi-asset-strategy.html#cb22-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX</span></span>
+<span id="cb22-4"><a href="multi-asset-strategy.html#cb22-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span>
+<span id="cb22-5"><a href="multi-asset-strategy.html#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="multi-asset-strategy.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#F.I. RETURNS</span></span>
+<span id="cb22-7"><a href="multi-asset-strategy.html#cb22-7" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.FI) <span class="co"># GET FI PERCENTAGE RETURNS C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-FI-daily.csv</span></span>
+<span id="cb22-8"><a href="multi-asset-strategy.html#cb22-8" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(z, <span class="fu">dimnames</span>(y)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX   </span></span>
+<span id="cb22-9"><a href="multi-asset-strategy.html#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="multi-asset-strategy.html#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#COMBINE RETURN FILES</span></span>
+<span id="cb22-11"><a href="multi-asset-strategy.html#cb22-11" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, z)[, <span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]]] <span class="co"># FINAL TOTAL-RETURN INDEX TABLE</span></span>
+<span id="cb22-12"><a href="multi-asset-strategy.html#cb22-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">max</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), T)})))<span class="sc">:</span><span class="fu">min</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), F)}))), ] <span class="co"># ENSURE ALL PIECES HAVE RETURN OVER THE SAME HORIZON</span></span></code></pre></div>
 </div>
 <div id="subset-files" class="section level3 hasAnchor" number="4.3.4">
 <h3><span class="header-section-number">4.3.4</span> Subset files<a href="multi-asset-strategy.html#subset-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Then, to subset the flow file <span class="math inline">\(x\)</span> and return file <span class="math inline">\(y\)</span> to the selected universe <span class="math inline">\(idx\)</span> of asset classes, the following code is used. During this process, we also ensure that the data structure in <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are completely aligned, having the same column names in the same order.</p>
 <!-- An additional step that we take when backtesting the entire multi asset universe is to make an adjustment to all daily flows, based on a regression between each asset classes 20-day flows and MSCI World index returns.  -->
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="multi-asset-strategy.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;Rgn&quot;</span>) { </span>
-<span id="cb36-2"><a href="multi-asset-strategy.html#cb36-2" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
-<span id="cb36-3"><a href="multi-asset-strategy.html#cb36-3" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
-<span id="cb36-4"><a href="multi-asset-strategy.html#cb36-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;FI&quot;</span>) {   </span>
-<span id="cb36-5"><a href="multi-asset-strategy.html#cb36-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(x)[<span class="dv">2</span>]]</span>
-<span id="cb36-6"><a href="multi-asset-strategy.html#cb36-6" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(y)[<span class="dv">2</span>]]</span>
-<span id="cb36-7"><a href="multi-asset-strategy.html#cb36-7" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="multi-asset-strategy.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;Rgn&quot;</span>) { </span>
+<span id="cb23-2"><a href="multi-asset-strategy.html#cb23-2" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
+<span id="cb23-3"><a href="multi-asset-strategy.html#cb23-3" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
+<span id="cb23-4"><a href="multi-asset-strategy.html#cb23-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;FI&quot;</span>) {   </span>
+<span id="cb23-5"><a href="multi-asset-strategy.html#cb23-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(x)[<span class="dv">2</span>]]</span>
+<span id="cb23-6"><a href="multi-asset-strategy.html#cb23-6" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(y)[<span class="dv">2</span>]]</span>
+<span id="cb23-7"><a href="multi-asset-strategy.html#cb23-7" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
 <p><em>* Note: subsetting can be also be done when creating the flow and return files</em></p>
 </div>
 <div id="ranking-asset-classes" class="section level3 hasAnchor" number="4.3.5">
@@ -1775,15 +1779,15 @@ GLOFIX
 <p>Next, we sort each of the asset classes in our universe into five equal bins based on their compounded percentage flow values for the selected holding period. To do this, we will use the function from <code>library('EPFR.r')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
 <p>The <code>bbk()</code> function requires our daily percentage flow data compounded over a desired period and total return index data. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
 <p>The first parameter we add is the number of bins we want to use. For our case, we want to use 5 because our strategy is to go long the top fifth and short the bottom fifth.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="multi-asset-strategy.html#cb37-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="multi-asset-strategy.html#cb24-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
 <p>Since EPFR data is published with T+1 day lag and is released around 5:00 pm EST, we account for a T+2 day delay in our model. Users interested in more timely signals can also use the T+2 open prices for backtesting purposes. Alternatively, EPFR’s Premium Daily offering collects an earlier release of end-of-day data which includes a significant subset of its original fund-level flow information.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="multi-asset-strategy.html#cb38-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data takes time to have</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="multi-asset-strategy.html#cb25-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data takes time to have</span></span></code></pre></div>
 <p>It is also important to note that this model will need to be re-balanced weekly. The day of the week the rebalancing occurs is at the discretion of the user. For this example we will set the day of the week to trade as <strong>Friday</strong>.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="multi-asset-strategy.html#cb39-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="multi-asset-strategy.html#cb26-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
 <p>Additionally, we also evaluate the returns for different holding periods. The user can input return horizons that they are interested in here. For this example we define a return horizon for weekly, fortnightly, monthly, bi-monthly, quarterly, and semi-annual rebalancing.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="multi-asset-strategy.html#cb40-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="multi-asset-strategy.html#cb27-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
 <p>Now that we have defined all of our inputs, to rank the asset classes into quintiles by their 20-day percentage flow, we call function <code>bbk()</code> for a 1-week holding period.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="multi-asset-strategy.html#cb41-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="multi-asset-strategy.html#cb28-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
 </div>
 <div id="model-1" class="section level3 hasAnchor" number="4.3.6">
 <h3><span class="header-section-number">4.3.6</span> Model<a href="multi-asset-strategy.html#model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1802,7 +1806,7 @@ GLOFIX
 <!-- datatable(head(mat.to.xlModel(z[["raw.fwd.rets"]], delay, hz[1], F)))  -->
 <!-- ``` -->
 <p><strong>Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)</strong></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="multi-asset-strategy.html#cb42-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="multi-asset-strategy.html#cb29-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2145,7 +2149,7 @@ GLOFIX
 </tbody>
 </table>
 <p><strong>Quintile Returns over the equal-weight universe</strong></p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="multi-asset-strategy.html#cb43-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="multi-asset-strategy.html#cb30-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2313,9 +2317,9 @@ uRet
 <div id="performance" class="section level3 hasAnchor" number="4.3.7">
 <h3><span class="header-section-number">4.3.7</span> Performance<a href="multi-asset-strategy.html#performance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Performance over all holding periods</strong></p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="multi-asset-strategy.html#cb44-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
-<span id="cb44-2"><a href="multi-asset-strategy.html#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-3"><a href="multi-asset-strategy.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="multi-asset-strategy.html#cb31-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
+<span id="cb31-2"><a href="multi-asset-strategy.html#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="multi-asset-strategy.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -3939,7 +3943,7 @@ AnnTo
 </table>
 <hr />
 <p><strong>Annualized mean one-week returns</strong></p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="multi-asset-strategy.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="multi-asset-strategy.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>

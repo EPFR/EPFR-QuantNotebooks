@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Strategies | EPFR Strategy Notebooks</title>
+  <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Strategies | EPFR Strategy Notebooks" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
+  <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
+  <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Strategies | EPFR Strategy Notebooks" />
+  
+  <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
+  <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="index.html"/>
+<link rel="next" href="epfr-library.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { font-weight: bold; } /* Alert */
+code span.an { font-style: italic; } /* Annotation */
+code span.cf { font-weight: bold; } /* ControlFlow */
+code span.co { font-style: italic; } /* Comment */
+code span.cv { font-style: italic; } /* CommentVar */
+code span.do { font-style: italic; } /* Documentation */
+code span.dt { text-decoration: underline; } /* DataType */
+code span.er { font-weight: bold; } /* Error */
+code span.in { font-style: italic; } /* Information */
+code span.kw { font-weight: bold; } /* Keyword */
+code span.pp { font-weight: bold; } /* Preprocessor */
+code span.wa { font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/comingsoon.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="strategies.html"><a href="strategies.html"><i class="fa fa-check"></i><b>2</b> Strategies</a></li>
+<li class="chapter" data-level="3" data-path="epfr-library.html"><a href="epfr-library.html"><i class="fa fa-check"></i><b>3</b> EPFR Library</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="epfr-library.html"><a href="epfr-library.html#about"><i class="fa fa-check"></i><b>3.1</b> About</a></li>
+<li class="chapter" data-level="3.2" data-path="epfr-library.html"><a href="epfr-library.html#set-up"><i class="fa fa-check"></i><b>3.2</b> Set up</a></li>
+<li class="chapter" data-level="3.3" data-path="epfr-library.html"><a href="epfr-library.html#ftp"><i class="fa fa-check"></i><b>3.3</b> FTP Functions</a>
+<ul>
+<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#rcurl"><i class="fa fa-check"></i>RCurl</a></li>
+<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#extract-ftp-file-path"><i class="fa fa-check"></i>Extract FTP File Path</a></li>
+<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#extract-ftp-file-name"><i class="fa fa-check"></i>Extract FTP File Name</a></li>
+<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#download-ftp-file"><i class="fa fa-check"></i>Download FTP file</a></li>
+<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#examples"><i class="fa fa-check"></i>Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="epfr-library.html"><a href="epfr-library.html#strategy-functions"><i class="fa fa-check"></i><b>3.4</b> Strategy Functions</a>
+<ul>
+<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#compunding-flows"><i class="fa fa-check"></i>Compunding Flows</a></li>
+<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#model"><i class="fa fa-check"></i>Model</a></li>
+<li class="chapter" data-level="" data-path="epfr-library.html"><a href="epfr-library.html#example"><i class="fa fa-check"></i>Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="Filters.html"><a href="Filters.html"><i class="fa fa-check"></i><b>4</b> Filters</a></li>
+<li class="chapter" data-level="5" data-path="MultiAsset.html"><a href="MultiAsset.html"><i class="fa fa-check"></i><b>5</b> Multi-Asset Strategy</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="MultiAsset.html"><a href="MultiAsset.html#overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="MultiAsset.html"><a href="MultiAsset.html#data"><i class="fa fa-check"></i><b>5.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="MultiAsset.html"><a href="MultiAsset.html#aggregations"><i class="fa fa-check"></i><b>5.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="5.2.2" data-path="MultiAsset.html"><a href="MultiAsset.html#daily-percentage-flow"><i class="fa fa-check"></i><b>5.2.2</b> Daily Percentage Flow</a></li>
+<li class="chapter" data-level="5.2.3" data-path="MultiAsset.html"><a href="MultiAsset.html#aggregate-flow-file"><i class="fa fa-check"></i><b>5.2.3</b> Aggregate Flow File</a></li>
+<li class="chapter" data-level="5.2.4" data-path="MultiAsset.html"><a href="MultiAsset.html#return-file"><i class="fa fa-check"></i><b>5.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="MultiAsset.html"><a href="MultiAsset.html#strategy-implementation"><i class="fa fa-check"></i><b>5.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="MultiAsset.html"><a href="MultiAsset.html#flow-file"><i class="fa fa-check"></i><b>5.3.1</b> Flow file</a></li>
+<li class="chapter" data-level="5.3.2" data-path="MultiAsset.html"><a href="MultiAsset.html#compounding-flows"><i class="fa fa-check"></i><b>5.3.2</b> Compounding Flows</a></li>
+<li class="chapter" data-level="5.3.3" data-path="MultiAsset.html"><a href="MultiAsset.html#return-file-1"><i class="fa fa-check"></i><b>5.3.3</b> Return file</a></li>
+<li class="chapter" data-level="5.3.4" data-path="MultiAsset.html"><a href="MultiAsset.html#subset-files"><i class="fa fa-check"></i><b>5.3.4</b> Subset files</a></li>
+<li class="chapter" data-level="5.3.5" data-path="MultiAsset.html"><a href="MultiAsset.html#ranking-asset-classes"><i class="fa fa-check"></i><b>5.3.5</b> Ranking Asset Classes</a></li>
+<li class="chapter" data-level="5.3.6" data-path="MultiAsset.html"><a href="MultiAsset.html#model-1"><i class="fa fa-check"></i><b>5.3.6</b> Model</a></li>
+<li class="chapter" data-level="5.3.7" data-path="MultiAsset.html"><a href="MultiAsset.html#performance"><i class="fa fa-check"></i><b>5.3.7</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="FX.html"><a href="FX.html"><i class="fa fa-check"></i><b>6</b> FX Strategy</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="FX.html"><a href="FX.html#overview-1"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="FX.html"><a href="FX.html#data-1"><i class="fa fa-check"></i><b>6.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="FX.html"><a href="FX.html#aggregations-1"><i class="fa fa-check"></i><b>6.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="6.2.2" data-path="FX.html"><a href="FX.html#daily-percentage-flow-1"><i class="fa fa-check"></i><b>6.2.2</b> Daily Percentage Flow</a></li>
+<li class="chapter" data-level="6.2.3" data-path="FX.html"><a href="FX.html#aggregate-flow-file-1"><i class="fa fa-check"></i><b>6.2.3</b> Aggregate Flow File</a></li>
+<li class="chapter" data-level="6.2.4" data-path="FX.html"><a href="FX.html#return-file-2"><i class="fa fa-check"></i><b>6.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="FX.html"><a href="FX.html#strategy-implementation-1"><i class="fa fa-check"></i><b>6.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="FX.html"><a href="FX.html#compounding-flows-1"><i class="fa fa-check"></i><b>6.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="6.3.2" data-path="FX.html"><a href="FX.html#ranking-currencies"><i class="fa fa-check"></i><b>6.3.2</b> Ranking Currencies</a></li>
+<li class="chapter" data-level="6.3.3" data-path="FX.html"><a href="FX.html#model-2"><i class="fa fa-check"></i><b>6.3.3</b> Model</a></li>
+<li class="chapter" data-level="6.3.4" data-path="FX.html"><a href="FX.html#performance-1"><i class="fa fa-check"></i><b>6.3.4</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html"><i class="fa fa-check"></i><b>7</b> Flow-Percentage Country Strategy</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html#overview-2"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html#data-2"><i class="fa fa-check"></i><b>7.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html#aggregations-2"><i class="fa fa-check"></i><b>7.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="7.2.2" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html#daily-percentage-flow-2"><i class="fa fa-check"></i><b>7.2.2</b> Daily Percentage Flow</a></li>
+<li class="chapter" data-level="7.2.3" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html#aggregate-flow-file-2"><i class="fa fa-check"></i><b>7.2.3</b> Aggregate Flow File</a></li>
+<li class="chapter" data-level="7.2.4" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html#return-file-3"><i class="fa fa-check"></i><b>7.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html#strategy-implementation-2"><i class="fa fa-check"></i><b>7.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html#compounding-flows-2"><i class="fa fa-check"></i><b>7.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="7.3.2" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html#ranking-countries"><i class="fa fa-check"></i><b>7.3.2</b> Ranking Countries</a></li>
+<li class="chapter" data-level="7.3.3" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html#model-3"><i class="fa fa-check"></i><b>7.3.3</b> Model</a></li>
+<li class="chapter" data-level="7.3.4" data-path="FlowPctCtry.html"><a href="FlowPctCtry.html#performance-2"><i class="fa fa-check"></i><b>7.3.4</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="FlowPctSector.html"><a href="FlowPctSector.html"><i class="fa fa-check"></i><b>8</b> Flow-Percentage Sector Strategy</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="FlowPctSector.html"><a href="FlowPctSector.html#overview-3"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="FlowPctSector.html"><a href="FlowPctSector.html#data-3"><i class="fa fa-check"></i><b>8.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="FlowPctSector.html"><a href="FlowPctSector.html#aggregations-3"><i class="fa fa-check"></i><b>8.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="8.2.2" data-path="FlowPctSector.html"><a href="FlowPctSector.html#daily-percentage-flow-3"><i class="fa fa-check"></i><b>8.2.2</b> Daily Percentage Flow</a></li>
+<li class="chapter" data-level="8.2.3" data-path="FlowPctSector.html"><a href="FlowPctSector.html#aggregate-flow-file-3"><i class="fa fa-check"></i><b>8.2.3</b> Aggregate Flow File</a></li>
+<li class="chapter" data-level="8.2.4" data-path="FlowPctSector.html"><a href="FlowPctSector.html#return-file-4"><i class="fa fa-check"></i><b>8.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="FlowPctSector.html"><a href="FlowPctSector.html#strategy-implementation-3"><i class="fa fa-check"></i><b>8.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="FlowPctSector.html"><a href="FlowPctSector.html#compounding-flows-3"><i class="fa fa-check"></i><b>8.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="8.3.2" data-path="FlowPctSector.html"><a href="FlowPctSector.html#ranking-sectors"><i class="fa fa-check"></i><b>8.3.2</b> Ranking Sectors</a></li>
+<li class="chapter" data-level="8.3.3" data-path="FlowPctSector.html"><a href="FlowPctSector.html#model-4"><i class="fa fa-check"></i><b>8.3.3</b> Model</a></li>
+<li class="chapter" data-level="8.3.4" data-path="FlowPctSector.html"><a href="FlowPctSector.html#performance-3"><i class="fa fa-check"></i><b>8.3.4</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ActPasCtry.html"><a href="ActPasCtry.html"><i class="fa fa-check"></i><b>9</b> Active/Passive Country Strategy</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="ActPasCtry.html"><a href="ActPasCtry.html#overview-4"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="ActPasCtry.html"><a href="ActPasCtry.html#data-4"><i class="fa fa-check"></i><b>9.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="ActPasCtry.html"><a href="ActPasCtry.html#aggregations-4"><i class="fa fa-check"></i><b>9.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="9.2.2" data-path="ActPasCtry.html"><a href="ActPasCtry.html#activepassive-indicator"><i class="fa fa-check"></i><b>9.2.2</b> Active/Passive Indicator</a></li>
+<li class="chapter" data-level="9.2.3" data-path="ActPasCtry.html"><a href="ActPasCtry.html#aggregate-indicator-file"><i class="fa fa-check"></i><b>9.2.3</b> Aggregate Indicator File</a></li>
+<li class="chapter" data-level="9.2.4" data-path="ActPasCtry.html"><a href="ActPasCtry.html#return-file-5"><i class="fa fa-check"></i><b>9.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="ActPasCtry.html"><a href="ActPasCtry.html#strategy-implementation-4"><i class="fa fa-check"></i><b>9.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="ActPasCtry.html"><a href="ActPasCtry.html#moving-sum-of-indicator"><i class="fa fa-check"></i><b>9.3.1</b> Moving Sum of Indicator</a></li>
+<li class="chapter" data-level="9.3.2" data-path="ActPasCtry.html"><a href="ActPasCtry.html#ranking-countries-1"><i class="fa fa-check"></i><b>9.3.2</b> Ranking Countries</a></li>
+<li class="chapter" data-level="9.3.3" data-path="ActPasCtry.html"><a href="ActPasCtry.html#model-5"><i class="fa fa-check"></i><b>9.3.3</b> Model</a></li>
+<li class="chapter" data-level="9.3.4" data-path="ActPasCtry.html"><a href="ActPasCtry.html#performance-4"><i class="fa fa-check"></i><b>9.3.4</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ActPasSector.html"><a href="ActPasSector.html"><i class="fa fa-check"></i><b>10</b> Active/Passive Sector Strategy</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ActPasSector.html"><a href="ActPasSector.html#overview-5"><i class="fa fa-check"></i><b>10.1</b> Overview</a></li>
+<li class="chapter" data-level="10.2" data-path="ActPasSector.html"><a href="ActPasSector.html#data-5"><i class="fa fa-check"></i><b>10.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="ActPasSector.html"><a href="ActPasSector.html#aggregations-5"><i class="fa fa-check"></i><b>10.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="10.2.2" data-path="ActPasSector.html"><a href="ActPasSector.html#activepassive-indicator-1"><i class="fa fa-check"></i><b>10.2.2</b> Active/Passive Indicator</a></li>
+<li class="chapter" data-level="10.2.3" data-path="ActPasSector.html"><a href="ActPasSector.html#aggregate-indicator-file-1"><i class="fa fa-check"></i><b>10.2.3</b> Aggregate Indicator File</a></li>
+<li class="chapter" data-level="10.2.4" data-path="ActPasSector.html"><a href="ActPasSector.html#return-file-6"><i class="fa fa-check"></i><b>10.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="ActPasSector.html"><a href="ActPasSector.html#strategy-implementation-5"><i class="fa fa-check"></i><b>10.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="ActPasSector.html"><a href="ActPasSector.html#moving-sum-of-indicator-1"><i class="fa fa-check"></i><b>10.3.1</b> Moving Sum of Indicator</a></li>
+<li class="chapter" data-level="10.3.2" data-path="ActPasSector.html"><a href="ActPasSector.html#ranking-sectors-1"><i class="fa fa-check"></i><b>10.3.2</b> Ranking Sectors</a></li>
+<li class="chapter" data-level="10.3.3" data-path="ActPasSector.html"><a href="ActPasSector.html#model-6"><i class="fa fa-check"></i><b>10.3.3</b> Model</a></li>
+<li class="chapter" data-level="10.3.4" data-path="ActPasSector.html"><a href="ActPasSector.html#performance-5"><i class="fa fa-check"></i><b>10.3.4</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="DMRates.html"><a href="DMRates.html"><i class="fa fa-check"></i><b>11</b> Flow-Percentage DM Rates Strategy</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="DMRates.html"><a href="DMRates.html#overview-6"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
+<li class="chapter" data-level="11.2" data-path="DMRates.html"><a href="DMRates.html#data-6"><i class="fa fa-check"></i><b>11.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="DMRates.html"><a href="DMRates.html#aggregations-6"><i class="fa fa-check"></i><b>11.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="11.2.2" data-path="DMRates.html"><a href="DMRates.html#daily-percentage-flow-4"><i class="fa fa-check"></i><b>11.2.2</b> Daily Percentage Flow</a></li>
+<li class="chapter" data-level="11.2.3" data-path="DMRates.html"><a href="DMRates.html#aggregate-flow-file-4"><i class="fa fa-check"></i><b>11.2.3</b> Aggregate Flow File</a></li>
+<li class="chapter" data-level="11.2.4" data-path="DMRates.html"><a href="DMRates.html#return-file-7"><i class="fa fa-check"></i><b>11.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="DMRates.html"><a href="DMRates.html#strategy-implementation-6"><i class="fa fa-check"></i><b>11.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="DMRates.html"><a href="DMRates.html#compounding-flows-4"><i class="fa fa-check"></i><b>11.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="11.3.2" data-path="DMRates.html"><a href="DMRates.html#ranking-countries-2"><i class="fa fa-check"></i><b>11.3.2</b> Ranking Countries</a></li>
+<li class="chapter" data-level="11.3.3" data-path="DMRates.html"><a href="DMRates.html#model-7"><i class="fa fa-check"></i><b>11.3.3</b> Model</a></li>
+<li class="chapter" data-level="11.3.4" data-path="DMRates.html"><a href="DMRates.html#performance-6"><i class="fa fa-check"></i><b>11.3.4</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="FAQ.html"><a href="FAQ.html"><i class="fa fa-check"></i><b>12</b> FAQ</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="FAQ.html"><a href="FAQ.html#Rets"><i class="fa fa-check"></i><b>12.1</b> Returns Information</a></li>
+<li class="chapter" data-level="12.2" data-path="FAQ.html"><a href="FAQ.html#country-flows"><i class="fa fa-check"></i><b>12.2</b> Country Flows</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://epfr.com/" target="blank">EPFR</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">EPFR Strategy Notebooks</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="strategies" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Strategies<a href="strategies.html#strategies" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><a href="MultiAsset.html#MultiAsset">5</a> - Multi Asset (daily flows)
+<a href="FX.html#FX">6</a> - FX (daily flows, country allocations)
+<a href="FlowPctCtry.html#FlowPctCtry">7</a> - Flow-Percentage Country (daily flows, country allocations)
+<a href="FlowPctSector.html#FlowPctSector">8</a> - Flow-Percentage Sector (daily flows, sector allocations, country allocations)
+<a href="ActPasCtry.html#ActPasCtry">9</a> - Active/Passive Country (country allocations)
+<a href="ActPasSector.html#ActPasSector">10</a>- Active/Passive Sector (sector allocations, country allocations)
+<a href="DMRates.html#DMRates">11</a> - DM Rates (daily flows, country allocations)</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="epfr-library.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/index.Rmd",
+"text": "Suggest an edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

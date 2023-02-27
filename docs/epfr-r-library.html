@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 EPFR R Library | EPFR Strategy Notebooks</title>
+  <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 EPFR R Library | EPFR Strategy Notebooks" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
+  <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
+  <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 EPFR R Library | EPFR Strategy Notebooks" />
+  
+  <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
+  <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="index.html"/>
+<link rel="next" href="Filters.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { font-weight: bold; } /* Alert */
+code span.an { font-style: italic; } /* Annotation */
+code span.cf { font-weight: bold; } /* ControlFlow */
+code span.co { font-style: italic; } /* Comment */
+code span.cv { font-style: italic; } /* CommentVar */
+code span.do { font-style: italic; } /* Documentation */
+code span.dt { text-decoration: underline; } /* DataType */
+code span.er { font-weight: bold; } /* Error */
+code span.in { font-style: italic; } /* Information */
+code span.kw { font-weight: bold; } /* Keyword */
+code span.pp { font-weight: bold; } /* Preprocessor */
+code span.wa { font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="assets/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="toc-logo"><a href="./"><img src="images/comingsoon.png"></a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Strategy Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#flow-momentum-signal"><i class="fa fa-check"></i>Flow Momentum Signal</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#activepassive-indicator"><i class="fa fa-check"></i>Active/Passive Indicator</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="epfr-r-library.html"><a href="epfr-r-library.html"><i class="fa fa-check"></i><b>2</b> EPFR R Library</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="epfr-r-library.html"><a href="epfr-r-library.html#about"><i class="fa fa-check"></i><b>2.1</b> About</a></li>
+<li class="chapter" data-level="2.2" data-path="epfr-r-library.html"><a href="epfr-r-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set up</a></li>
+<li class="chapter" data-level="2.3" data-path="epfr-r-library.html"><a href="epfr-r-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.3</b> Strategy Functions</a>
+<ul>
+<li class="chapter" data-level="" data-path="epfr-r-library.html"><a href="epfr-r-library.html#total-return-index"><i class="fa fa-check"></i>Total Return Index</a></li>
+<li class="chapter" data-level="" data-path="epfr-r-library.html"><a href="epfr-r-library.html#compunding-flows"><i class="fa fa-check"></i>Compunding Flows</a></li>
+<li class="chapter" data-level="" data-path="epfr-r-library.html"><a href="epfr-r-library.html#model"><i class="fa fa-check"></i>Model</a></li>
+<li class="chapter" data-level="" data-path="epfr-r-library.html"><a href="epfr-r-library.html#example"><i class="fa fa-check"></i>Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="Filters.html"><a href="Filters.html"><i class="fa fa-check"></i><b>3</b> EPFR Data &amp; Filters</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="Filters.html"><a href="Filters.html#video-explanation"><i class="fa fa-check"></i><b>3.1</b> Video Explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html"><i class="fa fa-check"></i><b>4</b> Multi-Asset Strategy</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#data"><i class="fa fa-check"></i><b>4.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#aggregations"><i class="fa fa-check"></i><b>4.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="4.2.2" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#daily-percentage-flow"><i class="fa fa-check"></i><b>4.2.2</b> Daily Percentage Flow</a></li>
+<li class="chapter" data-level="4.2.3" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#aggregate-flow-file"><i class="fa fa-check"></i><b>4.2.3</b> Aggregate Flow File</a></li>
+<li class="chapter" data-level="4.2.4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#return-file"><i class="fa fa-check"></i><b>4.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#strategy-implementation"><i class="fa fa-check"></i><b>4.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#flow-file"><i class="fa fa-check"></i><b>4.3.1</b> Flow file</a></li>
+<li class="chapter" data-level="4.3.2" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#compounding-flows"><i class="fa fa-check"></i><b>4.3.2</b> Compounding Flows</a></li>
+<li class="chapter" data-level="4.3.3" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#total-return-index-1"><i class="fa fa-check"></i><b>4.3.3</b> Total Return Index</a></li>
+<li class="chapter" data-level="4.3.4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#subset-files"><i class="fa fa-check"></i><b>4.3.4</b> Subset files</a></li>
+<li class="chapter" data-level="4.3.5" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#ranking-asset-classes"><i class="fa fa-check"></i><b>4.3.5</b> Ranking Asset Classes</a></li>
+<li class="chapter" data-level="4.3.6" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#model-1"><i class="fa fa-check"></i><b>4.3.6</b> Model</a></li>
+<li class="chapter" data-level="4.3.7" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html#performance"><i class="fa fa-check"></i><b>4.3.7</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="fx-strategy.html"><a href="fx-strategy.html"><i class="fa fa-check"></i><b>5</b> FX Strategy</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="fx-strategy.html"><a href="fx-strategy.html#overview-1"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="fx-strategy.html"><a href="fx-strategy.html#data-1"><i class="fa fa-check"></i><b>5.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="fx-strategy.html"><a href="fx-strategy.html#aggregations-1"><i class="fa fa-check"></i><b>5.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="5.2.2" data-path="fx-strategy.html"><a href="fx-strategy.html#daily-percentage-flow-1"><i class="fa fa-check"></i><b>5.2.2</b> Daily Percentage Flow</a></li>
+<li class="chapter" data-level="5.2.3" data-path="fx-strategy.html"><a href="fx-strategy.html#aggregate-flow-file-1"><i class="fa fa-check"></i><b>5.2.3</b> Aggregate Flow File</a></li>
+<li class="chapter" data-level="5.2.4" data-path="fx-strategy.html"><a href="fx-strategy.html#return-file-1"><i class="fa fa-check"></i><b>5.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="fx-strategy.html"><a href="fx-strategy.html#strategy-implementation-1"><i class="fa fa-check"></i><b>5.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="fx-strategy.html"><a href="fx-strategy.html#compounding-flows-1"><i class="fa fa-check"></i><b>5.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="5.3.2" data-path="fx-strategy.html"><a href="fx-strategy.html#ranking-currencies"><i class="fa fa-check"></i><b>5.3.2</b> Ranking Currencies</a></li>
+<li class="chapter" data-level="5.3.3" data-path="fx-strategy.html"><a href="fx-strategy.html#model-2"><i class="fa fa-check"></i><b>5.3.3</b> Model</a></li>
+<li class="chapter" data-level="5.3.4" data-path="fx-strategy.html"><a href="fx-strategy.html#performance-1"><i class="fa fa-check"></i><b>5.3.4</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html"><i class="fa fa-check"></i><b>6</b> Flow-Percentage Country Strategy</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#overview-2"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#data-2"><i class="fa fa-check"></i><b>6.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#aggregations-2"><i class="fa fa-check"></i><b>6.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="6.2.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#daily-percentage-flow-2"><i class="fa fa-check"></i><b>6.2.2</b> Daily Percentage Flow</a></li>
+<li class="chapter" data-level="6.2.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#aggregate-flow-file-2"><i class="fa fa-check"></i><b>6.2.3</b> Aggregate Flow File</a></li>
+<li class="chapter" data-level="6.2.4" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#return-file-2"><i class="fa fa-check"></i><b>6.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#strategy-implementation-2"><i class="fa fa-check"></i><b>6.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#compounding-flows-2"><i class="fa fa-check"></i><b>6.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="6.3.2" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#total-return-index-2"><i class="fa fa-check"></i><b>6.3.2</b> Total Return Index</a></li>
+<li class="chapter" data-level="6.3.3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#ranking-countries"><i class="fa fa-check"></i><b>6.3.3</b> Ranking Countries</a></li>
+<li class="chapter" data-level="6.3.4" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#model-3"><i class="fa fa-check"></i><b>6.3.4</b> Model</a></li>
+<li class="chapter" data-level="6.3.5" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html#performance-2"><i class="fa fa-check"></i><b>6.3.5</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html"><i class="fa fa-check"></i><b>7</b> Flow-Percentage Sector Strategy</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#overview-3"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#data-3"><i class="fa fa-check"></i><b>7.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#aggregations-3"><i class="fa fa-check"></i><b>7.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="7.2.2" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#daily-percentage-flow-3"><i class="fa fa-check"></i><b>7.2.2</b> Daily Percentage Flow</a></li>
+<li class="chapter" data-level="7.2.3" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#aggregate-flow-file-3"><i class="fa fa-check"></i><b>7.2.3</b> Aggregate Flow File</a></li>
+<li class="chapter" data-level="7.2.4" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#return-file-3"><i class="fa fa-check"></i><b>7.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#strategy-implementation-3"><i class="fa fa-check"></i><b>7.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#compounding-flows-3"><i class="fa fa-check"></i><b>7.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="7.3.2" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#total-return-index-3"><i class="fa fa-check"></i><b>7.3.2</b> Total Return Index</a></li>
+<li class="chapter" data-level="7.3.3" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#ranking-sectors"><i class="fa fa-check"></i><b>7.3.3</b> Ranking Sectors</a></li>
+<li class="chapter" data-level="7.3.4" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#model-4"><i class="fa fa-check"></i><b>7.3.4</b> Model</a></li>
+<li class="chapter" data-level="7.3.5" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html#performance-3"><i class="fa fa-check"></i><b>7.3.5</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html"><i class="fa fa-check"></i><b>8</b> Active/Passive Country Strategy</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#overview-4"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#data-4"><i class="fa fa-check"></i><b>8.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#aggregations-4"><i class="fa fa-check"></i><b>8.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="8.2.2" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#activepassive-indicator-1"><i class="fa fa-check"></i><b>8.2.2</b> Active/Passive Indicator</a></li>
+<li class="chapter" data-level="8.2.3" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#aggregate-indicator-file"><i class="fa fa-check"></i><b>8.2.3</b> Aggregate Indicator File</a></li>
+<li class="chapter" data-level="8.2.4" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#return-file-4"><i class="fa fa-check"></i><b>8.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#strategy-implementation-4"><i class="fa fa-check"></i><b>8.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#moving-sum-of-indicator"><i class="fa fa-check"></i><b>8.3.1</b> Moving Sum of Indicator</a></li>
+<li class="chapter" data-level="8.3.2" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#total-return-index-4"><i class="fa fa-check"></i><b>8.3.2</b> Total Return Index</a></li>
+<li class="chapter" data-level="8.3.3" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#ranking-countries-1"><i class="fa fa-check"></i><b>8.3.3</b> Ranking Countries</a></li>
+<li class="chapter" data-level="8.3.4" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#model-5"><i class="fa fa-check"></i><b>8.3.4</b> Model</a></li>
+<li class="chapter" data-level="8.3.5" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html#performance-4"><i class="fa fa-check"></i><b>8.3.5</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html"><i class="fa fa-check"></i><b>9</b> Active/Passive Sector Strategy</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#overview-5"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#data-5"><i class="fa fa-check"></i><b>9.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#aggregations-5"><i class="fa fa-check"></i><b>9.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="9.2.2" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#activepassive-indicator-2"><i class="fa fa-check"></i><b>9.2.2</b> Active/Passive Indicator</a></li>
+<li class="chapter" data-level="9.2.3" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#aggregate-indicator-file-1"><i class="fa fa-check"></i><b>9.2.3</b> Aggregate Indicator File</a></li>
+<li class="chapter" data-level="9.2.4" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#return-file-5"><i class="fa fa-check"></i><b>9.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#strategy-implementation-5"><i class="fa fa-check"></i><b>9.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#moving-sum-of-indicator-1"><i class="fa fa-check"></i><b>9.3.1</b> Moving Sum of Indicator</a></li>
+<li class="chapter" data-level="9.3.2" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#total-return-index-5"><i class="fa fa-check"></i><b>9.3.2</b> Total Return Index</a></li>
+<li class="chapter" data-level="9.3.3" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#ranking-sectors-1"><i class="fa fa-check"></i><b>9.3.3</b> Ranking Sectors</a></li>
+<li class="chapter" data-level="9.3.4" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#model-6"><i class="fa fa-check"></i><b>9.3.4</b> Model</a></li>
+<li class="chapter" data-level="9.3.5" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html#performance-5"><i class="fa fa-check"></i><b>9.3.5</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html"><i class="fa fa-check"></i><b>10</b> Flow-Percentage DM Rates Strategy</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#overview-6"><i class="fa fa-check"></i><b>10.1</b> Overview</a></li>
+<li class="chapter" data-level="10.2" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#data-6"><i class="fa fa-check"></i><b>10.2</b> Data</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#aggregations-6"><i class="fa fa-check"></i><b>10.2.1</b> Aggregations</a></li>
+<li class="chapter" data-level="10.2.2" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#daily-percentage-flow-4"><i class="fa fa-check"></i><b>10.2.2</b> Daily Percentage Flow</a></li>
+<li class="chapter" data-level="10.2.3" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#aggregate-flow-file-4"><i class="fa fa-check"></i><b>10.2.3</b> Aggregate Flow File</a></li>
+<li class="chapter" data-level="10.2.4" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#return-file-6"><i class="fa fa-check"></i><b>10.2.4</b> Return File</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#strategy-implementation-6"><i class="fa fa-check"></i><b>10.3</b> Strategy Implementation</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#compounding-flows-4"><i class="fa fa-check"></i><b>10.3.1</b> Compounding Flows</a></li>
+<li class="chapter" data-level="10.3.2" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#ranking-countries-2"><i class="fa fa-check"></i><b>10.3.2</b> Ranking Countries</a></li>
+<li class="chapter" data-level="10.3.3" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#model-7"><i class="fa fa-check"></i><b>10.3.3</b> Model</a></li>
+<li class="chapter" data-level="10.3.4" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html#performance-6"><i class="fa fa-check"></i><b>10.3.4</b> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="FAQ.html"><a href="FAQ.html"><i class="fa fa-check"></i><b>11</b> FAQ</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="FAQ.html"><a href="FAQ.html#Rets"><i class="fa fa-check"></i><b>11.1</b> Returns Information</a></li>
+<li class="chapter" data-level="11.2" data-path="FAQ.html"><a href="FAQ.html#country-flows"><i class="fa fa-check"></i><b>11.2</b> Country Flows</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://epfr.com/" target="blank">EPFR</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">EPFR Strategy Notebooks</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="epfr-r-library" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> EPFR R Library<a href="epfr-r-library.html#epfr-r-library" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<!-- (PART\*) EPFR Library -->
+<p>The R-based EPFR Library, created by members of the EPFR Quant Team, has an extensive list of applicable functions for use on our data and will be used in this demonstration of our strategies.</p>
+<p>To install the library <code>EPFR.r</code>, <a href="https://github.com/EPFR/EPFR-Quant-Library-R">click here</a> to download zip from github or you can find code to do this below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="epfr-r-library.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;devtools&quot;</span>)</span>
+<span id="cb1-2"><a href="epfr-r-library.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;EPFR/EPFR-Quant-Library-R&quot;</span>)</span>
+<span id="cb1-3"><a href="epfr-r-library.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;EPFR.r&quot;</span>)</span></code></pre></div>
+<hr />
+<div id="about" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> About<a href="epfr-r-library.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This library includes a variety of different functions that can help create signals, rank factors, evaluate performance of strategies, along with a list of other useful tools for handling EPFR data.</p>
+<p>To learn more please refer to the library documentation for all of the descriptions and complete list of parameters for each function, which is easily accessible via the help function in R (tip: <code>?fcn_name()</code>).</p>
+<!-- `ftp.get()`, `compound.flows()`, `bbk()`, bbk.matrix(), `Ctry.msci.members.rng()`, `Ctry.info()`, `ret.to.idx()`, `ret.idx.gaps.fix()`, `portfolio.beta.wrapper()`, `portfolio.residual()`, `mat.daily.to.monthly()`. -->
+<hr />
+</div>
+<div id="set-up" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Set up<a href="epfr-r-library.html#set-up" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To use various functions in <code>library('EPFR.r')</code> it is recommended that the user set up a folder called <em>EPFR</em> in your computers C drive (i.e. <em>C://EPFR</em>). This is the default directory that is used throughout the library to find any files used to perform backtests.</p>
+<p>Inside of this EPFR directory we would suggest following the below folder structure:</p>
+<ul>
+<li>Add “daily” folder; to store EPFR daily cvs files.
+<ul>
+<li>Example: <em>MultiAsset-Rgn-daily.csv</em>, <em>FloPctCtry-daily.csv</em>, <em>FloPctSector-US-daily.csv</em>, <em>FX-daily.csv</em>, ect.</li>
+</ul></li>
+<li>Add “monthly” folder; to store EPFR monthly csv files.
+<ul>
+<li>Example: <em>ActPasCtry-monthly.csv</em>, ect.</li>
+</ul></li>
+<li>Add “returns” folder; to store any return files used.
+<ul>
+<li>Example: <em>PsuedoReturns-MultiAsset-FI-daily.csv</em>, <em>ExchRates-daily.csv</em>, ect.</li>
+</ul></li>
+<li>Add “parameters”; to store any files that <code>library('EPFR.r')</code> has dependencies on.
+<ul>
+<li>The user should add the following files, which they can download via their EPFR FTP connection (located under the Classifications folder):
+<ol style="list-style-type: decimal">
+<li>classif-Ctry.txt</li>
+<li>MsciCtry2016.txt</li>
+<li>MsciCtryClassification.txt</li>
+</ol></li>
+</ul></li>
+</ul>
+<!-- --- -->
+<!-- ## FTP Functions {#ftp} -->
+<!-- Below are some functions built in `library('EPFR.r')` that connect a local R workspace to FTP server for convenience in accessing and working directly with our data. -->
+<!-- ### RCurl  {-} -->
+<!-- Functions built in `library('EPFR.r')` which give access to files on EPFR's ftp require the `RCurl` library. -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- library(RCurl) -->
+<!-- ``` -->
+<!-- ### Extract FTP File Path  {-} -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp.parent <- function(x) { -->
+<!-- # ----------------------------------------------------------------- -->
+<!-- # Args     : x = a string of full paths -->
+<!-- # Output   : returns paths to the parent directory -->
+<!-- # ----------------------------------------------------------------- -->
+<!--    z <- dirname(x) -->
+<!--    z <- ifelse(z == ".", "", z) -->
+<!--    z -->
+<!-- } -->
+<!-- ``` -->
+<!-- ### Extract FTP File Name  {-} -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp.file <- function(x) { -->
+<!-- # ----------------------------------------------------------------- -->
+<!-- # Args     : x = a string of full paths -->
+<!-- # Output   : strips out parent directory, returning just the file name -->
+<!-- # ----------------------------------------------------------------- -->
+<!--    txt.right(x, nchar(x) - nchar(ftp.parent(x)) - 1) -->
+<!-- } -->
+<!-- ``` -->
+<!-- ### Download FTP file  {-} -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp.get <- function(x, y, n, w, h, u = "ftp", v = F) { -->
+<!-- # ----------------------------------------------------------------- -->
+<!-- # Name     : ftp.get -->
+<!-- # Args     : x = remote file on an ftp site (e.g. "/ftpdata/mystuff/foo.txt") -->
+<!-- #      : y = local folder (e.g. "C:\\temp") -->
+<!-- #      : n = ftp site (defaults to standard) -->
+<!-- #      : w = user id (defaults to standard) -->
+<!-- #      : h = password (defaults to standard) -->
+<!-- #      : u = protocol (either "ftp" or "sftp") -->
+<!-- #      : v = T/F flag for ftp.use.epsv argument of getCurlHandle -->
+<!-- # Output   : file <x> from remote site -->
+<!-- # ----------------------------------------------------------------- -->
+<!-- # -->
+<!-- # MISSING ARGUMENTS -->
+<!--    if (missing(n)) n <- ftp.credential("ftp", u, v) -->
+<!--    if (missing(w)) w <- ftp.credential("user", u, v) -->
+<!--    if (missing(h)) h <- ftp.credential("pwd", u, v) -->
+<!-- # -->
+<!-- # GET DATA -->
+<!--    z <- getCurlHandle(ftp.use.epsv = v, userpwd = paste0(w, ":", h)) -->
+<!--    z <- getBinaryURL(paste0(u, "://", n, x), curl = z) -->
+<!--    writeBin(z, con = paste0(y, "\\", ftp.file(x))) -->
+<!-- # -->
+<!-- # RETURN NOTHING -->
+<!--    invisible() -->
+<!-- } -->
+<!-- ``` -->
+<!-- _Tip: within the C://EPFR//parameters folder, add a file called ftp-credential.txt. This will allow the ftp.get() function to automatically generate ftp, username and password information. See below example._ -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp <- "000.000.000.00" -->
+<!-- user <- "mydatafeed" -->
+<!-- pwd <- "mypassword100!" -->
+<!-- x <- t(data.frame(ftp, user, pwd)) -->
+<!-- mat.write(x, "c:\\EPFR\\parameters\\ftp-credential.txt") -->
+<!-- ``` -->
+<!-- ### Examples  {-} -->
+<!-- To download a desired ftp file you can set the file path to the csv file that will be used for your strategy and a local folder that this file will be downloaded to and then input parameters into the ftp.get() function. -->
+<!-- Example 1: Downloading Flow File -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- flow.file <- "/Strategies/daily/FloPctSector-US-daily.csv" # FTP FILE - FloPctSector-US-daily.csv -->
+<!-- flow.fldr <- "C:\\EPFR\\daily" # LOCAL FOLDER -->
+<!-- ``` -->
+<!-- Next you will enter your username and password: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- usr <- "YOUR USER NAME" # FTP USERNAME -->
+<!-- pwd <- "YOUR PASSWORD" #FTP PASSWORD -->
+<!-- ``` -->
+<!-- Now you can call `ftp.get()` with the following inputs: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp.get(file, fldr, "filetransport.epfrglobal.com", usr, pwd, "ftp") # DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS -->
+<!-- ``` -->
+<!-- After the file is downloaded the flow file's local path can be easily stored with follow line: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- flow.file <- paste(flow.fldr, ftp.file(flow.file), sep = "\\") # STORES FLOW FILE PATH -->
+<!-- ``` -->
+<!-- Example 2: Downloading Return File -->
+<!-- ```{r} -->
+<!-- ret.file <- "/Returns/PsuedoReturns-Sector-US-daily.csv" -->
+<!-- ret.fldr <- "C:\\EPFR\\returns" # LOCAL FOLDER -->
+<!-- ``` -->
+<!-- Next we will try using the automated credentials entered in _ftp-credential.txt_ to log in to the ftp, by calling `ftp.get()` with the following inputs: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp.get(file, fldr, u = "ftp", v = T) # DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS -->
+<!-- ``` -->
+<!-- After the file is downloaded the flow file's local path can be easily stored with follow line: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ret.file <- paste(ret.fldr, ftp.file(ret.file), sep = "\\") # STORES FLOW FILE PATH -->
+<!-- ``` -->
+<hr />
+</div>
+<div id="strategy-functions" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Strategy Functions<a href="epfr-r-library.html#strategy-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="total-return-index" class="section level3 unnumbered hasAnchor">
+<h3>Total Return Index<a href="epfr-r-library.html#total-return-index" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>EPFR’s function <code>ret.to.idx()</code> uses other functions within <code>library('EPFR.r')</code> to compute a total-return index series, from percentage returns. To calculate the total return index we sum 1 plus today’s percentage return multiplied by the previous days total-return index.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="epfr-r-library.html#cb2-1" aria-hidden="true" tabindex="-1"></a>ret.to.idx <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb2-2"><a href="epfr-r-library.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb2-3"><a href="epfr-r-library.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Name      : ret.to.idx</span></span>
+<span id="cb2-4"><a href="epfr-r-library.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Args      : x = a file of total returns indexed so that time runs forward</span></span>
+<span id="cb2-5"><a href="epfr-r-library.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Output    : computes a total-return index</span></span>
+<span id="cb2-6"><a href="epfr-r-library.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb2-7"><a href="epfr-r-library.html#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(<span class="fu">dim</span>(x))) {</span>
+<span id="cb2-8"><a href="epfr-r-library.html#cb2-8" aria-hidden="true" tabindex="-1"></a>        z <span class="ot">&lt;-</span> x</span>
+<span id="cb2-9"><a href="epfr-r-library.html#cb2-9" aria-hidden="true" tabindex="-1"></a>        w <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(z)</span>
+<span id="cb2-10"><a href="epfr-r-library.html#cb2-10" aria-hidden="true" tabindex="-1"></a>        n <span class="ot">&lt;-</span> <span class="fu">find.data</span>(w, T)</span>
+<span id="cb2-11"><a href="epfr-r-library.html#cb2-11" aria-hidden="true" tabindex="-1"></a>        m <span class="ot">&lt;-</span> <span class="fu">find.data</span>(w, F)</span>
+<span id="cb2-12"><a href="epfr-r-library.html#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (n <span class="sc">&gt;</span> <span class="dv">1</span>) n <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb2-13"><a href="epfr-r-library.html#cb2-13" aria-hidden="true" tabindex="-1"></a>        z[n] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb2-14"><a href="epfr-r-library.html#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> (n <span class="sc">&lt;</span> m) {</span>
+<span id="cb2-15"><a href="epfr-r-library.html#cb2-15" aria-hidden="true" tabindex="-1"></a>            n <span class="ot">&lt;-</span> n <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb2-16"><a href="epfr-r-library.html#cb2-16" aria-hidden="true" tabindex="-1"></a>            z[n] <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">zav</span>(z[n])<span class="sc">/</span><span class="dv">100</span>) <span class="sc">*</span> z[n <span class="sc">-</span> <span class="dv">1</span>]</span>
+<span id="cb2-17"><a href="epfr-r-library.html#cb2-17" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb2-18"><a href="epfr-r-library.html#cb2-18" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb2-19"><a href="epfr-r-library.html#cb2-19" aria-hidden="true" tabindex="-1"></a>        z <span class="ot">&lt;-</span> <span class="fu">fcn.mat.vec</span>(ret.to.idx, x,, T)</span>
+<span id="cb2-20"><a href="epfr-r-library.html#cb2-20" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-21"><a href="epfr-r-library.html#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb2-22"><a href="epfr-r-library.html#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># RETURN RESULT</span></span>
+<span id="cb2-23"><a href="epfr-r-library.html#cb2-23" aria-hidden="true" tabindex="-1"></a>z</span>
+<span id="cb2-24"><a href="epfr-r-library.html#cb2-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="compunding-flows" class="section level3 unnumbered hasAnchor">
+<h3>Compunding Flows<a href="epfr-r-library.html#compunding-flows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>EPFR’s function <code>compound.flows()</code> uses other functions within <code>library('EPFR.r')</code> to compute a rolling cumulative sum of flows over a trailing lookback period (typically we use 20 days).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="epfr-r-library.html#cb3-1" aria-hidden="true" tabindex="-1"></a>compound.flows <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">n =</span> F) {</span>
+<span id="cb3-2"><a href="epfr-r-library.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb3-3"><a href="epfr-r-library.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Args      : x = a matrix/data-frame of percentage flows</span></span>
+<span id="cb3-4"><a href="epfr-r-library.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#       : y = number of trailing rows to compound/sum</span></span>
+<span id="cb3-5"><a href="epfr-r-library.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       : n = if T, flows get summed. Otherwise they get compounded.</span></span>
+<span id="cb3-6"><a href="epfr-r-library.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Output    : compounded flows over &lt;n&gt; trailing periods indexed by last day in the flow window</span></span>
+<span id="cb3-7"><a href="epfr-r-library.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb3-8"><a href="epfr-r-library.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-9"><a href="epfr-r-library.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># FIND NA&#39;s : </span></span>
+<span id="cb3-10"><a href="epfr-r-library.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># creates new df with value of 1 for all non-NA flows, else NA</span></span>
+<span id="cb3-11"><a href="epfr-r-library.html#cb3-11" aria-hidden="true" tabindex="-1"></a>    h <span class="ot">&lt;-</span> <span class="fu">nonneg</span>(<span class="fu">mat.to.obs</span>(x)) </span>
+<span id="cb3-12"><a href="epfr-r-library.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-13"><a href="epfr-r-library.html#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># PRELIMINARIES : </span></span>
+<span id="cb3-14"><a href="epfr-r-library.html#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert all NA values to 0 in order to do computations</span></span>
+<span id="cb3-15"><a href="epfr-r-library.html#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to log form</span></span>
+<span id="cb3-16"><a href="epfr-r-library.html#cb3-16" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">zav</span>(x)</span>
+<span id="cb3-17"><a href="epfr-r-library.html#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>n) z <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">+</span> z<span class="sc">/</span><span class="dv">100</span>)</span>
+<span id="cb3-18"><a href="epfr-r-library.html#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-19"><a href="epfr-r-library.html#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ROLLING WINDOWS</span></span>
+<span id="cb3-20"><a href="epfr-r-library.html#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate rolling sum</span></span>
+<span id="cb3-21"><a href="epfr-r-library.html#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># reverse log form</span></span>
+<span id="cb3-22"><a href="epfr-r-library.html#cb3-22" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">mat.rollsum</span>(z, y)</span>
+<span id="cb3-23"><a href="epfr-r-library.html#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>n) z <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">exp</span>(z) <span class="sc">-</span> <span class="dv">100</span></span>
+<span id="cb3-24"><a href="epfr-r-library.html#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-25"><a href="epfr-r-library.html#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># ENSURE FINAL DATE IN EACH ROLLING WINDOW IS NON-NA</span></span>
+<span id="cb3-26"><a href="epfr-r-library.html#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># multiply compounded flow matrix by h (1/NA df)</span></span>
+<span id="cb3-27"><a href="epfr-r-library.html#cb3-27" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z <span class="sc">*</span> h</span>
+<span id="cb3-28"><a href="epfr-r-library.html#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-29"><a href="epfr-r-library.html#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"># RETURN RESULT</span></span>
+<span id="cb3-30"><a href="epfr-r-library.html#cb3-30" aria-hidden="true" tabindex="-1"></a>    z</span>
+<span id="cb3-31"><a href="epfr-r-library.html#cb3-31" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><em>Please refer to the library documentation for more details.</em></p>
+<hr />
+</div>
+<div id="model" class="section level3 unnumbered hasAnchor">
+<h3>Model<a href="epfr-r-library.html#model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>EPFR’s function <code>bbk()</code> creates a standardized backtest model based on our inputs (e.g. ranking factors into 5 equal baskets based on compounded flows).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="epfr-r-library.html#cb4-1" aria-hidden="true" tabindex="-1"></a>bbk <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">floW =</span> <span class="dv">1</span>, <span class="at">retW =</span> <span class="dv">5</span>, <span class="at">nBin =</span> <span class="dv">5</span>, <span class="at">doW =</span> <span class="cn">NULL</span>, <span class="at">sum.flows =</span> F, <span class="at">lag =</span> <span class="dv">0</span>, <span class="at">delay =</span> <span class="dv">2</span>, <span class="at">idx =</span> <span class="cn">NULL</span>, <span class="at">prd.size =</span> <span class="dv">1</span>, <span class="at">sprds =</span> F) {</span>
+<span id="cb4-2"><a href="epfr-r-library.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb4-3"><a href="epfr-r-library.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Args      : x = predictor indexed by yyyymmdd or yyyymm (compounded percentage flow)</span></span>
+<span id="cb4-4"><a href="epfr-r-library.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#       : y = total return index indexed by the same date format as &lt;x&gt; </span></span>
+<span id="cb4-5"><a href="epfr-r-library.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       : floW = number of &lt;prd.size&gt;&#39;s over which the predictor should be compounded/summed</span></span>
+<span id="cb4-6"><a href="epfr-r-library.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#       : retW = return window in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb4-7"><a href="epfr-r-library.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#       : nBin = number of bins to divide the variable into</span></span>
+<span id="cb4-8"><a href="epfr-r-library.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#       : doW = day of the week you will trade on (5 = Fri)</span></span>
+<span id="cb4-9"><a href="epfr-r-library.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#       : sum.flows = T/F depending on whether &lt;x&gt; should be summed or compounded</span></span>
+<span id="cb4-10"><a href="epfr-r-library.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#       : lag = predictor lag in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb4-11"><a href="epfr-r-library.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#       : delay = delay in knowing data in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb4-12"><a href="epfr-r-library.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#       : idx = the index within which you are trading</span></span>
+<span id="cb4-13"><a href="epfr-r-library.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#       : prd.size = size of each period in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb4-14"><a href="epfr-r-library.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#       : sprds = T/F depending on whether spread changes, rather than returns, are needed</span></span>
+<span id="cb4-15"><a href="epfr-r-library.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Output    : standard model output</span></span>
+<span id="cb4-16"><a href="epfr-r-library.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb4-17"><a href="epfr-r-library.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb4-18"><a href="epfr-r-library.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># GET DATA</span></span>
+<span id="cb4-19"><a href="epfr-r-library.html#cb4-19" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">bbk.data</span>(x, y, floW, sum.flows, lag, delay, doW, retW, idx, prd.size, sprds)</span>
+<span id="cb4-20"><a href="epfr-r-library.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb4-21"><a href="epfr-r-library.html#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># BIN RETURNS</span></span>
+<span id="cb4-22"><a href="epfr-r-library.html#cb4-22" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">bbk.bin.xRet</span>(x<span class="sc">$</span>x, x<span class="sc">$</span>fwdRet, nBin, T, T), mat.reverse)</span>
+<span id="cb4-23"><a href="epfr-r-library.html#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb4-24"><a href="epfr-r-library.html#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># SUMMARY</span></span>
+<span id="cb4-25"><a href="epfr-r-library.html#cb4-25" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">c</span>(z, <span class="fu">bbk.summ</span>(z<span class="sc">$</span>rets, z<span class="sc">$</span>bins, retW, <span class="fu">ifelse</span>(<span class="fu">is.null</span>(doW), <span class="dv">1</span>, <span class="dv">5</span>)))</span>
+<span id="cb4-26"><a href="epfr-r-library.html#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb4-27"><a href="epfr-r-library.html#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># RETURN RESULT</span></span>
+<span id="cb4-28"><a href="epfr-r-library.html#cb4-28" aria-hidden="true" tabindex="-1"></a>    z</span>
+<span id="cb4-29"><a href="epfr-r-library.html#cb4-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><em>Please refer to the library documentation for more details.</em></p>
+<hr />
+</div>
+<div id="example" class="section level3 unnumbered hasAnchor">
+<h3>Example<a href="epfr-r-library.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Step 0: Download &amp; read files</p>
+<p>Users can download corresponding percentage flow and percentage returns files available in the users ftp, under the folders <code>Strategies/daily</code> and <code>Returns/daily</code>. For this example we download the full file paths <code>/Strategies/daily/FloPctSector-US-daily.csv</code> and <code>/Returns/PsuedoReturns-Sector-US-daily.csv</code>, and save to our local folder <code>EPFR</code>.</p>
+<p>For convince we can save the local paths to these files as <code>flow.file</code> and <code>ret.file</code>, then we can read the files.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="epfr-r-library.html#cb5-1" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">FloPctSector-US-daily.csv&quot;</span></span>
+<span id="cb5-2"><a href="epfr-r-library.html#cb5-2" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">PsuedoReturns-Sector-US-daily.csv&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="epfr-r-library.html#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># Flow file</span></span>
+<span id="cb6-2"><a href="epfr-r-library.html#cb6-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file) <span class="co"># Return file</span></span></code></pre></div>
+<p>Step 1: Ensure that x and y the same column names and order</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="epfr-r-library.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[, <span class="fu">dimnames</span>(y)[[<span class="dv">2</span>]]]) <span class="co"># LINE UP INDICATORS WITH RETURNS </span></span></code></pre></div>
+<p>Step 2: Compound (or Sum Flows) over lookback period (<span class="math inline">\(y\)</span>)</p>
+<p>EPFR’s function <code>compound.flows()</code> uses other functions within <code>library('EPFR.r')</code> to either compound, or compute a rolling cumulative sum of flows, over a trailing lookback period (typically we use y = 20 days).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="epfr-r-library.html#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, <span class="at">y =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p>Step 3: Convert percentage returns to total return index</p>
+<p>EPFR’s function <code>ret.to.idx()</code> will convert our percentage returns data <span class="math inline">\(y\)</span> to total index returns indexed so that time moves forward. We also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file and <code>ret.idx.gaps.fix()</code> to replace any NA values.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="epfr-r-library.html#cb9-1" aria-hidden="true" tabindex="-1"></a>y[<span class="fu">is.na</span>(y)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-2"><a href="epfr-r-library.html#cb9-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX</span></span>
+<span id="cb9-3"><a href="epfr-r-library.html#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span></code></pre></div>
+<p>Step 4: Define variables</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="epfr-r-library.html#cb10-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS OR MONTHS) - holding periods</span></span>
+<span id="cb10-2"><a href="epfr-r-library.html#cb10-2" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># Number of bins (to sort)</span></span>
+<span id="cb10-3"><a href="epfr-r-library.html#cb10-3" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># Day of the week to trade on</span></span>
+<span id="cb10-4"><a href="epfr-r-library.html#cb10-4" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># Delay in getting the data (able to trade on data @ T+2)</span></span>
+<span id="cb10-5"><a href="epfr-r-library.html#cb10-5" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Optional: Universe that is being used for signal (e.g. ACWI/EM/EAFE/G10)</span></span></code></pre></div>
+<p>Step 5: Create standardized backtest model</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="epfr-r-library.html#cb11-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay, idx)</span></code></pre></div>
+<p>Step 6: Evaluate output</p>
+<p><span class="math inline">\(Z\)</span> has 4 different outputs that you can view. Within the final “rets” output, the overall portfolio will go long the top quintile and short the bottom, however the returns of each individual quintile are also presented</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="epfr-r-library.html#cb12-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;raw&quot;</span>]] <span class="co"># Flow percentage compounded over trailing 20 days</span></span>
+<span id="cb12-2"><a href="epfr-r-library.html#cb12-2" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;raw.fwd.rets&quot;</span>]] <span class="co"># One-week ahead return (Friday to Friday)</span></span>
+<span id="cb12-3"><a href="epfr-r-library.html#cb12-3" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]] <span class="co"># Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)</span></span>
+<span id="cb12-4"><a href="epfr-r-library.html#cb12-4" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]] <span class="co"># Quintile Returns over the equal-weight universe, *column TxB tells us top - bottom = Q1 - Q5 = overall portfolio returns</span></span></code></pre></div>
+<p>Step 7: Re-balance as needed</p>
+<p>Strategies need to be rebalanced and the below code outputs summary statistics across 6 different rebalancing options found in <span class="math inline">\(hz\)</span>. Depending on how the signal we are backtesting is indexed, holding periods can be specified in a daily or monthly format. For this example we have a daily signal and <span class="math inline">\(hz\)</span> contains options for a weekly (5 days), fortnightly (10 days), monthly (20 days), bi-monthly (45 days), quarterly (65 days), and semi-annual (130 days) rebalanced portfolio.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="epfr-r-library.html#cb13-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
+<span id="cb13-2"><a href="epfr-r-library.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="epfr-r-library.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
+<p>Step 8: Find the mean one-week returns per calendar year</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="epfr-r-library.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], <span class="dv">5</span>, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Filters.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-EPFRLib.Rmd",
+"text": "Suggest an edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

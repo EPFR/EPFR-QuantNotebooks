@@ -5,7 +5,6 @@ about
 set-up
 strategy-functions
 Filters
-investor-type
 multi-asset-strategy
 overview
 data

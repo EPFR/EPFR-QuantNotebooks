@@ -5,6 +5,7 @@ about
 set-up
 strategy-functions
 Filters
+video-explanations
 multi-asset-strategy
 overview
 data

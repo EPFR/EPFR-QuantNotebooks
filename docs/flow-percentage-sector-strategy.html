@@ -1047,7 +1047,7 @@ FinsExREst
 </div>
 <div id="return-file-3" class="section level3 hasAnchor" number="7.2.4">
 <h3><span class="header-section-number">7.2.4</span> Return File<a href="flow-percentage-sector-strategy.html#return-file-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The return file for this strategy should contain daily equity returns for each of the sectors in the flow file, over the period of time and within the country or region the user wants to backtest.</p>
+<p>The return file for this strategy should contain daily passive equity fund returns for each of the sectors in the flow file, over the period of time and within the country or region the user wants to backtest.</p>
 <p>The user can choose to use return data found with their own resources, or they have the option to use a file EPFR provides of <em>Sector Returns</em>, which is <strong>available in the user’s EPFR FTP connection under the Returns folder</strong> ( <a href="FAQ.html#Rets">11.1</a> ). The Return file that EPFR provides contains Fund Return data and can be used as a proxy to equity market returns. The user can recreate these files using EPFR daily flow data with the following equation:</p>
 <p><span class="math display">\[\text{Fund Return}_{s,r,t} = 100 \times \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,s,r,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,s,r,t}}\]</span>
 Where:</p>
@@ -1064,7 +1064,7 @@ Where:</p>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-CDisc
+CStpls
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 Engy
@@ -1104,31 +1104,31 @@ REst
 -0.2431
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.5814
+-0.6401
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1473
+-0.2838
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3333
+0.2003
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0491
+0.0493
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4450
+0.2252
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1484
+-0.1012
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4478
+0.4482
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1865
+-0.2080
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0517
+-0.2548
 </td>
 </tr>
 <tr>
@@ -1136,34 +1136,34 @@ REst
 20221202
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0138
+0.0121
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0061
+0.0213
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0024
+-0.0034
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0701
+0.0365
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.0929
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1161
+-0.0941
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0401
+0.0453
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.0024
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1441
+-0.0109
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1602
+-0.0171
 </td>
 </tr>
 <tr>
@@ -1171,34 +1171,34 @@ REst
 20221205
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.6348
+-1.6356
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.9185
+-3.2600
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.9419
+-2.4229
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.6861
+-0.6162
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.8415
+-0.8405
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.9521
+-1.9255
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.3380
+-1.0314
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.3610
+-1.3607
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.0006
+-0.9563
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.0375
+-1.8007
 </td>
 </tr>
 <tr>
@@ -1206,34 +1206,34 @@ REst
 20221206
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.1861
+-1.1871
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.8681
+-3.1151
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.9757
+-1.2726
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.4688
+-1.4503
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.4472
+-1.4473
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.7839
+-2.9407
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.8538
+-0.7542
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.8511
+-2.8517
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3086
+0.3810
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.8446
+-1.1524
 </td>
 </tr>
 <tr>
@@ -1241,34 +1241,34 @@ REst
 20221207
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0736
+0.0738
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.4658
+-0.3759
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0627
+-0.0744
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4294
+0.4393
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1264
+-0.1259
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.4355
+-0.3715
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1153
+-0.1486
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.2059
+-0.2057
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1889
+-0.1489
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0666
+0.1621
 </td>
 </tr>
 <tr>
@@ -1276,34 +1276,34 @@ REst
 20221208
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.7009
+0.7013
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.8482
+-0.8788
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0538
+-0.0780
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.1937
+1.3499
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.4440
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.6883
+1.8668
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3783
+0.4028
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.5260
+-0.5269
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2917
+0.2874
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3761
+0.7512
 </td>
 </tr>
 </tbody>
@@ -1665,7 +1665,7 @@ FinsExREst
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-CDisc
+CStpls
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 Engy
@@ -1702,13 +1702,13 @@ REst
 20221230
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
+4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
+2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
@@ -1723,7 +1723,7 @@ REst
 5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
+3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1
@@ -1737,7 +1737,7 @@ REst
 20221223
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
+4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1
@@ -1758,7 +1758,7 @@ REst
 5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
+3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1
@@ -1910,25 +1910,25 @@ uRet
 20221230
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.4945056
+-1.8566050
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3856172
+1.0887642
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1383092
+0.3708237
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.0413127
+0.0497519
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2058850
+0.3472651
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.7003906
+-2.2038701
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.0135342
+2.2246404
 </td>
 </tr>
 <tr>
@@ -1936,25 +1936,25 @@ uRet
 20221223
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0882285
+-0.0418929
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2694172
+0.3402011
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1206071
+0.4276992
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2513174
+-0.3162858
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.3118990
+-0.4097217
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2236705
+0.3678288
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1941440
+-0.1898268
 </td>
 </tr>
 <tr>
@@ -1962,25 +1962,25 @@ uRet
 20221216
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.0590980
+2.1395331
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2470051
+0.2277807
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0504366
+0.0070763
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.8664706
+-1.9778575
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.4900691
+-0.3965326
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.5491671
+2.5360658
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0900472
+0.2637821
 </td>
 </tr>
 <tr>
@@ -1988,25 +1988,25 @@ uRet
 20221209
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.6349709
+1.9191695
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.5174762
+0.7071599
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.8225153
+-0.9190817
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.9866103
+-0.9616110
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.3433215
+-0.7456367
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.9782924
+2.6648062
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.4672554
+-1.5945934
 </td>
 </tr>
 <tr>
@@ -2014,25 +2014,25 @@ uRet
 20221202
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.5299252
+-1.6735452
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3124441
+0.0697746
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1162726
+0.3735787
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0062364
+0.1790699
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.0949721
+1.0511220
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.6248973
+-2.7246672
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.3864877
+-3.5737229
 </td>
 </tr>
 </tbody>
@@ -2085,25 +2085,25 @@ uRet
 AnnMn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-5.4
+7.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1.0
+-2.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.1
+-1.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--3.7
+-0.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.7
+-3.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.1
+11.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.3
+7.8
 </td>
 </tr>
 <tr>
@@ -2111,25 +2111,25 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-10.0
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.8
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.4
+10.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 7.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-9.0
+7.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-15.6
+8.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-19.7
+9.7
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+16.8
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+20.2
 </td>
 </tr>
 <tr>
@@ -2137,25 +2137,25 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-54.1
+72.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12.6
+-28.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--14.2
+-25.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--46.3
+-3.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--18.6
+-33.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-45.5
+65.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-37.3
+38.7
 </td>
 </tr>
 <tr>
@@ -2163,22 +2163,22 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-5.6
+7.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.3
+-2.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.1
+-0.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.8
+-0.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--5.1
+-4.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-5.4
+6.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 7.1
@@ -2204,7 +2204,7 @@ Beta
 0.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.1
+0.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 1.0
@@ -2215,22 +2215,22 @@ Beta
 Alpha
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-5.1
+7.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1.0
+-2.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.0
+-1.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--3.5
+0.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.6
+-3.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.7
+10.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0.0
@@ -2241,25 +2241,25 @@ Alpha
 DrawDn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--20.1
+-21.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--29.5
+-55.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--37.6
+-54.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--64.8
+-33.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--79.7
+-83.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--37.5
+-33.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--75.7
+-76.6
 </td>
 </tr>
 <tr>
@@ -2267,22 +2267,22 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20210305
+20220610
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20080905
+20081107
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20200103
+20081024
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 20070622
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20090313
+20100702
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20210305
+20220610
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 20071012
@@ -2293,22 +2293,22 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-41
+34
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-447
+743
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-141
+718
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-809
+77
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-625
+557
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-100
+34
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 73
@@ -2319,22 +2319,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1130
+1114
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2213
+2248
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2356
+2549
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2279
+2308
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1216
+1178
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2346
+2292
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0
@@ -2350,25 +2350,25 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-4.8
+6.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.1
+-2.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.5
+-0.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--3.4
+-0.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.7
+-3.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.5
+9.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.1
+7.5
 </td>
 </tr>
 <tr>
@@ -2376,25 +2376,25 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-9.8
+10.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.5
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.2
+7.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 7.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-8.2
+7.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-14.7
+8.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-18.9
+16.1
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+19.3
 </td>
 </tr>
 <tr>
@@ -2402,25 +2402,25 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-48.1
+58.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.5
+-28.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.2
+-9.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--45.0
+-6.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--20.6
+-33.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-43.3
+56.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-37.7
+39.2
 </td>
 </tr>
 <tr>
@@ -2428,22 +2428,22 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-4.2
+4.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2.3
+-0.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1.6
+0.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--2.7
+-0.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--4.4
+-4.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.1
+6.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 10.0
@@ -2454,9 +2454,6 @@ HitRate
 Beta
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.1
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
@@ -2469,7 +2466,10 @@ Beta
 0.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.1
+0.0
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 1.0
@@ -2480,22 +2480,22 @@ Beta
 Alpha
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-4.4
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.2
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.4
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--3.3
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.6
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 6.0
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+-1.9
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+-0.8
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+-0.2
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+-3.1
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+9.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0.0
@@ -2506,25 +2506,25 @@ Alpha
 DrawDn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--20.1
+-20.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--41.9
+-55.7
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+-30.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 -30.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--65.0
+-83.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--76.0
+-36.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--37.2
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--72.0
+-72.9
 </td>
 </tr>
 <tr>
@@ -2532,19 +2532,19 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20215461
+20215418
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20080964
+20081062
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20200364
+20135464
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 20070723
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20100454
+20100418
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 20210308
@@ -2558,19 +2558,19 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-18
+19
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-144
+341
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-62
+51
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-351
+196
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-284
+306
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 35
@@ -2584,22 +2584,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-874
+847
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1468
+1460
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1545
+1605
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1467
+1453
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-877
+872
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1751
+1720
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0
@@ -2615,25 +2615,25 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-4.8
+5.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.4
+-1.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.2
+-0.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--2.8
+-1.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.4
+-2.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.1
+7.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.1
+7.5
 </td>
 </tr>
 <tr>
@@ -2641,25 +2641,25 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-9.4
+10.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.4
+7.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.9
+7.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.7
+8.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.9
+8.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-13.7
+15.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-18.8
+19.1
 </td>
 </tr>
 <tr>
@@ -2667,25 +2667,25 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-50.8
+55.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--5.7
+-20.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--3.5
+-12.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--35.8
+-14.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--17.9
+-26.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-45.4
+52.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-37.8
+39.4
 </td>
 </tr>
 <tr>
@@ -2693,25 +2693,25 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-8.3
+9.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1.2
+-1.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.0
+-0.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--5.4
+-2.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--4.0
+-4.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-8.0
+7.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12.1
+12.5
 </td>
 </tr>
 <tr>
@@ -2745,22 +2745,22 @@ Beta
 Alpha
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-4.6
+5.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.2
+-1.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.3
+-0.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--2.6
+-0.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.4
+-2.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.0
+8.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0.0
@@ -2771,25 +2771,25 @@ Alpha
 DrawDn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--19.7
+-19.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--35.6
+-42.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--32.1
+-39.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--59.3
+-41.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--67.6
+-74.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--38.6
+-33.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--67.3
+-68.4
 </td>
 </tr>
 <tr>
@@ -2797,22 +2797,22 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20212936
+20198012
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20110637
+20127988
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20128045
+20073296
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 20070838
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20098090
+20097993
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20175410
+20178008
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 20070911
@@ -2823,22 +2823,22 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-16
+15
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-69
+110
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-57
+136
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-163
+150
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-143
+153
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20
+17
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 20
@@ -2849,22 +2849,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-640
+626
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-875
+881
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 894
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-901
+909
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-652
+646
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1292
+1272
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0
@@ -2880,25 +2880,25 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-3.1
+3.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.4
+-0.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.9
+0.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--2.0
+-1.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.6
+-2.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-4.7
+6.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.8
+7.1
 </td>
 </tr>
 <tr>
@@ -2906,25 +2906,25 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-9.2
+10.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.4
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.8
+7.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 7.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-8.1
+7.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-13.6
+8.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-17.9
+15.2
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+18.1
 </td>
 </tr>
 <tr>
@@ -2932,25 +2932,25 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-34.0
+36.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--4.5
+-7.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12.9
+9.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--29.3
+-21.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--21.6
+-29.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-35.1
+40.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-38.2
+39.8
 </td>
 </tr>
 <tr>
@@ -2958,25 +2958,25 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.5
+8.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 2.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-5.7
+5.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--5.2
+-3.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--5.2
+-6.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-8.9
+7.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-16.1
+16.3
 </td>
 </tr>
 <tr>
@@ -2996,7 +2996,7 @@ Beta
 0.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.0
+0.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0.0
@@ -3010,22 +3010,22 @@ Beta
 Alpha
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2.8
+3.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.8
+0.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.8
+-1.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.9
+-3.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-4.7
+6.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0.0
@@ -3036,25 +3036,25 @@ Alpha
 DrawDn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--19.8
+-20.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--35.1
+-32.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--33.0
+-26.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--48.2
+-41.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--68.2
+-75.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--32.2
+-30.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--60.0
+-60.9
 </td>
 </tr>
 <tr>
@@ -3062,22 +3062,22 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20118404
+20113939
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20089702
+20112865
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20110774
+20117285
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20089521
+20085108
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20106263
+20102873
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20097160
+20081688
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 20070870
@@ -3088,25 +3088,25 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12
+16
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 29
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-25
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-57
+37
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 60
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-8
+62
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-8
+7
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+9
 </td>
 </tr>
 <tr>
@@ -3114,22 +3114,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-317
+312
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-402
+415
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-401
+414
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-409
+410
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-329
+322
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-646
+634
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0
@@ -3145,25 +3145,25 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2.9
+3.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.2
+-0.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.2
+0.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.6
+-1.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.3
+-1.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-4.2
+5.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.8
+7.1
 </td>
 </tr>
 <tr>
@@ -3171,25 +3171,25 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-8.5
+9.3
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+7.7
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+7.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 7.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.0
+8.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.2
+13.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.9
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12.5
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-17.3
+17.4
 </td>
 </tr>
 <tr>
@@ -3197,25 +3197,25 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-34.3
+38.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--2.1
+-5.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2.5
+9.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--22.4
+-24.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--17.9
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-33.7
+-25.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 39.5
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+41.3
 </td>
 </tr>
 <tr>
@@ -3223,25 +3223,25 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.1
+7.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2.2
+2.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-3.9
+5.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--4.9
+-5.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--6.7
+-6.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.2
+8.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-18.0
+17.9
 </td>
 </tr>
 <tr>
@@ -3261,7 +3261,7 @@ Beta
 -0.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.0
+0.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0.0
@@ -3275,22 +3275,22 @@ Beta
 Alpha
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2.6
+3.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.0
+-0.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.0
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.2
+0.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 -1.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-4.0
+-2.3
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+5.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0.0
@@ -3301,25 +3301,25 @@ Alpha
 DrawDn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--20.9
+-21.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--32.9
+-35.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--28.4
+-25.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--38.8
+-39.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--61.3
+-69.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--38.9
+-38.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--55.8
+-56.8
 </td>
 </tr>
 <tr>
@@ -3327,22 +3327,22 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20117377
+20146599
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20101600
+20109802
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20137554
+20112855
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20087553
+20093701
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20103682
+20102121
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20100651
+20123790
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 20071638
@@ -3353,13 +3353,13 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-23
+8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 16
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+15
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 42
@@ -3368,7 +3368,7 @@ DDnN
 44
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7
+5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 6
@@ -3379,22 +3379,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-237
+232
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-301
+294
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+293
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 288
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-290
+238
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-243
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-480
+470
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0
@@ -3410,25 +3410,25 @@ AnnTo
 AnnMn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-2.2
+3.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.1
+-0.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.3
+0.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.7
+-0.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.7
+-2.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-3.9
+5.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.9
+7.2
 </td>
 </tr>
 <tr>
@@ -3436,25 +3436,25 @@ AnnMn
 AnnSd
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-8.0
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.3
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.9
+8.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 7.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-8.7
+7.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-13.0
+7.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-17.9
+9.1
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+14.2
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+18.1
 </td>
 </tr>
 <tr>
@@ -3462,25 +3462,25 @@ AnnSd
 Sharpe
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-28.8
+35.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.5
+-5.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6.0
+8.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--10.2
+-12.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--21.0
+-26.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-31.5
+38.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-38.7
+40.4
 </td>
 </tr>
 <tr>
@@ -3488,25 +3488,25 @@ Sharpe
 HitRate
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-7.6
+8.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.2
+-1.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-4.9
+5.8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.8
+-2.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--8.8
+-9.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-10.0
+11.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-19.2
+19.9
 </td>
 </tr>
 <tr>
@@ -3526,7 +3526,7 @@ Beta
 -0.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.0
+0.1
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0.0
@@ -3540,22 +3540,22 @@ Beta
 Alpha
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-1.9
+2.7
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.0
+-0.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.2
+0.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.1
+-0.3
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--1.9
+-2.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-3.8
+5.4
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0.0
@@ -3566,25 +3566,25 @@ Alpha
 DrawDn
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--23.5
+-23.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--29.2
+-32.9
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--25.9
+-25.2
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--30.2
+-34.6
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--56.2
+-61.5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--36.9
+-37.0
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--47.8
+-48.7
 </td>
 </tr>
 <tr>
@@ -3592,25 +3592,25 @@ DrawDn
 DDnBeg
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20122142
+20128651
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20108710
+20117665
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20127208
+20127621
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20108851
+20112646
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20107259
+20105746
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20108300
+20112554
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-20071239
+20071216
 </td>
 </tr>
 <tr>
@@ -3618,22 +3618,22 @@ DDnBeg
 DDnN
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-9
+8
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-11
+13
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-9
+10
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-17
+14
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-21
+22
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-6
+5
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 3
@@ -3644,22 +3644,22 @@ DDnN
 AnnTo
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-129
+126
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-150
+148
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-151
+145
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-151
+152
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-129
+128
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-258
+254
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 0
@@ -3707,25 +3707,25 @@ nPrds
 2007
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.090398
+4.622228
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.1064278
+8.728068
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--12.5239503
+-4.9439937
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.0292103
+-21.2120912
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-11.3563350
+12.805789
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.265937
+-8.183561
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1094208
+-1.011691
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 31
@@ -3736,25 +3736,25 @@ nPrds
 2008
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.708147
+14.375725
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.7655814
+-1.322843
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.3909424
+1.7095187
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--19.3637537
+-19.3877873
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.0302458
+4.625387
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.322099
+9.750339
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--46.3572135
+-46.504989
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3765,25 +3765,25 @@ nPrds
 2009
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-14.165041
+14.868090
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.8259412
+-5.668578
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--9.0672525
+-21.4480016
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--16.1497748
+16.1556139
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.2260447
+-3.907124
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.938997
+18.775214
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-35.0539749
+34.566948
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3794,25 +3794,25 @@ nPrds
 2010
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.177994
+8.717687
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--9.9711443
+-6.689767
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.9413605
+-6.5033783
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.4448212
+3.2858599
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2896896
+1.189599
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.888304
+7.528088
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-17.3513004
+17.243632
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 53
@@ -3823,25 +3823,25 @@ nPrds
 2011
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-11.274065
+9.678729
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3457096
+3.674624
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.8994071
+-3.3859450
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.8165057
+-2.0050766
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--8.5368733
+-7.962332
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-19.810938
+17.641062
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.9246818
+2.173219
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3852,25 +3852,25 @@ nPrds
 2012
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.067064
+3.429355
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.4955295
+1.986293
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.0740501
+4.3574638
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.7251977
+2.1383469
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--8.9114457
+-11.911459
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-11.978509
+15.340814
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-13.4809375
+13.683315
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3881,25 +3881,25 @@ nPrds
 2013
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.955288
+4.606888
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.2351282
+3.821385
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.7120456
+-0.2403924
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.5484315
+3.0689767
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--11.4508929
+-11.256858
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-15.406180
+15.863746
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-23.8744038
+24.404870
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3910,25 +3910,25 @@ nPrds
 2014
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.919956
+5.386686
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.6024530
+-3.721557
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.9287788
+6.3174943
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.9758556
+0.6926633
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.2704263
+-8.675287
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.190382
+14.061974
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-12.9408012
+13.174733
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3939,25 +3939,25 @@ nPrds
 2015
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.413940
+6.751300
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.1312620
+-8.115439
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.9157448
+-2.8562334
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.9355170
+11.3308423
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.1339399
+-7.110470
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-13.547880
+13.861770
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.9643819
+-4.508516
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3968,25 +3968,25 @@ nPrds
 2016
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.059270
+-2.437210
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--4.1845984
+-3.924251
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.2283663
+4.9285130
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.5163389
+-1.3246662
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.5318407
+2.757614
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.591110
+-5.194824
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-10.5591987
+11.252761
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 53
@@ -3997,25 +3997,25 @@ nPrds
 2017
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.145396
+0.166657
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.8180424
+3.931922
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.3501412
+1.4284693
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.6012313
+-0.7176119
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.7123483
+-4.809437
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.857744
+4.976094
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-11.0792418
+11.534889
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -4026,25 +4026,25 @@ nPrds
 2018
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.748447
+11.614465
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0509944
+-3.887556
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.5073424
+2.1236343
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.1120063
+-4.7626868
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--4.1800925
+-5.087857
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-13.928539
+16.702321
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--10.0257917
+-9.608623
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -4055,25 +4055,25 @@ nPrds
 2019
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.293170
+2.921743
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-10.9446259
+3.774146
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.0631686
+5.6689766
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3968762
+-0.1542883
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--12.1115006
+-12.210578
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.818331
+15.132321
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-23.3302048
+23.680192
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -4084,25 +4084,25 @@ nPrds
 2020
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-27.933688
+38.702682
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-12.9304599
+-3.998738
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--17.2045978
+-23.9888203
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--16.5310458
+-2.4511768
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.1285043
+-8.263947
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-35.062192
+46.966629
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-12.7457391
+13.106947
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -4113,25 +4113,25 @@ nPrds
 2021
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--11.668802
+-8.569646
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--4.4515818
+-11.670276
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.1566271
+0.0534208
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.6467737
+8.9491152
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.6302376
+11.237386
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--21.299040
+-19.807031
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-21.2488200
+23.475278
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 53
@@ -4142,25 +4142,25 @@ nPrds
 2022
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-12.343340
+16.420679
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.0013375
+-6.881379
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.4257272
+4.9606529
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--10.8862799
+-9.6867452
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.9673292
+-4.813208
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-10.376011
+21.233887
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--12.6975146
+-12.678979
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52

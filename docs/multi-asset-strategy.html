@@ -1225,7 +1225,7 @@ GLOFIX
 </div>
 <div id="return-file" class="section level3 hasAnchor" number="4.2.4">
 <h3><span class="header-section-number">4.2.4</span> Return File<a href="multi-asset-strategy.html#return-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The return file for this strategy should contain daily fixed income and passive equity fund returns for the respective asset classes contained in the flow file, over the period of time the user wants to backtest.</p>
+<p>The return file for this strategy should contain daily fixed income and passive equity returns for the respective asset classes contained in the flow file, over the period of time the user wants to backtest.</p>
 <p>The user can choose to use return data found with their own resources, or they have the option to use files EPFR provides specifically for the <em>Multi-Asset strategy</em>, which are <strong>available in the user’s EPFR FTP connection under the Returns folder</strong> ( <a href="FAQ.html#Rets">11.1</a> ). The Return files that EPFR provides contain Fund Return data and can be used as a proxy to equity and fixed income market returns. The user can recreate these files using EPFR daily flow data with the following equation:</p>
 <p><span class="math display">\[\text{Fund Return}_{a,t} = 100 \times \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,a,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,a,t}}\]</span>
 Where:</p>
@@ -1675,7 +1675,7 @@ GLOFIX
 </tbody>
 </table>
 <hr />
-<p>For convince save the paths to the return files you choose to use as <code>ret.file.rgn</code> and <code>ret.file.FI</code> respectively, example shown below:</p>
+<p>For convenience save the paths to the return files you choose to use as <code>ret.file.rgn</code> and <code>ret.file.FI</code> respectively, example shown below:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="multi-asset-strategy.html#cb16-1" aria-hidden="true" tabindex="-1"></a>ret.file.rgn <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-MultiAsset-Rgn-daily.csv&quot;</span></span>
 <span id="cb16-2"><a href="multi-asset-strategy.html#cb16-2" aria-hidden="true" tabindex="-1"></a>ret.file.FI <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-MultiAsset-FI-daily.csv&quot;</span></span></code></pre></div>
 <!-- --- -->

@@ -333,7 +333,7 @@ code span.wa { font-style: italic; } /* Warning */
 <p>To use various functions in <code>library('EPFR.r')</code> it is recommended that the user set up a folder called <em>EPFR</em> in your computers C drive (i.e. <em>C://EPFR</em>). This is the default directory that is used throughout the library to find any files used to perform backtests.</p>
 <p>Inside of this EPFR directory we would suggest following the below folder structure:</p>
 <ul>
-<li>Add “daily” folder; to store EPFR daily cvs files.
+<li>Add “daily” folder; to store EPFR daily csv files.
 <ul>
 <li>Example: <em>MultiAsset-Rgn-daily.csv</em>, <em>FloPctCtry-daily.csv</em>, <em>FloPctSector-US-daily.csv</em>, <em>FX-daily.csv</em>, ect.</li>
 </ul></li>
@@ -563,7 +563,7 @@ code span.wa { font-style: italic; } /* Warning */
 <h3>Example<a href="epfr.r-library.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Step 0: Download &amp; read files</p>
 <p>Users can download corresponding percentage flow and percentage returns files available in the users ftp, under the folders <code>Strategies/daily</code> and <code>Returns/daily</code>. For this example we download the full file paths <code>/Strategies/daily/FloPctSector-US-daily.csv</code> and <code>/Returns/PsuedoReturns-Sector-US-daily.csv</code>, and save to our local folder <code>EPFR</code>.</p>
-<p>For convince we can save the local paths to these files as <code>flow.file</code> and <code>ret.file</code>, then we can read the files.</p>
+<p>For convenience we can save the local paths to these files as <code>flow.file</code> and <code>ret.file</code>, then we can read the files.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="epfr.r-library.html#cb5-1" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">FloPctSector-US-daily.csv&quot;</span></span>
 <span id="cb5-2"><a href="epfr.r-library.html#cb5-2" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">PsuedoReturns-Sector-US-daily.csv&quot;</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="epfr.r-library.html#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># Flow file</span></span>

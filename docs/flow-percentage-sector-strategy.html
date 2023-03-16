@@ -129,7 +129,7 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="2" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i><b>2</b> EPFR.r Library</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="epfr.r-library.html"><a href="epfr.r-library.html#about"><i class="fa fa-check"></i><b>2.1</b> About</a></li>
-<li class="chapter" data-level="2.2" data-path="epfr.r-library.html"><a href="epfr.r-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set up</a></li>
+<li class="chapter" data-level="2.2" data-path="epfr.r-library.html"><a href="epfr.r-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set-up</a></li>
 <li class="chapter" data-level="2.3" data-path="epfr.r-library.html"><a href="epfr.r-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.3</b> Strategy Functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html#total-return-index"><i class="fa fa-check"></i>Total Return Index</a></li>
@@ -143,15 +143,15 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="3.1" data-path="Filters.html"><a href="Filters.html#video-explanations"><i class="fa fa-check"></i><b>3.1</b> Video Explanations</a>
 <ul>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#asset-class-focus"><i class="fa fa-check"></i>Asset class focus</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-type"><i class="fa fa-check"></i>Fund Type</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-type"><i class="fa fa-check"></i>Fund type</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#investor-type"><i class="fa fa-check"></i>Investor type</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#currency-of-flows"><i class="fa fa-check"></i>Currency of flows</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-domicile-or-geographic-focus"><i class="fa fa-check"></i>Fund Domicile or Geographic Focus</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-domicile-or-geographic-focus"><i class="fa fa-check"></i>Fund domicile or Geographic focus</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#theme"><i class="fa fa-check"></i>Theme</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#sector"><i class="fa fa-check"></i>Sector</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#style"><i class="fa fa-check"></i>Style</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#duration"><i class="fa fa-check"></i>Duration</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#individual-managers"><i class="fa fa-check"></i>Individual Managers</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#individual-managers"><i class="fa fa-check"></i>Individual managers</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html"><i class="fa fa-check"></i><b>4</b> Multi-Asset Strategy</a>
@@ -316,22 +316,22 @@ code span.wa { font-style: italic; } /* Warning */
 <h1><span class="header-section-number">7</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="overview-3" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Overview<a href="flow-percentage-sector-strategy.html#overview-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
+<p>The <em>Flow-Percentage Sector Strategy</em> is an equity-based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
 <!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
 <hr />
 </div>
 <div id="data-3" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Data<a href="flow-percentage-sector-strategy.html#data-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The <em>Flow-Percentage Sector Strategy</em> developed by EPFR is based on percentage flow into sectors weighted by the regional emphasis of each fund. In this section, the reader will gain an understanding of the aggregations which can be used to create a signal as well as the methodology behind daily percentage flow calculations.</p>
+<p>The <em>Flow-Percentage Sector Strategy</em> developed by EPFR is based on the percentage flow into sectors weighted by the regional emphasis of each fund. In this section, the reader will gain an understanding of the aggregations which can be used to create a signal as well as the methodology behind daily percentage flow calculations.</p>
 <hr />
 <div id="aggregations-3" class="section level3 hasAnchor" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Aggregations<a href="flow-percentage-sector-strategy.html#aggregations-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first step is defining a subset of data to capture in calculating our signal.</p>
-<p>This strategy requires;</p>
+<p>This strategy requires:</p>
 <ul>
 <li><p>Active equity funds with a cross-border focus. These are essentially any active fund that has a mandate spanning more than one country.</p></li>
-<li><p>Funds with a geographic mandate confined to the country or region of interest (e.g. for U.S. sector, we look only at funds that have a mandate to invest in the United States).</p></li>
-<li><p>Funds must report both daily flows with monthly sector and country allocations, since these values are needed to calculate Daily Percentage Flow.</p></li>
+<li><p>Funds with a geographic mandate confined to the country or region of interest (e.g. for the US sector, we look only at funds that have a mandate to invest in the United States).</p></li>
+<li><p>Funds must report both daily flows with monthly sector and country allocations, since these values are needed to calculate the daily percentage flow.</p></li>
 </ul>
 <hr />
 <p>Active cross-border equity funds, which report their sector allocations, country allocations and their fund flows have grown substantially over time. The figure below shows EPFR’s coverage over time of funds used to create this signal for different countries and regions.</p>
@@ -698,18 +698,18 @@ US
 <!-- ![Updated at the end of July each year](https://raw.githubusercontent.com/EPFR/EPFR-QuantNotebooks/master/png/coverage_flopctsector.png){width=250px} -->
 <!-- </center> -->
 <p>Users looking for more specific detail can customize this aggregation even further using EPFR’s fund-level or share class-level granularity. Some good examples would be to consider only active, passive, ETFs or mutual funds, or only institutional or retail share class flows and assets. Users can leverage these tags to different degrees in creating aggregated signals to backtest. Further detail about this is available in section <a href="Filters.html#Filters">3</a>.</p>
-<p>This can be achieved using fund-level flow and allocation files or by reaching out to EPFR’s quant team for customized aggregations.</p>
+<p>This can be achieved using fund-level flow and allocation files or by reaching out to EPFR’s Quant Team for customized aggregations.</p>
 <hr />
 </div>
 <div id="daily-percentage-flow-3" class="section level3 hasAnchor" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Daily Percentage Flow<a href="flow-percentage-sector-strategy.html#daily-percentage-flow-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To begin calculating Daily Percentage flow, we start with our subset of active cross-border equity funds with a geographic mandate confined to a country or region of interest. First, we calculate a fund’s weighting to each sector within this region of interest, as the product of its stated sector and country allocation.</p>
+<p>To begin calculating the daily percentage flow, we start with our subset of active cross-border equity funds with a geographic mandate confined to a country or region of interest. First, we calculate a fund’s weighting to each sector within this region of interest, as the product of its stated sector and country allocation.</p>
 <p><span class="math display">\[\text{Fund Weight}_{i,s,r,m} = \text{Sector Allocation}_{i,s,m} \times \text{Country Allocation}_{i,r,m}\]</span></p>
 <p>Where:</p>
 <ul>
 <li><span class="math inline">\(\text{Fund Weight}\)</span> = weighting to sector <span class="math inline">\(s\)</span>, within country or region <span class="math inline">\(r\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for month <span class="math inline">\(m\)</span></li>
 </ul>
-<p>Then, to calculate a fund’s dollar flow into a sector within the country or region of interest, we scale the fund’s flow by the fund’s weighting, on that day. We apply the same procedure to all funds with flow and allocation information and then sum across all funds, to get total dollar flow for each sector. <em>EPFR releases sector and country allocations of all funds on the <span class="math inline">\(23^{\text{rd}}\)</span> of each month (or the next available business day) at a monthly frequency. Hence, our calculation assumes constant country and sector weightings between two consecutive release dates within the month.</em></p>
+<p>Then, to calculate a fund’s dollar flow into a sector within the country or region of interest, we scale the fund’s flow by the fund’s weighting, on that day. We apply the same procedure to all funds with flow and allocation information and then sum across all funds, to get the total dollar flow for each sector. <em>EPFR releases sector and country allocations of all funds on the <span class="math inline">\(23^{\text{rd}}\)</span> of each month (or the next available business day) at a monthly frequency. Hence, our calculation assumes constant country and sector weightings between two consecutive release dates within the month.</em></p>
 <p><span class="math display">\[\text{Total Flow}_{s,r,t} = \sum^{N}_{i=m}{\text{Flow}_{i,s,r,t} \times \text{Fund Weight}_{i,s,r,m}}\]</span>
 Where:</p>
 <ul>
@@ -722,7 +722,7 @@ Where:</p>
 <li><span class="math inline">\(\text{Total AuM}\)</span> = the total assets held in a sector <span class="math inline">\(s\)</span>, for country or region <span class="math inline">\(r\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
 </ul>
 <p>Finally, to find the daily percentage flow for a sector, we divide the total flow by the total AuM held in a country or region.</p>
-<p><span class="math display">\[\text{Percentage Flow}_{s,r,t} = \frac{\text{Total Impact}_{s,r,t}}{\text{Total AuM}_{s,r,t}}\]</span>
+<p><span class="math display">\[\text{Percentage Flow}_{s,r,t} = 100 \times \frac{\text{Total Flow}_{s,r,t}}{\text{Total AuM}_{s,r,t}}\]</span>
 Where:</p>
 <ul>
 <li><span class="math inline">\(\text{Percentage Flow}\)</span> = the scaled flow as a percentage into a sector <span class="math inline">\(s\)</span>, for country or region <span class="math inline">\(r\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
@@ -733,9 +733,9 @@ Where:</p>
 <div id="aggregate-flow-file-3" class="section level3 hasAnchor" number="7.2.3">
 <h3><span class="header-section-number">7.2.3</span> Aggregate Flow File<a href="flow-percentage-sector-strategy.html#aggregate-flow-file-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Users may create flow percentages for their desired country or region, sector aggregations and granularity using the methodology described in the previous section.</p>
-<p>Users also have the option to use the <em>Flow-Percentage Sector Strategy</em> files EPFR provides, which are updated daily at 5:00 PM est. with a T+1 day lag, and are <strong>available in the user’s EPFR FTP connection under the strategies folder</strong>. There are five different types of <em>Flow-Percentage Sector Strategy</em> files available for different countries or geographic regions which include; Emerging Markets (EM), Japan (JP), United Kingdom (UK), Eurozone, and the United States (US). Each of these files contain aggregate percentage flow data for 12 sectors (displayed below).</p>
+<p>Users also have the option to use the <em>Flow-Percentage Sector Strategy</em> files EPFR provides, which are updated daily at 5:00 PM EST with a T+1 day lag, and are <strong>available in the user’s EPFR FTP connection under the Strategies folder</strong>. There are five different types of <em>Flow-Percentage Sector Strategy</em> files available for different countries or geographic, regions which include: Emerging Markets (EM), Japan (JP), United Kingdom (UK), Eurozone, and the United States (US). Each of these files contain aggregate percentage flow data for 12 sectors (displayed below).</p>
 <hr />
-<p>For this demonstration, we will focus on the <strong>US</strong> so we will be using the file <code>FloPctSector-US-daily.csv</code>, which can be downloaded from the users ftp under the folder <code>Strategies/daily</code> and can be stored in the users local folder <code>EPFR/daily</code>.</p>
+<p>For this demonstration, we will focus on the <strong>US</strong> so we will be using the file <code>FloPctSector-US-daily.csv</code>, which can be downloaded from the user’s FTP under the folder <code>Strategies/daily</code> and can be stored in the user’s local folder <code>EPFR/daily</code>.</p>
 <p>Below shows a snippet of what this file contains:</p>
 <p><code>Strategies/daily/FloPctSector-US-daily.csv</code></p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
@@ -1030,7 +1030,7 @@ FinsExREst
 </tr>
 </tbody>
 </table>
-<p>For convenience save the path to the flow file you choose to use as <code>flow.file</code>, example shown below:</p>
+<p>For convenience, save the path to the flow file you choose to use as <code>flow.file</code>. Example shown below:</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="flow-percentage-sector-strategy.html#cb71-1" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily</span><span class="sc">\\</span><span class="st">FloPctSector-US-daily.csv&quot;</span></span></code></pre></div>
 <!-- To follow along the user can download the _Flow-Percentage Sector Strategy_ files using the code below, which contains ftp functions ( \@ref(ftp) ) from `library('EPFR.r')`:  -->
 <!-- ```{r, eval=F, echo=T} -->
@@ -1047,15 +1047,15 @@ FinsExREst
 </div>
 <div id="return-file-3" class="section level3 hasAnchor" number="7.2.4">
 <h3><span class="header-section-number">7.2.4</span> Return File<a href="flow-percentage-sector-strategy.html#return-file-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The return file for this strategy should contain daily passive equity returns for each of the sectors in the flow file, over the period of time and within the country or region the user wants to backtest.</p>
-<p>The user can choose to use return data found with their own resources, or they have the option to use a file EPFR provides of <em>Sector Returns</em>, which is <strong>available in the user’s EPFR FTP connection under the Returns folder</strong> ( <a href="FAQ.html#Rets">11.1</a> ). The Return file that EPFR provides contains Fund Return data and can be used as a proxy to equity market returns. The user can recreate these files using EPFR daily flow data with the following equation:</p>
+<p>The return file for this strategy should contain the daily passive equity returns for each of the sectors in the flow file, over the period of time and within the country or region the user wants to backtest.</p>
+<p>The user can choose to use return data found with their own resources, or they have the option to use a file EPFR provides of <em>Sector Returns</em>, which is <strong>available in the user’s EPFR FTP connection under the Returns folder</strong> ( <a href="FAQ.html#Rets">11.1</a> ). The return file that EPFR provides contains Fund Return data and can be used as a proxy to equity market returns. The user can recreate these files using EPFR’s daily flow data with the following equation:</p>
 <p><span class="math display">\[\text{Fund Return}_{s,r,t} = 100 \times \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,s,r,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,s,r,t}}\]</span>
 Where:</p>
 <ul>
 <li><span class="math inline">\(\text{Fund Return}\)</span> = the percentage return of sector <span class="math inline">\(s\)</span>, for country or region <span class="math inline">\(r\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
 </ul>
 <hr />
-<p>For this demonstration, we will focus on the <strong>US</strong> so we will be using the file <code>PsuedoReturns-Sector-US-daily.csv</code>, which can be downloaded from the users ftp under the folder <code>Returns/daily</code> and can be stored in the users local folder <code>EPFR/returns</code>.</p>
+<p>For this demonstration, we will focus on the <strong>US</strong> so we will be using the file <code>PsuedoReturns-Sector-US-daily.csv</code>, which can be downloaded from the user’s FTP under the folder <code>Returns/daily</code> and can be stored in the user’s local folder <code>EPFR/returns</code>.</p>
 <p>Below shows a snippet of what this file contains:</p>
 <p><code>Returns/daily/PsuedoReturns-Sector-US-daily.csv</code></p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
@@ -1309,7 +1309,7 @@ REst
 </tbody>
 </table>
 <hr />
-<p>For convenience save the path to the return file you choose to use as <code>ret.file</code>, example shown below:</p>
+<p>For convenience, save the path to the return file you choose to use as <code>ret.file</code>. Example shown below:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="flow-percentage-sector-strategy.html#cb72-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-Sector-US-daily.csv&quot;</span></span></code></pre></div>
 <!-- --- -->
 <!-- To follow along the user can download the _US Sector Return_ file using the code below, which contains ftp functions ( \@ref(ftp) ) from `library('EPFR.r')`:  -->
@@ -1327,15 +1327,15 @@ REst
 </div>
 <div id="strategy-implementation-3" class="section level2 hasAnchor" number="7.3">
 <h2><span class="header-section-number">7.3</span> Strategy Implementation<a href="flow-percentage-sector-strategy.html#strategy-implementation-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the flow and return files to our <em>R studio</em> work space.</p>
+<p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the flow and return files to our <em>R studio</em> workspace.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="flow-percentage-sector-strategy.html#cb73-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># GET FLOW PERCENTAGE C:\\EPFR\\daily\\FloPctSector-US-daily.csv</span></span>
 <span id="cb73-2"><a href="flow-percentage-sector-strategy.html#cb73-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file)  <span class="co"># GET RETURN C:\\EPFR\\returns\\PsuedoReturns-Sector-US-daily.csv</span></span></code></pre></div>
-<p>Next we will need to ensure that the data structure in <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are completely aligned, having the same column names in the same order. Below we will subset the columns of <span class="math inline">\(x\)</span> to use the same sectors, in the same order as <span class="math inline">\(y\)</span>.</p>
+<p>Next, we will need to ensure that the data structure in <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are completely aligned, having the same column names in the same order. Below we will subset the columns of <span class="math inline">\(x\)</span> to use the same sectors, in the same order as <span class="math inline">\(y\)</span>.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="flow-percentage-sector-strategy.html#cb74-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[, <span class="fu">dimnames</span>(y)[[<span class="dv">2</span>]]]) <span class="co"># LINE UP INDICATORS WITH RETURNS </span></span></code></pre></div>
-<p><em>* Note: subsetting can be also be done when creating the flow and return files</em></p>
+<p><em>* Note: subsetting can also be done when creating the flow and return files</em></p>
 <div id="compounding-flows-3" class="section level3 hasAnchor" number="7.3.1">
 <h3><span class="header-section-number">7.3.1</span> Compounding Flows<a href="flow-percentage-sector-strategy.html#compounding-flows-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Next, we set up a variable for our look-back period, which can also be called a flow window. This variable will be the window of time we use to create a trailing compounded daily percentage flow. The look-back period we choose for our demonstrations is <strong>20 days</strong>.</p>
+<p>Next, we set up a variable for our lookback period, which can also be called a flow window. This variable will be the window of time we use to create a trailing compounded daily percentage flow. The lookback period we choose for our demonstrations is <strong>20 days</strong>.</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="flow-percentage-sector-strategy.html#cb75-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># FLOW WINDOW (IN WEEKDAYS) - 20 day look back period</span></span></code></pre></div>
 <p>Again, using a function from the <code>library('EPFR.r')</code>, <code>compound.flows()</code> compounds our daily percentage flow over the trailing <code>lookback</code> period for each sector.</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="flow-percentage-sector-strategy.html#cb76-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, F) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
@@ -1634,7 +1634,7 @@ FinsExREst
 </div>
 <div id="total-return-index-3" class="section level3 hasAnchor" number="7.3.2">
 <h3><span class="header-section-number">7.3.2</span> Total Return Index<a href="flow-percentage-sector-strategy.html#total-return-index-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We will now convert our percentage returns data <span class="math inline">\(y\)</span> to total index returns indexed so that time moves forward. To do this we will use function <code>ret.to.idx()</code> from <code>library('EPFR.r')</code>. We also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file and <code>ret.idx.gaps.fix()</code> to replace any NA values. Please refer to the library documentation for the complete list of parameters for these functions (tip: <code>?ret.to.idx()</code>,<code>?ret.idx.gaps.fix()</code> ).</p>
+<p>We will now convert our percentage returns data <span class="math inline">\(y\)</span> to total index returns indexed so that time moves forward. To do this we will use the function <code>ret.to.idx()</code> from <code>library('EPFR.r')</code>. We will also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file and <code>ret.idx.gaps.fix()</code> to replace any NA values. Please refer to the library documentation for the complete list of parameters for these functions (tip: <code>?ret.to.idx()</code>,<code>?ret.idx.gaps.fix()</code> ).</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="flow-percentage-sector-strategy.html#cb77-1" aria-hidden="true" tabindex="-1"></a>y[<span class="fu">is.na</span>(y)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb77-2"><a href="flow-percentage-sector-strategy.html#cb77-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX</span></span>
 <span id="cb77-3"><a href="flow-percentage-sector-strategy.html#cb77-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span></code></pre></div>
@@ -1642,22 +1642,22 @@ FinsExREst
 <div id="ranking-sectors" class="section level3 hasAnchor" number="7.3.3">
 <h3><span class="header-section-number">7.3.3</span> Ranking Sectors<a href="flow-percentage-sector-strategy.html#ranking-sectors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we sort each of the sectors in our country or region into five equal bins based on their compounded percentage flow values for the selected holding period. To do this, we will use the function from <code>library('EPFR.r')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
-<p>The <code>bbk()</code> function requires our daily percentage flow data compounded over a desired period and total return index data. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
+<p>The <code>bbk()</code> function requires our daily percentage flow data compounded over a desired period and the total return index data. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
 <p>The first parameter we add is the number of bins we want to use. For our case, we want to use 5 because our strategy is to go long the top fifth and short the bottom fifth.</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="flow-percentage-sector-strategy.html#cb78-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
-<p>Since EPFR data is published with T+1 day lag and is released around 5:00 pm EST, we account for a T+2 day delay in our model. Users interested in more timely signals can also use the T+2 open prices for backtesting purposes. Alternatively, EPFR’s Premium Daily offering collects an earlier release of end-of-day data which includes a significant subset of its original fund-level flow information.</p>
+<p>Since EPFR data is published with a T+1 day lag and is released around 5:00 pm EST, we account for a T+2 day delay in our model. Users interested in more timely signals can also use the T+2 open prices for backtesting purposes. Alternatively, EPFR’s Premium Daily offering collects an earlier release of end-of-day data which includes a significant subset of its original fund-level flow information.</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="flow-percentage-sector-strategy.html#cb79-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data takes time to have</span></span></code></pre></div>
-<p>It is also important to note that this model will need to be re-balanced weekly. The day of the week the rebalancing occurs is at the discretion of the user. For this example we will set the day of the week to trade as <strong>Friday</strong>.</p>
+<p>It is also important to note that this model will need to be re-balanced weekly. The day of the week the rebalancing occurs is at the user’s discretion. For this example we will set the day of the week to trade as <strong>Friday</strong>.</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="flow-percentage-sector-strategy.html#cb80-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
-<p>Additionally, we also evaluate the returns for different holding periods. The user can input return horizons that they are interested in here. For this example we define a return horizon for weekly, fortnightly, monthly, bi-monthly, quarterly, and semi-annual rebalancing.</p>
+<p>Additionally, we also evaluate the returns for different holding periods. The user can input return the horizons that they are interested in here. For this example, we define a return horizon for weekly, fortnightly, monthly, bi-monthly, quarterly, and semi-annual rebalancing.</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="flow-percentage-sector-strategy.html#cb81-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
-<p>Now that we have defined all of our inputs, to rank the sectors into quintiles by their 20-day percentage flow, we call function <code>bbk()</code> for a 1-week holding period.</p>
+<p>Now that we have defined all of our inputs, to rank the sectors into quintiles by their 20-day percentage flow, we call the function <code>bbk()</code> for a one-week holding period.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="flow-percentage-sector-strategy.html#cb82-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
 </div>
 <div id="model-4" class="section level3 hasAnchor" number="7.3.4">
 <h3><span class="header-section-number">7.3.4</span> Model<a href="flow-percentage-sector-strategy.html#model-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Go long the top basket and short the bottom basket.</p>
-<p><strong>Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)</strong></p>
+<p><strong>20-day flow percentage ranked into quintiles (computed only where forward returns are available)</strong></p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="flow-percentage-sector-strategy.html#cb83-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1874,7 +1874,7 @@ REst
 </tr>
 </tbody>
 </table>
-<p><strong>Quintile Returns over the equal-weight universe</strong></p>
+<p><strong>Quintile returns over the equal-weight universe</strong></p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="flow-percentage-sector-strategy.html#cb84-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
@@ -2037,7 +2037,7 @@ uRet
 </tr>
 </tbody>
 </table>
-<p><em>Def: TxB represents summary statistics for the long short portfolio (top - bottom = Q1 - Q5 = overall portfolio returns)</em></p>
+<p><em>Def: TxB represents summary statistics for the long/short portfolio (top - bottom = Q1 - Q5 = overall portfolio returns)</em></p>
 <hr />
 </div>
 <div id="performance-3" class="section level3 hasAnchor" number="7.3.5">

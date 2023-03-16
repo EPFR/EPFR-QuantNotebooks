@@ -129,7 +129,7 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="2" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i><b>2</b> EPFR.r Library</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="epfr.r-library.html"><a href="epfr.r-library.html#about"><i class="fa fa-check"></i><b>2.1</b> About</a></li>
-<li class="chapter" data-level="2.2" data-path="epfr.r-library.html"><a href="epfr.r-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set up</a></li>
+<li class="chapter" data-level="2.2" data-path="epfr.r-library.html"><a href="epfr.r-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set-up</a></li>
 <li class="chapter" data-level="2.3" data-path="epfr.r-library.html"><a href="epfr.r-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.3</b> Strategy Functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html#total-return-index"><i class="fa fa-check"></i>Total Return Index</a></li>
@@ -143,15 +143,15 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="3.1" data-path="Filters.html"><a href="Filters.html#video-explanations"><i class="fa fa-check"></i><b>3.1</b> Video Explanations</a>
 <ul>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#asset-class-focus"><i class="fa fa-check"></i>Asset class focus</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-type"><i class="fa fa-check"></i>Fund Type</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-type"><i class="fa fa-check"></i>Fund type</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#investor-type"><i class="fa fa-check"></i>Investor type</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#currency-of-flows"><i class="fa fa-check"></i>Currency of flows</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-domicile-or-geographic-focus"><i class="fa fa-check"></i>Fund Domicile or Geographic Focus</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-domicile-or-geographic-focus"><i class="fa fa-check"></i>Fund domicile or Geographic focus</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#theme"><i class="fa fa-check"></i>Theme</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#sector"><i class="fa fa-check"></i>Sector</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#style"><i class="fa fa-check"></i>Style</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#duration"><i class="fa fa-check"></i>Duration</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#individual-managers"><i class="fa fa-check"></i>Individual Managers</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#individual-managers"><i class="fa fa-check"></i>Individual managers</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html"><i class="fa fa-check"></i><b>4</b> Multi-Asset Strategy</a>
@@ -322,7 +322,7 @@ code span.wa { font-style: italic; } /* Warning */
 </div>
 <div id="data-4" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> Data<a href="activepassive-country-strategy.html#data-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The <em>Active/Passive Country Strategy</em> developed by EPFR Global uses the ratio of average allocation of active over passive funds. This section aims to give the reader an understanding of the methodology for constructing the variables used in the strategy.</p>
+<p>The <em>Active/Passive Country Strategy</em> developed by EPFR uses the ratio of average allocation of active over passive funds. This section aims to give the reader an understanding of the methodology for constructing the variables used in the strategy.</p>
 <hr />
 <div id="aggregations-4" class="section level3 hasAnchor" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> Aggregations<a href="activepassive-country-strategy.html#aggregations-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -665,12 +665,12 @@ Total
 <!-- ![Updated at the end of July each year](https://raw.githubusercontent.com/EPFR/EPFR-QuantNotebooks/master/png/coverage_AISctry.png){width=250px} -->
 <!-- </center> -->
 <p>Users looking for more specific detail can customize this aggregation even further using EPFR’s fund-level or share class-level granularity. Some good examples would be to consider only ETFs or mutual funds, geographic mandate, and fund domicile. Users can leverage these tags to different degrees in creating aggregated signals to backtest. Further detail about this is available in section <a href="Filters.html#Filters">3</a>.</p>
-<p>This can be achieved using fund-level allocation files or reaching out to EPFR’s quant team for customized aggregations.</p>
+<p>This can be achieved using fund-level allocation files or reaching out to EPFR’s Quant Team for customized aggregations.</p>
 <hr />
 </div>
 <div id="activepassive-indicator-1" class="section level3 hasAnchor" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Active/Passive Indicator<a href="activepassive-country-strategy.html#activepassive-indicator-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To begin calculating the Active/Passive indicator, we start with our subset of active and passive cross-border equity funds. Then for each country, we compute equally-weighted average allocations. These averages are computed separately across active and passive funds, shown below.</p>
+<p>To begin calculating the active/passive indicator, we start with our subset of active and passive cross-border equity funds. Then for each country, we compute equally-weighted average allocations. These averages are computed separately across active and passive funds, as shown below.</p>
 <p><span class="math display">\[\overline{\text{Active Allocation}}_{c,m} = \frac{\sum^{N}_{i=m}{\text{Country Allocation}_{i,c,m}}}{N}\]</span></p>
 <p>Where:</p>
 <ul>
@@ -681,8 +681,8 @@ Total
 <ul>
 <li><span class="math inline">\(\overline{\text{Passive Allocation}}\)</span> = the equally-weighted average allocations to a country <span class="math inline">\(c\)</span>, across all Passive funds in our universe <span class="math inline">\(i\)</span>, for month <span class="math inline">\(m\)</span></li>
 </ul>
-<p>Finally, to get our Active/Passive Indicator for a country, we express the average allocation of active funds as percentage of that over passive funds.</p>
-<p><span class="math display">\[\text{Active/Passive Indicatior}_{c,m} = \frac{\overline{\text{Active Allocation}}_{c,m}}{\overline{\text{Passive Allocation}_{c,m}}}\]</span>
+<p>Finally, to get our active/passive indicator for a country, we express the average allocation of active funds as percentage of that over passive funds.</p>
+<p><span class="math display">\[\text{Active/Passive Indicatior}_{c,m} = 100 \times \frac{\overline{\text{Active Allocation}}_{c,m}}{\overline{\text{Passive Allocation}_{c,m}}}\]</span>
 Where:</p>
 <ul>
 <li><span class="math inline">\(\text{Active/Passive Indicatior}\)</span> = the ratio of average active over passive allocations to a country <span class="math inline">\(c\)</span> and month <span class="math inline">\(t\)</span></li>
@@ -692,10 +692,10 @@ Where:</p>
 </div>
 <div id="aggregate-indicator-file" class="section level3 hasAnchor" number="8.2.3">
 <h3><span class="header-section-number">8.2.3</span> Aggregate Indicator File<a href="activepassive-country-strategy.html#aggregate-indicator-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Users may create the Active/Passive indicator for their desired country aggregations using the methodology described in the previous section.</p>
-<p>Users also have the option to use the <em>Active/Passive Country Strategy</em> file EPFR provides, which is updated monthly at 5:00 PM est. with a T+23 day lag, and is <strong>available in the user’s EPFR FTP connection under the strategies folder</strong>. The <em>Active/Passive Country Strategy</em> file contains aggregate Active/Passive indicator data for 55 countries in the ACWI, EAFE and Emerging Market country universes.</p>
+<p>Users may create the active/passive indicator for their desired country aggregations using the methodology described in the previous section.</p>
+<p>Users also have the option to use the <em>Active/Passive Country Strategy</em> file EPFR provides, which is updated monthly at 5:00 PM EST with a T+23 day lag, and is <strong>available in the user’s EPFR FTP connection under the Strategies folder</strong>. The <em>Active/Passive Country Strategy</em> file contains aggregate active/passive indicator data for 55 countries in the ACWI, EAFE and Emerging Market country universes.</p>
 <hr />
-<p>For this demonstration, we will be using the file <code>ActPasCtry-monthly.csv</code>, which can be downloaded from the users ftp under the folder <code>Strategies/monthly</code> and can be stored in the users local folder <code>EPFR/monthly</code>.</p>
+<p>For this demonstration, we will be using the file <code>ActPasCtry-monthly.csv</code>, which can be downloaded from the user’s FTP under the folder <code>Strategies/monthly</code> and can be stored in the user’s local folder <code>EPFR/monthly</code>.</p>
 <p>Below shows a snippet of what this file contains:</p>
 <p><code>Strategies/monthly/ActPasCtry-monthly.csv</code></p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
@@ -1852,7 +1852,7 @@ NA
 </tbody>
 </table>
 <hr />
-<p>For convenience save the path to the active/passive indicator file you choose to use as <code>indicator.file</code>, example shown below:</p>
+<p>For convenience, save the path to the active/passive indicator file you choose to use as <code>indicator.file</code>. Example shown below:</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="activepassive-country-strategy.html#cb87-1" aria-hidden="true" tabindex="-1"></a>indicator.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">monthly</span><span class="sc">\\</span><span class="st">ActPasCtry-monthly.csv&quot;</span></span></code></pre></div>
 <!-- --- -->
 <!-- To follow along the user can download the _Active/Passive Country Strategy_ files using the code below, which contains ftp functions ( \@ref(ftp) ) from `library('EPFR.r')`:  -->
@@ -1870,7 +1870,7 @@ NA
 <div id="return-file-4" class="section level3 hasAnchor" number="8.2.4">
 <h3><span class="header-section-number">8.2.4</span> Return File<a href="activepassive-country-strategy.html#return-file-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The return file for this strategy should contain monthly passive equity ETF returns for each of the countries in the aggregate indicator file, over the period of time the user wants to backtest.</p>
-<p>The user can choose to use return data found with their own resources, or they have the option to use a file EPFR provides of <em>ETF Country Returns</em>, which is <strong>available in the user’s EPFR FTP connection under the Returns folder</strong> ( <a href="FAQ.html#Rets">11.1</a> ). The Return file that EPFR provides contains Fund Return data and can be used as a proxy to equity market returns. The user can recreate these files using EPFR daily flow data with the following equation:</p>
+<p>The user can choose to use return data found with their own resources, or they have the option to use a file EPFR provides of <em>ETF Country Returns</em>, which is <strong>available in the user’s EPFR FTP connection under the Returns folder</strong> ( <a href="FAQ.html#Rets">11.1</a> ). The return file that EPFR provides contains Fund Return data and can be used as a proxy to equity market returns. The user can recreate these files using EPFR’s daily flow data with the following equation:</p>
 <p><span class="math display">\[\text{Fund Return}_{c,t} = 100 \times \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,c,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,c,t}}\]</span>
 Where:</p>
 <ul>
@@ -1878,7 +1878,7 @@ Where:</p>
 </ul>
 <p>However, since this signal is limited to monthly granularity, it is important to ensure that returns are also indexed by month. If the user’s return file is indexed daily or weekly, the function <code>mat.daily.to.monthly(, T)</code> from <code>library('EPFR.r')</code> should be used when implementing the strategy.</p>
 <hr />
-<p>For this demonstration, we will be using the file <code>PsuedoReturns-Country-ETF-daily.csv</code>, which can be downloaded from the users ftp under the folder <code>Returns/daily</code> and can be stored in the users local folder <code>EPFR/returns</code>.</p>
+<p>For this demonstration, we will be using the file <code>PsuedoReturns-Country-ETF-daily.csv</code>, which can be downloaded from the user’s FTP under the folder <code>Returns/daily</code> and can be stored in the users local folder <code>EPFR/returns</code>.</p>
 <p>Below shows a snippet of what this file contains:</p>
 <p><code>Returns/daily/PsuedoReturns-Country-ETF-daily.csv</code></p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
@@ -2972,7 +2972,7 @@ NA
 </tbody>
 </table>
 <hr />
-<p>For convenience save the path to the return file you choose to use as <code>ret.file</code>, example shown below:</p>
+<p>For convenience, save the path to the return file you choose to use as <code>ret.file</code>. Example shown below:</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="activepassive-country-strategy.html#cb88-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-Country-ETF-daily.csv&quot;</span></span></code></pre></div>
 <!-- --- -->
 <!-- To follow along the user can download the _ETF Country Return_ file using the code below, which contains ftp functions ( \@ref(ftp) ) from `library('EPFR.r')`:  -->
@@ -2990,16 +2990,16 @@ NA
 </div>
 <div id="strategy-implementation-4" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> Strategy Implementation<a href="activepassive-country-strategy.html#strategy-implementation-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the aggregate indicator and return files to our <em>R studio</em> work space.</p>
+<p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the aggregate indicator and return files to our <em>R studio</em> workspace.</p>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="activepassive-country-strategy.html#cb89-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">mat.read</span>(indicator.file)) <span class="co"># GET ACTIVE/PASSIVE INDICATOR C:\\EPFR\\monthly\\ActPasCtry-monthly.csv</span></span>
 <span id="cb89-2"><a href="activepassive-country-strategy.html#cb89-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file)  <span class="co"># GET TOTAL RETURN INDEX C:\\EPFR\\returns\\PsuedoReturns-Country-ETF-daily.csv</span></span></code></pre></div>
-<p>Before we the data is ready, we will first need to apply the <code>mat.daily.to.monthly()</code> function to ensure that return data is correctly indexed by month, as mentioned previously (help: <code>?mat.daily.to.monthly()</code>).</p>
+<p>Before the data is ready, we will first need to apply the <code>mat.daily.to.monthly()</code> function to ensure that return data is correctly indexed by month, as mentioned previously (help: <code>?mat.daily.to.monthly()</code>).</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="activepassive-country-strategy.html#cb90-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.daily.to.monthly</span>(y, T)</span></code></pre></div>
-<p>One of our first options is choosing the universe we want to use. EPFR has tested this signal within three different universes of countries ACWI (All Country World Index), EAFE (Europe, Australasia, and the Far East), and EM (Emerging Markets). For this example, we choose <strong>ACWI</strong>, which includes <a href="www.something.com">52 countries</a>.</p>
+<p>One of our first options is choosing the universe we want to use. EPFR has tested this signal within three different universes of countries: ACWI (All Country World Index), EAFE (Europe, Australasia, and the Far East), and EM (Emerging Markets). For this example, we choose <strong>ACWI</strong>, which includes <a href="www.something.com">52 countries</a>.</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="activepassive-country-strategy.html#cb91-1" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="st">&quot;ACWI&quot;</span></span></code></pre></div>
 <p>Depending on what universe <span class="math inline">\(idx\)</span> the user chooses to test, the indicator file <span class="math inline">\(x\)</span> and return file <span class="math inline">\(y\)</span> must both be subset to the correct countries. Running the code below, which calls from functions contained in<code>library('EPFR')</code>, helps identify every member that was included the selected universe during the period over which we are backtesting.</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="activepassive-country-strategy.html#cb92-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x[, <span class="fu">is.element</span>(<span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]], <span class="fu">Ctry.msci.members.rng</span>(idx, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]][<span class="dv">1</span>], <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]][<span class="fu">dim</span>(x)[<span class="dv">1</span>]]))] <span class="co"># SUBSET TO INDEX COUNTRIES</span></span></code></pre></div>
-<p>A few other adjustments must also be applied to our monthly Active/Passive signal data to ensure that it aligns with returns. First – the internally-generated fund returns are only available with sufficient coverage from the end of 2015 onwards. Second – fund returns for country ISO codes JO and VE are unavailable.</p>
+<p>A few other adjustments must also be applied to our monthly Active/Passive signal data to ensure that it aligns with returns. First, the internally-generated fund returns are only available with sufficient coverage from the end of 2015 onwards. Second, fund returns for country ISO codes JO and VE are unavailable.</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="activepassive-country-strategy.html#cb93-1" aria-hidden="true" tabindex="-1"></a>startdate <span class="ot">&lt;-</span> <span class="st">&quot;20150512&quot;</span></span>
 <span id="cb93-2"><a href="activepassive-country-strategy.html#cb93-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x[<span class="fu">rownames</span>(x)<span class="sc">&gt;=</span>startdate, ] <span class="co"># SUBSET TIME PERIOD</span></span>
 <span id="cb93-3"><a href="activepassive-country-strategy.html#cb93-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -3009,12 +3009,12 @@ NA
 <!-- ```{r, eval=F, echo=T} -->
 <!-- y <- mat.daily.to.monthly(y[, dimnames(x)[[2]]], T) # TOTAL RETURN INDEX -->
 <!-- ``` -->
-<p>Next we will need to ensure that the data structure in <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are completely aligned, having the same column names in the same order. Below we will subset the columns of <span class="math inline">\(y\)</span> to use the same countries, in the same order as <span class="math inline">\(x\)</span>.</p>
+<p>Next, we will need to ensure that the data structure in <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are completely aligned, having the same column names in the same order. Below we will subset the columns of <span class="math inline">\(y\)</span> to use the same countries, in the same order as <span class="math inline">\(x\)</span>.</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="activepassive-country-strategy.html#cb94-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[, <span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]]] <span class="co"># TOTAL RETURN INDEX</span></span></code></pre></div>
-<p><em>* Note: subsetting can be also be done when creating the indicator and return files</em></p>
+<p><em>* Note: subsetting can also be done when creating the indicator and return files</em></p>
 <div id="moving-sum-of-indicator" class="section level3 hasAnchor" number="8.3.1">
 <h3><span class="header-section-number">8.3.1</span> Moving Sum of Indicator<a href="activepassive-country-strategy.html#moving-sum-of-indicator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Next, we set up a variable for our look-back period. This variable will be the window of time across which we smooth the signal for each country. The look-back period we choose for our demonstrations is <strong>12 months</strong>.</p>
+<p>Next, we set up a variable for our lookback period. This variable will be the window of time across which we smooth the signal for each country. The lookback period we choose for our demonstrations is <strong>12 months</strong>.</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="activepassive-country-strategy.html#cb95-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">12</span> <span class="co"># LOOKBACK (IN MONTHS)               </span></span></code></pre></div>
 <p>Now, using the function from the <code>library('EPFR.r')</code>, called <code>compound.flows()</code> we compute the moving sum of our signal over the trailing <code>lookback</code> period for each country.</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="activepassive-country-strategy.html#cb96-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, T) <span class="co"># COMPUTE MOVING SUM</span></span></code></pre></div>
@@ -4111,29 +4111,29 @@ SA
 </div>
 <div id="total-return-index-4" class="section level3 hasAnchor" number="8.3.2">
 <h3><span class="header-section-number">8.3.2</span> Total Return Index<a href="activepassive-country-strategy.html#total-return-index-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We will now convert our percentage returns data <span class="math inline">\(y\)</span> to total index returns indexed so that time moves forward. To do this we will use function <code>ret.to.idx()</code> from <code>library('EPFR.r')</code>. We also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file and <code>ret.idx.gaps.fix()</code> to replace any NA values. Please refer to the library documentation for the complete list of parameters for these functions (tip: <code>?ret.to.idx()</code>,<code>?ret.idx.gaps.fix()</code> ).</p>
+<p>We will now convert our percentage returns data <span class="math inline">\(y\)</span> to total index returns indexed so that time moves forward. To do this, we will use the function <code>ret.to.idx()</code> from <code>library('EPFR.r')</code>. We will also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file and <code>ret.idx.gaps.fix()</code> to replace any NA values. Please refer to the library documentation for the complete list of parameters for these functions (tip: <code>?ret.to.idx()</code>,<code>?ret.idx.gaps.fix()</code> ).</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="activepassive-country-strategy.html#cb97-1" aria-hidden="true" tabindex="-1"></a>y[<span class="fu">is.na</span>(y)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb97-2"><a href="activepassive-country-strategy.html#cb97-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX</span></span>
 <span id="cb97-3"><a href="activepassive-country-strategy.html#cb97-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span></code></pre></div>
 </div>
 <div id="ranking-countries-1" class="section level3 hasAnchor" number="8.3.3">
 <h3><span class="header-section-number">8.3.3</span> Ranking Countries<a href="activepassive-country-strategy.html#ranking-countries-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Next, we sort each of the countries in our universe into five equal bins based on the last 12-month Active/Passive Indicator values for the selected holding period. To do this, we will use the function from <code>library('EPFR.r')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
-<p>The <code>bbk()</code> function requires our 12-month Active/Passive indicator, total return index data, and our selected universe. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
+<p>Next, we sort each of the countries in our universe into five equal bins based on the last 12-month active/passive indicator values for the selected holding period. To do this, we will use the function from <code>library('EPFR.r')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
+<p>The <code>bbk()</code> function requires our 12-month active/passive indicator, the total return index data, and our selected universe. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
 <p>The first parameter we add is the number of bins we want to use. For our case, we want to use 5 because our strategy is to go long the top fifth and short the bottom fifth.</p>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="activepassive-country-strategy.html#cb98-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
-<p>Since EPFR data is published with T+23 day lag and is released around 5:00 pm EST, we account for a T+1 month delay in our model.</p>
+<p>Since EPFR data is published with a T+23 day lag and is released around 5:00 pm EST, we account for a T+1 month delay in our model.</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="activepassive-country-strategy.html#cb99-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># DELAY IN KNOWING DATA (IN MONTHS)  </span></span></code></pre></div>
-<p>The day of the week the rebalancing occurs is at the discretion of the user, but for this example we will set the day of the week to trade as <strong>N/A</strong>.This allows the <code>bbk()</code> function to default to monthly-indexed returns, and avoids trading on a specific weekday on each rebalancing date.</p>
+<p>The day of the week the rebalancing occurs is at the user’s discretion, but for this example we will set the day of the week to trade as <strong>N/A</strong>.This allows the <code>bbk()</code> function to default to monthly-indexed returns, and avoids trading on a specific weekday on each rebalancing date.</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="activepassive-country-strategy.html#cb100-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
-<p>Additionally, we also evaluate the returns for different holding periods. The user can input return horizons that they are interested in here. For this example we define a return horizon for monthly, quarterly, semi-annual, and annual rebalancing, but is it important to note that this model can be re-balanced as desired.</p>
+<p>Additionally, we also evaluate the returns for different holding periods. The user can input the return horizons that they are interested in here. For this example, we define a return horizon for monthly, quarterly, semi-annual, and annual rebalancing, but is it important to note that this model can be re-balanced as desired.</p>
 <div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="activepassive-country-strategy.html#cb101-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">12</span>) <span class="co"># RETURN HORIZON (IN MONTHS)</span></span></code></pre></div>
-<p>Now that we have defined all of our inputs, to rank the countries into quintiles by their 12-month Active/Passive indicator, we call function <code>bbk()</code> for a 1-month holding period. By adding the selected backtesting universe as an input to the function, we can ensure that the model tracks additions and removals of countries over time, and is therefore able to identify all members on a point-in-time basis.</p>
+<p>Now that we have defined all of our inputs, to rank the countries into quintiles by their 12-month active/passive indicator, we call the function <code>bbk()</code> for a one-month holding period. By adding the selected backtesting universe as an input to the function, we can ensure that the model tracks additions and removals of countries over time, and is therefore able to identify all members on a point-in-time basis.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="activepassive-country-strategy.html#cb102-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay, idx)</span></code></pre></div>
 </div>
 <div id="model-5" class="section level3 hasAnchor" number="8.3.4">
 <h3><span class="header-section-number">8.3.4</span> Model<a href="activepassive-country-strategy.html#model-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>12 month cumulative indicator ranked into quintiles (computed only where forward returns are available)</strong></p>
+<p><strong>12-month cumulative indicator ranked into quintiles (computed only where forward returns are available)</strong></p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="activepassive-country-strategy.html#cb103-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
@@ -5225,7 +5225,7 @@ NA
 </tr>
 </tbody>
 </table>
-<p><strong>Quintile Returns over the equal-weight universe</strong></p>
+<p><strong>Quintile returns over the equal-weight universe</strong></p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="activepassive-country-strategy.html#cb104-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
@@ -5414,7 +5414,7 @@ uRet
 </tr>
 </tbody>
 </table>
-<p><em>Def: TxB represents summary statistics for the long short portfolio (top - bottom = Q1 - Q5 = overall portfolio returns)</em></p>
+<p><em>Def: TxB represents summary statistics for the long/short portfolio (top - bottom = Q1 - Q5 = overall portfolio returns)</em></p>
 <hr />
 </div>
 <div id="performance-4" class="section level3 hasAnchor" number="8.3.5">

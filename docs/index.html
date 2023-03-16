@@ -129,7 +129,7 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="2" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i><b>2</b> EPFR.r Library</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="epfr.r-library.html"><a href="epfr.r-library.html#about"><i class="fa fa-check"></i><b>2.1</b> About</a></li>
-<li class="chapter" data-level="2.2" data-path="epfr.r-library.html"><a href="epfr.r-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set up</a></li>
+<li class="chapter" data-level="2.2" data-path="epfr.r-library.html"><a href="epfr.r-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set-up</a></li>
 <li class="chapter" data-level="2.3" data-path="epfr.r-library.html"><a href="epfr.r-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.3</b> Strategy Functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html#total-return-index"><i class="fa fa-check"></i>Total Return Index</a></li>
@@ -143,15 +143,15 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="3.1" data-path="Filters.html"><a href="Filters.html#video-explanations"><i class="fa fa-check"></i><b>3.1</b> Video Explanations</a>
 <ul>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#asset-class-focus"><i class="fa fa-check"></i>Asset class focus</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-type"><i class="fa fa-check"></i>Fund Type</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-type"><i class="fa fa-check"></i>Fund type</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#investor-type"><i class="fa fa-check"></i>Investor type</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#currency-of-flows"><i class="fa fa-check"></i>Currency of flows</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-domicile-or-geographic-focus"><i class="fa fa-check"></i>Fund Domicile or Geographic Focus</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-domicile-or-geographic-focus"><i class="fa fa-check"></i>Fund domicile or Geographic focus</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#theme"><i class="fa fa-check"></i>Theme</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#sector"><i class="fa fa-check"></i>Sector</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#style"><i class="fa fa-check"></i>Style</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#duration"><i class="fa fa-check"></i>Duration</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#individual-managers"><i class="fa fa-check"></i>Individual Managers</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#individual-managers"><i class="fa fa-check"></i>Individual managers</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html"><i class="fa fa-check"></i><b>4</b> Multi-Asset Strategy</a>
@@ -325,14 +325,14 @@ code span.wa { font-style: italic; } /* Warning */
 <!-- --- -->
 <!-- # Introduction -->
 <p>EPFR’s two core data sets capture the flows and allocations of mutual funds and ETFs. Together these data sets provide market insight and illustrate where money is moving across geographies, sectors, industries and securities.</p>
-<p>Described in this book are proof-of-concept strategies created by Quantitative Analysts at EPFR. Each of these chapters demonstrates the value and predictive power this data holds for different use cases. The backtesting methodology used across each of these strategies is relatively similar. They are all quintile based, long/short, and we apply similar lookback periods for our backtests. We use a standard backtest period because we seek to avoid optimizing any one strategy.</p>
+<p>Described in this book are proof-of-concept strategies created by Quantitative Analysts at EPFR. Each of these chapters demonstrates the value and predictive power this data holds for different use cases. The backtesting methodology used across each of these strategies is relatively similar. They are all quintile-based, long/short, and we apply similar lookback periods for our backtests. We use a standard backtest period because we seek to avoid optimizing any one strategy.</p>
 <p>For each of the strategies discussed in this notebook, we provide the time series files available for download. To access the files you can find them readily available in the user’s EPFR FTP connection under the strategies folder, or <a href="mailto:support@epfr.com">click here</a> to email our team for assistance.</p>
 <div id="signals" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Signals<a href="index.html#signals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The two different types of signals discussed in this notebook are flow momentum and an active/passive indicator, however these are not the only signals that can be created.</p>
+<p>The two different types of signals discussed in this notebook are flow momentum and active/passive indicator. However these are not the only signals that can be created.</p>
 <div id="flow-momentum" class="section level3 unnumbered hasAnchor">
 <h3>Flow Momentum<a href="index.html#flow-momentum" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Using EPFR’s daily, weekly, or monthly flows we can create momentum signals, which gives insight to where money is flowing in the market. By identifying where positive flows are moving and driving the market up and the opposite with negative flows, we can make educated decisions to go long or short by following these flow trends. Below is a list of EPFR’s proof-of-concept strategies that are based on flow momentum and the data used to create the signal:</p>
+<p>Using EPFR’s daily, weekly, or monthly flows we can create momentum signals, which gives insight to where money is flowing in the market. By identifying where positive flows are moving and driving the market up and the opposite with negative flows, we can make informed decisions to go long or short by following these flow trends. Below is a list of EPFR’s proof-of-concept strategies that are based on flow momentum and the data used to create the signal:</p>
 <ol style="list-style-type: decimal">
 <li><p><a href="multi-asset-strategy.html#multi-asset-strategy">Multi-Asset Strategy</a> - (daily flows)</p></li>
 <li><p><a href="fx-strategy.html#fx-strategy">FX Strategy</a> - (daily flows, country allocations)</p></li>
@@ -343,7 +343,7 @@ code span.wa { font-style: italic; } /* Warning */
 </div>
 <div id="activepassive-indicator" class="section level3 unnumbered hasAnchor">
 <h3>Active/Passive Indicator<a href="index.html#activepassive-indicator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Using EPFR’s monthly allocations data we can create active/passive indicators, which gives insight to where managers are placing the money within their funds. By identifying which countries, sectors, industries, and securities the funds have overweight and underweight positions in, we are able to make educated decisions to follow the active positioning of the aggregate asset management community. Below is a list of EPFR’s proof-of-concept strategies that are based on an active/passive indicator and the data used to create the signal:</p>
+<p>Using EPFR’s monthly allocations data we can create active/passive indicators, which gives insight to where managers are placing the money within their funds. By identifying which countries, sectors, industries, and securities the funds have overweight and underweight positions in, we are able to make informed decisions to follow the active positioning of the aggregate asset management community. Below is a list of EPFR’s proof-of-concept strategies that are based on an active/passive indicator and the data used to create the signal:</p>
 <ol style="list-style-type: decimal">
 <li><p><a href="activepassive-country-strategy.html#activepassive-country-strategy">Active/Passive Country Strategy</a> - (country allocations)</p></li>
 <li><p><a href="activepassive-sector-strategy.html#activepassive-sector-strategy">Active/Passive Sector Strategy</a> - (sector allocations)</p></li>

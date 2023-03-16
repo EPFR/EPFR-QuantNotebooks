@@ -129,7 +129,7 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="2" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i><b>2</b> EPFR.r Library</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="epfr.r-library.html"><a href="epfr.r-library.html#about"><i class="fa fa-check"></i><b>2.1</b> About</a></li>
-<li class="chapter" data-level="2.2" data-path="epfr.r-library.html"><a href="epfr.r-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set up</a></li>
+<li class="chapter" data-level="2.2" data-path="epfr.r-library.html"><a href="epfr.r-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set-up</a></li>
 <li class="chapter" data-level="2.3" data-path="epfr.r-library.html"><a href="epfr.r-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.3</b> Strategy Functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html#total-return-index"><i class="fa fa-check"></i>Total Return Index</a></li>
@@ -143,15 +143,15 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="3.1" data-path="Filters.html"><a href="Filters.html#video-explanations"><i class="fa fa-check"></i><b>3.1</b> Video Explanations</a>
 <ul>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#asset-class-focus"><i class="fa fa-check"></i>Asset class focus</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-type"><i class="fa fa-check"></i>Fund Type</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-type"><i class="fa fa-check"></i>Fund type</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#investor-type"><i class="fa fa-check"></i>Investor type</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#currency-of-flows"><i class="fa fa-check"></i>Currency of flows</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-domicile-or-geographic-focus"><i class="fa fa-check"></i>Fund Domicile or Geographic Focus</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-domicile-or-geographic-focus"><i class="fa fa-check"></i>Fund domicile or Geographic focus</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#theme"><i class="fa fa-check"></i>Theme</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#sector"><i class="fa fa-check"></i>Sector</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#style"><i class="fa fa-check"></i>Style</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#duration"><i class="fa fa-check"></i>Duration</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#individual-managers"><i class="fa fa-check"></i>Individual Managers</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#individual-managers"><i class="fa fa-check"></i>Individual managers</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html"><i class="fa fa-check"></i><b>4</b> Multi-Asset Strategy</a>
@@ -316,32 +316,32 @@ code span.wa { font-style: italic; } /* Warning */
 <h1><span class="header-section-number">11</span> FAQ<a href="FAQ.html#FAQ" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="Rets" class="section level2 hasAnchor" number="11.1">
 <h2><span class="header-section-number">11.1</span> Returns Information<a href="FAQ.html#Rets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>When available, EPFR has provided daily fund return data which can be used as a proxy for the returns of each market that we’re backtesting. For demonstration purposes these files are used throughout this notebook to exhibit use cases. However, EPFR is not able to produce bond rates and these files will need to be sourced using 3rd party return data.</p>
-<p>For users who choose to use these readily available fund return files to follow along can access them under the ftp folder <strong>Returns</strong>.</p>
-<p><em>Disclaimer: EPFR Quant team uses 3rd party data providers to calculate returns in our usual presentations to showcase performances.</em></p>
-<p>Fund returns are calculated using EPFR daily flow data, and can be recreated using following equations:</p>
-<p><span class="math display">\[\text{Fund Return}_{a,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,a,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,a,t}}\]</span>
+<p>When available, EPFR has provided daily fund return data which can be used as a proxy for the returns of each market that we’re backtesting. For demonstration purposes, these files are used throughout this notebook to exhibit use cases. However, EPFR is not able to produce bond rates and these files will need to be sourced using third-party return data.</p>
+<p>Users who choose to utilize these readily-available fund return files to follow along can access them under the FTP folder <strong>Returns</strong>.</p>
+<p><em>Disclaimer: EPFR Quant team uses third-party data providers to calculate returns in our usual presentations to showcase performances.</em></p>
+<p>Fund returns are calculated using EPFR’s daily flow data, and can be recreated using the following equations:</p>
+<p><span class="math display">\[\text{Fund Return}_{a,t} = 100 \times \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,a,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,a,t}}\]</span>
 Where:</p>
 <ul>
 <li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of asset class <span class="math inline">\(a\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
 </ul>
-<p><span class="math display">\[\text{Fund Return}_{c,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,c,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,c,t}}\]</span>
+<p><span class="math display">\[\text{Fund Return}_{c,t} = 100\times \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,c,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,c,t}}\]</span>
 Where:</p>
 <ul>
 <li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of country <span class="math inline">\(c\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
 </ul>
-<p><span class="math display">\[\text{Fund Return}_{s,r,t} = \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,s,r,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,s,r,t}}\]</span>
+<p><span class="math display">\[\text{Fund Return}_{s,r,t} = 100 \times \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,s,r,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,s,r,t}}\]</span>
 Where:</p>
 <ul>
 <li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of sector <span class="math inline">\(s\)</span>, for region <span class="math inline">\(r\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
 </ul>
-<p>However, depending on how the signal being tested is indexed, it is important that the return file is also indexed at the same frequency. For example if the signal being tested is limited to monthly granularity, it is important to ensure that returns are also indexed by month. In this case if the user chooses to use one of EPFR’s daily return files, the function <code>mat.daily.to.monthly(, T)</code> from <code>library('EPFR.r')</code> should be used to modify a daily return file to be indexed with monthly dates. This same process can also be done using <code>mat.daily.to.weekly</code> from <code>library('EPFR.r')</code> to modify a daily return file to be indexed with weekly dates.</p>
+<p>However, depending on how the signal being tested is indexed, it is important that the return file is also indexed at the same frequency. For example, if the signal being tested is limited to monthly granularity, it is important to ensure that the returns are also indexed by month. In this case, if the user chooses to use one of EPFR’s daily return files, the function <code>mat.daily.to.monthly(, T)</code> from <code>library('EPFR.r')</code> should be used to modify a daily return file to be indexed with monthly dates. This same process can also be done using <code>mat.daily.to.weekly</code> from <code>library('EPFR.r')</code> to modify a daily return file to be indexed with weekly dates.</p>
 <!-- On our usual presentation we use 3rd party data providers to calculate returns, but for demonstration purposes this notebook uses fund returns where available to showcase strategy performances.  -->
 </div>
 <div id="country-flows" class="section level2 hasAnchor" number="11.2">
 <h2><span class="header-section-number">11.2</span> Country Flows<a href="FAQ.html#country-flows" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Country flows is a derived dataset that delivers flows to individual countries. It uses a proprietary algorithm to calculate these derivations. The procedure assumes fixed average country allocations across different cross-border mandates. It then uses fund-level flow data to calculate flows to individual countries. One advantage of this derivation is the broader coverage. EPFR’s Fund Flows Database has significant coverage across different regions and countries.</p>
-<p>In contrast, the Country Allocations Database is a subset of the fund flows dataset. Using fixed average country allocations allows us to include a broader range of cross-border funds in individual country flow calculations. Because of the more general assumptions, Country Flows Database is typically a better fit for macroeconomist &amp; strategists. A typical use case for a macroeconomist would be calculating a high-frequency proxy for those countries’ balance of payments statistics. On the other hand, when trying to create country rotation strategies, quantitative hedge funds rely on fund-level data. This lets them have a one-to-one match between the country allocations and fund-level flows.</p>
+<p>In contrast, the Country Allocations Database is a subset of the fund flows dataset. Using fixed average country allocations allows us to include a broader range of cross-border funds in individual country flow calculations. Because of the more general assumptions, the Country Flows Database is typically a better fit for Macroeconomist &amp; and Strategists. A typical use case for a Macroeconomist would be calculating a high-frequency proxy for those countries’ balance of payments statistics. On the other hand, when trying to create country rotation strategies, quantitative hedge funds rely on fund-level data. This lets them have a one-to-one match between the country allocations and fund-level flows.</p>
 
 </div>
 </div>

@@ -129,7 +129,7 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="2" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i><b>2</b> EPFR.r Library</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="epfr.r-library.html"><a href="epfr.r-library.html#about"><i class="fa fa-check"></i><b>2.1</b> About</a></li>
-<li class="chapter" data-level="2.2" data-path="epfr.r-library.html"><a href="epfr.r-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set up</a></li>
+<li class="chapter" data-level="2.2" data-path="epfr.r-library.html"><a href="epfr.r-library.html#set-up"><i class="fa fa-check"></i><b>2.2</b> Set-up</a></li>
 <li class="chapter" data-level="2.3" data-path="epfr.r-library.html"><a href="epfr.r-library.html#strategy-functions"><i class="fa fa-check"></i><b>2.3</b> Strategy Functions</a>
 <ul>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html#total-return-index"><i class="fa fa-check"></i>Total Return Index</a></li>
@@ -143,15 +143,15 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="3.1" data-path="Filters.html"><a href="Filters.html#video-explanations"><i class="fa fa-check"></i><b>3.1</b> Video Explanations</a>
 <ul>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#asset-class-focus"><i class="fa fa-check"></i>Asset class focus</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-type"><i class="fa fa-check"></i>Fund Type</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-type"><i class="fa fa-check"></i>Fund type</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#investor-type"><i class="fa fa-check"></i>Investor type</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#currency-of-flows"><i class="fa fa-check"></i>Currency of flows</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-domicile-or-geographic-focus"><i class="fa fa-check"></i>Fund Domicile or Geographic Focus</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#fund-domicile-or-geographic-focus"><i class="fa fa-check"></i>Fund domicile or Geographic focus</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#theme"><i class="fa fa-check"></i>Theme</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#sector"><i class="fa fa-check"></i>Sector</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#style"><i class="fa fa-check"></i>Style</a></li>
 <li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#duration"><i class="fa fa-check"></i>Duration</a></li>
-<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#individual-managers"><i class="fa fa-check"></i>Individual Managers</a></li>
+<li class="chapter" data-level="" data-path="Filters.html"><a href="Filters.html#individual-managers"><i class="fa fa-check"></i>Individual managers</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html"><i class="fa fa-check"></i><b>4</b> Multi-Asset Strategy</a>
@@ -316,7 +316,7 @@ code span.wa { font-style: italic; } /* Warning */
 <h1><span class="header-section-number">2</span> EPFR.r Library<a href="epfr.r-library.html#epfr.r-library" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <!-- (PART\*) EPFR Library -->
 <p>The R-based EPFR Library, created by members of the EPFR Quant Team, has an extensive list of applicable functions for use on our data and will be used in this demonstration of our strategies.</p>
-<p>To install the library <code>EPFR.r</code>, <a href="https://github.com/EPFR/EPFR-Quant-Library-R">click here</a> to download zip from github or you can find code to do this below.</p>
+<p>To install the library <code>EPFR.r</code>, <a href="https://github.com/EPFR/EPFR-Quant-Library-R">click here</a> to download the zip file from github, or you can find the code to do this below.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="epfr.r-library.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;devtools&quot;</span>)</span>
 <span id="cb1-2"><a href="epfr.r-library.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">&quot;EPFR/EPFR-Quant-Library-R&quot;</span>)</span>
 <span id="cb1-3"><a href="epfr.r-library.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;EPFR.r&quot;</span>)</span></code></pre></div>
@@ -329,23 +329,23 @@ code span.wa { font-style: italic; } /* Warning */
 <hr />
 </div>
 <div id="set-up" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Set up<a href="epfr.r-library.html#set-up" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>To use various functions in <code>library('EPFR.r')</code> it is recommended that the user set up a folder called <em>EPFR</em> in your computers C drive (i.e. <em>C://EPFR</em>). This is the default directory that is used throughout the library to find any files used to perform backtests.</p>
+<h2><span class="header-section-number">2.2</span> Set-up<a href="epfr.r-library.html#set-up" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To use various functions in <code>library('EPFR.r')</code> it is recommended that the user sets up a folder called <em>EPFR</em> in your computer’s C drive (i.e. <em>C://EPFR</em>). This is the default directory that is used throughout the library to find any files used to perform backtests.</p>
 <p>Inside of this EPFR directory we would suggest following the below folder structure:</p>
 <ul>
-<li>Add “daily” folder; to store EPFR daily csv files.
+<li>Add a “daily” folder to store EPFR daily csv files.
 <ul>
-<li>Example: <em>MultiAsset-Rgn-daily.csv</em>, <em>FloPctCtry-daily.csv</em>, <em>FloPctSector-US-daily.csv</em>, <em>FX-daily.csv</em>, ect.</li>
+<li>Example: <em>MultiAsset-Rgn-daily.csv</em>, <em>FloPctCtry-daily.csv</em>, <em>FloPctSector-US-daily.csv</em>, <em>FX-daily.csv</em>, etc.</li>
 </ul></li>
-<li>Add “monthly” folder; to store EPFR monthly csv files.
+<li>Add a “monthly” folder to store EPFR monthly csv files.
 <ul>
-<li>Example: <em>ActPasCtry-monthly.csv</em>, ect.</li>
+<li>Example: <em>ActPasCtry-monthly.csv</em>, etc.</li>
 </ul></li>
-<li>Add “returns” folder; to store any return files used.
+<li>Add a “returns” folder to store any return files used.
 <ul>
-<li>Example: <em>PsuedoReturns-MultiAsset-FI-daily.csv</em>, <em>ExchRates-daily.csv</em>, ect.</li>
+<li>Example: <em>PsuedoReturns-MultiAsset-FI-daily.csv</em>, <em>ExchRates-daily.csv</em>, etc.</li>
 </ul></li>
-<li>Add “parameters”; to store any files that <code>library('EPFR.r')</code> has dependencies on.
+<li>Add a “parameters” folder to store any files that <code>library('EPFR.r')</code> has dependencies on.
 <ul>
 <li>The user should add the following files, which they can download via their EPFR FTP connection (located under the Classifications folder):
 <ol style="list-style-type: decimal">
@@ -561,20 +561,20 @@ code span.wa { font-style: italic; } /* Warning */
 </div>
 <div id="example" class="section level3 unnumbered hasAnchor">
 <h3>Example<a href="epfr.r-library.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Step 0: Download &amp; read files</p>
-<p>Users can download corresponding percentage flow and percentage returns files available in the users ftp, under the folders <code>Strategies/daily</code> and <code>Returns/daily</code>. For this example we download the full file paths <code>/Strategies/daily/FloPctSector-US-daily.csv</code> and <code>/Returns/PsuedoReturns-Sector-US-daily.csv</code>, and save to our local folder <code>EPFR</code>.</p>
-<p>For convenience we can save the local paths to these files as <code>flow.file</code> and <code>ret.file</code>, then we can read the files.</p>
+<p>Step 0: Download and read the files</p>
+<p>Users can download the corresponding percentage flow and percentage returns files available in the users FTP, under the folders <code>Strategies/daily</code> and <code>Returns/daily</code>. For this example, we download the full file paths <code>/Strategies/daily/FloPctSector-US-daily.csv</code> and <code>/Returns/PsuedoReturns-Sector-US-daily.csv</code>, and save to our local folder <code>EPFR</code>.</p>
+<p>For convenience, we can save the local paths to these files as <code>flow.file</code> and <code>ret.file</code>, then we can read the files.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="epfr.r-library.html#cb5-1" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">FloPctSector-US-daily.csv&quot;</span></span>
 <span id="cb5-2"><a href="epfr.r-library.html#cb5-2" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">PsuedoReturns-Sector-US-daily.csv&quot;</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="epfr.r-library.html#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># Flow file</span></span>
 <span id="cb6-2"><a href="epfr.r-library.html#cb6-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file) <span class="co"># Return file</span></span></code></pre></div>
-<p>Step 1: Ensure that x and y the same column names and order</p>
+<p>Step 1: Ensure that x and y have the same column names and order</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="epfr.r-library.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[, <span class="fu">dimnames</span>(y)[[<span class="dv">2</span>]]]) <span class="co"># LINE UP INDICATORS WITH RETURNS </span></span></code></pre></div>
 <p>Step 2: Compound (or Sum Flows) over lookback period (<span class="math inline">\(y\)</span>)</p>
 <p>EPFR’s function <code>compound.flows()</code> uses other functions within <code>library('EPFR.r')</code> to either compound, or compute a rolling cumulative sum of flows, over a trailing lookback period (typically we use y = 20 days).</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="epfr.r-library.html#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, <span class="at">y =</span> <span class="dv">20</span>)</span></code></pre></div>
-<p>Step 3: Convert percentage returns to total return index</p>
-<p>EPFR’s function <code>ret.to.idx()</code> will convert our percentage returns data <span class="math inline">\(y\)</span> to total index returns indexed so that time moves forward. We also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file and <code>ret.idx.gaps.fix()</code> to replace any NA values.</p>
+<p>Step 3: Convert the percentage returns to total return index</p>
+<p>EPFR’s function <code>ret.to.idx()</code> will convert our percentage returns data <span class="math inline">\(y\)</span> to total index returns indexed, so that time moves forward. We also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file and <code>ret.idx.gaps.fix()</code> to replace any NA values.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="epfr.r-library.html#cb9-1" aria-hidden="true" tabindex="-1"></a>y[<span class="fu">is.na</span>(y)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb9-2"><a href="epfr.r-library.html#cb9-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX</span></span>
 <span id="cb9-3"><a href="epfr.r-library.html#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span></code></pre></div>
@@ -587,13 +587,13 @@ code span.wa { font-style: italic; } /* Warning */
 <p>Step 5: Create standardized backtest model</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="epfr.r-library.html#cb11-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay, idx)</span></code></pre></div>
 <p>Step 6: Evaluate output</p>
-<p><span class="math inline">\(Z\)</span> has 4 different outputs that you can view. Within the final “rets” output, the overall portfolio will go long the top quintile and short the bottom, however the returns of each individual quintile are also presented</p>
+<p><span class="math inline">\(Z\)</span> has 4 different outputs that you can view. Within the final “rets” output, the overall portfolio will go long the top quintile and short the bottom. However, the returns of each individual quintile are also presented.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="epfr.r-library.html#cb12-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;raw&quot;</span>]] <span class="co"># Flow percentage compounded over trailing 20 days</span></span>
 <span id="cb12-2"><a href="epfr.r-library.html#cb12-2" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;raw.fwd.rets&quot;</span>]] <span class="co"># One-week ahead return (Friday to Friday)</span></span>
 <span id="cb12-3"><a href="epfr.r-library.html#cb12-3" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]] <span class="co"># Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)</span></span>
 <span id="cb12-4"><a href="epfr.r-library.html#cb12-4" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]] <span class="co"># Quintile Returns over the equal-weight universe, *column TxB tells us top - bottom = Q1 - Q5 = overall portfolio returns</span></span></code></pre></div>
 <p>Step 7: Re-balance as needed</p>
-<p>Strategies need to be rebalanced and the below code outputs summary statistics across 6 different rebalancing options found in <span class="math inline">\(hz\)</span>. Depending on how the signal we are backtesting is indexed, holding periods can be specified in a daily or monthly format. For this example we have a daily signal and <span class="math inline">\(hz\)</span> contains options for a weekly (5 days), fortnightly (10 days), monthly (20 days), bi-monthly (45 days), quarterly (65 days), and semi-annual (130 days) rebalanced portfolio.</p>
+<p>Strategies need to be rebalanced and the below code outputs summary statistics across 6 different rebalancing options found in <span class="math inline">\(hz\)</span>. Depending on how the signal we are backtesting is indexed, holding periods can be specified in a daily or monthly format. For this example, we have a daily signal and <span class="math inline">\(hz\)</span> contains options for a weekly (5 days), fortnightly (10 days), monthly (20 days), bi-monthly (45 days), quarterly (65 days), and semi-annual (130 days) rebalanced portfolio.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="epfr.r-library.html#cb13-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
 <span id="cb13-2"><a href="epfr.r-library.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="epfr.r-library.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>

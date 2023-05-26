@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks</title>
+  <title>Macro Strategy Signals | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="Macro Strategy Signals | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="Macro Strategy Signals | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-implementation-2.html"/>
-<link rel="next" href="data-3.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="epfr-stock-factors.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -363,20 +363,37 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-sector-strategy" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- ## Overview -->
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity-based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
-<!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
-<hr />
+<div id="macro-strategy-signals" class="section level2 unnumbered hasAnchor">
+<h2>Macro Strategy Signals<a href="macro-strategy-signals.html#macro-strategy-signals" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The two different types of signals discussed in the macro strategies section of this notebook are flow momentum and active/passive indicator. However these are not the only signals that can be created.</p>
+<p>For each of the strategies discussed in this notebook, we provide the time series files available for download. To access the files you can find them readily available in the user’s EPFR FTP connection under the strategies folder, or <a href="mailto:support@epfr.com">click here</a> to email our team for assistance.</p>
+<div id="flow-momentum" class="section level3 unnumbered hasAnchor">
+<h3>Flow Momentum<a href="macro-strategy-signals.html#flow-momentum" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using EPFR’s daily, weekly, or monthly flows we can create momentum signals, which gives insight to where money is flowing in the market. By identifying where positive flows are moving and driving the market up and the opposite with negative flows, we can make informed decisions to go long or short by following these flow trends. Below is a list of EPFR’s proof-of-concept strategies that are based on flow momentum and the data used to create the signal:</p>
+<ol style="list-style-type: decimal">
+<li><p><a href="multi-asset-strategy.html#multi-asset-strategy">Multi-Asset Strategy</a> - (daily flows)</p></li>
+<li><p><a href="fx-strategy.html#fx-strategy">FX Strategy</a> - (daily flows, country allocations)</p></li>
+<li><p><a href="flow-percentage-country-strategy.html#flow-percentage-country-strategy">Flow-Percentage Country Strategy</a> - (daily flows, country allocations)</p></li>
+<li><p><a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy">Flow-Percentage Sector Strategy</a> - (daily flows, sector allocations, country allocations)</p></li>
+<li><p><a href="flow-percentage-dm-rates-strategy.html#flow-percentage-dm-rates-strategy">Flow-Percentage DM Rates Strategy</a> - (daily flows, country allocations)</p></li>
+</ol>
+</div>
+<div id="activepassive-indicator" class="section level3 unnumbered hasAnchor">
+<h3>Active/Passive Indicator<a href="macro-strategy-signals.html#activepassive-indicator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using EPFR’s monthly allocations data we can create active/passive indicators, which gives insight to where managers are placing the money within their funds. By identifying which countries, sectors, industries, and securities the funds have overweight and underweight positions in, we are able to make informed decisions to follow the active positioning of the aggregate asset management community. Below is a list of EPFR’s proof-of-concept strategies that are based on an active/passive indicator and the data used to create the signal:</p>
+<ol style="list-style-type: decimal">
+<li><p><a href="activepassive-country-strategy.html#activepassive-country-strategy">Active/Passive Country Strategy</a> - (country allocations)</p></li>
+<li><p><a href="activepassive-sector-strategy.html#activepassive-sector-strategy">Active/Passive Sector Strategy</a> - (sector allocations)</p></li>
+</ol>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-implementation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="epfr-stock-factors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -407,7 +424,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/index.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks</title>
+  <title>Set-up | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="Set-up | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="Set-up | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-implementation-2.html"/>
-<link rel="next" href="data-3.html"/>
+<link rel="prev" href="epfr.r-library.html"/>
+<link rel="next" href="strategy-functions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -363,11 +363,133 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-sector-strategy" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- ## Overview -->
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity-based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
-<!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
+<div id="set-up" class="section level2 unnumbered hasAnchor">
+<h2>Set-up<a href="set-up.html#set-up" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To use various functions in <code>library('EPFR.r')</code> it is recommended that the user sets up a folder called <em>EPFR</em> in your computer’s C drive (i.e. <em>C://EPFR</em>). This is the default directory that is used throughout the library to find any files used to perform backtests.</p>
+<p>Inside of this EPFR directory we would suggest following the below folder structure:</p>
+<ul>
+<li>Add a “daily” folder to store EPFR daily csv files.
+<ul>
+<li>Example: <em>MultiAsset-Rgn-daily.csv</em>, <em>FloPctCtry-daily.csv</em>, <em>FloPctSector-US-daily.csv</em>, <em>FX-daily.csv</em>, etc.</li>
+</ul></li>
+<li>Add a “monthly” folder to store EPFR monthly csv files.
+<ul>
+<li>Example: <em>ActPasCtry-monthly.csv</em>, etc.</li>
+</ul></li>
+<li>Add a “returns” folder to store any return files used.
+<ul>
+<li>Example: <em>PsuedoReturns-MultiAsset-FI-daily.csv</em>, <em>ExchRates-daily.csv</em>, etc.</li>
+</ul></li>
+<li>Add a “parameters” folder to store any files that <code>library('EPFR.r')</code> has dependencies on.
+<ul>
+<li>The user should add the following files, which they can download via their EPFR FTP connection (located under the Classifications folder):
+<ol style="list-style-type: decimal">
+<li>classif-Ctry.txt</li>
+<li>MsciCtry2016.txt</li>
+<li>MsciCtryClassification.txt</li>
+</ol></li>
+</ul></li>
+</ul>
+<!-- --- -->
+<!-- ## FTP Functions {#ftp} -->
+<!-- Below are some functions built in `library('EPFR.r')` that connect a local R workspace to FTP server for convenience in accessing and working directly with our data. -->
+<!-- ### RCurl  {-} -->
+<!-- Functions built in `library('EPFR.r')` which give access to files on EPFR's ftp require the `RCurl` library. -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- library(RCurl) -->
+<!-- ``` -->
+<!-- ### Extract FTP File Path  {-} -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp.parent <- function(x) { -->
+<!-- # ----------------------------------------------------------------- -->
+<!-- # Args     : x = a string of full paths -->
+<!-- # Output   : returns paths to the parent directory -->
+<!-- # ----------------------------------------------------------------- -->
+<!--    z <- dirname(x) -->
+<!--    z <- ifelse(z == ".", "", z) -->
+<!--    z -->
+<!-- } -->
+<!-- ``` -->
+<!-- ### Extract FTP File Name  {-} -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp.file <- function(x) { -->
+<!-- # ----------------------------------------------------------------- -->
+<!-- # Args     : x = a string of full paths -->
+<!-- # Output   : strips out parent directory, returning just the file name -->
+<!-- # ----------------------------------------------------------------- -->
+<!--    txt.right(x, nchar(x) - nchar(ftp.parent(x)) - 1) -->
+<!-- } -->
+<!-- ``` -->
+<!-- ### Download FTP file  {-} -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp.get <- function(x, y, n, w, h, u = "ftp", v = F) { -->
+<!-- # ----------------------------------------------------------------- -->
+<!-- # Name     : ftp.get -->
+<!-- # Args     : x = remote file on an ftp site (e.g. "/ftpdata/mystuff/foo.txt") -->
+<!-- #      : y = local folder (e.g. "C:\\temp") -->
+<!-- #      : n = ftp site (defaults to standard) -->
+<!-- #      : w = user id (defaults to standard) -->
+<!-- #      : h = password (defaults to standard) -->
+<!-- #      : u = protocol (either "ftp" or "sftp") -->
+<!-- #      : v = T/F flag for ftp.use.epsv argument of getCurlHandle -->
+<!-- # Output   : file <x> from remote site -->
+<!-- # ----------------------------------------------------------------- -->
+<!-- # -->
+<!-- # MISSING ARGUMENTS -->
+<!--    if (missing(n)) n <- ftp.credential("ftp", u, v) -->
+<!--    if (missing(w)) w <- ftp.credential("user", u, v) -->
+<!--    if (missing(h)) h <- ftp.credential("pwd", u, v) -->
+<!-- # -->
+<!-- # GET DATA -->
+<!--    z <- getCurlHandle(ftp.use.epsv = v, userpwd = paste0(w, ":", h)) -->
+<!--    z <- getBinaryURL(paste0(u, "://", n, x), curl = z) -->
+<!--    writeBin(z, con = paste0(y, "\\", ftp.file(x))) -->
+<!-- # -->
+<!-- # RETURN NOTHING -->
+<!--    invisible() -->
+<!-- } -->
+<!-- ``` -->
+<!-- _Tip: within the C://EPFR//parameters folder, add a file called ftp-credential.txt. This will allow the ftp.get() function to automatically generate ftp, username and password information. See below example._ -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp <- "000.000.000.00" -->
+<!-- user <- "mydatafeed" -->
+<!-- pwd <- "mypassword100!" -->
+<!-- x <- t(data.frame(ftp, user, pwd)) -->
+<!-- mat.write(x, "c:\\EPFR\\parameters\\ftp-credential.txt") -->
+<!-- ``` -->
+<!-- ### Examples  {-} -->
+<!-- To download a desired ftp file you can set the file path to the csv file that will be used for your strategy and a local folder that this file will be downloaded to and then input parameters into the ftp.get() function. -->
+<!-- Example 1: Downloading Flow File -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- flow.file <- "/Strategies/daily/FloPctSector-US-daily.csv" # FTP FILE - FloPctSector-US-daily.csv -->
+<!-- flow.fldr <- "C:\\EPFR\\daily" # LOCAL FOLDER -->
+<!-- ``` -->
+<!-- Next you will enter your username and password: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- usr <- "YOUR USER NAME" # FTP USERNAME -->
+<!-- pwd <- "YOUR PASSWORD" #FTP PASSWORD -->
+<!-- ``` -->
+<!-- Now you can call `ftp.get()` with the following inputs: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp.get(file, fldr, "filetransport.epfrglobal.com", usr, pwd, "ftp") # DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS -->
+<!-- ``` -->
+<!-- After the file is downloaded the flow file's local path can be easily stored with follow line: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- flow.file <- paste(flow.fldr, ftp.file(flow.file), sep = "\\") # STORES FLOW FILE PATH -->
+<!-- ``` -->
+<!-- Example 2: Downloading Return File -->
+<!-- ```{r} -->
+<!-- ret.file <- "/Returns/PsuedoReturns-Sector-US-daily.csv" -->
+<!-- ret.fldr <- "C:\\EPFR\\returns" # LOCAL FOLDER -->
+<!-- ``` -->
+<!-- Next we will try using the automated credentials entered in _ftp-credential.txt_ to log in to the ftp, by calling `ftp.get()` with the following inputs: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ftp.get(file, fldr, u = "ftp", v = T) # DOWNLOADS FILE FROM FTP TO LOCAL FOLDER, USING CREDENTIALS -->
+<!-- ``` -->
+<!-- After the file is downloaded the flow file's local path can be easily stored with follow line: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- ret.file <- paste(ret.fldr, ftp.file(ret.file), sep = "\\") # STORES FLOW FILE PATH -->
+<!-- ``` -->
 <hr />
 </div>
             </section>
@@ -375,8 +497,8 @@ code span.wa { font-style: italic; } /* Warning */
           </div>
         </div>
       </div>
-<a href="strategy-implementation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="epfr.r-library.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="strategy-functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -407,7 +529,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-EPFRLib.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

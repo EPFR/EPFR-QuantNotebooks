@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks</title>
+  <title>12 Ownership Dispersion | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="12 Ownership Dispersion | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="12 Ownership Dispersion | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-implementation-2.html"/>
-<link rel="next" href="data-3.html"/>
+<link rel="prev" href="manager-momentum.html"/>
+<link rel="next" href="conviction.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -363,20 +363,204 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-sector-strategy" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- ## Overview -->
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity-based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
-<!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
+<div id="ownership-dispersion" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">12</span> Ownership Dispersion<a href="ownership-dispersion.html#ownership-dispersion" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>EPFR has a set of 2 monthly “Ownership Dispersion” indicators that try to identify if there is any concentrated ownership of a stock.</p>
+<p>The idea behind the following “Ownership Dispersion” indicators is to identify whether stocks are held by a wider or smaller group of fund managers. By historically testing this factor literature suggests that a very concentrated ownership suggests it is a bad thing for a stocks sharpe ratio and overall rick outlook. Generally, it is better to pick stocks with a broad range of investors, as higher ownership dispersion has been associated with lower stock volatility.</p>
 <hr />
+<div id="herfindahl" class="section level3 unnumbered hasAnchor">
+<h3>Herfindahl<a href="ownership-dispersion.html#herfindahl" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Measures the % weight held in a stock by each individual fund, and the ending AuM of the fund. It represents a measurement of owner dispersion.</p>
+<p><span class="math display">\[\text{Herfindahl}^{[1]} \equiv 1- \frac{\sum (\omega \times A)^2}{(\sum \omega \times  A)^2}\]</span>
+where:</p>
+<p><span class="math inline">\(\begin{align} \omega &amp; \equiv \text{% weight held by a fund in a security} \\  A &amp; \equiv \text{dollar ending assets of a fund} \end{align}\)</span></p>
+<div id="interpretation-herfindahl" class="section level4 unnumbered hasAnchor">
+<h4>Interpretation Herfindahl<a href="ownership-dispersion.html#interpretation-herfindahl" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A small value indicates that a small number of funds hold the majority of the stock (i.e. less dispersed, more concentrated ownership). Conversely, a large value indicates that many funds hold smaller amounts of the stock.</p>
+</div>
+<div id="example-herfindahl" class="section level4 unnumbered hasAnchor">
+<h4>Example Herfindahl<a href="ownership-dispersion.html#example-herfindahl" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Below shows a snippet of what EPFR’s <em>Herfindahl</em> Files contain:</p>
+<p>Location: <code>'/StockFlows4.1/QuantitativeFactors/Monthly/Herfindahl/Aggregate/Herfindahl2020Q4.txt'</code></p>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+ReportDate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+HSecurityId
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+SecurityName
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Herfindahl
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+50355
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+410864
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Apple Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.9459
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+47747
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4979352
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Tesla Inc
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.9435
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+53624
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+90522
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Amazon.com, Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.9462
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+43723
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1002967
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Microsoft Corporation
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.9519
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+37679
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1002408
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Exxon Mobil Corporation
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.9442
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+39450
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+623932
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Netflix, Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.9429
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+39484
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+6012656
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Visa Inc
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.9572
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
+<div id="fund-count" class="section level3 unnumbered hasAnchor">
+<h3>Fund Count<a href="ownership-dispersion.html#fund-count" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Counts the number of funds holding some positive weight of a stock.</p>
+<p><span class="math display">\[\text{FundCt}^{[2]} \equiv \sum sgn(\omega)\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(\begin{align} \omega &amp; \equiv \text{% weight held by a fund in a security} \end{align}\)</span></p>
+<div id="interpretation-fund-count" class="section level4 unnumbered hasAnchor">
+<h4>Interpretation Fund Count<a href="ownership-dispersion.html#interpretation-fund-count" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The higher the fund count, the larger the number of funds invested in it for a given month-end.</p>
+<!-- #### Example FILL IN {-} -->
+<!-- Below shows a snippet of what EPFR's _FILL IN_ Files contain: -->
+<!-- Location: `'/StockFlows4.1/QuantitativeFactors/Monthly/FILL IN/Aggregate/', FILL IN')` -->
+<!-- ```{r, FILL IN_ex, results='asis', echo=F} -->
+<!-- FILL IN_ex -->
+<!-- ``` -->
+<hr />
+</div>
+</div>
+<div id="references-1" class="section level3 unnumbered hasAnchor">
+<h3>References<a href="ownership-dispersion.html#references-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>[2] Barabanov , S. S. (2003). The relationship between institutional
+ownership, concentration of ownership, bid ask spread, and returns on
+NASDAQ stocks.</p>
+<p>[3] Chen, J., Hong, H., &amp; Stein, J. C. (2002). Breadth of ownership and stock
+returns. Journal of financial Economics, 66(2 3), 171 205.</p>
+<hr />
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-implementation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="manager-momentum.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conviction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -407,7 +591,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/02-Stock.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

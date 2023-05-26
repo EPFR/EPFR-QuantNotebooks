@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks</title>
+  <title>13 Conviction | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="13 Conviction | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="13 Conviction | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-implementation-2.html"/>
-<link rel="next" href="data-3.html"/>
+<link rel="prev" href="ownership-dispersion.html"/>
+<link rel="next" href="backtest-implementation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -363,20 +363,177 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-sector-strategy" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- ## Overview -->
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity-based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
-<!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
+<div id="conviction" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">13</span> Conviction<a href="conviction.html#conviction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The idea behind the following “Conviction” indicator is to identify fund managers with larger positions than average, and use the assumption that this may signal some type of private information which we want to exploit.</p>
+<p>For example if a stock is being held by 100 managers but only 2 of them have a very significant positions in that stock, this may indicate some level of exclusive knowledge which is what we want to identify.</p>
 <hr />
+<div id="allocskew" class="section level3 unnumbered hasAnchor">
+<h3>AllocSkew<a href="conviction.html#allocskew" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Multiplies a fund’s AuM by the direction of the difference between the average allocations of a peer group of funds and the fund’s latest allocations towards the same stock. If this difference is positive, the fund is underweight vs peers, and if the difference is negative, the fund is overweight vs peers. By summing these AuM across all applicable funds, then dividing by the sum of all AuM, we get a normalized metric. We expect this factor to reflect the percentage of AuM that is underweight a stock.</p>
+<p><span class="math display">\[\text{AllocationSkew} \equiv \sum sgn(-\omega^+) \times \frac{ A}{\sum  A}\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(\begin{align} \omega^{+} &amp; \equiv \text{active weight versus peers} \\  A &amp; \equiv \text{dollar ending assets of a fund} \end{align}\)</span></p>
+<div id="interpretation-allocskew" class="section level4 unnumbered hasAnchor">
+<h4>Interpretation AllocSkew<a href="conviction.html#interpretation-allocskew" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A positive value tells us that most funds, or at least those with a larger AuM, are underweight, meaning that only a small fraction of managers are bullish towards the stock. Similarly, a negative value indicates that many high-AuM funds are overweight the stock.</p>
+</div>
+<div id="example-allocskew" class="section level4 unnumbered hasAnchor">
+<h4>Example AllocSkew<a href="conviction.html#example-allocskew" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Below shows a snippet of what EPFR’s <em>AllocSkew</em> Files contain:</p>
+<p>Location: <code>'/StockFlows4.1/QuantitativeFactors/Monthly/AllocSkew/Aggregate/AllocationSkew2020Q4.txt'</code></p>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+ReportDate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+HSecurityId
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+SecurityName
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+AllocSkew
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+46642
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+410864
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Apple Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.6417
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+44898
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4979352
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Tesla Inc
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.6790
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+48863
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+90522
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Amazon.com, Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.5596
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+42096
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1002967
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Microsoft Corporation
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.6114
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+38097
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1002408
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Exxon Mobil Corporation
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.7763
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+39934
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+623932
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Netflix, Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.6587
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+40312
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+6012656
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Visa Inc
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.6018
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-implementation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ownership-dispersion.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="backtest-implementation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -407,7 +564,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/02-Stock.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

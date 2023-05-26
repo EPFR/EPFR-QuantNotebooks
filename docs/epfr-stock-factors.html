@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks</title>
+  <title>EPFR Stock Factors | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="EPFR Stock Factors | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="EPFR Stock Factors | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-implementation-2.html"/>
-<link rel="next" href="data-3.html"/>
+<link rel="prev" href="macro-strategy-signals.html"/>
+<link rel="next" href="epfr.r-library.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -363,20 +363,57 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-sector-strategy" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- ## Overview -->
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity-based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
-<!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
-<hr />
+<div id="epfr-stock-factors" class="section level2 unnumbered hasAnchor">
+<h2>EPFR Stock Factors<a href="epfr-stock-factors.html#epfr-stock-factors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Quantitative analysts at EPFR have created 13 different proof-of-concept stock factors using EPFR’s monthly holdings data and daily or monthly flows, which provide insight to various trends in the market. By identifying and following these trends, users can make better informed investment decisions. Below is a list of EPFR’s 7 daily and 6 monthly proof-of-concept factors that use stock level data used to create a signal:</p>
+<div id="daily-factors" class="section level3 unnumbered hasAnchor">
+<h3>Daily Factors:<a href="epfr-stock-factors.html#daily-factors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><a href="flow-momentum-1.html#flow-momentum-1">Flow Momentum</a>
+<ol style="list-style-type: decimal">
+<li><a href="flow-momentum-1.html#flomo">FloMo</a></li>
+</ol></li>
+<li><a href="smart-money.html#smart-money">Smart Money</a>
+<ol start="2" style="list-style-type: decimal">
+<li><a href="smart-money.html#flotrend">FloTrend</a></li>
+<li><a href="smart-money.html#flodiff">FloDiff</a></li>
+<li><a href="smart-money.html#flodiff2">FloDiff2</a></li>
+<li><a href="smart-money.html#actwttrend">ActWtTrend</a></li>
+<li><a href="smart-money.html#actwtdiff">ActWtDiff</a></li>
+<li><a href="smart-money.html#actwtdiff2">ActWtDiff2</a></li>
+</ol></li>
+</ul>
 </div>
+<div id="monthly-factors" class="section level3 unnumbered hasAnchor">
+<h3>Monthly Factors:<a href="epfr-stock-factors.html#monthly-factors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><a href="manager-momentum.html#manager-momentum">Manager momentum</a>
+<ol style="list-style-type: decimal">
+<li><a href="manager-momentum.html#allocmo">AllocMo</a></li>
+<li><a href="manager-momentum.html#alloctrend">AllocTrend</a></li>
+<li><a href="manager-momentum.html#allocdiff">AllocDiff</a></li>
+</ol></li>
+<li><a href="ownership-dispersion.html#ownership-dispersion">Ownership Dispersion</a>
+<ol start="4" style="list-style-type: decimal">
+<li><a href="ownership-dispersion.html#herfindahl">Herfindahl</a></li>
+<li><a href="ownership-dispersion.html#fund-count">Fund Count</a></li>
+</ol></li>
+<li><a href="conviction.html#conviction">Conviction</a>
+<ol start="6" style="list-style-type: decimal">
+<li><a href="conviction.html#allocskew">AllocSkew</a></li>
+</ol></li>
+</ul>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-implementation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="macro-strategy-signals.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="epfr.r-library.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -407,7 +444,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/index.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

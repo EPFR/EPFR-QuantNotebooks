@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks</title>
+  <title>9 Flow Momentum | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="9 Flow Momentum | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="9 Flow Momentum | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-implementation-2.html"/>
-<link rel="next" href="data-3.html"/>
+<link rel="prev" href="overview.html"/>
+<link rel="next" href="smart-money.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -363,20 +363,197 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-sector-strategy" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- ## Overview -->
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity-based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
-<!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
+<div id="flow-momentum-1" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Flow Momentum<a href="flow-momentum-1.html#flow-momentum-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Flow momentum shows where flows are moving.</p>
 <hr />
+<div id="flomo" class="section level3 unnumbered hasAnchor">
+<h3>FloMo<a href="flow-momentum-1.html#flomo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>FloMo is calculated by the normalized the dollar flow over AuM.</p>
+<p>To calculate the dollar flow to a security, EPFR scales a fund’s flow by multiplying it against its stated stock allocation, on that day. The same procedure is applied to all funds with fund flow and stock allocation information, which are then summed for each security across all funds, to get the total dollar flow into a security.</p>
+<!-- $$\text{Total Flow}_{s,t} = \sum \varphi \times \omega$$ -->
+<!-- Where: -->
+<!-- * $\text{Total Flow}$ = the total dollar flow into a security $s$, across all funds in our universe $i$, for day $t$ -->
+<p>To normalize this figure EPFR repeats the process across the same fund’s Assets held under Management (AuM), to get the total AuM held in a security.</p>
+<!-- $$\text{Total AuM}_{c,t} = \sum \alpha \times \omega$$ -->
+<!-- Where: -->
+<!-- * $\text{Total AuM}$ = the total assets held in a security $s$, across all funds in our universe $i$, for day $t$ -->
+<p>The final step, to find the flow momentum for a security, the total flow is divided by the total AuM held in a security.</p>
+<!-- $$\text{FloMo}_{s,t} = 100 \times \frac{\text{Total Flow}_{s,t}}{\text{Total AuM}_{s,t}}$$ -->
+<!-- Where: -->
+<!-- * $\text{FloMo}$ = the scaled flow as a percentage into a security $s$, across all funds in our universe $i$, for day $t$ -->
+<p>This is repeated this across all securities for the entire history.</p>
+<!-- #### Equation {-} -->
+<p><span class="math display">\[\text{FlowMo} \equiv \frac{\sum \varphi \times \omega}{\sum \alpha \times \omega}\]</span>
+where:</p>
+<p><span class="math inline">\(\begin{align} \varphi &amp; \equiv \text{dollar flow into a fund} \\ \omega &amp; \equiv \text{% weight held by a fund in a security} \\ \alpha &amp; \equiv \text{dollar starting assets of a fund} \end{align}\)</span></p>
+<!-- ### Aggregate FloMo File -->
+<!-- Users can find the history files for daily flow momentum available in their EPFR FTP connection under the folder: -->
+<!-- ```{r, eval=F, echo=T} -->
+<!-- '/StockFlows4.1/QuantitativeFactors/Daily/FloMo' -->
+<!-- ``` -->
+<!-- The user will find all aggregate FloMo history as well as history broken down by Active, Passive, ETF and Mutual funds. -->
+<div id="interpretation-flomo" class="section level4 unnumbered hasAnchor">
+<h4>Interpretation FloMo<a href="flow-momentum-1.html#interpretation-flomo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A positive value indicates money flowing to a security. Similarly a negative value indicates outflow from a security.</p>
+<!-- We can use these values to rank stocks into different baskets and g  -->
+</div>
+<div id="example-flomo" class="section level4 unnumbered hasAnchor">
+<h4>Example FloMo<a href="flow-momentum-1.html#example-flomo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Below shows a snippet of what EPFR’s <em>FloMo</em> Files contain:</p>
+<p>Location: <code>'/StockFlows4.1/QuantitativeFactors/Daily/FloMo/Aggregate/FlowMomentum202012.txt'</code></p>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+ReportDate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+HSecurityId
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+SecurityName
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+386084
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+410864
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Apple Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.10249
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+386460
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4979352
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Tesla Inc
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.02997
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+389471
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+90522
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Amazon.com, Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.12930
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+383270
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1002967
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Microsoft Corporation
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.10906
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+392057
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1002408
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Exxon Mobil Corporation
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.27580
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+393302
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+623932
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Netflix, Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.11210
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+394087
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+12/31/2020 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+6012656
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+Visa Inc
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+0.11759
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-implementation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="smart-money.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -407,7 +584,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/02-Stock.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

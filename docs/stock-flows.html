@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks</title>
+  <title>Stock Flows | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="Stock Flows | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="Stock Flows | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-implementation-2.html"/>
-<link rel="next" href="data-3.html"/>
+<link rel="prev" href="country-flows.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -363,20 +363,39 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-sector-strategy" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="stock-flows" class="section level1 unnumbered hasAnchor">
+<h1>Stock Flows<a href="stock-flows.html#stock-flows" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <!-- ## Overview -->
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity-based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
-<!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
-<hr />
+<!-- In addition to other offerings EPFR has, we also have Stock Allocations data. -->
+<!-- EPFR tracks around **23-26** trillion AuM in equity funds, and at the stock level positions we track around **12** trillion AuM. Below you can find this coverage over time in comparison to our other offerings.  -->
+<!-- <center> -->
+<!-- ![Updated at the end of July each year](https://raw.githubusercontent.com/oliviablasz/EPFRNotebooks_v1/main/png/coverage_allocations.PNG){width=250px} -->
+<!-- </center> -->
+<!-- Allocations data is published monthly with a 26 day lag. -->
+<!-- --- -->
+<!-- ## Holdings -->
+<p>Stock flows is a derived dataset that delivers aggregate daily and monthly total dollar flows to individual securities.</p>
+<p>EPFR also provides the average percentage allocation of fund managers to individual securities, by Geographic Focus. This output is also aggregate data, which we provide monthly at the stock level only.</p>
+<p>There are 4 different outputs of average allocations that EPFR provides. This includes equal and Fund-weighted average percentage allocations which can include or exclude funds with zero allocation in the calculation.</p>
+<p>Both average allocation and stock dollar flow can also be broken down by active/passive, etf/mutual.</p>
+<p>Due to NDA’s EPFR has signed we cannot release stock allocations at the fund level, which is why all the reports within EPFR’s Stock Flows product are aggregate values at the security level. If there is a specific universe of funds that the user would like to see, EPFR’s team of quantitative analysts can help create custom aggregate files.</p>
+<!-- --- -->
+<!-- ### Granularity -->
+<!-- EPFR's holdings data is broken down by the following filters to create very different variations of average allocations: -->
+<!-- * Active -->
+<!-- * Passive -->
+<!-- * Exchange-traded funds (ETF) -->
+<!-- * Mutual -->
+<!-- --- -->
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-implementation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="country-flows.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -407,7 +426,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/99-FAQ.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks</title>
+  <title>Returns Information | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="Returns Information | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="Returns Information | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-implementation-2.html"/>
-<link rel="next" href="data-3.html"/>
+<link rel="prev" href="results.html"/>
+<link rel="next" href="country-flows.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -363,11 +363,32 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-sector-strategy" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- ## Overview -->
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity-based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
-<!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
+<div id="returns-information" class="section level1 unnumbered hasAnchor">
+<h1>Returns Information<a href="returns-information.html#returns-information" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>When available, EPFR has provided daily fund return data which can be used as a proxy for the returns of each market that we’re backtesting. For demonstration purposes, these files are used throughout this notebook to exhibit use cases. However, EPFR is not able to produce bond rates or individual stock returns, so these files will need to be sourced using third-party return data.</p>
+<p>Users who choose to utilize these readily-available fund return files to follow along can access them under the FTP folder <strong>Returns</strong>.</p>
+<hr />
+<p><em>Disclaimer: EPFR Quant team uses third-party data providers to calculate returns in our usual presentations to showcase performances.</em></p>
+<hr />
+<p>Fund returns are calculated using EPFR’s daily flow data, and can be recreated using the following equations:</p>
+<p><span class="math display">\[\text{Fund Return}_{a,t} = 100 \times \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,a,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,a,t}}\]</span>
+Where:</p>
+<ul>
+<li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of asset class <span class="math inline">\(a\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+</ul>
+<p><span class="math display">\[\text{Fund Return}_{c,t} = 100\times \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,c,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,c,t}}\]</span>
+Where:</p>
+<ul>
+<li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of country <span class="math inline">\(c\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+</ul>
+<p><span class="math display">\[\text{Fund Return}_{s,r,t} = 100 \times \frac{\sum^{N}_{i=m} \text{Portfolio Change}_{i,s,r,t}}{\sum^{N}_{i=m} \text{Assets Start}_{i,s,r,t}}\]</span>
+Where:</p>
+<ul>
+<li><span class="math inline">\(\text{Fund Return}\)</span> = the return value of sector <span class="math inline">\(s\)</span>, for region <span class="math inline">\(r\)</span>, across all funds in our universe <span class="math inline">\(i\)</span>, for day <span class="math inline">\(t\)</span></li>
+</ul>
+<hr />
+<p>However, depending on how the signal being tested is indexed, it is important that the return file is also indexed at the same frequency. For example, if the signal being tested is limited to monthly granularity, it is important to ensure that the returns are also indexed by month. In this case, if the user chooses to use one of EPFR’s daily return files, the function <code>mat.daily.to.monthly(, T)</code> from <code>library('EPFR.r')</code> should be used to modify a daily return file to be indexed with monthly dates. This same process can also be done using <code>mat.daily.to.weekly</code> from <code>library('EPFR.r')</code> to modify a daily return file to be indexed with weekly dates.</p>
+<!-- On our usual presentation we use 3rd party data providers to calculate returns, but for demonstration purposes this notebook uses fund returns where available to showcase strategy performances.  -->
 <hr />
 </div>
             </section>
@@ -375,8 +396,8 @@ code span.wa { font-style: italic; } /* Warning */
           </div>
         </div>
       </div>
-<a href="strategy-implementation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="results.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="country-flows.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -407,7 +428,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/99-FAQ.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

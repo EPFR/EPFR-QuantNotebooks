@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks</title>
+  <title>Import Data | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="Import Data | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="Import Data | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-implementation-2.html"/>
-<link rel="next" href="data-3.html"/>
+<link rel="prev" href="functions.html"/>
+<link rel="next" href="results.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -363,20 +363,632 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-sector-strategy" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- ## Overview -->
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity-based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
-<!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
+<div id="import-data" class="section level2 unnumbered hasAnchor">
+<h2>Import Data<a href="import-data.html#import-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="epfr-stock-factor-data" class="section level3 unnumbered hasAnchor">
+<h3>EPFR Stock Factor data<a href="import-data.html#epfr-stock-factor-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For efficiency while importing EPFR stock factor data, we will create the function below called <code>fetch.fcn()</code>, which combines functions from <code>library('EPFR.r')</code> as well as <a href="functions.html#functions">Functions</a> discussed earlier in this section, <code>fetch.ftp.QuantFactor()</code>, <code>ftp.QuantFactor.format()</code>, <code>ftp.QuantFactor.name()</code>. This will seamlessly fetch and format data directly from the users EPFR ftp connection, for a desired period. This function also performs any necessary compounding or summing of the specified factor over the desired period.</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="import-data.html#cb144-1" aria-hidden="true" tabindex="-1"></a>fetch.fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, n, <span class="at">w =</span> <span class="st">&quot;&quot;</span>, classif) {       </span>
+<span id="cb144-2"><a href="import-data.html#cb144-2" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">yyyymm.lag</span>(x, <span class="dv">1</span>)</span>
+<span id="cb144-3"><a href="import-data.html#cb144-3" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">yyyymmdd.ex.yyyymm</span>(z)</span>
+<span id="cb144-4"><a href="import-data.html#cb144-4" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">fetch.ftp.QuantFactor</span>(y, z, n, w, classif)</span>
+<span id="cb144-5"><a href="import-data.html#cb144-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb144-6"><a href="import-data.html#cb144-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>(y <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;fundct&quot;</span>, <span class="st">&quot;Herfindahl&quot;</span>, <span class="st">&quot;FloAlpha&quot;</span>))){</span>
+<span id="cb144-7"><a href="import-data.html#cb144-7" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">compound.sf</span>(z, <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="st">&quot;FloMo&quot;</span>, F, T))</span>
+<span id="cb144-8"><a href="import-data.html#cb144-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb144-9"><a href="import-data.html#cb144-9" aria-hidden="true" tabindex="-1"></a>  z</span>
+<span id="cb144-10"><a href="import-data.html#cb144-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The function <code>fetch.fcn()</code> requires inputs being the period of data <code>x</code> we are looking for, the stock factor name we want to test <code>y</code>. The number of tailing periods or the lookback period <code>n</code>.</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="import-data.html#cb145-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">&quot;202012&quot;</span> <span class="co">#period of data</span></span>
+<span id="cb145-2"><a href="import-data.html#cb145-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="st">&quot;FloMo&quot;</span> <span class="co">#stock factor name - FloMo, FloTrend, FloDiff, FloDiff2, ActWtTrend, ActWtDiff, ActWtDiff2, AllocMo, AllocTrend, AllocDiff, Herfindahl, AllocSkew</span></span>
+<span id="cb145-3"><a href="import-data.html#cb145-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co">#lookback period</span></span></code></pre></div>
+<!-- If a user wants to subset to a  -->
+<!-- ```{r} -->
+<!-- classif <- NA #TBD -->
+<!-- ``` -->
+<p>An optional input the user can add is their customized location of the StockFlows4.1 folder within their EPFR ftp connection. If there is no additional string before <code>/StockFlows4.1/</code>, this variable can be left as empty.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="import-data.html#cb146-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span></code></pre></div>
+<p>Another option if the user is having issues connecting to ftp via r, they can manually download history from the <code>/StockFlows4.1/QuantitativeFactors</code> folder in ftp. The user would then just want to include the full path of where the files sit in their local device as <code>w</code>. For example if the full location of files we want to backtest are <code>'C:\\EPFR\\StockFlows4.1\\QuantitativeFactors\\Daily\\FloMo\\Aggregate'</code>, we only write:</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="import-data.html#cb147-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR&quot;</span></span></code></pre></div>
+<p>To fetch the data we can now execute <code>fetch.fcn()</code> and below shows a snippet of how this function formats the data before compounding/summing over period:</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="import-data.html#cb148-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">fetch.fcn</span>(x, y, n, w, <span class="at">classif =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201110
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201111
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201112
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201113
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201116
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201117
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201118
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201119
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201120
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201123
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201124
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201125
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201126
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201127
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+FloMo.20201130
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+1002967
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.2106713
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.3528287
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0715635
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.8807967
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0436101
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0161006
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0910522
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0577236
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0891811
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0519823
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0525696
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1055612
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0061000
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1241751
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0041389
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+410864
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.2284853
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.3832075
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0637106
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.9091212
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0617418
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0299000
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0877601
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0582342
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.1094986
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0253414
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0829102
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1138093
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0143771
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1389322
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0009251
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+90522
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.2104804
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.3694689
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0427630
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.9147785
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0673913
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0209737
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0996508
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0839870
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0858998
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0462715
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0314040
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1172130
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0033814
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0849490
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0012711
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+1002408
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0828271
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.8908344
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.3251359
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.2623417
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0523342
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.5036567
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.3909722
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0275872
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.1995538
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0163996
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0054852
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.3501145
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.2678046
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.4470404
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0007026
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+623932
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.2621542
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.3552862
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1143285
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.8368644
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0355506
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0134974
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0561610
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0265500
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.1003440
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0144234
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0688096
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1255552
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0090262
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0869749
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0044517
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+6012656
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1503319
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.4290317
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1035494
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0850885
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0663591
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0504502
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1271815
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0367181
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0550606
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0416139
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0753898
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0780998
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0115163
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.2652385
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0061536
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+4979352
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.3683085
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0457542
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.2422062
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.8195359
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1570179
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.2797853
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0759700
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0395536
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.0068730
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1913781
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0142193
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1510861
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.1662521
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.2291914
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0254565
+</td>
+</tr>
+</tbody>
+</table>
 <hr />
 </div>
+<div id="returns-data" class="section level3 unnumbered hasAnchor">
+<h3>Returns data<a href="import-data.html#returns-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There should be a single return file for each calendar year the user is backtesting this strategy. The columns in the file should consist of the return data over a single month for each security included in the universe. EPFR is not able to provide this data, so users must find this data though their own third-party resources.</p>
+<p>For the purpose of creating backtest results in this notebook, we have used an internal file containing historical daily stock returns, stored locally in the folder EPFR/returns.</p>
+<p>Below shows a snippet of what this file contains:</p>
+<p><code>EPFR/StockRets/Sp500_2020.csv</code></p>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.1
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.2
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.3
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.4
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.5
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.6
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.7
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.8
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.9
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.10
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.11
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+Ret.12
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+90522
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-1.5576018
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-3.532843
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.0371816
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+12.066268
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-7.047026
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+6.735504
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-3.272232
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4.303415
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-5.351807
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2.660242
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3.992373
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-4.925194
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+410864
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.5505863
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-7.970508
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.7336908
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+7.621908
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-5.050512
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+9.911060
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+6.498088
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4.249487
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-6.803390
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5.865757
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+10.507253
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+7.422870
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+623932
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-1.5423594
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1.213396
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-3.1901271
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-1.569988
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-2.076071
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5.051610
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-2.014350
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+9.973530
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+7.229572
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+13.102533
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-7.012791
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-6.147375
+</td>
+</tr>
+</tbody>
+</table>
+<!-- #### Ranking stocks -->
+<!-- #### Model -->
+<!-- --- -->
+<!-- #### Factor Performance -->
+<!-- #### Performance Consistency -->
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-implementation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -407,7 +1019,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/02-Stock.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

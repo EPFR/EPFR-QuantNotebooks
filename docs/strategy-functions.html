@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks</title>
+  <title>Strategy Functions | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="Strategy Functions | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Flow-Percentage Sector Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="Strategy Functions | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-implementation-2.html"/>
-<link rel="next" href="data-3.html"/>
+<link rel="prev" href="set-up.html"/>
+<link rel="next" href="epfr-data-filters.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -363,20 +363,159 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-sector-strategy" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Flow-Percentage Sector Strategy<a href="flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- ## Overview -->
-<p>The <em>Flow-Percentage Sector Strategy</em> is an equity-based rotation strategy, which ranks different sectors across a customized universe of geographic regions. This approach uses daily active fund flows in conjunction with monthly sector and country allocations.</p>
-<!-- The best results from this strategy come from Emerging, Japanese and United Kingdom sectors, but adds value across the board. For those regions, the top two sectors, in terms of twenty-day percentage flows, tend to out preform the bottom two sectors by around 7% per year. -->
+<div id="strategy-functions" class="section level2 unnumbered hasAnchor">
+<h2>Strategy Functions<a href="strategy-functions.html#strategy-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="total-return-index" class="section level3 unnumbered hasAnchor">
+<h3>Total Return Index<a href="strategy-functions.html#total-return-index" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>EPFR’s function <code>ret.to.idx()</code> uses other functions within <code>library('EPFR.r')</code> to compute a total-return index series, from percentage returns. To calculate the total return index we sum 1 plus today’s percentage return multiplied by the previous days total-return index.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="strategy-functions.html#cb2-1" aria-hidden="true" tabindex="-1"></a>ret.to.idx <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb2-2"><a href="strategy-functions.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb2-3"><a href="strategy-functions.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Name      : ret.to.idx</span></span>
+<span id="cb2-4"><a href="strategy-functions.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Args      : x = a file of total returns indexed so that time runs forward</span></span>
+<span id="cb2-5"><a href="strategy-functions.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Output    : computes a total-return index</span></span>
+<span id="cb2-6"><a href="strategy-functions.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb2-7"><a href="strategy-functions.html#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(<span class="fu">dim</span>(x))) {</span>
+<span id="cb2-8"><a href="strategy-functions.html#cb2-8" aria-hidden="true" tabindex="-1"></a>        z <span class="ot">&lt;-</span> x</span>
+<span id="cb2-9"><a href="strategy-functions.html#cb2-9" aria-hidden="true" tabindex="-1"></a>        w <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(z)</span>
+<span id="cb2-10"><a href="strategy-functions.html#cb2-10" aria-hidden="true" tabindex="-1"></a>        n <span class="ot">&lt;-</span> <span class="fu">find.data</span>(w, T)</span>
+<span id="cb2-11"><a href="strategy-functions.html#cb2-11" aria-hidden="true" tabindex="-1"></a>        m <span class="ot">&lt;-</span> <span class="fu">find.data</span>(w, F)</span>
+<span id="cb2-12"><a href="strategy-functions.html#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (n <span class="sc">&gt;</span> <span class="dv">1</span>) n <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb2-13"><a href="strategy-functions.html#cb2-13" aria-hidden="true" tabindex="-1"></a>        z[n] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb2-14"><a href="strategy-functions.html#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> (n <span class="sc">&lt;</span> m) {</span>
+<span id="cb2-15"><a href="strategy-functions.html#cb2-15" aria-hidden="true" tabindex="-1"></a>            n <span class="ot">&lt;-</span> n <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb2-16"><a href="strategy-functions.html#cb2-16" aria-hidden="true" tabindex="-1"></a>            z[n] <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">zav</span>(z[n])<span class="sc">/</span><span class="dv">100</span>) <span class="sc">*</span> z[n <span class="sc">-</span> <span class="dv">1</span>]</span>
+<span id="cb2-17"><a href="strategy-functions.html#cb2-17" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb2-18"><a href="strategy-functions.html#cb2-18" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb2-19"><a href="strategy-functions.html#cb2-19" aria-hidden="true" tabindex="-1"></a>        z <span class="ot">&lt;-</span> <span class="fu">fcn.mat.vec</span>(ret.to.idx, x,, T)</span>
+<span id="cb2-20"><a href="strategy-functions.html#cb2-20" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-21"><a href="strategy-functions.html#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb2-22"><a href="strategy-functions.html#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># RETURN RESULT</span></span>
+<span id="cb2-23"><a href="strategy-functions.html#cb2-23" aria-hidden="true" tabindex="-1"></a>z</span>
+<span id="cb2-24"><a href="strategy-functions.html#cb2-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="compunding-flows" class="section level3 unnumbered hasAnchor">
+<h3>Compunding Flows<a href="strategy-functions.html#compunding-flows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>EPFR’s function <code>compound.flows()</code> uses other functions within <code>library('EPFR.r')</code> to compute a rolling cumulative sum of flows over a trailing lookback period (typically we use 20 days).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="strategy-functions.html#cb3-1" aria-hidden="true" tabindex="-1"></a>compound.flows <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">n =</span> F) {</span>
+<span id="cb3-2"><a href="strategy-functions.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb3-3"><a href="strategy-functions.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Args      : x = a matrix/data-frame of percentage flows</span></span>
+<span id="cb3-4"><a href="strategy-functions.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#       : y = number of trailing rows to compound/sum</span></span>
+<span id="cb3-5"><a href="strategy-functions.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       : n = if T, flows get summed. Otherwise they get compounded.</span></span>
+<span id="cb3-6"><a href="strategy-functions.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Output    : compounded flows over &lt;n&gt; trailing periods indexed by last day in the flow window</span></span>
+<span id="cb3-7"><a href="strategy-functions.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb3-8"><a href="strategy-functions.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-9"><a href="strategy-functions.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># FIND NA&#39;s : </span></span>
+<span id="cb3-10"><a href="strategy-functions.html#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># creates new df with value of 1 for all non-NA flows, else NA</span></span>
+<span id="cb3-11"><a href="strategy-functions.html#cb3-11" aria-hidden="true" tabindex="-1"></a>    h <span class="ot">&lt;-</span> <span class="fu">nonneg</span>(<span class="fu">mat.to.obs</span>(x)) </span>
+<span id="cb3-12"><a href="strategy-functions.html#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-13"><a href="strategy-functions.html#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># PRELIMINARIES : </span></span>
+<span id="cb3-14"><a href="strategy-functions.html#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert all NA values to 0 in order to do computations</span></span>
+<span id="cb3-15"><a href="strategy-functions.html#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># convert to log form</span></span>
+<span id="cb3-16"><a href="strategy-functions.html#cb3-16" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">zav</span>(x)</span>
+<span id="cb3-17"><a href="strategy-functions.html#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>n) z <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="dv">1</span> <span class="sc">+</span> z<span class="sc">/</span><span class="dv">100</span>)</span>
+<span id="cb3-18"><a href="strategy-functions.html#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-19"><a href="strategy-functions.html#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ROLLING WINDOWS</span></span>
+<span id="cb3-20"><a href="strategy-functions.html#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># calculate rolling sum</span></span>
+<span id="cb3-21"><a href="strategy-functions.html#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># reverse log form</span></span>
+<span id="cb3-22"><a href="strategy-functions.html#cb3-22" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">mat.rollsum</span>(z, y)</span>
+<span id="cb3-23"><a href="strategy-functions.html#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>n) z <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">exp</span>(z) <span class="sc">-</span> <span class="dv">100</span></span>
+<span id="cb3-24"><a href="strategy-functions.html#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-25"><a href="strategy-functions.html#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># ENSURE FINAL DATE IN EACH ROLLING WINDOW IS NON-NA</span></span>
+<span id="cb3-26"><a href="strategy-functions.html#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># multiply compounded flow matrix by h (1/NA df)</span></span>
+<span id="cb3-27"><a href="strategy-functions.html#cb3-27" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z <span class="sc">*</span> h</span>
+<span id="cb3-28"><a href="strategy-functions.html#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-29"><a href="strategy-functions.html#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"># RETURN RESULT</span></span>
+<span id="cb3-30"><a href="strategy-functions.html#cb3-30" aria-hidden="true" tabindex="-1"></a>    z</span>
+<span id="cb3-31"><a href="strategy-functions.html#cb3-31" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><em>Please refer to the library documentation for more details.</em></p>
 <hr />
 </div>
+<div id="model" class="section level3 unnumbered hasAnchor">
+<h3>Model<a href="strategy-functions.html#model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>EPFR’s function <code>bbk()</code> creates a standardized backtest model based on our inputs (e.g. ranking factors into 5 equal baskets based on compounded flows).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="strategy-functions.html#cb4-1" aria-hidden="true" tabindex="-1"></a>bbk <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, <span class="at">floW =</span> <span class="dv">1</span>, <span class="at">retW =</span> <span class="dv">5</span>, <span class="at">nBin =</span> <span class="dv">5</span>, <span class="at">doW =</span> <span class="cn">NULL</span>, <span class="at">sum.flows =</span> F, <span class="at">lag =</span> <span class="dv">0</span>, <span class="at">delay =</span> <span class="dv">2</span>, <span class="at">idx =</span> <span class="cn">NULL</span>, <span class="at">prd.size =</span> <span class="dv">1</span>, <span class="at">sprds =</span> F) {</span>
+<span id="cb4-2"><a href="strategy-functions.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb4-3"><a href="strategy-functions.html#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Args      : x = predictor indexed by yyyymmdd or yyyymm (compounded percentage flow)</span></span>
+<span id="cb4-4"><a href="strategy-functions.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#       : y = total return index indexed by the same date format as &lt;x&gt; </span></span>
+<span id="cb4-5"><a href="strategy-functions.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#       : floW = number of &lt;prd.size&gt;&#39;s over which the predictor should be compounded/summed</span></span>
+<span id="cb4-6"><a href="strategy-functions.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#       : retW = return window in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb4-7"><a href="strategy-functions.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#       : nBin = number of bins to divide the variable into</span></span>
+<span id="cb4-8"><a href="strategy-functions.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#       : doW = day of the week you will trade on (5 = Fri)</span></span>
+<span id="cb4-9"><a href="strategy-functions.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#       : sum.flows = T/F depending on whether &lt;x&gt; should be summed or compounded</span></span>
+<span id="cb4-10"><a href="strategy-functions.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#       : lag = predictor lag in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb4-11"><a href="strategy-functions.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#       : delay = delay in knowing data in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb4-12"><a href="strategy-functions.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#       : idx = the index within which you are trading</span></span>
+<span id="cb4-13"><a href="strategy-functions.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#       : prd.size = size of each period in days or months depending on whether &lt;x&gt; is YYYYMMDD or YYYYMM</span></span>
+<span id="cb4-14"><a href="strategy-functions.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#       : sprds = T/F depending on whether spread changes, rather than returns, are needed</span></span>
+<span id="cb4-15"><a href="strategy-functions.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Output    : standard model output</span></span>
+<span id="cb4-16"><a href="strategy-functions.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb4-17"><a href="strategy-functions.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb4-18"><a href="strategy-functions.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># GET DATA</span></span>
+<span id="cb4-19"><a href="strategy-functions.html#cb4-19" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">bbk.data</span>(x, y, floW, sum.flows, lag, delay, doW, retW, idx, prd.size, sprds)</span>
+<span id="cb4-20"><a href="strategy-functions.html#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb4-21"><a href="strategy-functions.html#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># BIN RETURNS</span></span>
+<span id="cb4-22"><a href="strategy-functions.html#cb4-22" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">bbk.bin.xRet</span>(x<span class="sc">$</span>x, x<span class="sc">$</span>fwdRet, nBin, T, T), mat.reverse)</span>
+<span id="cb4-23"><a href="strategy-functions.html#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb4-24"><a href="strategy-functions.html#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># SUMMARY</span></span>
+<span id="cb4-25"><a href="strategy-functions.html#cb4-25" aria-hidden="true" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">c</span>(z, <span class="fu">bbk.summ</span>(z<span class="sc">$</span>rets, z<span class="sc">$</span>bins, retW, <span class="fu">ifelse</span>(<span class="fu">is.null</span>(doW), <span class="dv">1</span>, <span class="dv">5</span>)))</span>
+<span id="cb4-26"><a href="strategy-functions.html#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb4-27"><a href="strategy-functions.html#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># RETURN RESULT</span></span>
+<span id="cb4-28"><a href="strategy-functions.html#cb4-28" aria-hidden="true" tabindex="-1"></a>    z</span>
+<span id="cb4-29"><a href="strategy-functions.html#cb4-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><em>Please refer to the library documentation for more details.</em></p>
+<hr />
+</div>
+<div id="example" class="section level3 unnumbered hasAnchor">
+<h3>Example<a href="strategy-functions.html#example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Step 0: Download and read the files</p>
+<p>Users can download the corresponding percentage flow and percentage returns files available in the users FTP, under the folders <code>Strategies/daily</code> and <code>Returns/daily</code>. For this example, we download the full file paths <code>/Strategies/daily/FloPctSector-US-daily.csv</code> and <code>/Returns/PsuedoReturns-Sector-US-daily.csv</code>, and save to our local folder <code>EPFR</code>.</p>
+<p>For convenience, we can save the local paths to these files as <code>flow.file</code> and <code>ret.file</code>, then we can read the files.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="strategy-functions.html#cb5-1" aria-hidden="true" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">FloPctSector-US-daily.csv&quot;</span></span>
+<span id="cb5-2"><a href="strategy-functions.html#cb5-2" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">PsuedoReturns-Sector-US-daily.csv&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="strategy-functions.html#cb6-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># Flow file</span></span>
+<span id="cb6-2"><a href="strategy-functions.html#cb6-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file) <span class="co"># Return file</span></span></code></pre></div>
+<p>Step 1: Ensure that x and y have the same column names and order</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="strategy-functions.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(x[, <span class="fu">dimnames</span>(y)[[<span class="dv">2</span>]]]) <span class="co"># LINE UP INDICATORS WITH RETURNS </span></span></code></pre></div>
+<p>Step 2: Compound (or Sum Flows) over lookback period (<span class="math inline">\(y\)</span>)</p>
+<p>EPFR’s function <code>compound.flows()</code> uses other functions within <code>library('EPFR.r')</code> to either compound, or compute a rolling cumulative sum of flows, over a trailing lookback period (typically we use y = 20 days).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="strategy-functions.html#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, <span class="at">y =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p>Step 3: Convert the percentage returns to total return index</p>
+<p>EPFR’s function <code>ret.to.idx()</code> will convert our percentage returns data <span class="math inline">\(y\)</span> to total index returns indexed, so that time moves forward. We also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file and <code>ret.idx.gaps.fix()</code> to replace any NA values.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="strategy-functions.html#cb9-1" aria-hidden="true" tabindex="-1"></a>y[<span class="fu">is.na</span>(y)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-2"><a href="strategy-functions.html#cb9-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX</span></span>
+<span id="cb9-3"><a href="strategy-functions.html#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span></code></pre></div>
+<p>Step 4: Define variables</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="strategy-functions.html#cb10-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS OR MONTHS) - holding periods</span></span>
+<span id="cb10-2"><a href="strategy-functions.html#cb10-2" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># Number of bins (to sort)</span></span>
+<span id="cb10-3"><a href="strategy-functions.html#cb10-3" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># Day of the week to trade on</span></span>
+<span id="cb10-4"><a href="strategy-functions.html#cb10-4" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># Delay in getting the data (able to trade on data @ T+2)</span></span>
+<span id="cb10-5"><a href="strategy-functions.html#cb10-5" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># Optional: Universe that is being used for signal (e.g. ACWI/EM/EAFE/G10)</span></span></code></pre></div>
+<p>Step 5: Create standardized backtest model</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="strategy-functions.html#cb11-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay, idx)</span></code></pre></div>
+<p>Step 6: Evaluate output</p>
+<p><span class="math inline">\(Z\)</span> has 4 different outputs that you can view. Within the final “rets” output, the overall portfolio will go long the top quintile and short the bottom. However, the returns of each individual quintile are also presented.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="strategy-functions.html#cb12-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;raw&quot;</span>]] <span class="co"># Flow percentage compounded over trailing 20 days</span></span>
+<span id="cb12-2"><a href="strategy-functions.html#cb12-2" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;raw.fwd.rets&quot;</span>]] <span class="co"># One-week ahead return (Friday to Friday)</span></span>
+<span id="cb12-3"><a href="strategy-functions.html#cb12-3" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]] <span class="co"># Twenty-day flow percentage ranked into quintiles (computed only where forward returns are available)</span></span>
+<span id="cb12-4"><a href="strategy-functions.html#cb12-4" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]] <span class="co"># Quintile Returns over the equal-weight universe, *column TxB tells us top - bottom = Q1 - Q5 = overall portfolio returns</span></span></code></pre></div>
+<p>Step 7: Re-balance as needed</p>
+<p>Strategies need to be rebalanced and the below code outputs summary statistics across 6 different rebalancing options found in <span class="math inline">\(hz\)</span>. Depending on how the signal we are backtesting is indexed, holding periods can be specified in a daily or monthly format. For this example, we have a daily signal and <span class="math inline">\(hz\)</span> contains options for a weekly (5 days), fortnightly (10 days), monthly (20 days), bi-monthly (45 days), quarterly (65 days), and semi-annual (130 days) rebalanced portfolio.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="strategy-functions.html#cb13-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
+<span id="cb13-2"><a href="strategy-functions.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="strategy-functions.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
+<p>Step 8: Find the mean one-week returns per calendar year</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="strategy-functions.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], <span class="dv">5</span>, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm</span></code></pre></div>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-implementation-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="set-up.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="epfr-data-filters.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -407,7 +546,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-EPFRLib.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

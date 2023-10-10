@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.1 Data | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.1 Data | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
+  <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="5.1 Data | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
-  <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
+  <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
 
 
 
@@ -101,6 +101,10 @@ code span.pp { font-weight: bold; } /* Preprocessor */
 code span.wa { font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="assets/style.css" type="text/css" />
 </head>
@@ -212,6 +216,7 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="3.2.4" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html#model-3"><i class="fa fa-check"></i><b>3.2.4</b> Model</a></li>
 <li class="chapter" data-level="3.2.5" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html#performance-2"><i class="fa fa-check"></i><b>3.2.5</b> Performance</a></li>
 </ul></li>
+<li class="chapter" data-level="3.3" data-path="publications.html"><a href="publications.html"><i class="fa fa-check"></i><b>3.3</b> Publications</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html"><i class="fa fa-check"></i><b>4</b> Flow-Percentage Sector Strategy</a>
 <ul>
@@ -320,7 +325,7 @@ code span.wa { font-style: italic; } /* Warning */
 <ul>
 <li class="chapter" data-level="" data-path="conviction.html"><a href="conviction.html#allocskew"><i class="fa fa-check"></i>AllocSkew</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="backtest-implementation.html"><a href="backtest-implementation.html"><i class="fa fa-check"></i><b>14</b> Backtest Implementation</a>
+<li class="chapter" data-level="14" data-path="backtest-example.html"><a href="backtest-example.html"><i class="fa fa-check"></i><b>14</b> Backtest Example</a>
 <ul>
 <li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a>
 <ul>
@@ -333,13 +338,13 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="" data-path="import-data.html"><a href="import-data.html#epfr-stock-factor-data"><i class="fa fa-check"></i>EPFR Stock Factor data</a></li>
 <li class="chapter" data-level="" data-path="import-data.html"><a href="import-data.html#returns-data"><i class="fa fa-check"></i>Returns data</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>15</b> Results</a>
+<li class="chapter" data-level="" data-path="strategy-implementation-7.html"><a href="strategy-implementation-7.html"><i class="fa fa-check"></i>Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="" data-path="results.html"><a href="results.html#quintile-spreads"><i class="fa fa-check"></i>Quintile Spreads</a></li>
-<li class="chapter" data-level="" data-path="results.html"><a href="results.html#sharpe"><i class="fa fa-check"></i>Sharpe</a></li>
+<li class="chapter" data-level="" data-path="strategy-implementation-7.html"><a href="strategy-implementation-7.html#results"><i class="fa fa-check"></i>Results</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>FAQ</b></span></li>
+<li class="chapter" data-level="" data-path="epfr-macro-strategey-files.html"><a href="epfr-macro-strategey-files.html"><i class="fa fa-check"></i>EPFR Macro Strategey Files</a></li>
 <li class="chapter" data-level="" data-path="returns-information.html"><a href="returns-information.html"><i class="fa fa-check"></i>Returns Information</a></li>
 <li class="chapter" data-level="" data-path="country-flows.html"><a href="country-flows.html"><i class="fa fa-check"></i>Country Flows</a></li>
 <li class="chapter" data-level="" data-path="stock-flows.html"><a href="stock-flows.html"><i class="fa fa-check"></i>Stock Flows</a></li>
@@ -1896,7 +1901,7 @@ NA
 </table>
 <hr />
 <p>For convenience, save the path to the active/passive indicator file you choose to use as <code>indicator.file</code>. Example shown below:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="data-4.html#cb87-1" aria-hidden="true" tabindex="-1"></a>indicator.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">monthly</span><span class="sc">\\</span><span class="st">ActPasCtry-monthly.csv&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="data-4.html#cb87-1" tabindex="-1"></a>indicator.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">monthly</span><span class="sc">\\</span><span class="st">ActPasCtry-monthly.csv&quot;</span></span></code></pre></div>
 <!-- --- -->
 <!-- To follow along the user can download the _Active/Passive Country Strategy_ files using the code below, which contains ftp functions ( \@ref(ftp) ) from `library('EPFR.r')`:  -->
 <!-- ```{r, eval=F, echo=T} -->
@@ -1929,7 +1934,7 @@ Where:</p>
 <tr>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 AU
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
@@ -1965,7 +1970,7 @@ PH
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 RU
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 SG
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
@@ -2001,7 +2006,7 @@ HU
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 IL
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 NZ
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
@@ -2058,7 +2063,7 @@ PT
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 ES
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
 HK
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
@@ -2086,8 +2091,8 @@ SA
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 202201
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.043783
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.973288
@@ -2122,8 +2127,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.045048
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.437406
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.591932
@@ -2158,8 +2163,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4.223976
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.477441
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.600713
@@ -2215,8 +2220,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.086309
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.165507
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2.092986
@@ -2241,8 +2246,8 @@ NA
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 202202
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.713338
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.182113
@@ -2277,8 +2282,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -46.019314
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-1.353633
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.327717
@@ -2313,8 +2318,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1.909268
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.438020
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1.325298
@@ -2370,8 +2375,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.209912
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.219028
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.113051
@@ -2396,8 +2401,8 @@ NA
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 202203
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.359841
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.071897
@@ -2432,8 +2437,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.032630
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-1.162310
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.417681
@@ -2468,8 +2473,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -1.177646
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.053719
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -1.894339
@@ -2525,8 +2530,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -1.571247
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.512080
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -1.484202
@@ -2551,8 +2556,8 @@ NA
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 202204
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.852301
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -1.541044
@@ -2587,8 +2592,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.052179
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+0.487974
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.095365
@@ -2623,8 +2628,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -2.222141
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.222229
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.484269
@@ -2680,8 +2685,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.087847
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1.379602
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -3.445825
@@ -2706,8 +2711,8 @@ NA
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 202205
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.936524
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.305397
@@ -2742,8 +2747,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.312938
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.308178
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.864324
@@ -2778,8 +2783,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.237217
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1.400308
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1.232678
@@ -2835,8 +2840,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.878720
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4.790801
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.785360
@@ -2861,8 +2866,8 @@ NA
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
 202206
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-1.935108
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -1.492936
@@ -2897,8 +2902,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -3.007181
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.945293
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -1.455299
@@ -2933,8 +2938,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -1.643945
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-0.811640
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -2.411276
@@ -2990,8 +2995,8 @@ NA
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.762954
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-NA
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+-2.507422
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.852413
@@ -3016,7 +3021,7 @@ NA
 </table>
 <hr />
 <p>For convenience, save the path to the return file you choose to use as <code>ret.file</code>. Example shown below:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="data-4.html#cb88-1" aria-hidden="true" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-Country-ETF-daily.csv&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="data-4.html#cb88-1" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-Country-ETF-daily.csv&quot;</span></span></code></pre></div>
 <!-- --- -->
 <!-- To follow along the user can download the _ETF Country Return_ file using the code below, which contains ftp functions ( \@ref(ftp) ) from `library('EPFR.r')`:  -->
 <!-- ```{r, eval=F, echo=T} -->

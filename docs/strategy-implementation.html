@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.2 Strategy Implementation | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.2 Strategy Implementation | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
+  <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="1.2 Strategy Implementation | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
-  <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
+  <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
 
 
 
@@ -101,6 +101,10 @@ code span.pp { font-weight: bold; } /* Preprocessor */
 code span.wa { font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="assets/style.css" type="text/css" />
 </head>
@@ -212,6 +216,7 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="3.2.4" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html#model-3"><i class="fa fa-check"></i><b>3.2.4</b> Model</a></li>
 <li class="chapter" data-level="3.2.5" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html#performance-2"><i class="fa fa-check"></i><b>3.2.5</b> Performance</a></li>
 </ul></li>
+<li class="chapter" data-level="3.3" data-path="publications.html"><a href="publications.html"><i class="fa fa-check"></i><b>3.3</b> Publications</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html"><i class="fa fa-check"></i><b>4</b> Flow-Percentage Sector Strategy</a>
 <ul>
@@ -320,7 +325,7 @@ code span.wa { font-style: italic; } /* Warning */
 <ul>
 <li class="chapter" data-level="" data-path="conviction.html"><a href="conviction.html#allocskew"><i class="fa fa-check"></i>AllocSkew</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="backtest-implementation.html"><a href="backtest-implementation.html"><i class="fa fa-check"></i><b>14</b> Backtest Implementation</a>
+<li class="chapter" data-level="14" data-path="backtest-example.html"><a href="backtest-example.html"><i class="fa fa-check"></i><b>14</b> Backtest Example</a>
 <ul>
 <li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a>
 <ul>
@@ -333,13 +338,13 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="" data-path="import-data.html"><a href="import-data.html#epfr-stock-factor-data"><i class="fa fa-check"></i>EPFR Stock Factor data</a></li>
 <li class="chapter" data-level="" data-path="import-data.html"><a href="import-data.html#returns-data"><i class="fa fa-check"></i>Returns data</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>15</b> Results</a>
+<li class="chapter" data-level="" data-path="strategy-implementation-7.html"><a href="strategy-implementation-7.html"><i class="fa fa-check"></i>Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="" data-path="results.html"><a href="results.html#quintile-spreads"><i class="fa fa-check"></i>Quintile Spreads</a></li>
-<li class="chapter" data-level="" data-path="results.html"><a href="results.html#sharpe"><i class="fa fa-check"></i>Sharpe</a></li>
+<li class="chapter" data-level="" data-path="strategy-implementation-7.html"><a href="strategy-implementation-7.html#results"><i class="fa fa-check"></i>Results</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>FAQ</b></span></li>
+<li class="chapter" data-level="" data-path="epfr-macro-strategey-files.html"><a href="epfr-macro-strategey-files.html"><i class="fa fa-check"></i>EPFR Macro Strategey Files</a></li>
 <li class="chapter" data-level="" data-path="returns-information.html"><a href="returns-information.html"><i class="fa fa-check"></i>Returns Information</a></li>
 <li class="chapter" data-level="" data-path="country-flows.html"><a href="country-flows.html"><i class="fa fa-check"></i>Country Flows</a></li>
 <li class="chapter" data-level="" data-path="stock-flows.html"><a href="stock-flows.html"><i class="fa fa-check"></i>Stock Flows</a></li>
@@ -366,21 +371,21 @@ code span.wa { font-style: italic; } /* Warning */
 <div id="strategy-implementation" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Strategy Implementation<a href="strategy-implementation.html#strategy-implementation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the flow files to our <em>R studio</em> workspace.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="strategy-implementation.html#cb17-1" aria-hidden="true" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file.rgn) <span class="co"># GET RGN FLOW PERCENTAGE C:\\EPFR\\daily\\MultiAsset-Rgn-daily.csv</span></span>
-<span id="cb17-2"><a href="strategy-implementation.html#cb17-2" aria-hidden="true" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file.FI) <span class="co"># GET FI FLOW PERCENTAGE C:\\EPFR\\daily\\MultiAsset-FI-daily.csv</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="strategy-implementation.html#cb17-1" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file.rgn) <span class="co"># GET RGN FLOW PERCENTAGE C:\\EPFR\\daily\\MultiAsset-Rgn-daily.csv</span></span>
+<span id="cb17-2"><a href="strategy-implementation.html#cb17-2" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file.FI) <span class="co"># GET FI FLOW PERCENTAGE C:\\EPFR\\daily\\MultiAsset-FI-daily.csv</span></span></code></pre></div>
 <p>The next step is to ensure both of our flow files have the same rows so that we can combine the two files, like we do below.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="strategy-implementation.html#cb18-1" aria-hidden="true" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> x.rgn[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES RGN MATCHES FI ROWS</span></span>
-<span id="cb18-2"><a href="strategy-implementation.html#cb18-2" aria-hidden="true" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> x.FI[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES FI MATCHES RGN ROWS</span></span>
-<span id="cb18-3"><a href="strategy-implementation.html#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="strategy-implementation.html#cb18-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x.rgn, x.FI) <span class="co"># COMBINES RGN AND FI DATA</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="strategy-implementation.html#cb18-1" tabindex="-1"></a>x.rgn <span class="ot">&lt;-</span> x.rgn[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES RGN MATCHES FI ROWS</span></span>
+<span id="cb18-2"><a href="strategy-implementation.html#cb18-2" tabindex="-1"></a>x.FI <span class="ot">&lt;-</span> x.FI[<span class="fu">is.element</span>(<span class="fu">dimnames</span>(x.FI)[[<span class="dv">1</span>]], <span class="fu">dimnames</span>(x.rgn)[[<span class="dv">1</span>]]), ] <span class="co"># ENSURES FI MATCHES RGN ROWS</span></span>
+<span id="cb18-3"><a href="strategy-implementation.html#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="strategy-implementation.html#cb18-4" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(x.rgn, x.FI) <span class="co"># COMBINES RGN AND FI DATA</span></span></code></pre></div>
 <p>One of the first options we have is choosing the universe we want to backtest. EPFR has tested this signal within two different universes of asset classes: Rgn (7 Region Equity) and FI (Fixed Income). For this example, we choose <strong>Multi</strong>, which includes both of our equity and fixed-income asset classes, but users can also choose to backtest within either the Rgn or FI universes separately.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="strategy-implementation.html#cb19-1" aria-hidden="true" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="st">&quot;Multi&quot;</span> <span class="co"># Multi/Rgn/FI</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="strategy-implementation.html#cb19-1" tabindex="-1"></a>idx <span class="ot">&lt;-</span> <span class="st">&quot;Multi&quot;</span> <span class="co"># Multi/Rgn/FI</span></span></code></pre></div>
 <div id="compounding-flows" class="section level3 hasAnchor" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> Compounding Flows<a href="strategy-implementation.html#compounding-flows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we set up a variable for our lookback period, which can also be called a flow window. This variable will be the window of time we use to create a trailing compounded daily percentage flow. The lookback period we choose for our demonstrations is <strong>20 days</strong>.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="strategy-implementation.html#cb20-1" aria-hidden="true" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># FLOW WINDOW (IN WEEKDAYS) - 20 day look back period</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="strategy-implementation.html#cb20-1" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># FLOW WINDOW (IN WEEKDAYS) - 20 day look back period</span></span></code></pre></div>
 <p>Using a function from the <code>library('EPFR.r')</code>, <code>compound.flows()</code> compounds our daily percentage flow over the trailing <code>lookback</code> period for each asset class.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="strategy-implementation.html#cb21-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, F) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="strategy-implementation.html#cb21-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, F) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -782,30 +787,30 @@ GLOFIX
 <div id="total-return-index-1" class="section level3 hasAnchor" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Total Return Index<a href="strategy-implementation.html#total-return-index-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We will then import our two total return files and modify them to become one data frame of total index returns indexed so that time moves forward. To do this, we will use the function <code>ret.to.idx()</code> from <code>library('EPFR.r')</code>. We will also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file, and <code>ret.idx.gaps.fix()</code> to replace any NA values. Please refer to the library documentation for the complete list of parameters for these functions (tip: <code>?ret.to.idx()</code>,<code>?ret.idx.gaps.fix()</code> ).</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="strategy-implementation.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RGN RETURNS</span></span>
-<span id="cb22-2"><a href="strategy-implementation.html#cb22-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.rgn) <span class="co"># GET RGN PERCENTAGE RETURNS C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-Rgn-daily.csv</span></span>
-<span id="cb22-3"><a href="strategy-implementation.html#cb22-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX</span></span>
-<span id="cb22-4"><a href="strategy-implementation.html#cb22-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span>
-<span id="cb22-5"><a href="strategy-implementation.html#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="strategy-implementation.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#F.I. RETURNS</span></span>
-<span id="cb22-7"><a href="strategy-implementation.html#cb22-7" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.FI) <span class="co"># GET FI PERCENTAGE RETURNS C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-FI-daily.csv</span></span>
-<span id="cb22-8"><a href="strategy-implementation.html#cb22-8" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(z, <span class="fu">dimnames</span>(y)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX   </span></span>
-<span id="cb22-9"><a href="strategy-implementation.html#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-10"><a href="strategy-implementation.html#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#COMBINE RETURN FILES</span></span>
-<span id="cb22-11"><a href="strategy-implementation.html#cb22-11" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, z)[, <span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]]] <span class="co"># FINAL TOTAL-RETURN INDEX TABLE</span></span>
-<span id="cb22-12"><a href="strategy-implementation.html#cb22-12" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">max</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), T)})))<span class="sc">:</span><span class="fu">min</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), F)}))), ] <span class="co"># ENSURE ALL PIECES HAVE RETURN OVER THE SAME HORIZON</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="strategy-implementation.html#cb22-1" tabindex="-1"></a><span class="co">#RGN RETURNS</span></span>
+<span id="cb22-2"><a href="strategy-implementation.html#cb22-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.rgn) <span class="co"># GET RGN PERCENTAGE RETURNS C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-Rgn-daily.csv</span></span>
+<span id="cb22-3"><a href="strategy-implementation.html#cb22-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX</span></span>
+<span id="cb22-4"><a href="strategy-implementation.html#cb22-4" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span>
+<span id="cb22-5"><a href="strategy-implementation.html#cb22-5" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="strategy-implementation.html#cb22-6" tabindex="-1"></a><span class="co">#F.I. RETURNS</span></span>
+<span id="cb22-7"><a href="strategy-implementation.html#cb22-7" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file.FI) <span class="co"># GET FI PERCENTAGE RETURNS C:\\EPFR\\returns\\PsuedoReturns-MultiAsset-FI-daily.csv</span></span>
+<span id="cb22-8"><a href="strategy-implementation.html#cb22-8" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(z, <span class="fu">dimnames</span>(y)[[<span class="dv">1</span>]])) <span class="co"># CONVERT TO A TOTAL-RETURN INDEX   </span></span>
+<span id="cb22-9"><a href="strategy-implementation.html#cb22-9" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="strategy-implementation.html#cb22-10" tabindex="-1"></a><span class="co">#COMBINE RETURN FILES</span></span>
+<span id="cb22-11"><a href="strategy-implementation.html#cb22-11" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y, z)[, <span class="fu">dimnames</span>(x)[[<span class="dv">2</span>]]] <span class="co"># FINAL TOTAL-RETURN INDEX TABLE</span></span>
+<span id="cb22-12"><a href="strategy-implementation.html#cb22-12" tabindex="-1"></a>y <span class="ot">&lt;-</span> y[<span class="fu">max</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), T)})))<span class="sc">:</span><span class="fu">min</span>(<span class="fu">simplify2array</span>(<span class="fu">lapply</span>(y, <span class="cf">function</span>(x) {<span class="fu">find.data</span>(<span class="sc">!</span><span class="fu">is.na</span>(x), F)}))), ] <span class="co"># ENSURE ALL PIECES HAVE RETURN OVER THE SAME HORIZON</span></span></code></pre></div>
 </div>
 <div id="subset-files" class="section level3 hasAnchor" number="1.2.3">
 <h3><span class="header-section-number">1.2.3</span> Subset files<a href="strategy-implementation.html#subset-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Then, to subset the flow file <span class="math inline">\(x\)</span> and return file <span class="math inline">\(y\)</span> to the selected universe <span class="math inline">\(idx\)</span> of asset classes, the following code is used. During this process, we also ensure that the data structure in <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are completely aligned, having the same column names in the same order.</p>
 <!-- An additional step that we take when backtesting the entire multi asset universe is to make an adjustment to all daily flows, based on a regression between each asset classes 20-day flows and MSCI World index returns.  -->
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="strategy-implementation.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;Rgn&quot;</span>) { </span>
-<span id="cb23-2"><a href="strategy-implementation.html#cb23-2" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
-<span id="cb23-3"><a href="strategy-implementation.html#cb23-3" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
-<span id="cb23-4"><a href="strategy-implementation.html#cb23-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;FI&quot;</span>) {   </span>
-<span id="cb23-5"><a href="strategy-implementation.html#cb23-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(x)[<span class="dv">2</span>]]</span>
-<span id="cb23-6"><a href="strategy-implementation.html#cb23-6" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(y)[<span class="dv">2</span>]]</span>
-<span id="cb23-7"><a href="strategy-implementation.html#cb23-7" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="strategy-implementation.html#cb23-1" tabindex="-1"></a><span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;Rgn&quot;</span>) { </span>
+<span id="cb23-2"><a href="strategy-implementation.html#cb23-2" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
+<span id="cb23-3"><a href="strategy-implementation.html#cb23-3" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>]</span>
+<span id="cb23-4"><a href="strategy-implementation.html#cb23-4" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (idx <span class="sc">==</span> <span class="st">&quot;FI&quot;</span>) {   </span>
+<span id="cb23-5"><a href="strategy-implementation.html#cb23-5" tabindex="-1"></a>    x <span class="ot">&lt;-</span> x[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(x)[<span class="dv">2</span>]]</span>
+<span id="cb23-6"><a href="strategy-implementation.html#cb23-6" tabindex="-1"></a>    y <span class="ot">&lt;-</span> y[, <span class="dv">8</span><span class="sc">:</span><span class="fu">dim</span>(y)[<span class="dv">2</span>]]</span>
+<span id="cb23-7"><a href="strategy-implementation.html#cb23-7" tabindex="-1"></a>}  </span></code></pre></div>
 <p><em>* Note: subsetting can also be done when creating the flow and return files</em></p>
 </div>
 <div id="ranking-asset-classes" class="section level3 hasAnchor" number="1.2.4">
@@ -813,15 +818,15 @@ GLOFIX
 <p>Next, we sort each of the asset classes in our universe into five equal bins based on their compounded percentage flow values for the selected holding period. To do this, we will use the function from <code>library('EPFR.r')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
 <p>The <code>bbk()</code> function requires our daily percentage flow data compounded over a desired period and the total return index data. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
 <p>The first parameter we add is the number of bins we want to use. For our case, we want to use 5 because our strategy is to go long the top fifth and short the bottom fifth.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="strategy-implementation.html#cb24-1" aria-hidden="true" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="strategy-implementation.html#cb24-1" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
 <p>Since EPFR data is published with a T+1 day lag and is released around 5:00 pm EST, we account for a T+2 day delay in our model. Users interested in more timely signals can also use the T+2 open prices for backtesting purposes. Alternatively, EPFR’s Premium Daily offering collects an earlier release of end-of-day data which includes a significant subset of its original fund-level flow information.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="strategy-implementation.html#cb25-1" aria-hidden="true" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data takes time to have</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="strategy-implementation.html#cb25-1" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data takes time to have</span></span></code></pre></div>
 <p>It is also important to note that this model will need to be re-balanced weekly. The day of the week the rebalancing occurs is at the user’s discretion. For this example, we will set the day of the week to trade as <strong>Friday</strong>.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="strategy-implementation.html#cb26-1" aria-hidden="true" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="strategy-implementation.html#cb26-1" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)</span></span></code></pre></div>
 <p>Additionally, we also evaluate the returns for different holding periods. The user can input the return horizons that they are interested in here. For this example, we define a return horizon for weekly, fortnightly, monthly, bi-monthly, quarterly, and semi-annual rebalancing.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="strategy-implementation.html#cb27-1" aria-hidden="true" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="strategy-implementation.html#cb27-1" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">45</span>, <span class="dv">65</span>, <span class="dv">130</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
 <p>Now that we have defined all of our inputs, to rank the asset classes into quintiles by their 20-day percentage flow, we call the function <code>bbk()</code> for a one-week holding period.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="strategy-implementation.html#cb28-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="strategy-implementation.html#cb28-1" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
 </div>
 <div id="model-1" class="section level3 hasAnchor" number="1.2.5">
 <h3><span class="header-section-number">1.2.5</span> Model<a href="strategy-implementation.html#model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -840,7 +845,7 @@ GLOFIX
 <!-- datatable(head(mat.to.xlModel(z[["raw.fwd.rets"]], delay, hz[1], F)))  -->
 <!-- ``` -->
 <p><strong>20-day flow percentage ranked into quintiles (computed only where forward returns are available)</strong></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="strategy-implementation.html#cb29-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="strategy-implementation.html#cb29-1" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1183,7 +1188,7 @@ GLOFIX
 </tbody>
 </table>
 <p><strong>Quintile returns over the equal-weight universe</strong></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="strategy-implementation.html#cb30-1" aria-hidden="true" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="strategy-implementation.html#cb30-1" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1351,9 +1356,9 @@ uRet
 <div id="performance" class="section level3 hasAnchor" number="1.2.6">
 <h3><span class="header-section-number">1.2.6</span> Performance<a href="strategy-implementation.html#performance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Performance over all holding periods</strong></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="strategy-implementation.html#cb31-1" aria-hidden="true" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
-<span id="cb31-2"><a href="strategy-implementation.html#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="strategy-implementation.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="strategy-implementation.html#cb31-1" tabindex="-1"></a>fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(retW) {<span class="fu">as.matrix</span>(<span class="fu">bbk</span>(x, y, <span class="dv">1</span>, retW, nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>summ)} <span class="co"># DEFINE SUMMARY FUNCTION</span></span>
+<span id="cb31-2"><a href="strategy-implementation.html#cb31-2" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="strategy-implementation.html#cb31-3" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">split</span>(hz, hz), fcn, <span class="at">simplify =</span> <span class="st">&quot;array&quot;</span>) <span class="co"># WRITE SUMMARIES</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2977,7 +2982,7 @@ AnnTo
 </table>
 <hr />
 <p><strong>Annualized mean one-week returns</strong></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="strategy-implementation.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="strategy-implementation.html#cb32-1" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -3015,25 +3020,25 @@ nPrds
 2007
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.6082047
+-3.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.7757241
+9.8
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.9489985
+0.9
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.8024830
+0.8
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--12.6187485
+-12.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.010544
+9.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.096411
+5.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 31
@@ -3044,25 +3049,25 @@ nPrds
 2008
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-29.3562711
+29.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--8.5932871
+-8.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.2019531
+7.2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--4.5737342
+-4.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--19.0021958
+-19.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-48.358467
+48.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--26.419153
+-26.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3073,25 +3078,25 @@ nPrds
 2009
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.4847787
+1.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.9190692
+-1.9
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-13.6980105
+13.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.0915206
+4.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--18.0793911
+-18.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-19.564170
+19.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-24.424264
+24.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3102,25 +3107,25 @@ nPrds
 2010
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.2610208
+1.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.5646080
+-1.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.4672020
+-3.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.1968338
+4.2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.3034532
+-1.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.564474
+2.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.836910
+8.8
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 53
@@ -3131,25 +3136,25 @@ nPrds
 2011
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.3135717
+-1.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.2368679
+-1.2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--15.6334918
+-15.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.2636251
+9.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.2447205
+6.2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.558292
+-7.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.662064
+-1.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3160,25 +3165,25 @@ nPrds
 2012
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1860335
+-0.2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.3568849
+1.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0330965
+0.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.6034806
+1.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.7280240
+-3.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.541991
+3.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.968927
+10.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3189,25 +3194,25 @@ nPrds
 2013
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.0417546
+6.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1748375
+0.2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.5863940
+-0.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4887079
+0.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.3400877
+-6.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-12.381842
+12.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.832942
+4.8
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3218,25 +3223,25 @@ nPrds
 2014
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--9.5477567
+-9.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.0865594
+-1.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.5629921
+-3.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.7165743
+5.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.9373955
+6.9
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--16.485152
+-16.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.534944
+3.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3247,25 +3252,25 @@ nPrds
 2015
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1183793
+-0.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.6349116
+2.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.3390582
+1.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.1771732
+2.2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.6367921
+-7.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.518413
+7.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.713711
+-2.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3276,25 +3281,25 @@ nPrds
 2016
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.1926927
+-1.2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.4769847
+-6.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.1375141
+6.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.0365156
+1.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.3091374
+2.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.501830
+-3.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.614489
+6.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 53
@@ -3305,25 +3310,25 @@ nPrds
 2017
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.4889656
+-1.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--4.8036337
+-4.8
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.6455256
+-0.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.9465112
+4.9
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.9439879
+1.9
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.432953
+-3.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.515356
+8.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3334,25 +3339,25 @@ nPrds
 2018
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.2066780
+1.2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--9.6643318
+-9.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.5932077
+9.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.7854425
+-1.8
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.4664800
+4.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.259802
+-3.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.493222
+-5.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3363,25 +3368,25 @@ nPrds
 2019
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.7750225
+-6.8
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.0809016
+-3.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.8483689
+5.8
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.9415722
+2.9
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.1124262
+1.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.887449
+-7.9
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-11.670249
+11.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3392,25 +3397,25 @@ nPrds
 2020
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-20.0203192
+20.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.3055202
+5.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--11.7713592
+-11.8
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.3488543
+-7.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--5.5245145
+-5.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-25.544834
+25.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.149965
+4.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52
@@ -3421,25 +3426,25 @@ nPrds
 2021
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.6403110
+-2.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0185477
+0.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0354360
+0.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.6589912
+7.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.5823830
+-7.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.942072
+4.9
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3.956660
+4.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 53
@@ -3450,25 +3455,25 @@ nPrds
 2022
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--8.7384394
+-8.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2.3320596
+2.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.6409023
+4.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4485055
+0.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3901168
+0.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--9.128556
+-9.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--9.538317
+-9.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 52

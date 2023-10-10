@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11 Manager momentum | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11 Manager momentum | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
-  <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
+  <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="11 Manager momentum | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
-  <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/cover-image.png" />
+  <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
 
 
 
@@ -101,6 +101,10 @@ code span.pp { font-weight: bold; } /* Preprocessor */
 code span.wa { font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="assets/style.css" type="text/css" />
 </head>
@@ -212,6 +216,7 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="3.2.4" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html#model-3"><i class="fa fa-check"></i><b>3.2.4</b> Model</a></li>
 <li class="chapter" data-level="3.2.5" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html#performance-2"><i class="fa fa-check"></i><b>3.2.5</b> Performance</a></li>
 </ul></li>
+<li class="chapter" data-level="3.3" data-path="publications.html"><a href="publications.html"><i class="fa fa-check"></i><b>3.3</b> Publications</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html"><i class="fa fa-check"></i><b>4</b> Flow-Percentage Sector Strategy</a>
 <ul>
@@ -320,7 +325,7 @@ code span.wa { font-style: italic; } /* Warning */
 <ul>
 <li class="chapter" data-level="" data-path="conviction.html"><a href="conviction.html#allocskew"><i class="fa fa-check"></i>AllocSkew</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="backtest-implementation.html"><a href="backtest-implementation.html"><i class="fa fa-check"></i><b>14</b> Backtest Implementation</a>
+<li class="chapter" data-level="14" data-path="backtest-example.html"><a href="backtest-example.html"><i class="fa fa-check"></i><b>14</b> Backtest Example</a>
 <ul>
 <li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a>
 <ul>
@@ -333,13 +338,13 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="" data-path="import-data.html"><a href="import-data.html#epfr-stock-factor-data"><i class="fa fa-check"></i>EPFR Stock Factor data</a></li>
 <li class="chapter" data-level="" data-path="import-data.html"><a href="import-data.html#returns-data"><i class="fa fa-check"></i>Returns data</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>15</b> Results</a>
+<li class="chapter" data-level="" data-path="strategy-implementation-7.html"><a href="strategy-implementation-7.html"><i class="fa fa-check"></i>Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="" data-path="results.html"><a href="results.html#quintile-spreads"><i class="fa fa-check"></i>Quintile Spreads</a></li>
-<li class="chapter" data-level="" data-path="results.html"><a href="results.html#sharpe"><i class="fa fa-check"></i>Sharpe</a></li>
+<li class="chapter" data-level="" data-path="strategy-implementation-7.html"><a href="strategy-implementation-7.html#results"><i class="fa fa-check"></i>Results</a></li>
+</ul></li>
 </ul></li>
 <li class="part"><span><b>FAQ</b></span></li>
+<li class="chapter" data-level="" data-path="epfr-macro-strategey-files.html"><a href="epfr-macro-strategey-files.html"><i class="fa fa-check"></i>EPFR Macro Strategey Files</a></li>
 <li class="chapter" data-level="" data-path="returns-information.html"><a href="returns-information.html"><i class="fa fa-check"></i>Returns Information</a></li>
 <li class="chapter" data-level="" data-path="country-flows.html"><a href="country-flows.html"><i class="fa fa-check"></i>Country Flows</a></li>
 <li class="chapter" data-level="" data-path="stock-flows.html"><a href="stock-flows.html"><i class="fa fa-check"></i>Stock Flows</a></li>
@@ -380,7 +385,7 @@ code span.wa { font-style: italic; } /* Warning */
 <div id="example-allocmo" class="section level4 unnumbered hasAnchor">
 <h4>Example AllocMo<a href="manager-momentum.html#example-allocmo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Below shows a snippet of what EPFR’s <em>AllocMo</em> Files contain:</p>
-<p>Location: <code>'/StockFlows4.1/QuantitativeFactors/Monthly/AllocMo/Aggregate/AllocationMomentum2020Q4.txt'</code></p>
+<p>Location: <code>'/StockFlows5.0/QuantitativeFactors/Monthly/AllocMo/Aggregate/AllocationMomentum2022Q4.txt'</code></p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -403,121 +408,121 @@ ActWtDiff2
 <tbody>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-315522
+384729
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/30/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-410864
+7041220
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Apple Inc. 
+Apple Inc Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.10921
+-0.07822
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-313965
+389097
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/30/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4979352
+7049454
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Tesla Inc
+Tesla Inc Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.06406
+-0.19218
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-314778
+384623
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/30/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-90522
+7041046
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Amazon.com, Inc. 
+Amazon.com Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.01709
+-0.21606
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-324219
+393116
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/30/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1002967
+7057091
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Microsoft Corporation
+Microsoft Corp Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.07687
+-0.12586
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-320958
+391772
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/30/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1002408
+7054419
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Exxon Mobil Corporation
+Exxon Mobil Corp Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.06762
+-0.09212
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-318982
+392923
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/30/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-623932
+7056752
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Netflix, Inc. 
+Netflix Inc Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.11478
+-0.27254
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-317555
+396450
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/30/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6012656
+7063679
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Visa Inc
+Visa Inc USA Class A
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.04041
+-0.24982
 </td>
 </tr>
 </tbody>
@@ -538,7 +543,7 @@ Visa Inc
 <div id="example-alloctrend" class="section level4 unnumbered hasAnchor">
 <h4>Example AllocTrend<a href="manager-momentum.html#example-alloctrend" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Below shows a snippet of what EPFR’s <em>AllocTrend</em> Files contain:</p>
-<p>Location: <code>'/StockFlows4.1/QuantitativeFactors/Monthly/AllocTrend/Aggregate/AllocationTrend2020Q4.txt'</code></p>
+<p>Location: <code>'/StockFlows5.0/QuantitativeFactors/Monthly/AllocTrend/Aggregate/AllocationTrend2022Q4.txt'</code></p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -561,121 +566,121 @@ AllocTrend
 <tbody>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-52613
+45935
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-410864
+7041220
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Apple Inc. 
+Apple Inc Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.8330
+-0.9799
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-52568
+50788
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4979352
+7049454
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Tesla Inc
+Tesla Inc Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.8485
+-0.9926
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-53236
+45823
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-90522
+7041046
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Amazon.com, Inc. 
+Amazon.com Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.5678
+-0.6407
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-42038
+55270
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1002967
+7057091
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Microsoft Corporation
+Microsoft Corp Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.5225
+0.2535
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-38199
+53776
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1002408
+7054419
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Exxon Mobil Corporation
+Exxon Mobil Corp Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.8905
+0.5703
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-50261
+55068
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-623932
+7056752
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Netflix, Inc. 
+Netflix Inc Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.9888
+0.3131
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-39353
+59146
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6012656
+7063679
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Visa Inc
+Visa Inc USA Class A
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.4028
+0.8715
 </td>
 </tr>
 </tbody>
@@ -697,7 +702,7 @@ Visa Inc
 <div id="example-allocdiff" class="section level4 unnumbered hasAnchor">
 <h4>Example AllocDiff<a href="manager-momentum.html#example-allocdiff" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Below shows a snippet of what EPFR’s <em>AllocDiff</em> Files contain:</p>
-<p>Location: <code>'/StockFlows4.1/QuantitativeFactors/Monthly/AllocDiff/Aggregate/AllocationDiff2020Q4.txt'</code></p>
+<p>Location: <code>'/StockFlows5.0/QuantitativeFactors/Monthly/AllocDiff/Aggregate/AllocationDiff2022Q4.txt'</code></p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -720,121 +725,121 @@ AllocDiff
 <tbody>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-45700
+45935
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-410864
+7041220
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Apple Inc. 
+Apple Inc Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.8724
+-0.9393
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-45428
+50788
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4979352
+7049454
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Tesla Inc
+Tesla Inc Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.9445
+-0.9691
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-47374
+45823
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-90522
+7041046
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Amazon.com, Inc. 
+Amazon.com Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.8615
+-0.8690
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-42136
+55270
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1002967
+7057091
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Microsoft Corporation
+Microsoft Corp Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.6728
+0.6164
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-38038
+53776
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1002408
+7054419
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Exxon Mobil Corporation
+Exxon Mobil Corp Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.9732
+0.9193
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-39066
+55068
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-623932
+7056752
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Netflix, Inc. 
+Netflix Inc Common Stock
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.9888
+0.8738
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-39272
+59146
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2020 12:00:00 AM
+12/31/2022 12:00:00 AM
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6012656
+7063679
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Visa Inc
+Visa Inc USA Class A
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.6277
+0.8384
 </td>
 </tr>
 </tbody>

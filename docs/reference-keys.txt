@@ -34,6 +34,7 @@ total-return-index-2
 ranking-countries
 model-3
 performance-2
+publications
 flow-percentage-sector-strategy
 data-3
 aggregations-3
@@ -87,5 +88,4 @@ smart-money
 manager-momentum
 ownership-dispersion
 conviction
-backtest-implementation
-results
+backtest-example

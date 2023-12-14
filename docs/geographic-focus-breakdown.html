@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>12 Manager momentum | EPFR Strategy Notebooks</title>
+  <title>Geographic Focus Breakdown | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="12 Manager momentum | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="Geographic Focus Breakdown | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="12 Manager momentum | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="Geographic Focus Breakdown | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="smart-money.html"/>
-<link rel="next" href="ownership-dispersion.html"/>
+<link rel="prev" href="stock-flows.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -389,484 +389,41 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="manager-momentum" class="section level1 hasAnchor" number="12">
-<h1><span class="header-section-number">12</span> Manager momentum<a href="manager-momentum.html#manager-momentum" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>EPFR has a set of 3 monthly “Manager Momentum” indicators which aim to capture if there are any trends in changes of allocation, and identify stocks with a positive momentum.</p>
-<hr />
-<div id="allocmo" class="section level3 unnumbered hasAnchor">
-<h3>AllocMo<a href="manager-momentum.html#allocmo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A measure of manager allocation changes towards the stock, in absolute $ terms of AuM, where the change in allocation over the month reflects price pressure from manager-directed trading. By using both start and end AuM in the equation, we neutralize the effect of underlying price changes.</p>
-<p><span class="math display">\[\text{AllocMo} \equiv \frac{\sum \Delta \omega \times ( A + \alpha)}{\sum (\omega - \Delta \omega/2) \times ( A + \alpha)}\]</span></p>
-<p>where:</p>
-<p><span class="math inline">\(\begin{align} \omega &amp; \equiv \text{% weight held by a fund in a security} \\ \Delta \omega &amp; \equiv \text{change in weight from prior month} \\ \alpha &amp; \equiv \text{dollar starting assets of a fund} \\  A &amp; \equiv \text{dollar ending assets of a fund} \end{align}\)</span></p>
-<div id="interpretation-allocmo" class="section level4 unnumbered hasAnchor">
-<h4>Interpretation AllocMo<a href="manager-momentum.html#interpretation-allocmo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>A positive value tells us that allocations towards a given stock have increased.</p>
-</div>
-<div id="example-allocmo" class="section level4 unnumbered hasAnchor">
-<h4>Example AllocMo<a href="manager-momentum.html#example-allocmo" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Below shows a snippet of what EPFR’s <em>AllocMo</em> Files contain:</p>
-<p>Location: <code>'/StockFlows5.0/QuantitativeFactors/Monthly/AllocMo/Aggregate/AllocationMomentum2022Q4.txt'</code></p>
-<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-ReportDate
-</th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-HSecurityId
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-SecurityName
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-ActWtDiff2
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-384729
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/30/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7041220
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Apple Inc Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.07822
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-389097
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/30/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7049454
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Tesla Inc Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.19218
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-384623
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/30/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7041046
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Amazon.com Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.21606
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-393116
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/30/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7057091
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Microsoft Corp Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.12586
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-391772
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/30/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7054419
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Exxon Mobil Corp Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.09212
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-392923
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/30/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7056752
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Netflix Inc Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.27254
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-396450
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/30/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7063679
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Visa Inc USA Class A
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.24982
-</td>
-</tr>
-</tbody>
-</table>
-<hr />
-</div>
-</div>
-<div id="alloctrend" class="section level3 unnumbered hasAnchor">
-<h3>AllocTrend<a href="manager-momentum.html#alloctrend" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A measure of manager allocation changes towards the stock, in scaled $ amounts, where the change in allocation over the month reflects price pressure from manager-directed trading. By using both start and end AuM in the equation, we neutralize the effect of underlying price changes.</p>
-<p><span class="math display">\[\text{AllocTrend} \equiv \frac{\sum \Delta \omega \times ( A + \alpha)}{\sum |\Delta \omega \times ( A + \alpha)|}\]</span></p>
-<p>where:</p>
-<p><span class="math inline">\(\begin{align} \Delta \omega &amp; \equiv \text{change in weight from prior month} \\ \alpha &amp; \equiv \text{dollar starting assets of a fund} \\  A &amp; \equiv \text{dollar ending assets of a fund} \end{align}\)</span></p>
-<div id="interpretation-alloctrend" class="section level4 unnumbered hasAnchor">
-<h4>Interpretation AllocTrend<a href="manager-momentum.html#interpretation-alloctrend" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>A positive value tells us that allocations towards a given stock have increased.</p>
-</div>
-<div id="example-alloctrend" class="section level4 unnumbered hasAnchor">
-<h4>Example AllocTrend<a href="manager-momentum.html#example-alloctrend" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Below shows a snippet of what EPFR’s <em>AllocTrend</em> Files contain:</p>
-<p>Location: <code>'/StockFlows5.0/QuantitativeFactors/Monthly/AllocTrend/Aggregate/AllocationTrend2022Q4.txt'</code></p>
-<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-ReportDate
-</th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-HSecurityId
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-SecurityName
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-AllocTrend
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-45935
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7041220
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Apple Inc Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.9799
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-50788
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7049454
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Tesla Inc Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.9926
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-45823
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7041046
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Amazon.com Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.6407
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-55270
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7057091
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Microsoft Corp Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.2535
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-53776
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7054419
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Exxon Mobil Corp Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.5703
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-55068
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7056752
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Netflix Inc Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.3131
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-59146
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7063679
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Visa Inc USA Class A
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.8715
-</td>
-</tr>
-</tbody>
-</table>
-<hr />
-</div>
-</div>
-<div id="allocdiff" class="section level3 unnumbered hasAnchor">
-<h3>AllocDiff<a href="manager-momentum.html#allocdiff" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Multiplies a fund’s start and end AuM by the direction of the latest month-on-month change in % allocations towards a given stock. By summing these AuM across all applicable funds, then dividing by the sum of all start and end AuM, we get a normalized metric.</p>
-<p><span class="math display">\[\text{AllocDiff} \equiv \frac{\sum sgn(\Delta \omega) \times ( A + \alpha)}{\sum ( A + \alpha)}\]</span></p>
-<p>where:</p>
-<p><span class="math inline">\(\begin{align} \Delta \omega &amp; \equiv \text{change in weight from prior month} \\ \alpha &amp; \equiv \text{dollar starting assets of a fund} \\  A &amp; \equiv \text{dollar ending assets of a fund} \end{align}\)</span></p>
-<div id="interpretation-allocdiff" class="section level4 unnumbered hasAnchor">
-<h4>Interpretation AllocDiff<a href="manager-momentum.html#interpretation-allocdiff" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>A positive value indicates an increase in the amount of AuM invested to the stock, and a negative value indicates a decrease in the AuM invested in the stock.</p>
-<p>The more positive the indicator, the larger the increase of AuM invested in the stock relative to other stocks with a less positive indicator. Similarly, a more negative indicator indicates a larger decrease in AuM invested in the stock relative to other stocks with a less negative indicator.</p>
-</div>
-<div id="example-allocdiff" class="section level4 unnumbered hasAnchor">
-<h4>Example AllocDiff<a href="manager-momentum.html#example-allocdiff" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Below shows a snippet of what EPFR’s <em>AllocDiff</em> Files contain:</p>
-<p>Location: <code>'/StockFlows5.0/QuantitativeFactors/Monthly/AllocDiff/Aggregate/AllocationDiff2022Q4.txt'</code></p>
-<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-ReportDate
-</th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-HSecurityId
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-SecurityName
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
-AllocDiff
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-45935
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7041220
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Apple Inc Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.9393
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-50788
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7049454
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Tesla Inc Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.9691
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-45823
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7041046
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Amazon.com Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
--0.8690
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-55270
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7057091
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Microsoft Corp Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.6164
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-53776
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7054419
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Exxon Mobil Corp Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.9193
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-55068
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7056752
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Netflix Inc Common Stock
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.8738
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-59146
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-12/31/2022 12:00:00 AM
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7063679
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-Visa Inc USA Class A
-</td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
-0.8384
-</td>
-</tr>
-</tbody>
-</table>
-<hr />
-</div>
+<div id="geographic-focus-breakdown" class="section level1 unnumbered hasAnchor">
+<h1>Geographic Focus Breakdown<a href="geographic-focus-breakdown.html#geographic-focus-breakdown" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Each fund will have a geographic mandate to where it’s able to invest. Below we outline the Developed and Emerging market regional breakdowns EPFR considers.</p>
+<ul>
+<li><strong>Developed Markets</strong>: Funds that invest in developed market funds and include Asia Pacific, Global, North America, and Western Europe.
+<ul>
+<li><strong>Asia Pacific</strong>: Funds that invest in Australia, Hong Kong, Japan, Pacific Regional, Singapore, and New Zealand.</li>
+<li><strong>All Global</strong>: Funds that invest in both developed and emerging markets and include both Global and Global ex-US investment mandates.
+<ul>
+<li><strong>Global</strong>: Funds that can invest in a broad range of countries and are not limited geographically with a relative lack of investment restrictions.</li>
+<li><strong>Global ex-US</strong>: Contains a different subset of global funds that invest in a range of countries excluding the United States.</li>
+</ul></li>
+<li><strong>North America</strong>: Funds that invest in the United States and Canada.</li>
+<li><strong>Western Europe</strong>: Funds that invest in developed European markets and include Austria, Belgium, Denmark, Europe ex-UK Regional, Europe Regional, Finland, France, Germany, Greece, Italy, Netherlands, Norway, Portugal, Spain, Sweden, Switzerland, United Kingdom, Ireland.
+<ul>
+<li><strong>European Regional</strong>: Funds that can invest across multiple countries in the European continent, including the United Kingdom.</li>
+<li><strong>Europe ex-UK</strong>: Contains a different subset of funds that invest in multiple countries in the European continent, excluding the United Kingdom.</li>
+</ul></li>
+</ul></li>
+<li><strong>Emerging Markets</strong>: Funds that invest in emerging market funds and include Asia Ex-Japan, EMEA, GEM, and LatAm.
+<ul>
+<li><strong>Asia ex-Japan</strong>: Funds that invest in Asian emerging markets; excludes Japan. Includes Asia ex-Japan Regional mandate and all of the individual country mandates within this region - Bangladesh, China, Greater China, India, Indonesia, Korea (South), Malaysia, Pakistan, Philippines, Taiwan Province of China, Thailand, Vietnam, Mongolia.
+<ul>
+<li><strong>Asia ex-Japan Regional</strong>: Only includes funds that invest in the broad Asian market and excludes funds that have a mandate to invest in single countries.</li>
+</ul></li>
+<li><strong>EMEA</strong>: Funds that invest in Africa Regional, Baltic Republics, Bulgaria, Slovak Republic, Czech Republic, Egypt, Emerging Europe Regional, Europe, Middle East &amp; Africa Regional, Hungary, Israel, Kuwait, Middle East &amp; Africa Regional, Middle East Regional, Oman, Poland, Qatar, Romania, Russia, Saudi Arabia, South Africa, Turkey, Ukraine, United Arab Emirates, Morocco, Nigeria.</li>
+<li><strong>GEM</strong>: The GEM (Global Emerging Market) funds are specific funds that invest the majority of the fund assets in all Emerging Market regions of the world and include BRIC and Global Emerging Markets.</li>
+<li><strong>LatAm (Latin American)</strong>: Funds that invest in Latin American emerging markets and include Argentina, Brazil, Chile, Colombia, Latin America Regional, Mexico, and Peru.</li>
+</ul></li>
+</ul>
+<div id="stock-flows-geofocus-breakdown" class="section level3 unnumbered hasAnchor">
+<h3>Stock Flows GeoFocus Breakdown<a href="geographic-focus-breakdown.html#stock-flows-geofocus-breakdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Stock $ flows are aggregated by Geographic Focus groups in order to give better insight as to where the money flowing into a security has came from. For example, we can then view the $ amount going into Apple from the US versus the UK.</p>
+<p>We can also easily aggregate the flows to an individual security from a customized group of geographic focuses by simply summing their calculated stock $ flow. To get the total stock $ flow into a security (from all funds), you can simply sum the stock $ flow amount across all geographic focuses. (Note: All Stock $ flow figures are published in millions USD.)</p>
+
 </div>
 </div>
             </section>
@@ -874,8 +431,8 @@ Visa Inc USA Class A
           </div>
         </div>
       </div>
-<a href="smart-money.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ownership-dispersion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="stock-flows.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -906,7 +463,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/02-Stock.Rmd",
+"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/99-FAQ.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

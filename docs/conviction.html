@@ -289,7 +289,8 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="7.2.4" data-path="strategy-implementation-6.html"><a href="strategy-implementation-6.html#performance-6"><i class="fa fa-check"></i><b>7.2.4</b> Performance</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="flow-percentage-daily-bond-strategy.html"><a href="flow-percentage-daily-bond-strategy.html"><i class="fa fa-check"></i><b>8</b> Flow-Percentage Daily Bond Strategy</a>
+<li class="part"><span><b>Alternative Macro Strategies</b></span></li>
+<li class="chapter" data-level="8" data-path="flow-percentage-daily-fixed-income-strategy.html"><a href="flow-percentage-daily-fixed-income-strategy.html"><i class="fa fa-check"></i><b>8</b> Flow-Percentage Daily Fixed-Income Strategy</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="data-7.html"><a href="data-7.html"><i class="fa fa-check"></i><b>8.1</b> Data</a>
 <ul>
@@ -399,7 +400,7 @@ code span.wa { font-style: italic; } /* Warning */
 <p>Multiplies a fund’s AuM by the direction of the difference between the average allocations of a peer group of funds and the fund’s latest allocations towards the same stock. If this difference is positive, the fund is underweight vs peers, and if the difference is negative, the fund is overweight vs peers. By summing these AuM across all applicable funds, then dividing by the sum of all AuM, we get a normalized metric. We expect this factor to reflect the percentage of AuM that is underweight a stock.</p>
 <p><span class="math display">\[\text{AllocationSkew} \equiv \frac{\sum sgn(-\omega^+) \times  A}{\sum  A}\]</span></p>
 <p>where:</p>
-<p><span class="math inline">\(\begin{align} \omega^{+} &amp; \equiv \text{active weight versus peers} \\  A &amp; \equiv \text{dollar ending assets of a fund} \end{align}\)</span></p>
+<p><span class="math inline">\(\begin{align} \omega^{+} &amp; \equiv \text{the difference between each fund’s reported weight in a stock and the fund-weighted average of a peer group of funds with the same geographic mandate} \\  A &amp; \equiv \text{dollar ending assets of a fund} \end{align}\)</span></p>
 <div id="interpretation-allocskew" class="section level4 unnumbered hasAnchor">
 <h4>Interpretation AllocSkew<a href="conviction.html#interpretation-allocskew" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>A positive value tells us that most funds, or at least those with a larger AuM, are underweight, meaning that only a small fraction of managers are bullish towards the stock. Similarly, a negative value indicates that many high-AuM funds are overweight the stock.</p>

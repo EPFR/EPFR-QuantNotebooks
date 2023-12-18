@@ -289,7 +289,8 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="7.2.4" data-path="strategy-implementation-6.html"><a href="strategy-implementation-6.html#performance-6"><i class="fa fa-check"></i><b>7.2.4</b> Performance</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="flow-percentage-daily-bond-strategy.html"><a href="flow-percentage-daily-bond-strategy.html"><i class="fa fa-check"></i><b>8</b> Flow-Percentage Daily Bond Strategy</a>
+<li class="part"><span><b>Alternative Macro Strategies</b></span></li>
+<li class="chapter" data-level="8" data-path="flow-percentage-daily-fixed-income-strategy.html"><a href="flow-percentage-daily-fixed-income-strategy.html"><i class="fa fa-check"></i><b>8</b> Flow-Percentage Daily Fixed-Income Strategy</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="data-7.html"><a href="data-7.html"><i class="fa fa-check"></i><b>8.1</b> Data</a>
 <ul>
@@ -882,7 +883,7 @@ Visa Inc USA Class A
 <h3>ActWtTrend<a href="smart-money.html#actwttrend" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <!-- #### Calculation  -->
 <p><span class="math display">\[\text{ActWtTrend} \equiv \frac{\sum \omega^{+} \times \varphi}{\sum |\omega^{+} \times \varphi|}\]</span>
-<span class="math inline">\(\begin{align} \varphi &amp; \equiv \text{dollar flow into a fund} \\ \omega^{+} &amp; \equiv \text{active weight versus peers} \end{align}\)</span></p>
+<span class="math inline">\(\begin{align} \varphi &amp; \equiv \text{dollar flow into a fund} \\ \omega^{+} &amp; \equiv \text{the difference between each fund’s reported weight in a stock and the fund-weighted average of a peer group of funds with the same geographic mandate} \end{align}\)</span></p>
 <div id="interpretation-actwttrend" class="section level4 unnumbered hasAnchor">
 <h4>Interpretation ActWtTrend<a href="smart-money.html#interpretation-actwttrend" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>A positive value indicates a positive manager sentiment towards the stock, as their active weights are bullish, as well as high investor sentiment and strong inflows to the same fund.</p>
@@ -1041,7 +1042,7 @@ Visa Inc USA Class A
 <p>This indicator places more emphasis on the fund in/outflows, by removing any magnitude associated with active weights and simplifying them to a + or -1.</p>
 <!-- #### Calculation {-} -->
 <p><span class="math display">\[\text{ActWtDiff} \equiv \frac{\sum \text{sgn}(\omega^{+}) \times \varphi}{\sum |\varphi|}\]</span>
-<span class="math inline">\(\begin{align} \varphi &amp; \equiv \text{dollar flow into a fund} \\ \omega^{+} &amp; \equiv \text{active weight versus peers} \end{align}\)</span></p>
+<span class="math inline">\(\begin{align} \varphi &amp; \equiv \text{dollar flow into a fund} \\ \omega^{+} &amp; \equiv \text{the difference between each fund’s reported weight in a stock and the fund-weighted average of a peer group of funds with the same geographic mandate} \end{align}\)</span></p>
 <div id="interpretation-actwtdiff" class="section level4 unnumbered hasAnchor">
 <h4>Interpretation ActWtDiff<a href="smart-money.html#interpretation-actwtdiff" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>A positive value tells us that more flows have been directed towards funds that are bullish towards the stock compared with its peers. Similarly, a negative value indicates that more flows have been driven towards funds that are bearish toward the stock compared with its peers.</p>
@@ -1199,7 +1200,7 @@ Visa Inc USA Class A
 <p>Conversely to the ActWtDiff indicator, this one places more emphasis on active weights, by removing any magnitude associated with fund in/outflows and simplifying them to a + or -1.</p>
 <!-- #### Calculation {-} -->
 <p><span class="math display">\[\text{ActWtDiff2} \equiv \frac{\sum \omega^{+} \times \text{sgn}(\varphi)}{\sum |\omega^{+}|}\]</span>
-<span class="math inline">\(\begin{align} \varphi &amp; \equiv \text{dollar flow into a fund} \\ \omega^{+} &amp; \equiv \text{active weight versus peers} \end{align}\)</span></p>
+<span class="math inline">\(\begin{align} \varphi &amp; \equiv \text{dollar flow into a fund} \\ \omega^{+} &amp; \equiv \text{the difference between each fund’s reported weight in a stock and the fund-weighted average of a peer group of funds with the same geographic mandate} \end{align}\)</span></p>
 <div id="interpretation-actwtdiff2" class="section level4 unnumbered hasAnchor">
 <h4>Interpretation ActWtDiff2<a href="smart-money.html#interpretation-actwtdiff2" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>A positive value tells us that more flows have been directed towards funds that are more highly bullish towards the stock compared with its peers (i.e. the active weight is larger). Similarly, a negative value indicates that more flows have come out of funds that are more highly bullish towards the stock compared with its peers.</p>

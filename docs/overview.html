@@ -289,7 +289,8 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="7.2.4" data-path="strategy-implementation-6.html"><a href="strategy-implementation-6.html#performance-6"><i class="fa fa-check"></i><b>7.2.4</b> Performance</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="flow-percentage-daily-bond-strategy.html"><a href="flow-percentage-daily-bond-strategy.html"><i class="fa fa-check"></i><b>8</b> Flow-Percentage Daily Bond Strategy</a>
+<li class="part"><span><b>Alternative Macro Strategies</b></span></li>
+<li class="chapter" data-level="8" data-path="flow-percentage-daily-fixed-income-strategy.html"><a href="flow-percentage-daily-fixed-income-strategy.html"><i class="fa fa-check"></i><b>8</b> Flow-Percentage Daily Fixed-Income Strategy</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="data-7.html"><a href="data-7.html"><i class="fa fa-check"></i><b>8.1</b> Data</a>
 <ul>
@@ -427,7 +428,7 @@ code span.wa { font-style: italic; } /* Warning */
 <!-- ### EPFR Security Level Data {-} -->
 <!-- Quantitative analysts at EPFR derive stock factors from the following variables in EPFR's holdings and fund flow database: -->
 <p><strong>Holdings:</strong></p>
-<p><span class="math inline">\(\begin{align} \omega &amp; \equiv \text{% weight held by a fund in a security} \\ \Delta \omega &amp; \equiv \text{change in weight from prior month} \\ \omega^{+} &amp; \equiv \text{active weight versus peers} \end{align}\)</span></p>
+<p><span class="math inline">\(\begin{align} \omega &amp; \equiv \text{% weight held by a fund in a security} \\ \Delta \omega &amp; \equiv \text{change in weight from prior month} \\ \omega^{+} &amp; \equiv \text{the difference between each fund’s reported weight in a stock and the fund-weighted average of a peer group of funds with the same geographic mandate} \end{align}\)</span></p>
 <p><em>EPFR releases stock allocations of all funds on the <span class="math inline">\(26^{\text{th}}\)</span> of each month (or the next available business day) at a monthly frequency. Hence, our calculation assumes constant security weightings between two consecutive release dates within the month.</em></p>
 <p><strong>Flows:</strong></p>
 <p><span class="math inline">\(\begin{align} \varphi &amp; \equiv \text{dollar flow into a fund} \\ \alpha &amp; \equiv \text{dollar starting assets of a fund} \\  A &amp; \equiv \text{dollar ending assets of a fund} \end{align}\)</span></p>
@@ -555,7 +556,7 @@ Stock
 738
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-266
+234
 </td>
 </tr>
 <tr>
@@ -575,7 +576,7 @@ Stock
 986
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-662
+622
 </td>
 </tr>
 <tr>
@@ -595,7 +596,7 @@ Stock
 1,013
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-696
+664
 </td>
 </tr>
 <tr>
@@ -615,7 +616,7 @@ Stock
 1,807
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-1,036
+995
 </td>
 </tr>
 <tr>
@@ -635,7 +636,7 @@ Stock
 2,660
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-1,658
+1,595
 </td>
 </tr>
 <tr>
@@ -655,7 +656,7 @@ Stock
 3,008
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-2,418
+2,234
 </td>
 </tr>
 <tr>
@@ -675,7 +676,7 @@ Stock
 3,496
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-2,739
+2,511
 </td>
 </tr>
 <tr>
@@ -695,7 +696,7 @@ Stock
 4,604
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-3,797
+3,434
 </td>
 </tr>
 <tr>
@@ -715,7 +716,7 @@ Stock
 5,559
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-4,545
+4,197
 </td>
 </tr>
 <tr>
@@ -735,7 +736,7 @@ Stock
 6,327
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-5,300
+4,614
 </td>
 </tr>
 <tr>
@@ -755,7 +756,7 @@ Stock
 7,179
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-5,753
+5,377
 </td>
 </tr>
 <tr>
@@ -775,7 +776,7 @@ Stock
 10,313
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-8,442
+8,235
 </td>
 </tr>
 <tr>
@@ -795,7 +796,27 @@ Stock
 9,261
 </td>
 <td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
-8,489
+8,497
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+2023
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+28,154
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+17,451
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+13,925
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+10,399
+</td>
+<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+9,710
 </td>
 </tr>
 </tbody>

@@ -82,7 +82,7 @@ compounding-flows-4
 ranking-countries-2
 model-7
 performance-6
-flow-percentage-daily-bond-strategy
+flow-percentage-daily-fixed-income-strategy
 data-7
 aggregations-7
 daily-percentage-flow-5

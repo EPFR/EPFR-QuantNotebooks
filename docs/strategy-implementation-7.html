@@ -392,10 +392,10 @@ code span.wa { font-style: italic; } /* Warning */
             <section class="normal" id="section-">
 <div id="strategy-implementation-7" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> Strategy Implementation<a href="strategy-implementation-7.html#strategy-implementation-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The final step is implementing this strategy to create a signal. Let’s begin by reading in the flow files to our <em>R studio</em> workspace.</p>
+<p>To implementing this strategy, begin by reading in the flow files to our <em>R studio</em> workspace.</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="strategy-implementation-7.html#cb143-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># GET RGN FLOW PERCENTAGE C:\\EPFR\\PremDaily\\FloPctBond-US-PremDaily700.csv</span></span>
 <span id="cb143-2"><a href="strategy-implementation-7.html#cb143-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file) <span class="co"># TOTAL RETURN INDEX C:\\EPFR\\returns\\USBond_ETFS.txt</span></span></code></pre></div>
-<p>There is one date where we do not have daily flows published before 7am available which is on, Feb. 20, 2023. For this date we will use the following code to fill in the missing day of data with the previous day’s flows, with the help of functions from <code>library('EPFR.r')</code>.</p>
+<p>There is one date where we do not have daily flows published before 7am available which is on 20 Feb. 2023. For this date we will use the following code to fill in the missing day of data with the previous day’s flows, with the help of functions from <code>library('EPFR.r')</code>.</p>
 <div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="strategy-implementation-7.html#cb144-1" tabindex="-1"></a><span class="co"># MISSING FLOW DATES (GETS PRIOR-DAY&#39;S FLOW PERCENTAGE)</span></span>
 <span id="cb144-2"><a href="strategy-implementation-7.html#cb144-2" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]]</span>
 <span id="cb144-3"><a href="strategy-implementation-7.html#cb144-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">map.rname</span>(x, <span class="fu">flowdate.seq</span>(w[<span class="dv">1</span>], <span class="fu">rev</span>(w)[<span class="dv">1</span>]))</span>
@@ -413,19 +413,20 @@ code span.wa { font-style: italic; } /* Warning */
 <p>The <code>bbk()</code> function requires our daily percentage flow data compounded over a desired period and the total return index data. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
 <p>The first parameter we add is the number of bins we want to use. For our case, we want to use 5 because our strategy is to go long the top fifth and short the bottom fifth.</p>
 <div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="strategy-implementation-7.html#cb146-1" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
-<p>Since we are using EPFR’s Premium Daily flow data is published the next day before the market opens, we do not need to account for a delay in our model.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="strategy-implementation-7.html#cb147-1" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data is available before market opens</span></span></code></pre></div>
+<p>EPFR’s Premium Daily flow data is published the next day before the market open, we will only need to account for a 1-day delay in our model.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="strategy-implementation-7.html#cb147-1" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data is available before market opens</span></span></code></pre></div>
 <p>It is also important to note that this model will be re-balanced daily. The function requires an input for the day of the week to trade, we will put <code>NULL</code>.</p>
 <div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="strategy-implementation-7.html#cb148-1" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (NULL = DAILY)</span></span></code></pre></div>
-<p>Additionally, we want to evaluate the perfromance of the signal based on our holding period. The user can input the return horizons that they are interested in here. For this model, we define a return horizon for daily rebalancing or a 1 day holding period.</p>
+<p>Additionally, we want to evaluate the performance of the signal based on our holding period. The user can input the return horizons that they are interested in here. For this model, we define a return horizon for daily rebalancing or a 1 day holding period.</p>
 <div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="strategy-implementation-7.html#cb149-1" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
-<p>Now that we have defined all of our inputs, to rank the asset classes into quintiles by their 20-day percentage flow, we call the function <code>bbk()</code> for a one-week holding period.</p>
+<p>Now that we have defined all of our inputs, to rank the asset classes into quintiles by their 1-day percentage flow, we call the function <code>bbk()</code> for a one-week holding period.</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="strategy-implementation-7.html#cb150-1" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
 </div>
 <div id="model-8" class="section level3 hasAnchor" number="8.2.3">
 <h3><span class="header-section-number">8.2.3</span> Model<a href="strategy-implementation-7.html#model-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>1-day flow percentage ranked into quintiles (computed only where forward returns are available)</strong></p>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="strategy-implementation-7.html#cb151-1" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -481,7 +482,7 @@ Total Return
 20230228
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
+5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
@@ -496,31 +497,31 @@ Total Return
 1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
+4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
 </td>
 </tr>
 <tr>
@@ -528,19 +529,22 @@ Total Return
 20230227
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
+4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
@@ -549,19 +553,16 @@ Total Return
 1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 1
@@ -575,46 +576,46 @@ Total Return
 20230224
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
 </td>
 </tr>
 <tr>
@@ -622,46 +623,46 @@ Total Return
 20230223
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
+1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
 </td>
 </tr>
 <tr>
@@ -669,10 +670,37 @@ Total Return
 20230222
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+NA
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+NA
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 4
@@ -682,33 +710,6 @@ Total Return
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-NA
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-NA
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
 </td>
 </tr>
 <tr>
@@ -722,19 +723,10 @@ NA
 5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
+4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 2
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5
@@ -743,23 +735,33 @@ NA
 1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-2
+3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+5
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 NA
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4
+3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
+2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1
+3
 </td>
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>Quintile returns over the equal-weight universe</strong></p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="strategy-implementation-7.html#cb152-1" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
@@ -796,22 +798,22 @@ uRet
 20230228
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0599414
+-0.0419955
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0532713
+-0.0689486
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0037435
+0.1374004
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.2451060
+0.1282479
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.2409316
+-0.1089042
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1809902
+0.0669087
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.1817861
@@ -822,22 +824,22 @@ uRet
 20230227
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0006905
+-0.3599815
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1172793
+-0.0952014
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.3168441
+0.0792846
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.2673381
+0.3926506
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.3619788
+0.0096758
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.3626693
+-0.3696574
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.2705314
@@ -848,22 +850,22 @@ uRet
 20230224
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1563430
+-0.1165616
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.1505063
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0976512
+-0.1288016
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0899596
+0.0864855
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0190221
+-0.0345623
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1373210
+-0.0819993
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.1725353
@@ -874,22 +876,22 @@ uRet
 20230223
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0866860
+0.0782963
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0858914
+-0.0066639
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0651616
+-0.0378932
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0657300
+-0.0693983
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0214943
+0.0230281
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0651917
+0.0552682
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.2003083
@@ -900,22 +902,22 @@ uRet
 20230222
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0734053
+-0.0085670
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0190852
+-0.0447315
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0783822
+-0.2822338
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0330375
+-0.0648286
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0736034
+0.4551409
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1470087
+-0.4637079
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 0.1091861
@@ -926,22 +928,22 @@ uRet
 20230221
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0222490
+0.0224375
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.0705578
+0.0850116
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1029554
+0.1011316
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.0822084
+0.0144925
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.1174373
+-0.1899052
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.1396863
+0.2123428
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -0.0648474
@@ -954,7 +956,7 @@ uRet
 </div>
 <div id="performance-7" class="section level3 hasAnchor" number="8.2.4">
 <h3><span class="header-section-number">8.2.4</span> Performance<a href="strategy-implementation-7.html#performance-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><strong>Annualized mean one-week returns</strong></p>
+<p><strong>Annualized mean one-day returns</strong></p>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="strategy-implementation-7.html#cb153-1" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
@@ -993,22 +995,22 @@ nPrds
 2019
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.3
+1.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.8
+0.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.3
+-1.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.1
+-2.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--4.0
+1.2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-8.3
+0.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 5.2
@@ -1022,22 +1024,22 @@ nPrds
 2020
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-15.9
+7.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-5.8
+-1.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.4
+-2.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--7.1
+5.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--16.8
+-7.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-32.7
+14.8
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 3.8
@@ -1051,22 +1053,22 @@ nPrds
 2021
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-9.4
+2.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.4
+-2.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--1.4
+1.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--3.0
+1.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--4.3
+-1.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-13.7
+3.2
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -2.6
@@ -1080,22 +1082,22 @@ nPrds
 2022
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-7.6
+3.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.3
+0.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-6.0
+-1.3
+</td>
+<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+2.6
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -4.0
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--10.0
-</td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-17.6
+7.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
 -15.8
@@ -1109,28 +1111,28 @@ nPrds
 2023
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-4.0
+2.5
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-1.1
+2.3
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--0.6
+-3.1
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-0.7
+0.8
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--6.0
+-2.4
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-10.0
+4.9
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
--2.7
+2.7
 </td>
 <td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
-187
+249
 </td>
 </tr>
 </tbody>

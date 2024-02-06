@@ -28,7 +28,7 @@ y <- ret.idx.gaps.fix(y)
 #RANKING
 lookback <- 1 # FLOW WINDOW (IN WEEKDAYS) - 1 day look back period
 nBin <- 5 # NUMBER OF BINS
-delay <- 0 # DELAY IN KNOWING DATA (IN WEEKDAYS) - data takes time to have
+delay <- 1 # DELAY IN KNOWING DATA (IN WEEKDAYS) - data takes time to have
 doW <- NULL # DAY OF THE WEEK YOU WILL TRADE ON (5 = FRIDAYS)
 z <- bbk(x, y, 1, 1, 5, NULL, T, 0, delay)
 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.1 Data | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.1 Data | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
@@ -52,11 +52,13 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +68,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -343,7 +345,11 @@ code span.wa { font-style: italic; } /* Warning */
 <ul>
 <li class="chapter" data-level="" data-path="conviction.html"><a href="conviction.html#allocskew"><i class="fa fa-check"></i>AllocSkew</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="backtest-example.html"><a href="backtest-example.html"><i class="fa fa-check"></i><b>15</b> Backtest Example</a>
+<li class="chapter" data-level="15" data-path="index-curse-share-suprise.html"><a href="index-curse-share-suprise.html"><i class="fa fa-check"></i><b>15</b> Index Curse (Share Suprise)</a>
+<ul>
+<li class="chapter" data-level="" data-path="index-curse-share-suprise.html"><a href="index-curse-share-suprise.html#shssurp"><i class="fa fa-check"></i>ShsSurp</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="backtest-example.html"><a href="backtest-example.html"><i class="fa fa-check"></i><b>16</b> Backtest Example</a>
 <ul>
 <li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a>
 <ul>
@@ -407,7 +413,7 @@ code span.wa { font-style: italic; } /* Warning */
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;border-bottom: 0;">
 <thead>
 <tr>
-<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: white !important;padding-right: 4px; padding-left: 4px; background-color: #2c1f6e !important;" colspan="5">
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; color: white !important;padding-right: 4px; padding-left: 4px; background-color: rgba(44, 31, 110, 255) !important;" colspan="5">
 <div style="TRUE">
 AUM ($BB) of Fixed income funds
 </div>
@@ -416,253 +422,253 @@ AUM ($BB) of Fixed income funds
 <tr>
 <th style="empty-cells: hide;" colspan="1">
 </th>
-<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: #2c1f6e !important;" colspan="2">
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: rgba(44, 31, 110, 255) !important;" colspan="2">
 <div style="TRUE">
 All Funds
 </div>
 </th>
-<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: #2c1f6e !important;" colspan="2">
+<th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; font-weight: bold; color: rgba(44, 31, 110, 255) !important;" colspan="2">
 <div style="TRUE">
 Cross-border
 </div>
 </th>
 </tr>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 Monthly Flows
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 Daily Flows
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 Daily Flows
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 Daily Flows &amp; Ctry Alloc
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2007
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 3,220
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 1,611
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 309
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 29
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2008
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 4,262
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 2,611
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 431
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 30
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2009
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 5,643
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 3,812
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 471
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 30
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2010
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 6,520
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 4,169
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 850
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 58
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2011
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 7,455
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 4,803
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 1,344
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 107
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2012
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 8,795
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 5,343
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 1,372
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 53
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2013
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 9,801
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 6,467
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 1,787
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 82
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2014
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 11,083
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 7,562
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 2,390
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 142
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2015
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 11,632
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 8,080
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 2,515
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 155
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2016
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 12,362
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 8,638
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 2,829
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 240
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2017
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 13,758
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 9,701
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 3,384
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 294
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2018
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 14,755
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 10,515
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 3,782
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 311
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;">
 2019
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 16,288
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 11,494
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 3,893
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;text-align: center;width: 2.25cm; ">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;text-align: center;width: 2.25cm; ">
 507
 </td>
 </tr>
@@ -713,256 +719,258 @@ Where:</p>
 <p>For this demonstration, we will be using the file <code>FloPctCtry-B-daily.csv</code>, which can be downloaded from the user’s FTP under the folder <code>Strategies/daily</code> and can be stored in the user’s local folder <code>EPFR/daily</code>.</p>
 <p>Below shows a snippet of what this file contains:</p>
 <p><code>Strategies/daily/FloPctCtry-B-daily.csv</code></p>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 AU
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 CA
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 CH
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 DE
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 GB
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 JP
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 NO
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 NZ
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 SE
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 US
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220201
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0950507
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0315327
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.3727611
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1047609
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0969043
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0081440
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0657132
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1475318
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0844231
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0759766
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220202
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0469661
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0249638
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2127343
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0741945
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0554096
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0186634
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0711573
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0314773
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0065801
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0266499
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220203
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0082617
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0043339
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0404950
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0704836
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0494751
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0709754
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0488570
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0036287
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0407186
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0568840
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220204
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1367533
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0449064
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.3684561
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1533709
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1369094
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0093309
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1679166
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1858445
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2541709
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1108859
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220207
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1280167
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0041454
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2162555
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2249074
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1607073
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0305696
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1262835
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1076707
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1903250
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1399923
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220208
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1972474
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1002139
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2642751
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2797248
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1652405
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0904993
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2372150
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2663778
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2768842
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1358340
 </td>
 </tr>
 </tbody>
 </table>
+</div>
 <hr />
 <p>For convenience, save the path to the flow file you choose to use as <code>flow.file</code>. Example shown below:</p>
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="data-6.html#cb125-1" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily</span><span class="sc">\\</span><span class="st">FloPctCtry-B-daily.csv&quot;</span></span></code></pre></div>
@@ -989,248 +997,248 @@ US
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 AU
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 CA
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 CH
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 DE
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 GB
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 JP
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 NO
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 NZ
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 SE
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 US
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220201
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.9025
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.790
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.079
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.034
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.300
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.180
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.987
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.595
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.406
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.789
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220202
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.9125
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.756
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.090
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.038
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.257
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.179
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.990
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.572
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.424
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.777
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220203
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.8675
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.799
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.176
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.139
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.368
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.176
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.077
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.520
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.521
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.832
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220204
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.9600
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.853
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.246
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.203
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.411
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.198
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.104
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.600
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.595
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.911
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220207
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.9950
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.836
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.266
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.225
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.408
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.197
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.121
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.600
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.656
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.917
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220208
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.1200
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.855
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.326
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.263
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.489
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.218
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.153
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.708
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.690
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.965
 </td>
 </tr>
@@ -1262,42 +1270,42 @@ US
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
-"text": "Suggest an edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+    "text": "Suggest an edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

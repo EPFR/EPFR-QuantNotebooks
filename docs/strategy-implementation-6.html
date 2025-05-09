@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>7.2 Strategy Implementation | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="7.2 Strategy Implementation | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
@@ -52,11 +52,13 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +68,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -343,7 +345,11 @@ code span.wa { font-style: italic; } /* Warning */
 <ul>
 <li class="chapter" data-level="" data-path="conviction.html"><a href="conviction.html#allocskew"><i class="fa fa-check"></i>AllocSkew</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="backtest-example.html"><a href="backtest-example.html"><i class="fa fa-check"></i><b>15</b> Backtest Example</a>
+<li class="chapter" data-level="15" data-path="index-curse-share-suprise.html"><a href="index-curse-share-suprise.html"><i class="fa fa-check"></i><b>15</b> Index Curse (Share Suprise)</a>
+<ul>
+<li class="chapter" data-level="" data-path="index-curse-share-suprise.html"><a href="index-curse-share-suprise.html#shssurp"><i class="fa fa-check"></i>ShsSurp</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="backtest-example.html"><a href="backtest-example.html"><i class="fa fa-check"></i><b>16</b> Backtest Example</a>
 <ul>
 <li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a>
 <ul>
@@ -405,256 +411,258 @@ code span.wa { font-style: italic; } /* Warning */
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="strategy-implementation-6.html#cb129-1" tabindex="-1"></a>lookback <span class="ot">&lt;-</span> <span class="dv">20</span> <span class="co"># FLOW WINDOW (IN WEEKDAYS) - 20 day look back period</span></span></code></pre></div>
 <p>Again, using a function from the <code>library('EPFR.r')</code>, <code>compound.flows()</code> compounds our daily percentage flow over the trailing <code>lookback</code> period for each country.</p>
 <div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="strategy-implementation-6.html#cb130-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">compound.flows</span>(x, lookback, F) <span class="co"># COMPOUND FLOWS</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 AU
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 CA
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 CH
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 DE
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 GB
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 JP
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 NO
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 NZ
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 SE
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 US
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220201
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0147356
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0998440
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.281829
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.5176295
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.4215695
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.8690703
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.8346496
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.086802
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.6430788
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.085531
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220202
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1436693
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0422141
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.566203
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.4747096
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.5748950
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.8112050
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.9143912
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.137833
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.6976324
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.079877
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220203
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1788996
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0583401
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.648158
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.5788006
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.6370636
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.7962985
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.9826300
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.174760
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.7499326
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.154433
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220204
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2867007
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0322003
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.957859
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.6540758
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.7560261
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.7889151
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.1206663
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.358382
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.9953409
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.232607
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220207
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.4238226
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0518056
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.150644
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.8875790
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.8945644
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.7171231
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.2435045
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.439052
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.2318519
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.332639
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220208
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.6638225
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1019379
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.488187
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.1557103
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.0960234
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.5340066
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.5090552
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.721286
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.6577818
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.430017
 </td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 <div id="ranking-countries-2" class="section level3 hasAnchor" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Ranking Countries<a href="strategy-implementation-6.html#ranking-countries-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -708,178 +716,178 @@ US
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 AU
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 CA
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 CH
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 DE
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 GB
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 JP
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 NO
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 NZ
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 SE
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 US
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220225
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 4
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220218
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 4
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220211
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220204
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 4
 </td>
 </tr>
@@ -900,133 +908,133 @@ US
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q1
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q2
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q3
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q4
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q5
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 TxB
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 uRet
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220225
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.03595
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0168
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.04595
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.06605
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.00095
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0350
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.17545
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220218
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.02070
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0177
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.00480
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.02080
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.01280
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0335
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.02970
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220211
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.04895
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.0203
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.01255
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.00545
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.02155
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0705
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.04445
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20220204
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.07860
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0764
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.00390
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.04060
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.03890
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1175
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.09410
 </td>
 </tr>
@@ -1044,1619 +1052,1619 @@ uRet
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q1
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q2
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q3
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q4
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q5
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 TxB
 </th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 uRet
 </th>
 </tr>
 </thead>
 <tbody>
 <tr grouplength="10">
-<td colspan="1" style="border-bottom: 1px solid;color: #2c1f6e !important;">
+<td colspan="1" style="border-bottom: 1px solid;color: rgba(44, 31, 110, 255) !important;">
 <strong>Weekly</strong>
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnMn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnSd
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.5
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Sharpe
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -28.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 11.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -32.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -3.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 50.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -50.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -36.8
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 HitRate
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 6.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Beta
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Alpha
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DrawDn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.8
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.8
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnBeg
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20090417
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20090619
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20070615
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20120914
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20081226
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20090605
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20070706
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnN
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 631
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 539
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 409
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 480
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 26
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 616
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 671
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnTo
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1443
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2580
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2876
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2543
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1518
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2961
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0
 </td>
 </tr>
 <tr grouplength="10">
-<td colspan="1" style="border-bottom: 1px solid;color: #2c1f6e !important;">
+<td colspan="1" style="border-bottom: 1px solid;color: rgba(44, 31, 110, 255) !important;">
 <strong>Fortnightly</strong>
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnMn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnSd
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Sharpe
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -32.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 33.5
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -14.6
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -31.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 40.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -45.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -39.7
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 HitRate
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -3.6
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 5.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -5.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -5.6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Beta
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Alpha
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DrawDn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.8
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnBeg
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20090372
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20110822
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20070612
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20095664
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20081216
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20085623
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20070660
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnN
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 326
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 65
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 111
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 310
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 14
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 336
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 339
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnTo
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1055
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1568
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1692
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1650
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1119
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2174
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0
 </td>
 </tr>
 <tr grouplength="10">
-<td colspan="1" style="border-bottom: 1px solid;color: #2c1f6e !important;">
+<td colspan="1" style="border-bottom: 1px solid;color: rgba(44, 31, 110, 255) !important;">
 <strong>Monthly</strong>
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnMn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnSd
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Sharpe
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -27.6
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 24.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -14.5
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -28.6
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 41.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -43.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -39.4
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 HitRate
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 3.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -5.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 8.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -5.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -6.8
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Beta
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Alpha
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DrawDn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -3.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnBeg
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20087969
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20098065
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20100566
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20083141
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20093212
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20087889
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20070643
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnN
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 162
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 68
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 94
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 122
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 29
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 163
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 170
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnTo
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 740
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 924
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 977
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 953
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 785
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1525
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0
 </td>
 </tr>
 <tr grouplength="10">
-<td colspan="1" style="border-bottom: 1px solid;color: #2c1f6e !important;">
+<td colspan="1" style="border-bottom: 1px solid;color: rgba(44, 31, 110, 255) !important;">
 <strong>Bi-Monthly</strong>
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnMn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnSd
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Sharpe
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -27.5
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 5.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 4.6
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -15.9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 34.8
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -39.9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -38.2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 HitRate
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -5.9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 7.5
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -7.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -8.3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Beta
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Alpha
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DrawDn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.8
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.8
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.6
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.5
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnBeg
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20084295
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20102888
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20091694
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20109616
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20118674
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20077514
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20071773
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnN
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 64
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 38
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 24
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 24
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 17
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 65
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 75
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnTo
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 365
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 430
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 445
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 434
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 373
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 738
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0
 </td>
 </tr>
 <tr grouplength="10">
-<td colspan="1" style="border-bottom: 1px solid;color: #2c1f6e !important;">
+<td colspan="1" style="border-bottom: 1px solid;color: rgba(44, 31, 110, 255) !important;">
 <strong>Quarterly</strong>
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnMn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnSd
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Sharpe
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -23.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -5.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 5.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -8.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 36.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -37.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -38.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 HitRate
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -5.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 9.8
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -6.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -9.4
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Beta
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Alpha
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DrawDn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.5
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.8
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.5
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.5
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.4
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnBeg
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20089039
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20102884
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20102184
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20114652
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20108193
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20089901
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20070707
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnN
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 44
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 33
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 21
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 27
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 45
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnTo
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 256
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 300
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 303
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 307
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 261
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 518
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0
 </td>
 </tr>
 <tr grouplength="10">
-<td colspan="1" style="border-bottom: 1px solid;color: #2c1f6e !important;">
+<td colspan="1" style="border-bottom: 1px solid;color: rgba(44, 31, 110, 255) !important;">
 <strong>Semi-Annual</strong>
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnMn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnSd
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.4
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.6
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Sharpe
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -13.8
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.7
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.5
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -5.9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 27.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -25.9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -38.1
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 HitRate
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.0
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.8
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 8.5
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -8.1
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -9.7
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Beta
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 1.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 Alpha
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 NA
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DrawDn
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.3
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.9
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.8
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.5
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -2.2
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -4.3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnBeg
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20093350
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20112889
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20096066
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20114543
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20107167
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20091428
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 20071216
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 DDnN
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 17
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 12
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 12
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 13
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 6
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 19
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 26
 </td>
 </tr>
 <tr>
-<td style="text-align:left;padding-left: 2em;font-weight: bold;color: #2c1f6e !important;" indentlevel="1">
+<td style="text-align:left;padding-left: 2em;font-weight: bold;color: rgba(44, 31, 110, 255) !important;" indentlevel="1">
 AnnTo
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 143
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 156
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 158
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 160
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 140
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 283
 </td>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0
 </td>
 </tr>
@@ -2668,496 +2676,496 @@ AnnTo
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q1
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q2
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q3
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q4
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 Q5
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 TxB
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 uRet
 </th>
-<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: #b54ed6 !important;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
 nPrds
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2007
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 29
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2008
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.9
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.6
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2009
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.7
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.8
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.7
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2010
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 53
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2011
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.6
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.7
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2012
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2013
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.9
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2014
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2015
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2016
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 53
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2017
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.7
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2018
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.6
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.7
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2019
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2020
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.5
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 52
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2021
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.4
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.0
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.6
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 53
 </td>
 </tr>
 <tr>
-<td style="text-align:left;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2022
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.3
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.7
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 0.2
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -0.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 -1.1
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 2.6
 </td>
-<td style="text-align:right;font-weight: bold;color: #2c1f6e !important;">
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
 10
 </td>
 </tr>
@@ -3190,42 +3198,42 @@ nPrds
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": false
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
-"text": "Suggest an edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+    "text": "Suggest an edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
 });
 });
 </script>

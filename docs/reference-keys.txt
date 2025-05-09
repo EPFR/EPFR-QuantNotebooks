@@ -99,4 +99,5 @@ smart-money
 manager-momentum
 ownership-dispersion
 conviction
+index-curse-share-suprise
 backtest-example

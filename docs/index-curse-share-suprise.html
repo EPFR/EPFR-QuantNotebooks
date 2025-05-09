@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Flow-Percentage DM Rates Strategy | EPFR Strategy Notebooks</title>
+  <title>15 Index Curse (Share Suprise) | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Flow-Percentage DM Rates Strategy | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="15 Index Curse (Share Suprise) | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Flow-Percentage DM Rates Strategy | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="15 Index Curse (Share Suprise) | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-implementation-5.html"/>
-<link rel="next" href="data-6.html"/>
+<link rel="prev" href="conviction.html"/>
+<link rel="next" href="backtest-example.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -396,32 +396,186 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="flow-percentage-dm-rates-strategy" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">7</span> Flow-Percentage DM Rates Strategy<a href="flow-percentage-dm-rates-strategy.html#flow-percentage-dm-rates-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- ## Overview -->
-<p>The <em>Flow-Percentage DM Rates Strategy</em> is a bond-based rotation strategy, which ranks G10 countries based on a percentage flow indicator, and invests in their respective 10-year rates. This approach uses the stated allocations of bond funds with a cross-border focus and calculates the percentage flow into G10 countries.</p>
-<!-- In terms of twenty-day percentage flows, the top fifth of G10 10 year rates outperform the bottom fifth by around 22pbs per year.  -->
-<p>G10 Countries used in this analysis are:</p>
-<pre><code>1. United States
-2. Europe
-3. United Kingdom
-4. Japan
-5. Australia
-6. New Zealand
-7. Canada
-8. Switzerland
-9. Norway
-10. Sweden</code></pre>
-<p><a href="r%20downloads/DM%20Rates.r">Download the R Script source for this chapter</a></p>
+<div id="index-curse-share-suprise" class="section level1 hasAnchor" number="15">
+<h1><span class="header-section-number">15</span> Index Curse (Share Suprise)<a href="index-curse-share-suprise.html#index-curse-share-suprise" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The Share Surprise (ShsSurp) signal captures unexpected changes in fund holdings that are not explained by reported flows. It does this by estimating the number of shares a fund should have bought or sold over the past month—based on its reported flow and stock allocation, and comparing that to the actual reported position. The deviaton between these two is treated as a “surprise” that may reflect portfolio adjustments such as index rebalancing.</p>
+<p>The quants corner, <a href="https://epfr.com/insights/quants-corner/surprising-value-investment-journey/">Surprising alue in the space between expected and delivered</a>, by Vikram Srimurthy - Head of Quant Development at EPFR, he writes about the success of this factor as a contrarian indicator, particularly amongst passive funds. The post also ties in “S&amp;P 500 curse” and mean reversion dynamics.</p>
 <hr />
+<div id="shssurp" class="section level3 unnumbered hasAnchor">
+<h3>ShsSurp<a href="index-curse-share-suprise.html#shssurp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!-- To construct this signal, EPFR first calculates the _Adjusted Current Shares_ value. For each fund we will scale its monthly flow by its percentage weight to a given stock to derive the portion of flow to security based on weight, for the current month. Once we have the stock flow we will calculate the number of shares that could be purchased base on the stock price, and this will be our expected adjustment. The expected adjustment subtracted by the current number of shares will give us Adjusted Current Shares, or derived previous shares. -->
+<!-- ShsSurp is calculated by estimating the difference between the expected number of shares a fund would have bought/sold of a security based on its known flow over the past month and its latest position to the security and the actual number of shares it purchased.  -->
+<!-- We allocate flows over the prior month according to the fund’s current weight in the stock. Scaling the result by the stock’s price at the end of the current month yields the adjustment factor. Subtracting this price-adjusted number of shares from the shares held at the end of the month gives us the Adjusted Shares number a given security. To capture the deviation – or “surprise” – for each stock, we perform the following calculation: -->
+<p>To capture this, we first calculate Adjusted Shares. This represents the shares held, had there been no flow. To get there, for each stock, we allocate flows over the prior month according to the fund’s current weight in the stock. Scaling the result by the stock’s price at the end of the current month yields the adjustment factor. Subtracting this price-adjusted number of shares from the number of shares held at the end of the month, gives us the Adjusted Shares number. We will sum across all the funds for each security.</p>
+<p>To capture the deviation – or “surprise” – for each stock, we perform the following calculation:</p>
+<p><span class="math display">\[\text{ShsSurp} \equiv \frac{\sum \text{Adj Current Shares}}{\sum \text{Prior Month Shares}} - 1 \equiv \frac{\sum \sigma - \varphi \times \omega/\gamma}{\sum \sigma - \Delta \sigma} - 1\]</span></p>
+<p>where:</p>
+<p><span class="math inline">\(\begin{align}
+\varphi &amp; \equiv \text{dollar flow into a fund} \\
+\omega &amp; \equiv \text{% weight held by a fund in a security} \\
+\gamma &amp; \equiv \text{price of the security}
+\end{align}\)</span></p>
+<div id="interpretation-shssurp" class="section level4 unnumbered hasAnchor">
+<h4>Interpretation ShsSurp<a href="index-curse-share-suprise.html#interpretation-shssurp" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A positive value will indicate a positive sentiment, this can mean funds bought more or sold less than expected based on flow. Similarly a negative value will indicate a negative sentiment, which can mean funds sold more or bought less than expected.</p>
+<p>The bigger the number for a given security, the bigger the surprise factor.</p>
+</div>
+<div id="example-shssurp" class="section level4 unnumbered hasAnchor">
+<h4>Example ShsSurp<a href="index-curse-share-suprise.html#example-shssurp" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Below shows a snippet of what EPFR’s ShsSurp Files contain:</p>
+<p>Location: <code>'/StockFlows5.0_Additional/QuantitativeFactors/Monthly/ShsSurp/Aggregate/ShsSurp2022Q2.txt'</code></p>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
+ReportDate
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
+HSecurityId
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
+SecurityName
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
+ShsSurp
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+66638
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+12/31/2022 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+7041220
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+Apple Inc
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+-0.8327
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+66461
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+12/31/2022 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+7049454
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+Tesla, Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+2.4158
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+58184
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+12/31/2022 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+7041046
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+Amazon.com, Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+2.4144
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+63964
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+12/31/2022 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+7057091
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+Microsoft Corp. 
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+1.3449
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+52992
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+12/31/2022 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+7054419
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+Exxon Mobil Corp. 
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+-0.6609
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+65519
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+12/31/2022 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+7056752
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+Netflix, Inc. 
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+-1.6315
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+61567
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+12/31/2022 12:00:00 AM
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+7063679
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+Visa Inc
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+0.2780
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-implementation-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="data-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="conviction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="backtest-example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -452,7 +606,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
+    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/02-Stock.Rmd",
     "text": "Suggest an edit"
   },
   "history": {

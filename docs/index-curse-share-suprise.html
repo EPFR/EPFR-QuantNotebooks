@@ -398,7 +398,7 @@ code span.wa { font-style: italic; } /* Warning */
             <section class="normal" id="section-">
 <div id="index-curse-share-suprise" class="section level1 hasAnchor" number="15">
 <h1><span class="header-section-number">15</span> Index Curse (Share Suprise)<a href="index-curse-share-suprise.html#index-curse-share-suprise" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The Share Surprise (ShsSurp) signal captures unexpected changes in fund holdings that are not explained by reported flows. It does this by estimating the number of shares a fund should have bought or sold over the past month—based on its reported flow and stock allocation, and comparing that to the actual reported position. The deviaton between these two is treated as a “surprise” that may reflect portfolio adjustments such as index rebalancing.</p>
+<p>The Share Surprise (ShsSurp) signal captures unexpected changes in fund holdings that are not explained by reported flows. It does this by estimating the number of shares a fund should have bought or sold over the past month—based on its reported flow and stock allocation, and comparing that to the actual reported position. The deviaton between these two is treated as a “surprise” that may reflect portfolio adjustments such as index rebalancing. As EPFR tracks a broad array of funds linked to diverse set of indices, this factor plays a key role in capturing the aggregate impact of index rebalancing across the mutual fund and ETF investment landscape.</p>
 <p>The quants corner, <a href="https://epfr.com/insights/quants-corner/surprising-value-investment-journey/">Surprising alue in the space between expected and delivered</a>, by Vikram Srimurthy - Head of Quant Development at EPFR, he writes about the success of this factor as a contrarian indicator, particularly amongst passive funds. The post also ties in “S&amp;P 500 curse” and mean reversion dynamics.</p>
 <hr />
 <div id="shssurp" class="section level3 unnumbered hasAnchor">
@@ -413,6 +413,7 @@ code span.wa { font-style: italic; } /* Warning */
 <p><span class="math inline">\(\begin{align}
 \varphi &amp; \equiv \text{dollar flow into a fund} \\
 \omega &amp; \equiv \text{% weight held by a fund in a security} \\
+\sigma &amp; \equiv \text{shares held in that stock by a fund} \\
 \gamma &amp; \equiv \text{price of the security}
 \end{align}\)</span></p>
 <div id="interpretation-shssurp" class="section level4 unnumbered hasAnchor">

@@ -137,6 +137,25 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="" data-path="epfr-stock-factors.html"><a href="epfr-stock-factors.html#monthly-factors"><i class="fa fa-check"></i>Monthly Factors:</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="epfr-api.html"><a href="epfr-api.html"><i class="fa fa-check"></i>EPFR API</a>
+<ul>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html"><i class="fa fa-check"></i>Quick Start</a>
+<ul>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-install"><i class="fa fa-check"></i>API Install</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-login"><i class="fa fa-check"></i>API Login</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-call"><i class="fa fa-check"></i>API Call</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#example-api-call"><i class="fa fa-check"></i>Example API call</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-date-format"><i class="fa fa-check"></i>API Date Format</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#supplemental-libraries"><i class="fa fa-check"></i>Supplemental Libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html"><i class="fa fa-check"></i>API Flow-Percentage</a>
+<ul>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-region-strategy"><i class="fa fa-check"></i>API Multi-Asset Region Strategy</a></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-fi-strategy"><i class="fa fa-check"></i>API Multi-Asset FI Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="api-dictionaries.html"><a href="api-dictionaries.html"><i class="fa fa-check"></i>API Dictionaries</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i>EPFR.r Library</a>
 <ul>
 <li class="chapter" data-level="" data-path="set-up.html"><a href="set-up.html"><i class="fa fa-check"></i>Set-up</a></li>
@@ -827,13 +846,13 @@ Total Return
 </div>
 <hr />
 <p>For convenience, save the path to the flow file you choose to use as <code>flow.file</code>. Example shown below:</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="data-7.html#cb140-1" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">PremDaily</span><span class="sc">\\</span><span class="st">FloPctBond-US-PremDaily700.csv&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="data-7.html#cb213-1" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">PremDaily</span><span class="sc">\\</span><span class="st">FloPctBond-US-PremDaily700.csv&quot;</span></span></code></pre></div>
 <hr />
 </div>
 <div id="return-file-7" class="section level3 hasAnchor" number="8.1.4">
 <h3><span class="header-section-number">8.1.4</span> Return File<a href="data-7.html#return-file-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The return file for this strategy should contain open to open daily fixed-income ETF returns for the respective asset classes contained in the flow file, over the period of time the user wants to backtest. For convenience, save the path to the return file you choose to use as <code>ret.file</code>. Example shown below:</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="data-7.html#cb141-1" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">USBond_ETFS.txt&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="data-7.html#cb214-1" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">USBond_ETFS.txt&quot;</span></span></code></pre></div>
 <hr />
 <p>The following ETFs were used to measure the daily performance for each of the US Bond asset classes.</p>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
@@ -1008,55 +1027,55 @@ Vanguard Total Bond Market ETF
 </tbody>
 </table>
 <p>To conduct our analysis we were able to use <code>library(quantmod)</code> to extract historical daily returns for each of these ETFs from www.yahoofinance.com.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="data-7.html#cb142-1" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span>
-<span id="cb142-2"><a href="data-7.html#cb142-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb142-3"><a href="data-7.html#cb142-3" tabindex="-1"></a></span>
-<span id="cb142-4"><a href="data-7.html#cb142-4" tabindex="-1"></a>etf_tickers <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb142-5"><a href="data-7.html#cb142-5" tabindex="-1"></a>  <span class="st">&quot;BKLN&quot;</span> <span class="ot">=</span> <span class="st">&quot;Bank Loan&quot;</span>,</span>
-<span id="cb142-6"><a href="data-7.html#cb142-6" tabindex="-1"></a>  <span class="st">&quot;JNK&quot;</span> <span class="ot">=</span> <span class="st">&quot;High Yield&quot;</span>, </span>
-<span id="cb142-7"><a href="data-7.html#cb142-7" tabindex="-1"></a>  <span class="st">&quot;TIP&quot;</span> <span class="ot">=</span> <span class="st">&quot;Inflation Protected&quot;</span>, </span>
-<span id="cb142-8"><a href="data-7.html#cb142-8" tabindex="-1"></a>  <span class="st">&quot;IUSB&quot;</span> <span class="ot">=</span> <span class="st">&quot;Intermediate Term&quot;</span>, </span>
-<span id="cb142-9"><a href="data-7.html#cb142-9" tabindex="-1"></a>  <span class="st">&quot;IGIB&quot;</span> <span class="ot">=</span> <span class="st">&quot;Intermediate Term Corporate&quot;</span>, </span>
-<span id="cb142-10"><a href="data-7.html#cb142-10" tabindex="-1"></a>  <span class="st">&quot;IEI&quot;</span> <span class="ot">=</span> <span class="st">&quot;Intermediate Term Government&quot;</span>,</span>
-<span id="cb142-11"><a href="data-7.html#cb142-11" tabindex="-1"></a>  <span class="st">&quot;AGG&quot;</span> <span class="ot">=</span> <span class="st">&quot;Long Term Bond&quot;</span>,</span>
-<span id="cb142-12"><a href="data-7.html#cb142-12" tabindex="-1"></a>  <span class="st">&quot;IGLB&quot;</span> <span class="ot">=</span> <span class="st">&quot;Long Term Corporate&quot;</span>, </span>
-<span id="cb142-13"><a href="data-7.html#cb142-13" tabindex="-1"></a>  <span class="st">&quot;TLH&quot;</span> <span class="ot">=</span> <span class="st">&quot;Long Term Government&quot;</span>,</span>
-<span id="cb142-14"><a href="data-7.html#cb142-14" tabindex="-1"></a>  <span class="st">&quot;MBB&quot;</span> <span class="ot">=</span> <span class="st">&quot;Mortgage Backed&quot;</span>, </span>
-<span id="cb142-15"><a href="data-7.html#cb142-15" tabindex="-1"></a>  <span class="st">&quot;SHY&quot;</span> <span class="ot">=</span> <span class="st">&quot;Short Term Bond&quot;</span>,</span>
-<span id="cb142-16"><a href="data-7.html#cb142-16" tabindex="-1"></a>  <span class="st">&quot;IGSB&quot;</span> <span class="ot">=</span> <span class="st">&quot;Short Term Corporate&quot;</span>, </span>
-<span id="cb142-17"><a href="data-7.html#cb142-17" tabindex="-1"></a>  <span class="st">&quot;SHV&quot;</span> <span class="ot">=</span> <span class="st">&quot;Short Term Government&quot;</span>, </span>
-<span id="cb142-18"><a href="data-7.html#cb142-18" tabindex="-1"></a>  <span class="st">&quot;BND&quot;</span> <span class="ot">=</span> <span class="st">&quot;Total Return&quot;</span> </span>
-<span id="cb142-19"><a href="data-7.html#cb142-19" tabindex="-1"></a>)</span>
-<span id="cb142-20"><a href="data-7.html#cb142-20" tabindex="-1"></a></span>
-<span id="cb142-21"><a href="data-7.html#cb142-21" tabindex="-1"></a></span>
-<span id="cb142-22"><a href="data-7.html#cb142-22" tabindex="-1"></a>etf_data <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb142-23"><a href="data-7.html#cb142-23" tabindex="-1"></a></span>
-<span id="cb142-24"><a href="data-7.html#cb142-24" tabindex="-1"></a><span class="co"># Loop through each ETF and retrieve the data</span></span>
-<span id="cb142-25"><a href="data-7.html#cb142-25" tabindex="-1"></a><span class="cf">for</span> (ticker <span class="cf">in</span> <span class="fu">names</span>(etf_tickers)) {</span>
-<span id="cb142-26"><a href="data-7.html#cb142-26" tabindex="-1"></a>  </span>
-<span id="cb142-27"><a href="data-7.html#cb142-27" tabindex="-1"></a>  <span class="co"># Fetch data from Yahoo Finance</span></span>
-<span id="cb142-28"><a href="data-7.html#cb142-28" tabindex="-1"></a>  etf <span class="ot">&lt;-</span> <span class="fu">getSymbols.yahoo</span>(ticker, <span class="at">auto.assign =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb142-29"><a href="data-7.html#cb142-29" tabindex="-1"></a>  </span>
-<span id="cb142-30"><a href="data-7.html#cb142-30" tabindex="-1"></a>  <span class="co"># Extract the &quot;Open&quot; prices</span></span>
-<span id="cb142-31"><a href="data-7.html#cb142-31" tabindex="-1"></a>  etf_open_prices <span class="ot">&lt;-</span> <span class="fu">Op</span>(etf)</span>
-<span id="cb142-32"><a href="data-7.html#cb142-32" tabindex="-1"></a>  </span>
-<span id="cb142-33"><a href="data-7.html#cb142-33" tabindex="-1"></a>  <span class="co"># Calculate daily returns (open to open)</span></span>
-<span id="cb142-34"><a href="data-7.html#cb142-34" tabindex="-1"></a>  etf_returns <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> (etf_open_prices <span class="sc">/</span> <span class="fu">lag</span>(etf_open_prices) <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb142-35"><a href="data-7.html#cb142-35" tabindex="-1"></a>  <span class="fu">names</span>(etf_returns) <span class="ot">&lt;-</span> etf_tickers[ticker]</span>
-<span id="cb142-36"><a href="data-7.html#cb142-36" tabindex="-1"></a>  </span>
-<span id="cb142-37"><a href="data-7.html#cb142-37" tabindex="-1"></a>  <span class="co"># Add the returns to the data frame</span></span>
-<span id="cb142-38"><a href="data-7.html#cb142-38" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(etf_data)) {</span>
-<span id="cb142-39"><a href="data-7.html#cb142-39" tabindex="-1"></a>    etf_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(etf_returns), etf_returns, <span class="at">check.names =</span> F)</span>
-<span id="cb142-40"><a href="data-7.html#cb142-40" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb142-41"><a href="data-7.html#cb142-41" tabindex="-1"></a>    etf_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(etf_data, <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(etf_returns), etf_returns, <span class="at">check.names =</span> F), <span class="at">by =</span> <span class="st">&quot;Date&quot;</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb142-42"><a href="data-7.html#cb142-42" tabindex="-1"></a>  }</span>
-<span id="cb142-43"><a href="data-7.html#cb142-43" tabindex="-1"></a>}</span>
-<span id="cb142-44"><a href="data-7.html#cb142-44" tabindex="-1"></a></span>
-<span id="cb142-45"><a href="data-7.html#cb142-45" tabindex="-1"></a>  <span class="co"># format date</span></span>
-<span id="cb142-46"><a href="data-7.html#cb142-46" tabindex="-1"></a>  etf_data<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">txt.replace</span>(etf_data<span class="sc">$</span>Date, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
-<span id="cb142-47"><a href="data-7.html#cb142-47" tabindex="-1"></a>    </span>
-<span id="cb142-48"><a href="data-7.html#cb142-48" tabindex="-1"></a>  <span class="co"># write output to desired destination</span></span>
-<span id="cb142-49"><a href="data-7.html#cb142-49" tabindex="-1"></a>    <span class="fu">mat.write</span>(etf_data, ret.file, <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, F)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="data-7.html#cb215-1" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span>
+<span id="cb215-2"><a href="data-7.html#cb215-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb215-3"><a href="data-7.html#cb215-3" tabindex="-1"></a></span>
+<span id="cb215-4"><a href="data-7.html#cb215-4" tabindex="-1"></a>etf_tickers <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb215-5"><a href="data-7.html#cb215-5" tabindex="-1"></a>  <span class="st">&quot;BKLN&quot;</span> <span class="ot">=</span> <span class="st">&quot;Bank Loan&quot;</span>,</span>
+<span id="cb215-6"><a href="data-7.html#cb215-6" tabindex="-1"></a>  <span class="st">&quot;JNK&quot;</span> <span class="ot">=</span> <span class="st">&quot;High Yield&quot;</span>, </span>
+<span id="cb215-7"><a href="data-7.html#cb215-7" tabindex="-1"></a>  <span class="st">&quot;TIP&quot;</span> <span class="ot">=</span> <span class="st">&quot;Inflation Protected&quot;</span>, </span>
+<span id="cb215-8"><a href="data-7.html#cb215-8" tabindex="-1"></a>  <span class="st">&quot;IUSB&quot;</span> <span class="ot">=</span> <span class="st">&quot;Intermediate Term&quot;</span>, </span>
+<span id="cb215-9"><a href="data-7.html#cb215-9" tabindex="-1"></a>  <span class="st">&quot;IGIB&quot;</span> <span class="ot">=</span> <span class="st">&quot;Intermediate Term Corporate&quot;</span>, </span>
+<span id="cb215-10"><a href="data-7.html#cb215-10" tabindex="-1"></a>  <span class="st">&quot;IEI&quot;</span> <span class="ot">=</span> <span class="st">&quot;Intermediate Term Government&quot;</span>,</span>
+<span id="cb215-11"><a href="data-7.html#cb215-11" tabindex="-1"></a>  <span class="st">&quot;AGG&quot;</span> <span class="ot">=</span> <span class="st">&quot;Long Term Bond&quot;</span>,</span>
+<span id="cb215-12"><a href="data-7.html#cb215-12" tabindex="-1"></a>  <span class="st">&quot;IGLB&quot;</span> <span class="ot">=</span> <span class="st">&quot;Long Term Corporate&quot;</span>, </span>
+<span id="cb215-13"><a href="data-7.html#cb215-13" tabindex="-1"></a>  <span class="st">&quot;TLH&quot;</span> <span class="ot">=</span> <span class="st">&quot;Long Term Government&quot;</span>,</span>
+<span id="cb215-14"><a href="data-7.html#cb215-14" tabindex="-1"></a>  <span class="st">&quot;MBB&quot;</span> <span class="ot">=</span> <span class="st">&quot;Mortgage Backed&quot;</span>, </span>
+<span id="cb215-15"><a href="data-7.html#cb215-15" tabindex="-1"></a>  <span class="st">&quot;SHY&quot;</span> <span class="ot">=</span> <span class="st">&quot;Short Term Bond&quot;</span>,</span>
+<span id="cb215-16"><a href="data-7.html#cb215-16" tabindex="-1"></a>  <span class="st">&quot;IGSB&quot;</span> <span class="ot">=</span> <span class="st">&quot;Short Term Corporate&quot;</span>, </span>
+<span id="cb215-17"><a href="data-7.html#cb215-17" tabindex="-1"></a>  <span class="st">&quot;SHV&quot;</span> <span class="ot">=</span> <span class="st">&quot;Short Term Government&quot;</span>, </span>
+<span id="cb215-18"><a href="data-7.html#cb215-18" tabindex="-1"></a>  <span class="st">&quot;BND&quot;</span> <span class="ot">=</span> <span class="st">&quot;Total Return&quot;</span> </span>
+<span id="cb215-19"><a href="data-7.html#cb215-19" tabindex="-1"></a>)</span>
+<span id="cb215-20"><a href="data-7.html#cb215-20" tabindex="-1"></a></span>
+<span id="cb215-21"><a href="data-7.html#cb215-21" tabindex="-1"></a></span>
+<span id="cb215-22"><a href="data-7.html#cb215-22" tabindex="-1"></a>etf_data <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb215-23"><a href="data-7.html#cb215-23" tabindex="-1"></a></span>
+<span id="cb215-24"><a href="data-7.html#cb215-24" tabindex="-1"></a><span class="co"># Loop through each ETF and retrieve the data</span></span>
+<span id="cb215-25"><a href="data-7.html#cb215-25" tabindex="-1"></a><span class="cf">for</span> (ticker <span class="cf">in</span> <span class="fu">names</span>(etf_tickers)) {</span>
+<span id="cb215-26"><a href="data-7.html#cb215-26" tabindex="-1"></a>  </span>
+<span id="cb215-27"><a href="data-7.html#cb215-27" tabindex="-1"></a>  <span class="co"># Fetch data from Yahoo Finance</span></span>
+<span id="cb215-28"><a href="data-7.html#cb215-28" tabindex="-1"></a>  etf <span class="ot">&lt;-</span> <span class="fu">getSymbols.yahoo</span>(ticker, <span class="at">auto.assign =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb215-29"><a href="data-7.html#cb215-29" tabindex="-1"></a>  </span>
+<span id="cb215-30"><a href="data-7.html#cb215-30" tabindex="-1"></a>  <span class="co"># Extract the &quot;Open&quot; prices</span></span>
+<span id="cb215-31"><a href="data-7.html#cb215-31" tabindex="-1"></a>  etf_open_prices <span class="ot">&lt;-</span> <span class="fu">Op</span>(etf)</span>
+<span id="cb215-32"><a href="data-7.html#cb215-32" tabindex="-1"></a>  </span>
+<span id="cb215-33"><a href="data-7.html#cb215-33" tabindex="-1"></a>  <span class="co"># Calculate daily returns (open to open)</span></span>
+<span id="cb215-34"><a href="data-7.html#cb215-34" tabindex="-1"></a>  etf_returns <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> (etf_open_prices <span class="sc">/</span> <span class="fu">lag</span>(etf_open_prices) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb215-35"><a href="data-7.html#cb215-35" tabindex="-1"></a>  <span class="fu">names</span>(etf_returns) <span class="ot">&lt;-</span> etf_tickers[ticker]</span>
+<span id="cb215-36"><a href="data-7.html#cb215-36" tabindex="-1"></a>  </span>
+<span id="cb215-37"><a href="data-7.html#cb215-37" tabindex="-1"></a>  <span class="co"># Add the returns to the data frame</span></span>
+<span id="cb215-38"><a href="data-7.html#cb215-38" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(etf_data)) {</span>
+<span id="cb215-39"><a href="data-7.html#cb215-39" tabindex="-1"></a>    etf_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(etf_returns), etf_returns, <span class="at">check.names =</span> F)</span>
+<span id="cb215-40"><a href="data-7.html#cb215-40" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb215-41"><a href="data-7.html#cb215-41" tabindex="-1"></a>    etf_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(etf_data, <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(etf_returns), etf_returns, <span class="at">check.names =</span> F), <span class="at">by =</span> <span class="st">&quot;Date&quot;</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb215-42"><a href="data-7.html#cb215-42" tabindex="-1"></a>  }</span>
+<span id="cb215-43"><a href="data-7.html#cb215-43" tabindex="-1"></a>}</span>
+<span id="cb215-44"><a href="data-7.html#cb215-44" tabindex="-1"></a></span>
+<span id="cb215-45"><a href="data-7.html#cb215-45" tabindex="-1"></a>  <span class="co"># format date</span></span>
+<span id="cb215-46"><a href="data-7.html#cb215-46" tabindex="-1"></a>  etf_data<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">txt.replace</span>(etf_data<span class="sc">$</span>Date, <span class="st">&quot;-&quot;</span>, <span class="st">&quot;&quot;</span>)</span>
+<span id="cb215-47"><a href="data-7.html#cb215-47" tabindex="-1"></a>    </span>
+<span id="cb215-48"><a href="data-7.html#cb215-48" tabindex="-1"></a>  <span class="co"># write output to desired destination</span></span>
+<span id="cb215-49"><a href="data-7.html#cb215-49" tabindex="-1"></a>    <span class="fu">mat.write</span>(etf_data, ret.file, <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, F)</span></code></pre></div>
 <p>Below shows a snippet of what the output file contains:</p>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">

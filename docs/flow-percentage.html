@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>EPFR Data &amp; Filters | EPFR Strategy Notebooks</title>
+  <title>Flow-Percentage | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="EPFR Data &amp; Filters | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="Flow-Percentage | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="EPFR Data &amp; Filters | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="Flow-Percentage | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-functions.html"/>
-<link rel="next" href="video-explanations.html"/>
+<link rel="prev" href="quick-start.html"/>
+<link rel="next" href="api-multi-asset-region-strategy.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -148,12 +148,15 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-date-format"><i class="fa fa-check"></i>API Date Format</a></li>
 <li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#supplemental-libraries"><i class="fa fa-check"></i>Supplemental Libraries</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html"><i class="fa fa-check"></i>API Flow-Percentage</a>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html"><i class="fa fa-check"></i>Flow-Percentage</a>
 <ul>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-region-strategy"><i class="fa fa-check"></i>API Multi-Asset Region Strategy</a></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-fi-strategy"><i class="fa fa-check"></i>API Multi-Asset FI Strategy</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#api-country-allocations"><i class="fa fa-check"></i>API Country Allocations</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#api-fund-flows"><i class="fa fa-check"></i>API Fund Flows</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#calculating-flow-percentage-country"><i class="fa fa-check"></i>Calculating Flow-Percentage Country</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="api-multi-asset-region-strategy.html"><a href="api-multi-asset-region-strategy.html"><i class="fa fa-check"></i>API Multi Asset Region Strategy</a></li>
+<li class="chapter" data-level="" data-path="multi-asset-fi-strategy.html"><a href="multi-asset-fi-strategy.html"><i class="fa fa-check"></i>Multi Asset FI Strategy</a></li>
 <li class="chapter" data-level="" data-path="api-dictionaries.html"><a href="api-dictionaries.html"><i class="fa fa-check"></i>API Dictionaries</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i>EPFR.r Library</a>
@@ -415,31 +418,204 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="epfr-data-filters" class="section level1 unnumbered hasAnchor">
-<h1>EPFR Data &amp; Filters<a href="epfr-data-filters.html#epfr-data-filters" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>EPFR has an extensive list of over two dozen filters that can be applied to our data sets, therefore the signals we can get can be fine-tuned.</p>
-<p>For example EPFR data can be filtered by:</p>
+<div id="flow-percentage" class="section level2 unnumbered hasAnchor">
+<h2>Flow-Percentage<a href="flow-percentage.html#flow-percentage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This chapter will cover recreating daily percentage flows for some of EPFR’s macro strategies, by retrieving data via the API. <br></p>
+<p><a href="r%20downloads/API_examples.r">Download the R Script source for this chapter</a></p>
+<div id="api-flow-percentage-country-strategy" class="section level3 unnumbered hasAnchor">
+<h3>API Flow-Percentage Country Strategy<a href="flow-percentage.html#api-flow-percentage-country-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Flow-Percentage Country Strategy is an equity-based rotation strategy which ranks different countries across a customized universe of both developed and emerging markets. This approach uses the stated allocations of equity funds with a cross-border focus to calculate the percentage flow for each country. <br></p>
+<p>More information about this strategy can be found under <a href="flow-percentage-country-strategy.html#flow-percentage-country-strategy">Flow-Percentage Country Strategy</a>.<br><br></p>
+<p>We will be recreating the country percentage flow data across all flow dates corresponding to one monthly allocation date. <br></p>
+<p>Both databases use the same function epfr.get.reportid to create the report which returns data. <br>
+Full documentation for the parameters of epfr.get.reportid can be in the <a href="https://developer.isimarkets.com/en/docs/epfr/api-v2/r/full-guide">API documentation</a></p>
+<p><em>More about available filters, asset classes, and return value categories call the api dictionaries <a href="https://developer.isimarkets.com/en/docs/epfr/api-v2/r/quick-examples/get-dictionary-filters">available here</a> </em><br></p>
+<p>The steps to recreating the flow-percentage country strategy are as follows</p>
 <ul>
-<li><a href="https://vimeo.com/802705702">Asset class focus</a>: ability to select equity mandate, bond mandate, multi-asset mandate, balanced mandate, money market funds, and alternative funds.</li>
-<li><a href="https://vimeo.com/802703225">Fund type</a>: ability to separate by active versus passive, and ETF versus mutual funds.</li>
-<li><a href="https://vimeo.com/802701861">Investor type</a>: ability to separate retail funds (&lt;100,000 USD investment or Mutual Fund) from institutional funds (&gt;100,000 USD investment or ETF).</li>
-<li><a href="https://vimeo.com/802704377">Fund domicile or geographic focus</a>: domicile refers to where the fund is based and where it is registered. Geographic focus refers to the assets that are bought within the fund.</li>
-<li><a href="https://vimeo.com/802708072">Currency of flows</a>: allows you to filter by the currency-type share class the fund denominates in, regardless of the domicile or location of the investment.</li>
-<li><a href="https://vimeo.com/802706613">Theme</a>: allows you to segment funds that invest in specific themes. These can include different commodities, bear/leverage, SRI/ESG, Sharia, Frontier, MLP, Dividend, Insurance, CIT, Crypto, or Hedge Funds.</li>
-<li><a href="https://vimeo.com/802710659">Duration</a>: refers to specific mandated maturities of bond funds.</li>
-<li><a href="https://vimeo.com/802711983">Style</a>: on the equities’ side, it ranges from the traditional blend, growth, and value mandate style to splitting out market caps.</li>
-<li><a href="https://vimeo.com/802715830">Sector</a>: allows you to filter for sector specific funds (ex: energy, real estate, health care, technology).</li>
+<li>Collect all equity country allocations</li>
+<li>Collect all cross-border equity fund flows</li>
+<li>Subset to funds reporting both allocations and fund flows</li>
+<li>Scale monthly country allocations against daily flow/AuM for each fund</li>
+<li>Divide the scaled flow by the scaled AuM to get the flow percentage for each country</li>
 </ul>
-<!-- * [Individual managers](https://vimeo.com/802710080): ability to separate aggregate flow data into individual manager buckets -->
-<p><em>More definitions can be found in the FAQ section on EPFR’s UI</em></p>
+</div>
+<div id="api-country-allocations" class="section level3 unnumbered hasAnchor">
+<h3>API Country Allocations<a href="flow-percentage.html#api-country-allocations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Retrieve the country allocations for one month for all asset classes contained in the country allocations database</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="flow-percentage.html#cb15-1" tabindex="-1"></a>alloc_month <span class="ot">&lt;-</span> <span class="st">&quot;202505&quot;</span></span>
+<span id="cb15-2"><a href="flow-percentage.html#cb15-2" tabindex="-1"></a>date <span class="ot">&lt;-</span> <span class="fu">flow_to_api_date</span>(<span class="fu">yyyymm.to.day</span>(alloc_month))</span>
+<span id="cb15-3"><a href="flow-percentage.html#cb15-3" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="flow-percentage.html#cb15-4" tabindex="-1"></a>all_acs <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">epfr.get.dictionary.assetclasses</span>(<span class="st">&quot;CA&quot;</span>)<span class="sc">$</span>data <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="flow-percentage.html#cb15-5" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">&quot;Equity&quot;</span>, name)) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(id) <span class="sc">%&gt;%</span> <span class="fu">as.list</span>()) <span class="co"># ALL AVALIABLE ASSET CLASSES</span></span>
+<span id="cb15-6"><a href="flow-percentage.html#cb15-6" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="flow-percentage.html#cb15-7" tabindex="-1"></a>report_ac <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportid</span>(<span class="at">dataset =</span> <span class="st">&quot;CA&quot;</span>, </span>
+<span id="cb15-8"><a href="flow-percentage.html#cb15-8" tabindex="-1"></a>                            <span class="at">from_date =</span> date, </span>
+<span id="cb15-9"><a href="flow-percentage.html#cb15-9" tabindex="-1"></a>                            <span class="at">to_date =</span> date, </span>
+<span id="cb15-10"><a href="flow-percentage.html#cb15-10" tabindex="-1"></a>                            <span class="at">asset_classes =</span> all_acs, </span>
+<span id="cb15-11"><a href="flow-percentage.html#cb15-11" tabindex="-1"></a>                            <span class="at">frequency =</span>  <span class="st">&quot;Monthly&quot;</span>, </span>
+<span id="cb15-12"><a href="flow-percentage.html#cb15-12" tabindex="-1"></a>                            <span class="at">level =</span> <span class="dv">2</span>, <span class="co"># FUND LEVEL</span></span>
+<span id="cb15-13"><a href="flow-percentage.html#cb15-13" tabindex="-1"></a>                            <span class="at">categories =</span> <span class="fu">list</span>(<span class="dv">85</span>), <span class="co"># FUND ID</span></span>
+<span id="cb15-14"><a href="flow-percentage.html#cb15-14" tabindex="-1"></a>                            <span class="at">average_type =</span> <span class="dv">1</span>, </span>
+<span id="cb15-15"><a href="flow-percentage.html#cb15-15" tabindex="-1"></a>                            <span class="at">allocation_ids =</span> <span class="fu">as.list</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">187</span>)), <span class="co"># ALL COUNTRIES</span></span>
+<span id="cb15-16"><a href="flow-percentage.html#cb15-16" tabindex="-1"></a>                            <span class="at">assets =</span> T, </span>
+<span id="cb15-17"><a href="flow-percentage.html#cb15-17" tabindex="-1"></a>                            <span class="at">universal_filters =</span> <span class="cn">NULL</span>,</span>
+<span id="cb15-18"><a href="flow-percentage.html#cb15-18" tabindex="-1"></a>                            <span class="at">equity_filters =</span> <span class="cn">NULL</span>,</span>
+<span id="cb15-19"><a href="flow-percentage.html#cb15-19" tabindex="-1"></a>                            <span class="at">bond_filters =</span> <span class="cn">NULL</span>,</span>
+<span id="cb15-20"><a href="flow-percentage.html#cb15-20" tabindex="-1"></a>                            <span class="at">alternative_filters =</span> <span class="cn">NULL</span>)</span></code></pre></div>
+<p>After the report ID is created, wait for report’s completion, then return the result.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="flow-percentage.html#cb16-1" tabindex="-1"></a>report_id_ac <span class="ot">&lt;-</span> report_ac<span class="sc">$</span>data<span class="sc">$</span>reportId</span>
+<span id="cb16-2"><a href="flow-percentage.html#cb16-2" tabindex="-1"></a><span class="fu">wait_for_completion</span>(report_id_ac, <span class="st">&quot;CA&quot;</span>, <span class="at">inital_time_offset =</span> <span class="dv">20</span>, <span class="at">time_offset =</span> <span class="dv">10</span>) </span>
+<span id="cb16-3"><a href="flow-percentage.html#cb16-3" tabindex="-1"></a>report_result_ca <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportoutput</span>(<span class="st">&quot;CA&quot;</span>, report_id_ac) </span></code></pre></div>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 20&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 20 seconds taken&quot;</code></pre>
+<p>Transform data such that there is a column of Fund Ids and the rest of columns are the country allocations for each fund in the data frame.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="flow-percentage.html#cb19-1" tabindex="-1"></a>curr_alloc_data <span class="ot">&lt;-</span> report_result_ca <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="flow-percentage.html#cb19-2" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(Date, Fund, <span class="st">`</span><span class="at">Total Net Assets</span><span class="st">`</span>, <span class="st">`</span><span class="at">Asset Class</span><span class="st">`</span>, Filters)) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="flow-percentage.html#cb19-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
+<span id="cb19-4"><a href="flow-percentage.html#cb19-4" tabindex="-1"></a>    <span class="at">.cols =</span> <span class="sc">-</span><span class="fu">c</span>(FundID),</span>
+<span id="cb19-5"><a href="flow-percentage.html#cb19-5" tabindex="-1"></a>    <span class="at">.fns =</span> <span class="sc">~</span> . <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb19-6"><a href="flow-percentage.html#cb19-6" tabindex="-1"></a>  ))</span>
+<span id="cb19-7"><a href="flow-percentage.html#cb19-7" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="flow-percentage.html#cb19-8" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(curr_alloc_data))</span>
+<span id="cb19-9"><a href="flow-percentage.html#cb19-9" tabindex="-1"></a><span class="fu">print</span>(curr_alloc_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(FundID, Australia, Brazil, China, USA) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>))</span></code></pre></div>
+<p>TEMP create table output</p>
+<pre><code>## [1] 1745  187</code></pre>
+<pre><code>## Selecting by USA</code></pre>
+<pre><code>##    FundID Australia Brazil    China      USA
+## 1   10959  0.000000      0 0.000000 0.766340
+## 2   78120  0.000000      0 0.000000 0.768722
+## 3    3701  0.000000      0 0.000000 0.819344
+## 4   88963  0.008400      0 0.000000 0.876300
+## 5   50111  0.013707      0 0.000585 0.805743
+## 6   15342  0.000000      0 0.000000 0.762000
+## 7   90008  0.000000      0 0.000000 0.982066
+## 8   13663  0.004851      0 0.000000 0.844482
+## 9    5168  0.004182      0 0.013083 0.784196
+## 10  39696  0.000000      0 0.000356 0.765399</code></pre>
+</div>
+<div id="api-fund-flows" class="section level3 unnumbered hasAnchor">
+<h3>API Fund Flows<a href="flow-percentage.html#api-fund-flows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Next, retrieve the fund flows for all cross border funds which report allocations data. To do this we will be querying all funds which have a cross border funds then filtering the dataframe for fund ids contained in the allocations dataframe.</p>
+<p>Collect the start and end flow dates for the chosen allocation month.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="flow-percentage.html#cb23-1" tabindex="-1"></a>flow_dates <span class="ot">&lt;-</span> <span class="fu">flowdate.ex.AllocMo</span>(alloc_month)</span>
+<span id="cb23-2"><a href="flow-percentage.html#cb23-2" tabindex="-1"></a>start_date_api <span class="ot">&lt;-</span> <span class="fu">flow_to_api_date</span>(flow_dates[<span class="dv">1</span>]) </span>
+<span id="cb23-3"><a href="flow-percentage.html#cb23-3" tabindex="-1"></a>end_date_api <span class="ot">&lt;-</span> <span class="fu">flow_to_api_date</span>(flow_dates[<span class="fu">length</span>(flow_dates)])</span></code></pre></div>
+<p>To get the cross border fund asset classes use the classif file located at TEMP.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="flow-percentage.html#cb24-1" tabindex="-1"></a>classif_geoid <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(<span class="at">x=</span><span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Dropbox</span><span class="sc">\\</span><span class="st">Quantitative Research</span><span class="sc">\\</span><span class="st">Concept</span><span class="sc">\\</span><span class="st">New Model Concept</span><span class="sc">\\</span><span class="st">General</span><span class="sc">\\</span><span class="st">parameters</span><span class="sc">\\</span><span class="st">classif-GeoId.txt&quot;</span>, <span class="at">y=</span><span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span>
+<span id="cb24-2"><a href="flow-percentage.html#cb24-2" tabindex="-1"></a>xborder <span class="ot">&lt;-</span> classif_geoid <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="flow-percentage.html#cb24-3" tabindex="-1"></a>  <span class="fu">filter</span>(xBord <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="flow-percentage.html#cb24-4" tabindex="-1"></a>  <span class="fu">select</span>(ApiEquityId) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="flow-percentage.html#cb24-5" tabindex="-1"></a>  <span class="fu">pull</span>()</span>
+<span id="cb24-6"><a href="flow-percentage.html#cb24-6" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="flow-percentage.html#cb24-7" tabindex="-1"></a>xborder <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;FF122001&quot;</span>, <span class="st">&quot;FF121001&quot;</span>, <span class="st">&quot;FF123001&quot;</span>, <span class="st">&quot;FF122007&quot;</span>, <span class="st">&quot;FF114004&quot;</span>, <span class="st">&quot;FF114005&quot;</span>,</span>
+<span id="cb24-8"><a href="flow-percentage.html#cb24-8" tabindex="-1"></a><span class="st">&quot;FF122008&quot;</span>, <span class="st">&quot;FF112001&quot;</span>, <span class="st">&quot;FF123002&quot;</span>, <span class="st">&quot;FF112002&quot;</span>, <span class="st">&quot;FF121004&quot;</span>, <span class="st">&quot;FF124005&quot;</span>,</span>
+<span id="cb24-9"><a href="flow-percentage.html#cb24-9" tabindex="-1"></a><span class="st">&quot;FF122012&quot;</span>, <span class="st">&quot;FF122013&quot;</span>, <span class="st">&quot;FF111004&quot;</span>)</span></code></pre></div>
+<p>Create the report id for the allocations data using the cross border ids. The report will return the fund IDs, flow USD and net assets start for each fund over the time period.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="flow-percentage.html#cb25-1" tabindex="-1"></a>report_ff <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportid</span>(<span class="at">dataset =</span> <span class="st">&quot;FF&quot;</span>, </span>
+<span id="cb25-2"><a href="flow-percentage.html#cb25-2" tabindex="-1"></a>                            <span class="at">from_date =</span> start_date_api, </span>
+<span id="cb25-3"><a href="flow-percentage.html#cb25-3" tabindex="-1"></a>                            <span class="at">to_date =</span> end_date_api,  </span>
+<span id="cb25-4"><a href="flow-percentage.html#cb25-4" tabindex="-1"></a>                            <span class="at">asset_classes =</span> xborder, </span>
+<span id="cb25-5"><a href="flow-percentage.html#cb25-5" tabindex="-1"></a>                            <span class="at">frequency =</span>  <span class="st">&quot;Daily&quot;</span>, </span>
+<span id="cb25-6"><a href="flow-percentage.html#cb25-6" tabindex="-1"></a>                            <span class="at">level =</span> <span class="dv">2</span>, </span>
+<span id="cb25-7"><a href="flow-percentage.html#cb25-7" tabindex="-1"></a>                            <span class="at">categories =</span> <span class="fu">list</span>(<span class="dv">53</span>, <span class="dv">3</span>, <span class="dv">13</span>), <span class="co">#  FUND ID, FLOW USD, NET ASSETS START </span></span>
+<span id="cb25-8"><a href="flow-percentage.html#cb25-8" tabindex="-1"></a>                            <span class="at">average_type =</span> <span class="cn">NULL</span>, </span>
+<span id="cb25-9"><a href="flow-percentage.html#cb25-9" tabindex="-1"></a>                            <span class="at">allocation_ids =</span> <span class="cn">NULL</span>, </span>
+<span id="cb25-10"><a href="flow-percentage.html#cb25-10" tabindex="-1"></a>                            <span class="at">assets =</span> <span class="cn">NULL</span>, </span>
+<span id="cb25-11"><a href="flow-percentage.html#cb25-11" tabindex="-1"></a>                            <span class="at">universal_filters =</span> <span class="cn">NULL</span>, </span>
+<span id="cb25-12"><a href="flow-percentage.html#cb25-12" tabindex="-1"></a>                            <span class="at">equity_filters =</span> <span class="cn">NULL</span>, </span>
+<span id="cb25-13"><a href="flow-percentage.html#cb25-13" tabindex="-1"></a>                            <span class="at">bond_filters =</span> <span class="cn">NULL</span>, </span>
+<span id="cb25-14"><a href="flow-percentage.html#cb25-14" tabindex="-1"></a>                            <span class="at">alternative_filters =</span> <span class="cn">NULL</span>)</span></code></pre></div>
+<p>After creating the report wait for completion</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="flow-percentage.html#cb26-1" tabindex="-1"></a>report_id_ff <span class="ot">&lt;-</span> report_ff<span class="sc">$</span>data<span class="sc">$</span>reportId</span>
+<span id="cb26-2"><a href="flow-percentage.html#cb26-2" tabindex="-1"></a><span class="fu">wait_for_completion</span>(report_id_ff, <span class="st">&quot;FF&quot;</span>, <span class="dv">30</span>, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 30&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 30 seconds taken&quot;</code></pre>
+<p>Examine the top rows of the output</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="flow-percentage.html#cb29-1" tabindex="-1"></a>report_result_ff <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportoutput</span>(<span class="st">&quot;FF&quot;</span>, report_id_ff) </span>
+<span id="cb29-2"><a href="flow-percentage.html#cb29-2" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="flow-percentage.html#cb29-3" tabindex="-1"></a>curr_flow_data <span class="ot">&lt;-</span> report_result_ff <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="flow-percentage.html#cb29-4" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(Date, FundID,<span class="st">`</span><span class="at">Flow US$ mill</span><span class="st">`</span>, <span class="st">`</span><span class="at">Total Net Assets Start</span><span class="st">`</span>))</span>
+<span id="cb29-5"><a href="flow-percentage.html#cb29-5" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="flow-percentage.html#cb29-6" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(curr_flow_data))</span>
+<span id="cb29-7"><a href="flow-percentage.html#cb29-7" tabindex="-1"></a><span class="fu">print</span>(curr_flow_data <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>## [1] 200629      4</code></pre>
+<pre><code>## Selecting by Total Net Assets Start</code></pre>
+<pre><code>##         Date FundID Flow US$ mill Total Net Assets Start
+## 1  7/22/2025  14460        0.5472               164576.2
+## 2  7/18/2025  14460        0.7913               163995.9
+## 3  7/15/2025  14460        1.1877               164019.1
+## 4  7/14/2025  14460        0.3411               163990.0
+## 5  7/11/2025  14460        0.6604               165373.9
+## 6  7/10/2025  14460        0.5022               165113.8
+## 7   7/7/2025  14460       84.7347               164311.4
+## 8   7/4/2025  14460        0.0000               164311.4
+## 9   7/3/2025  14460        1.1156               164137.9
+## 10  7/1/2025  14460        1.2995               163790.9</code></pre>
+</div>
+<div id="calculating-flow-percentage-country" class="section level3 unnumbered hasAnchor">
+<h3>Calculating Flow-Percentage Country<a href="flow-percentage.html#calculating-flow-percentage-country" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To calculate the percentage flow of a country first the country allocation weighted Fund Flows and Net Assets Start must be calculated. For each fund the daily flow and net assets start is multiplied by the monthly country allocation for that fund. After the weighted flow and net assets are calculated all funds values are summed and grouped by date.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="flow-percentage.html#cb33-1" tabindex="-1"></a><span class="co"># SCALE NET ASSETS START</span></span>
+<span id="cb33-2"><a href="flow-percentage.html#cb33-2" tabindex="-1"></a>net_asset_start <span class="ot">&lt;-</span> curr_alloc_data <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="flow-percentage.html#cb33-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">FundID =</span> <span class="fu">as.character</span>(FundID)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-4"><a href="flow-percentage.html#cb33-4" tabindex="-1"></a>  <span class="fu">inner_join</span>(curr_flow_data, <span class="at">by=</span><span class="st">&quot;FundID&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-5"><a href="flow-percentage.html#cb33-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
+<span id="cb33-6"><a href="flow-percentage.html#cb33-6" tabindex="-1"></a>    <span class="at">.cols =</span> <span class="sc">-</span><span class="fu">c</span>(Date, FundID, <span class="st">`</span><span class="at">Total Net Assets Start</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flow US$ mill</span><span class="st">`</span>),</span>
+<span id="cb33-7"><a href="flow-percentage.html#cb33-7" tabindex="-1"></a>    <span class="at">.fns =</span> <span class="sc">~</span>.<span class="sc">*</span> <span class="st">`</span><span class="at">Total Net Assets Start</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-8"><a href="flow-percentage.html#cb33-8" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(FundID, <span class="st">`</span><span class="at">Total Net Assets Start</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flow US$ mill</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-9"><a href="flow-percentage.html#cb33-9" tabindex="-1"></a>  <span class="fu">group_by</span>(Date) <span class="sc">%&gt;%</span></span>
+<span id="cb33-10"><a href="flow-percentage.html#cb33-10" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), sum))</span>
+<span id="cb33-11"><a href="flow-percentage.html#cb33-11" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="flow-percentage.html#cb33-12" tabindex="-1"></a><span class="co"># SCALE FLOW</span></span>
+<span id="cb33-13"><a href="flow-percentage.html#cb33-13" tabindex="-1"></a>flow <span class="ot">&lt;-</span> curr_alloc_data <span class="sc">%&gt;%</span></span>
+<span id="cb33-14"><a href="flow-percentage.html#cb33-14" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">FundID =</span> <span class="fu">as.character</span>(FundID)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-15"><a href="flow-percentage.html#cb33-15" tabindex="-1"></a>  <span class="fu">inner_join</span>(curr_flow_data, <span class="at">by=</span><span class="st">&quot;FundID&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb33-16"><a href="flow-percentage.html#cb33-16" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
+<span id="cb33-17"><a href="flow-percentage.html#cb33-17" tabindex="-1"></a>    <span class="at">.cols =</span> <span class="sc">-</span><span class="fu">c</span>(Date, FundID, <span class="st">`</span><span class="at">Total Net Assets Start</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flow US$ mill</span><span class="st">`</span>),</span>
+<span id="cb33-18"><a href="flow-percentage.html#cb33-18" tabindex="-1"></a>    <span class="at">.fns =</span> <span class="sc">~</span>.<span class="sc">*</span> <span class="st">`</span><span class="at">Flow US$ mill</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-19"><a href="flow-percentage.html#cb33-19" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(FundID, <span class="st">`</span><span class="at">Total Net Assets Start</span><span class="st">`</span>, <span class="st">`</span><span class="at">Flow US$ mill</span><span class="st">`</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-20"><a href="flow-percentage.html#cb33-20" tabindex="-1"></a>  <span class="fu">group_by</span>(Date) <span class="sc">%&gt;%</span></span>
+<span id="cb33-21"><a href="flow-percentage.html#cb33-21" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), sum))</span></code></pre></div>
+<p>The weighted flow for each flow date is then divided by the weighted net assets start for each date and multiplied by 100 to give the flow percentage for each country on each day.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="flow-percentage.html#cb34-1" tabindex="-1"></a><span class="co"># CALCULATE FLOW PERCENTAGE</span></span>
+<span id="cb34-2"><a href="flow-percentage.html#cb34-2" tabindex="-1"></a>flowpct <span class="ot">&lt;-</span> net_asset_start <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="flow-percentage.html#cb34-3" tabindex="-1"></a>  <span class="fu">inner_join</span>(flow, <span class="at">by=</span><span class="st">&quot;Date&quot;</span>, <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">&quot;_NAS&quot;</span>, <span class="st">&quot;_flow&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="flow-percentage.html#cb34-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
+<span id="cb34-5"><a href="flow-percentage.html#cb34-5" tabindex="-1"></a>    <span class="at">.cols =</span> <span class="fu">ends_with</span>(<span class="st">&quot;_flow&quot;</span>),</span>
+<span id="cb34-6"><a href="flow-percentage.html#cb34-6" tabindex="-1"></a>    <span class="at">.fns =</span> <span class="sc">~</span>. <span class="sc">/</span> <span class="fu">get</span>(<span class="fu">sub</span>(<span class="st">&quot;_flow$&quot;</span>, <span class="st">&quot;_NAS&quot;</span>, <span class="fu">cur_column</span>())) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb34-7"><a href="flow-percentage.html#cb34-7" tabindex="-1"></a>    <span class="at">.names =</span> <span class="st">&quot;{sub(&#39;_flow$&#39;, &#39;&#39;, .col)}_flowpct&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-8"><a href="flow-percentage.html#cb34-8" tabindex="-1"></a>  <span class="fu">select</span>(Date, <span class="fu">ends_with</span>(<span class="st">&quot;_flowpct&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-9"><a href="flow-percentage.html#cb34-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">chrdate_to_flowdate_vec</span>(Date)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-10"><a href="flow-percentage.html#cb34-10" tabindex="-1"></a>  <span class="fu">arrange</span>(Date) <span class="sc">%&gt;%</span></span>
+<span id="cb34-11"><a href="flow-percentage.html#cb34-11" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">column_to_rownames</span>(<span class="at">var =</span> <span class="st">&quot;Date&quot;</span>)</span>
+<span id="cb34-12"><a href="flow-percentage.html#cb34-12" tabindex="-1"></a></span>
+<span id="cb34-13"><a href="flow-percentage.html#cb34-13" tabindex="-1"></a><span class="fu">names</span>(flowpct) <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;_flowpct$&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="fu">names</span>(flowpct))</span>
+<span id="cb34-14"><a href="flow-percentage.html#cb34-14" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="flow-percentage.html#cb34-15" tabindex="-1"></a><span class="fu">print</span>(flowpct <span class="sc">%&gt;%</span> <span class="fu">select</span>(Australia, Brazil, China, USA) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>## Selecting by USA</code></pre>
+<pre><code>##           Australia       Brazil       China        USA
+## 20250624 0.02814600  0.010621314  0.01542774 0.03011692
+## 20250627 0.07079336  0.056281552  0.06516586 0.02489238
+## 20250701 0.04896777  0.084789350  0.07174432 0.07218193
+## 20250703 0.03882079  0.139505120  0.16125639 0.12071612
+## 20250709 0.07453717  0.035208509  0.03830671 0.01530975
+## 20250711 0.06000156  0.009118258  0.02200542 0.11023197
+## 20250714 0.02804328 -0.044157245 -0.02217098 0.02310832
+## 20250715 0.04548059  0.026941196  0.05393027 0.02077438
+## 20250718 0.03702452  0.036319201  0.07681542 0.04847699
+## 20250721 0.03361252  0.013082389  0.05924426 0.02805010</code></pre>
+<p>Save resulting data frame to disk</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="flow-percentage.html#cb37-1" tabindex="-1"></a>dir <span class="ot">&lt;-</span> path to your working directory</span>
+<span id="cb37-2"><a href="flow-percentage.html#cb37-2" tabindex="-1"></a><span class="fu">mat.write</span>(flowpct, <span class="fu">paste0</span>(dir, <span class="st">&quot;FlowCtryPct_&quot;</span>, alloc_month ,<span class="st">&quot;.csv&quot;</span>))</span></code></pre></div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="video-explanations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="quick-start.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="api-multi-asset-region-strategy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -470,7 +646,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-Filters.Rmd",
+    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-EPFRAPI.Rmd",
     "text": "Suggest an edit"
   },
   "history": {

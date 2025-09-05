@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>EPFR Data &amp; Filters | EPFR Strategy Notebooks</title>
+  <title>API Dictionaries | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="EPFR Data &amp; Filters | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="API Dictionaries | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="EPFR Data &amp; Filters | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="API Dictionaries | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-functions.html"/>
-<link rel="next" href="video-explanations.html"/>
+<link rel="prev" href="api-flow-percentage.html"/>
+<link rel="next" href="epfr.r-library.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -415,31 +415,88 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="epfr-data-filters" class="section level1 unnumbered hasAnchor">
-<h1>EPFR Data &amp; Filters<a href="epfr-data-filters.html#epfr-data-filters" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>EPFR has an extensive list of over two dozen filters that can be applied to our data sets, therefore the signals we can get can be fine-tuned.</p>
-<p>For example EPFR data can be filtered by:</p>
-<ul>
-<li><a href="https://vimeo.com/802705702">Asset class focus</a>: ability to select equity mandate, bond mandate, multi-asset mandate, balanced mandate, money market funds, and alternative funds.</li>
-<li><a href="https://vimeo.com/802703225">Fund type</a>: ability to separate by active versus passive, and ETF versus mutual funds.</li>
-<li><a href="https://vimeo.com/802701861">Investor type</a>: ability to separate retail funds (&lt;100,000 USD investment or Mutual Fund) from institutional funds (&gt;100,000 USD investment or ETF).</li>
-<li><a href="https://vimeo.com/802704377">Fund domicile or geographic focus</a>: domicile refers to where the fund is based and where it is registered. Geographic focus refers to the assets that are bought within the fund.</li>
-<li><a href="https://vimeo.com/802708072">Currency of flows</a>: allows you to filter by the currency-type share class the fund denominates in, regardless of the domicile or location of the investment.</li>
-<li><a href="https://vimeo.com/802706613">Theme</a>: allows you to segment funds that invest in specific themes. These can include different commodities, bear/leverage, SRI/ESG, Sharia, Frontier, MLP, Dividend, Insurance, CIT, Crypto, or Hedge Funds.</li>
-<li><a href="https://vimeo.com/802710659">Duration</a>: refers to specific mandated maturities of bond funds.</li>
-<li><a href="https://vimeo.com/802711983">Style</a>: on the equities’ side, it ranges from the traditional blend, growth, and value mandate style to splitting out market caps.</li>
-<li><a href="https://vimeo.com/802715830">Sector</a>: allows you to filter for sector specific funds (ex: energy, real estate, health care, technology).</li>
-</ul>
-<!-- * [Individual managers](https://vimeo.com/802710080): ability to separate aggregate flow data into individual manager buckets -->
-<p><em>More definitions can be found in the FAQ section on EPFR’s UI</em></p>
+<div id="api-dictionaries" class="section level2 unnumbered hasAnchor">
+<h2>API Dictionaries<a href="api-dictionaries.html#api-dictionaries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To see all available on asset classes, return values, and filters provided by the API the user can call the dictionary API functions. These examples are not exhaustive, and more dictionary functions can be found in the EPFR <a href="https://developer.isimarkets.com/en/docs/epfr/api-v2/r/full-guide">API documentation</a><br></p>
+<p>To see a database’s asset classes and categories call the dictionary function passing the database’s ID in for a parameter. Below are examples for the fund flows and country allocations databases.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="api-dictionaries.html#cb71-1" tabindex="-1"></a>acs_ff <span class="ot">&lt;-</span> <span class="fu">epfr.get.dictionary.assetclasses</span>(<span class="st">&quot;FF&quot;</span>)<span class="sc">$</span>data </span>
+<span id="cb71-2"><a href="api-dictionaries.html#cb71-2" tabindex="-1"></a>cs_ff <span class="ot">&lt;-</span> <span class="fu">epfr.get.dictionary.categories</span>(<span class="st">&quot;FF&quot;</span>)<span class="sc">$</span>data</span>
+<span id="cb71-3"><a href="api-dictionaries.html#cb71-3" tabindex="-1"></a></span>
+<span id="cb71-4"><a href="api-dictionaries.html#cb71-4" tabindex="-1"></a>acs_ca <span class="ot">&lt;-</span> <span class="fu">epfr.get.dictionary.assetclasses</span>(<span class="st">&quot;CA&quot;</span>)<span class="sc">$</span>data </span>
+<span id="cb71-5"><a href="api-dictionaries.html#cb71-5" tabindex="-1"></a>cs_ca <span class="ot">&lt;-</span> <span class="fu">epfr.get.dictionary.categories</span>(<span class="st">&quot;CA&quot;</span>)<span class="sc">$</span>data</span></code></pre></div>
+<p>Sample rows of the fund flows asset classes dictionary table (all USA asset classes).</p>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
+id
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
+name
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+FF113002
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+USA-North America-FF-Equity
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+FF213002
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+USA-North America-FF-Bond
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+FF313002
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+USA-North America-FF-Balanced
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+FF413002
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+USA-North America-FF-Money Market
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+FF513002
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+USA-North America-FF-Alternative
+</td>
+</tr>
+</tbody>
+</table>
+<p>For fund filters call the dictionary function associated with the category of filters you are interested in.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="api-dictionaries.html#cb72-1" tabindex="-1"></a>ufs <span class="ot">&lt;-</span> <span class="fu">epfr.get.dictionary.universalfilters</span>()<span class="sc">$</span>data</span>
+<span id="cb72-2"><a href="api-dictionaries.html#cb72-2" tabindex="-1"></a></span>
+<span id="cb72-3"><a href="api-dictionaries.html#cb72-3" tabindex="-1"></a>efs <span class="ot">&lt;-</span> <span class="fu">epfr.get.dictionary.equityfilters</span>()<span class="sc">$</span>data  </span>
+<span id="cb72-4"><a href="api-dictionaries.html#cb72-4" tabindex="-1"></a>bfs <span class="ot">&lt;-</span> <span class="fu">epfr.get.dictionary.bondfilters</span>()<span class="sc">$</span>data</span>
+<span id="cb72-5"><a href="api-dictionaries.html#cb72-5" tabindex="-1"></a>afs <span class="ot">&lt;-</span> <span class="fu">epfr.get.dictionary.alternativefilters</span>()  </span></code></pre></div>
+<p>For other API variables which are indexed to IDs there will be a get dictionary function associated with them. This function returns all the countries available for the country allocations database.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="api-dictionaries.html#cb73-1" tabindex="-1"></a>ctry <span class="ot">&lt;-</span> <span class="fu">epfr.get.dictionary.countries</span>()<span class="sc">$</span>data</span></code></pre></div>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="video-explanations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="api-flow-percentage.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="epfr.r-library.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -470,7 +527,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-Filters.Rmd",
+    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-EPFRAPI.Rmd",
     "text": "Suggest an edit"
   },
   "history": {

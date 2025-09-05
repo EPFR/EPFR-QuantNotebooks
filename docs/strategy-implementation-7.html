@@ -137,6 +137,25 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="" data-path="epfr-stock-factors.html"><a href="epfr-stock-factors.html#monthly-factors"><i class="fa fa-check"></i>Monthly Factors:</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="epfr-api.html"><a href="epfr-api.html"><i class="fa fa-check"></i>EPFR API</a>
+<ul>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html"><i class="fa fa-check"></i>Quick Start</a>
+<ul>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-install"><i class="fa fa-check"></i>API Install</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-login"><i class="fa fa-check"></i>API Login</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-call"><i class="fa fa-check"></i>API Call</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#example-api-call"><i class="fa fa-check"></i>Example API call</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-date-format"><i class="fa fa-check"></i>API Date Format</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#supplemental-libraries"><i class="fa fa-check"></i>Supplemental Libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html"><i class="fa fa-check"></i>API Flow-Percentage</a>
+<ul>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-region-strategy"><i class="fa fa-check"></i>API Multi-Asset Region Strategy</a></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-fi-strategy"><i class="fa fa-check"></i>API Multi-Asset FI Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="api-dictionaries.html"><a href="api-dictionaries.html"><i class="fa fa-check"></i>API Dictionaries</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i>EPFR.r Library</a>
 <ul>
 <li class="chapter" data-level="" data-path="set-up.html"><a href="set-up.html"><i class="fa fa-check"></i>Set-up</a></li>
@@ -399,39 +418,39 @@ code span.wa { font-style: italic; } /* Warning */
 <div id="strategy-implementation-7" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> Strategy Implementation<a href="strategy-implementation-7.html#strategy-implementation-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To implementing this strategy, begin by reading in the flow files to our <em>R studio</em> workspace.</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="strategy-implementation-7.html#cb143-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># GET RGN FLOW PERCENTAGE C:\\EPFR\\PremDaily\\FloPctBond-US-PremDaily700.csv</span></span>
-<span id="cb143-2"><a href="strategy-implementation-7.html#cb143-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file) <span class="co"># TOTAL RETURN INDEX C:\\EPFR\\returns\\USBond_ETFS.txt</span></span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="strategy-implementation-7.html#cb216-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(flow.file) <span class="co"># GET RGN FLOW PERCENTAGE C:\\EPFR\\PremDaily\\FloPctBond-US-PremDaily700.csv</span></span>
+<span id="cb216-2"><a href="strategy-implementation-7.html#cb216-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(ret.file) <span class="co"># TOTAL RETURN INDEX C:\\EPFR\\returns\\USBond_ETFS.txt</span></span></code></pre></div>
 <p>There is one date where we do not have daily flows published before 7am available which is on 20 Feb. 2023. For this date we will use the following code to fill in the missing day of data with the previous day’s flows, with the help of functions from <code>library('EPFR.r')</code>.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="strategy-implementation-7.html#cb144-1" tabindex="-1"></a><span class="co"># MISSING FLOW DATES (GETS PRIOR-DAY&#39;S FLOW PERCENTAGE)</span></span>
-<span id="cb144-2"><a href="strategy-implementation-7.html#cb144-2" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]]</span>
-<span id="cb144-3"><a href="strategy-implementation-7.html#cb144-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">map.rname</span>(x, <span class="fu">flowdate.seq</span>(w[<span class="dv">1</span>], <span class="fu">rev</span>(w)[<span class="dv">1</span>]))</span>
-<span id="cb144-4"><a href="strategy-implementation-7.html#cb144-4" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">fcn.mat.vec</span>(fix.gaps, x, , T)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="strategy-implementation-7.html#cb217-1" tabindex="-1"></a><span class="co"># MISSING FLOW DATES (GETS PRIOR-DAY&#39;S FLOW PERCENTAGE)</span></span>
+<span id="cb217-2"><a href="strategy-implementation-7.html#cb217-2" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]]</span>
+<span id="cb217-3"><a href="strategy-implementation-7.html#cb217-3" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">map.rname</span>(x, <span class="fu">flowdate.seq</span>(w[<span class="dv">1</span>], <span class="fu">rev</span>(w)[<span class="dv">1</span>]))</span>
+<span id="cb217-4"><a href="strategy-implementation-7.html#cb217-4" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">fcn.mat.vec</span>(fix.gaps, x, , T)</span></code></pre></div>
 <div id="total-return-index-6" class="section level3 hasAnchor" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> Total Return Index<a href="strategy-implementation-7.html#total-return-index-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We will then import our two total return files and modify them to become one data frame of total index returns indexed so that time moves forward. To do this, we will use the function <code>ret.to.idx()</code> from <code>library('EPFR.r')</code>. We will also use the functions <code>map.rname()</code> to ensure the row names of the matrices line up with our flow file, and <code>ret.idx.gaps.fix()</code> to replace any NA values. Please refer to the library documentation for the complete list of parameters for these functions (tip: <code>?ret.to.idx()</code>,<code>?ret.idx.gaps.fix()</code> ).</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="strategy-implementation-7.html#cb145-1" tabindex="-1"></a><span class="co"># TOTAL-RETURN INDEX</span></span>
-<span id="cb145-2"><a href="strategy-implementation-7.html#cb145-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) </span>
-<span id="cb145-3"><a href="strategy-implementation-7.html#cb145-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="strategy-implementation-7.html#cb218-1" tabindex="-1"></a><span class="co"># TOTAL-RETURN INDEX</span></span>
+<span id="cb218-2"><a href="strategy-implementation-7.html#cb218-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.to.idx</span>(<span class="fu">map.rname</span>(y, <span class="fu">dimnames</span>(x)[[<span class="dv">1</span>]])) </span>
+<span id="cb218-3"><a href="strategy-implementation-7.html#cb218-3" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">ret.idx.gaps.fix</span>(y)</span></code></pre></div>
 </div>
 <div id="ranking-asset-classes-1" class="section level3 hasAnchor" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Ranking Asset Classes<a href="strategy-implementation-7.html#ranking-asset-classes-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Next, we sort each of the asset classes in our universe into five equal bins based on their previous days percentage flow throughout history. To do this, we will use the function from <code>library('EPFR.r')</code>, called <code>bbk()</code>. This function will output a standardized backtest result.</p>
 <p>The <code>bbk()</code> function requires our daily percentage flow data compounded over a desired period and the total return index data. Please refer to the library documentation for the complete list of parameters of this function (tip: <code>?bbk()</code>).</p>
 <p>The first parameter we add is the number of bins we want to use. For our case, we want to use 5 because our strategy is to go long the top fifth and short the bottom fifth.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="strategy-implementation-7.html#cb146-1" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="strategy-implementation-7.html#cb219-1" tabindex="-1"></a>nBin <span class="ot">&lt;-</span> <span class="dv">5</span> <span class="co"># NUMBER OF BINS</span></span></code></pre></div>
 <p>EPFR’s Premium Daily flow data is published the next day before the market open, we will only need to account for a 1-day delay in our model.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="strategy-implementation-7.html#cb147-1" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data is available before market opens</span></span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="strategy-implementation-7.html#cb220-1" tabindex="-1"></a>delay <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># DELAY IN KNOWING DATA (IN WEEKDAYS) - data is available before market opens</span></span></code></pre></div>
 <p>It is also important to note that this model will be re-balanced daily. The function requires an input for the day of the week to trade, we will put <code>NULL</code>.</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="strategy-implementation-7.html#cb148-1" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (NULL = DAILY)</span></span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="strategy-implementation-7.html#cb221-1" tabindex="-1"></a>doW <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># DAY OF THE WEEK YOU WILL TRADE ON (NULL = DAILY)</span></span></code></pre></div>
 <p>Additionally, we want to evaluate the performance of the signal based on our holding period. The user can input the return horizons that they are interested in here. For this model, we define a return horizon for daily rebalancing or a 1 day holding period.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="strategy-implementation-7.html#cb149-1" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="strategy-implementation-7.html#cb222-1" tabindex="-1"></a>hz <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>) <span class="co"># RETURN HORIZON (IN WEEKDAYS) - holding periods</span></span></code></pre></div>
 <p>Now that we have defined all of our inputs, to rank the asset classes into quintiles by their 1-day percentage flow, we call the function <code>bbk()</code> for a one-week holding period.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="strategy-implementation-7.html#cb150-1" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="strategy-implementation-7.html#cb223-1" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)</span></code></pre></div>
 </div>
 <div id="model-8" class="section level3 hasAnchor" number="8.2.3">
 <h3><span class="header-section-number">8.2.3</span> Model<a href="strategy-implementation-7.html#model-8" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>1-day flow percentage ranked into quintiles (computed only where forward returns are available)</strong></p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="strategy-implementation-7.html#cb151-1" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="strategy-implementation-7.html#cb224-1" tabindex="-1"></a>z[[<span class="st">&quot;bins&quot;</span>]]</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
@@ -769,7 +788,7 @@ NA
 </table>
 </div>
 <p><strong>Quintile returns over the equal-weight universe</strong></p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="strategy-implementation-7.html#cb152-1" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="strategy-implementation-7.html#cb225-1" tabindex="-1"></a>z[[<span class="st">&quot;rets&quot;</span>]]</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -963,7 +982,7 @@ uRet
 <div id="performance-7" class="section level3 hasAnchor" number="8.2.4">
 <h3><span class="header-section-number">8.2.4</span> Performance<a href="strategy-implementation-7.html#performance-7" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Annualized mean one-day returns</strong></p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="strategy-implementation-7.html#cb153-1" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="strategy-implementation-7.html#cb226-1" tabindex="-1"></a><span class="fu">bbk</span>(x, y, <span class="dv">1</span>, hz[<span class="dv">1</span>], nBin, doW, T, <span class="dv">0</span>, delay)<span class="sc">$</span>annSumm <span class="co"># DISPLAY CALENDAR-YEAR RETURNS</span></span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>

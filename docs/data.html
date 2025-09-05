@@ -137,6 +137,25 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="" data-path="epfr-stock-factors.html"><a href="epfr-stock-factors.html#monthly-factors"><i class="fa fa-check"></i>Monthly Factors:</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="epfr-api.html"><a href="epfr-api.html"><i class="fa fa-check"></i>EPFR API</a>
+<ul>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html"><i class="fa fa-check"></i>Quick Start</a>
+<ul>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-install"><i class="fa fa-check"></i>API Install</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-login"><i class="fa fa-check"></i>API Login</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-call"><i class="fa fa-check"></i>API Call</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#example-api-call"><i class="fa fa-check"></i>Example API call</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-date-format"><i class="fa fa-check"></i>API Date Format</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#supplemental-libraries"><i class="fa fa-check"></i>Supplemental Libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html"><i class="fa fa-check"></i>API Flow-Percentage</a>
+<ul>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-region-strategy"><i class="fa fa-check"></i>API Multi-Asset Region Strategy</a></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-fi-strategy"><i class="fa fa-check"></i>API Multi-Asset FI Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="api-dictionaries.html"><a href="api-dictionaries.html"><i class="fa fa-check"></i>API Dictionaries</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i>EPFR.r Library</a>
 <ul>
 <li class="chapter" data-level="" data-path="set-up.html"><a href="set-up.html"><i class="fa fa-check"></i>Set-up</a></li>
@@ -1282,8 +1301,8 @@ GLOFIX
 <p><em>note: all strategy files represent indicator as a % figure, i.e. 0.1 is 0.1%</em></p>
 <hr />
 <p>For convenience, save the paths to the flow files you choose to use as <code>flow.file.rgn</code> and <code>flow.file.FI</code> respectively. Example shown below:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data.html#cb15-1" tabindex="-1"></a>flow.file.rgn <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily</span><span class="sc">\\</span><span class="st">MultiAsset-Rgn-daily.csv&quot;</span></span>
-<span id="cb15-2"><a href="data.html#cb15-2" tabindex="-1"></a>flow.file.FI <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily</span><span class="sc">\\</span><span class="st">MultiAsset-FI-daily.csv&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="data.html#cb88-1" tabindex="-1"></a>flow.file.rgn <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily</span><span class="sc">\\</span><span class="st">MultiAsset-Rgn-daily.csv&quot;</span></span>
+<span id="cb88-2"><a href="data.html#cb88-2" tabindex="-1"></a>flow.file.FI <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily</span><span class="sc">\\</span><span class="st">MultiAsset-FI-daily.csv&quot;</span></span></code></pre></div>
 <!-- --- -->
 <!-- To follow along the user can download the _Multi-Asset strategy_ files named `MultiAsset-Rgn-daily.csv` and `MultiAsset-FI-daily.csv` which are located on the users ftp under the folder `Strategies/daily` and store in your local folder `EPFR`. -->
 <!-- To follow along the user can download the _Multi-Asset strategy_ files using the code below, which contains ftp functions ( \@ref(ftp) ) from `library('EPFR.r')`:  -->
@@ -1757,8 +1776,8 @@ GLOFIX
 </div>
 <hr />
 <p>For convenience, save the paths to the return files you choose to use as <code>ret.file.rgn</code> and <code>ret.file.FI</code> respectively. Example shown below:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data.html#cb16-1" tabindex="-1"></a>ret.file.rgn <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-MultiAsset-Rgn-daily.csv&quot;</span></span>
-<span id="cb16-2"><a href="data.html#cb16-2" tabindex="-1"></a>ret.file.FI <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-MultiAsset-FI-daily.csv&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="data.html#cb89-1" tabindex="-1"></a>ret.file.rgn <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-MultiAsset-Rgn-daily.csv&quot;</span></span>
+<span id="cb89-2"><a href="data.html#cb89-2" tabindex="-1"></a>ret.file.FI <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">PsuedoReturns-MultiAsset-FI-daily.csv&quot;</span></span></code></pre></div>
 <!-- --- -->
 <!-- To follow along the user can download the _Multi-Asset strategy return_ files named `PsuedoReturns-MultiAsset-Rgn-daily.csv` and `PsuedoReturns-MultiAsset-FI-daily.csv` which are located on the users ftp under the folder `Returns/daily` and store in your local folder `EPFR`. -->
 <!-- To follow along the user can download the _Multi-Asset strategy return_ files using the code below, which contains ftp functions ( \@ref(ftp) ) from `library('EPFR.r')`:  -->

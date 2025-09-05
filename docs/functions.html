@@ -137,6 +137,25 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="" data-path="epfr-stock-factors.html"><a href="epfr-stock-factors.html#monthly-factors"><i class="fa fa-check"></i>Monthly Factors:</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="epfr-api.html"><a href="epfr-api.html"><i class="fa fa-check"></i>EPFR API</a>
+<ul>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html"><i class="fa fa-check"></i>Quick Start</a>
+<ul>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-install"><i class="fa fa-check"></i>API Install</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-login"><i class="fa fa-check"></i>API Login</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-call"><i class="fa fa-check"></i>API Call</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#example-api-call"><i class="fa fa-check"></i>Example API call</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-date-format"><i class="fa fa-check"></i>API Date Format</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#supplemental-libraries"><i class="fa fa-check"></i>Supplemental Libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html"><i class="fa fa-check"></i>API Flow-Percentage</a>
+<ul>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-region-strategy"><i class="fa fa-check"></i>API Multi-Asset Region Strategy</a></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-fi-strategy"><i class="fa fa-check"></i>API Multi-Asset FI Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="api-dictionaries.html"><a href="api-dictionaries.html"><i class="fa fa-check"></i>API Dictionaries</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i>EPFR.r Library</a>
 <ul>
 <li class="chapter" data-level="" data-path="set-up.html"><a href="set-up.html"><i class="fa fa-check"></i>Set-up</a></li>
@@ -401,127 +420,127 @@ code span.wa { font-style: italic; } /* Warning */
 <div id="file-name" class="section level3 unnumbered hasAnchor">
 <h3>File name<a href="functions.html#file-name" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The function <code>ftp.QuantFactor.name()</code> was created to automatically generate the name of the file corresponding to the stock factor being backtested, along with the file’s location within the users EPFR ftp connection.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="functions.html#cb155-1" tabindex="-1"></a>ftp.QuantFactor.name <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">w =</span> F, <span class="at">u =</span> <span class="st">&quot;Aggregate&quot;</span>) {</span>
-<span id="cb155-2"><a href="functions.html#cb155-2" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
-<span id="cb155-3"><a href="functions.html#cb155-3" tabindex="-1"></a>  <span class="co"># Name        : ftp.QuantFactor.path</span></span>
-<span id="cb155-4"><a href="functions.html#cb155-4" tabindex="-1"></a>  <span class="co"># Author  : OB</span></span>
-<span id="cb155-5"><a href="functions.html#cb155-5" tabindex="-1"></a>  <span class="co"># Date        : 5/24/23</span></span>
-<span id="cb155-6"><a href="functions.html#cb155-6" tabindex="-1"></a>  <span class="co"># Args        : x = the name of a quant factor being backtested</span></span>
-<span id="cb155-7"><a href="functions.html#cb155-7" tabindex="-1"></a>  <span class="co">#         : w = Custom ftp path before StockFlows folder</span></span>
-<span id="cb155-8"><a href="functions.html#cb155-8" tabindex="-1"></a>  <span class="co">#         : u = the name of a filter (Active, Aggregate, ETF, Mutual, Passive)</span></span>
-<span id="cb155-9"><a href="functions.html#cb155-9" tabindex="-1"></a>  <span class="co"># Output  : outputs full ftp file path for quant factor</span></span>
-<span id="cb155-10"><a href="functions.html#cb155-10" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
-<span id="cb155-11"><a href="functions.html#cb155-11" tabindex="-1"></a>  </span>
-<span id="cb155-12"><a href="functions.html#cb155-12" tabindex="-1"></a>  <span class="cf">if</span>(w <span class="sc">!=</span> F){</span>
-<span id="cb155-13"><a href="functions.html#cb155-13" tabindex="-1"></a>    <span class="cf">if</span>(x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;AllocMo&quot;</span>, <span class="st">&quot;AllocTrend&quot;</span>, <span class="st">&quot;AllocDiff&quot;</span>, <span class="st">&quot;Herfindahl&quot;</span>, <span class="st">&quot;AllocSkew&quot;</span>)){</span>
-<span id="cb155-14"><a href="functions.html#cb155-14" tabindex="-1"></a>      w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;/StockFlows5.0/QuantitativeFactors/Monthly/&quot;</span>, x, <span class="st">&quot;/&quot;</span>, u, <span class="st">&quot;/&quot;</span>) </span>
-<span id="cb155-15"><a href="functions.html#cb155-15" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb155-16"><a href="functions.html#cb155-16" tabindex="-1"></a>      w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;/StockFlows5.0/QuantitativeFactors/Daily/&quot;</span>, x, <span class="st">&quot;/&quot;</span>, u, <span class="st">&quot;/&quot;</span>) </span>
-<span id="cb155-17"><a href="functions.html#cb155-17" tabindex="-1"></a>    }</span>
-<span id="cb155-18"><a href="functions.html#cb155-18" tabindex="-1"></a>    </span>
-<span id="cb155-19"><a href="functions.html#cb155-19" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">grepl</span>(<span class="st">&quot;C:&quot;</span>, w)){</span>
-<span id="cb155-20"><a href="functions.html#cb155-20" tabindex="-1"></a>      w <span class="ot">&lt;-</span> <span class="fu">txt.replace</span>(w, <span class="st">&quot;/&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>)</span>
-<span id="cb155-21"><a href="functions.html#cb155-21" tabindex="-1"></a>    }</span>
-<span id="cb155-22"><a href="functions.html#cb155-22" tabindex="-1"></a>    </span>
-<span id="cb155-23"><a href="functions.html#cb155-23" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb155-24"><a href="functions.html#cb155-24" tabindex="-1"></a>     w <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
-<span id="cb155-25"><a href="functions.html#cb155-25" tabindex="-1"></a>  }</span>
-<span id="cb155-26"><a href="functions.html#cb155-26" tabindex="-1"></a>  </span>
-<span id="cb155-27"><a href="functions.html#cb155-27" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;FloMo&quot;</span>){ w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;FlowMomentum&quot;</span>)</span>
-<span id="cb155-28"><a href="functions.html#cb155-28" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;FloTrend&quot;</span>){   w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;StockFlowTrend-&quot;</span>)</span>
-<span id="cb155-29"><a href="functions.html#cb155-29" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;FloDiff&quot;</span>){    w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;FlowDiff&quot;</span>)</span>
-<span id="cb155-30"><a href="functions.html#cb155-30" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;FloDiff2&quot;</span>){   w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;FlowDiff2&quot;</span>)</span>
-<span id="cb155-31"><a href="functions.html#cb155-31" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;ActWtTrend&quot;</span>){ w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;ActiveWeightTrend&quot;</span>)</span>
-<span id="cb155-32"><a href="functions.html#cb155-32" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;ActWtDiff&quot;</span>){  w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;ActiveWeightDif&quot;</span>)</span>
-<span id="cb155-33"><a href="functions.html#cb155-33" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;ActWtDiff2&quot;</span>){ w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;ActiveWeightDiff2&quot;</span>)</span>
-<span id="cb155-34"><a href="functions.html#cb155-34" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;AllocMo&quot;</span>){    w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;AllocationMomentum&quot;</span>)</span>
-<span id="cb155-35"><a href="functions.html#cb155-35" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;AllocTrend&quot;</span>){ w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;AllocationTrend&quot;</span>)</span>
-<span id="cb155-36"><a href="functions.html#cb155-36" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;AllocDiff&quot;</span>){  w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;AllocationDiff&quot;</span>)</span>
-<span id="cb155-37"><a href="functions.html#cb155-37" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;Herfindahl&quot;</span>){ w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;Herfindahl&quot;</span>)</span>
-<span id="cb155-38"><a href="functions.html#cb155-38" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;AllocSkew&quot;</span>){  w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;AllocationSkew&quot;</span>)</span>
-<span id="cb155-39"><a href="functions.html#cb155-39" tabindex="-1"></a>  } <span class="cf">else</span> {  w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, x) }</span>
-<span id="cb155-40"><a href="functions.html#cb155-40" tabindex="-1"></a>  </span>
-<span id="cb155-41"><a href="functions.html#cb155-41" tabindex="-1"></a>  <span class="cf">if</span>(u <span class="sc">!=</span> <span class="st">&quot;Aggregate&quot;</span>){</span>
-<span id="cb155-42"><a href="functions.html#cb155-42" tabindex="-1"></a>    <span class="cf">if</span>(u <span class="sc">==</span> <span class="st">&quot;Mutual&quot;</span>){ u <span class="ot">&lt;-</span> <span class="st">&quot;MF&quot;</span> } </span>
-<span id="cb155-43"><a href="functions.html#cb155-43" tabindex="-1"></a>    w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;All&quot;</span>, u)</span>
-<span id="cb155-44"><a href="functions.html#cb155-44" tabindex="-1"></a>  }</span>
-<span id="cb155-45"><a href="functions.html#cb155-45" tabindex="-1"></a>  w</span>
-<span id="cb155-46"><a href="functions.html#cb155-46" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="functions.html#cb228-1" tabindex="-1"></a>ftp.QuantFactor.name <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">w =</span> F, <span class="at">u =</span> <span class="st">&quot;Aggregate&quot;</span>) {</span>
+<span id="cb228-2"><a href="functions.html#cb228-2" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb228-3"><a href="functions.html#cb228-3" tabindex="-1"></a>  <span class="co"># Name        : ftp.QuantFactor.path</span></span>
+<span id="cb228-4"><a href="functions.html#cb228-4" tabindex="-1"></a>  <span class="co"># Author  : OB</span></span>
+<span id="cb228-5"><a href="functions.html#cb228-5" tabindex="-1"></a>  <span class="co"># Date        : 5/24/23</span></span>
+<span id="cb228-6"><a href="functions.html#cb228-6" tabindex="-1"></a>  <span class="co"># Args        : x = the name of a quant factor being backtested</span></span>
+<span id="cb228-7"><a href="functions.html#cb228-7" tabindex="-1"></a>  <span class="co">#         : w = Custom ftp path before StockFlows folder</span></span>
+<span id="cb228-8"><a href="functions.html#cb228-8" tabindex="-1"></a>  <span class="co">#         : u = the name of a filter (Active, Aggregate, ETF, Mutual, Passive)</span></span>
+<span id="cb228-9"><a href="functions.html#cb228-9" tabindex="-1"></a>  <span class="co"># Output  : outputs full ftp file path for quant factor</span></span>
+<span id="cb228-10"><a href="functions.html#cb228-10" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb228-11"><a href="functions.html#cb228-11" tabindex="-1"></a>  </span>
+<span id="cb228-12"><a href="functions.html#cb228-12" tabindex="-1"></a>  <span class="cf">if</span>(w <span class="sc">!=</span> F){</span>
+<span id="cb228-13"><a href="functions.html#cb228-13" tabindex="-1"></a>    <span class="cf">if</span>(x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;AllocMo&quot;</span>, <span class="st">&quot;AllocTrend&quot;</span>, <span class="st">&quot;AllocDiff&quot;</span>, <span class="st">&quot;Herfindahl&quot;</span>, <span class="st">&quot;AllocSkew&quot;</span>)){</span>
+<span id="cb228-14"><a href="functions.html#cb228-14" tabindex="-1"></a>      w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;/StockFlows5.0/QuantitativeFactors/Monthly/&quot;</span>, x, <span class="st">&quot;/&quot;</span>, u, <span class="st">&quot;/&quot;</span>) </span>
+<span id="cb228-15"><a href="functions.html#cb228-15" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb228-16"><a href="functions.html#cb228-16" tabindex="-1"></a>      w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;/StockFlows5.0/QuantitativeFactors/Daily/&quot;</span>, x, <span class="st">&quot;/&quot;</span>, u, <span class="st">&quot;/&quot;</span>) </span>
+<span id="cb228-17"><a href="functions.html#cb228-17" tabindex="-1"></a>    }</span>
+<span id="cb228-18"><a href="functions.html#cb228-18" tabindex="-1"></a>    </span>
+<span id="cb228-19"><a href="functions.html#cb228-19" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">grepl</span>(<span class="st">&quot;C:&quot;</span>, w)){</span>
+<span id="cb228-20"><a href="functions.html#cb228-20" tabindex="-1"></a>      w <span class="ot">&lt;-</span> <span class="fu">txt.replace</span>(w, <span class="st">&quot;/&quot;</span>, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">&quot;</span>)</span>
+<span id="cb228-21"><a href="functions.html#cb228-21" tabindex="-1"></a>    }</span>
+<span id="cb228-22"><a href="functions.html#cb228-22" tabindex="-1"></a>    </span>
+<span id="cb228-23"><a href="functions.html#cb228-23" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb228-24"><a href="functions.html#cb228-24" tabindex="-1"></a>     w <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb228-25"><a href="functions.html#cb228-25" tabindex="-1"></a>  }</span>
+<span id="cb228-26"><a href="functions.html#cb228-26" tabindex="-1"></a>  </span>
+<span id="cb228-27"><a href="functions.html#cb228-27" tabindex="-1"></a>  <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;FloMo&quot;</span>){ w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;FlowMomentum&quot;</span>)</span>
+<span id="cb228-28"><a href="functions.html#cb228-28" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;FloTrend&quot;</span>){   w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;StockFlowTrend-&quot;</span>)</span>
+<span id="cb228-29"><a href="functions.html#cb228-29" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;FloDiff&quot;</span>){    w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;FlowDiff&quot;</span>)</span>
+<span id="cb228-30"><a href="functions.html#cb228-30" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;FloDiff2&quot;</span>){   w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;FlowDiff2&quot;</span>)</span>
+<span id="cb228-31"><a href="functions.html#cb228-31" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;ActWtTrend&quot;</span>){ w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;ActiveWeightTrend&quot;</span>)</span>
+<span id="cb228-32"><a href="functions.html#cb228-32" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;ActWtDiff&quot;</span>){  w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;ActiveWeightDif&quot;</span>)</span>
+<span id="cb228-33"><a href="functions.html#cb228-33" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;ActWtDiff2&quot;</span>){ w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;ActiveWeightDiff2&quot;</span>)</span>
+<span id="cb228-34"><a href="functions.html#cb228-34" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;AllocMo&quot;</span>){    w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;AllocationMomentum&quot;</span>)</span>
+<span id="cb228-35"><a href="functions.html#cb228-35" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;AllocTrend&quot;</span>){ w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;AllocationTrend&quot;</span>)</span>
+<span id="cb228-36"><a href="functions.html#cb228-36" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;AllocDiff&quot;</span>){  w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;AllocationDiff&quot;</span>)</span>
+<span id="cb228-37"><a href="functions.html#cb228-37" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;Herfindahl&quot;</span>){ w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;Herfindahl&quot;</span>)</span>
+<span id="cb228-38"><a href="functions.html#cb228-38" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span>(x <span class="sc">==</span> <span class="st">&quot;AllocSkew&quot;</span>){  w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;AllocationSkew&quot;</span>)</span>
+<span id="cb228-39"><a href="functions.html#cb228-39" tabindex="-1"></a>  } <span class="cf">else</span> {  w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, x) }</span>
+<span id="cb228-40"><a href="functions.html#cb228-40" tabindex="-1"></a>  </span>
+<span id="cb228-41"><a href="functions.html#cb228-41" tabindex="-1"></a>  <span class="cf">if</span>(u <span class="sc">!=</span> <span class="st">&quot;Aggregate&quot;</span>){</span>
+<span id="cb228-42"><a href="functions.html#cb228-42" tabindex="-1"></a>    <span class="cf">if</span>(u <span class="sc">==</span> <span class="st">&quot;Mutual&quot;</span>){ u <span class="ot">&lt;-</span> <span class="st">&quot;MF&quot;</span> } </span>
+<span id="cb228-43"><a href="functions.html#cb228-43" tabindex="-1"></a>    w <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, <span class="st">&quot;All&quot;</span>, u)</span>
+<span id="cb228-44"><a href="functions.html#cb228-44" tabindex="-1"></a>  }</span>
+<span id="cb228-45"><a href="functions.html#cb228-45" tabindex="-1"></a>  w</span>
+<span id="cb228-46"><a href="functions.html#cb228-46" tabindex="-1"></a>}</span></code></pre></div>
 <hr />
 </div>
 <div id="format-file" class="section level3 unnumbered hasAnchor">
 <h3>Format file<a href="functions.html#format-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The function <code>ftp.QuantFactor.format()</code> was built for backtesting purposes to automatically format the stock factor files hosted on EPFRs ftp connection, to easily have unique Ids as rownames and each date as a column.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="functions.html#cb156-1" tabindex="-1"></a>ftp.QuantFactor.format <span class="ot">&lt;-</span> <span class="cf">function</span>(z, <span class="at">n =</span> <span class="sc">-</span><span class="dv">2</span>) {</span>
-<span id="cb156-2"><a href="functions.html#cb156-2" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
-<span id="cb156-3"><a href="functions.html#cb156-3" tabindex="-1"></a>  <span class="co"># Name        : ftp.QuantFactor.path</span></span>
-<span id="cb156-4"><a href="functions.html#cb156-4" tabindex="-1"></a>  <span class="co"># Author  : OB</span></span>
-<span id="cb156-5"><a href="functions.html#cb156-5" tabindex="-1"></a>  <span class="co"># Date        : 5/24/23</span></span>
-<span id="cb156-6"><a href="functions.html#cb156-6" tabindex="-1"></a>  <span class="co"># Args        : z = single quant factor file from ftp</span></span>
-<span id="cb156-7"><a href="functions.html#cb156-7" tabindex="-1"></a>  <span class="co">#         : n = delay in getting data</span></span>
-<span id="cb156-8"><a href="functions.html#cb156-8" tabindex="-1"></a>  <span class="co"># Output  : outputs formatted data frame - ID as rows, date as header </span></span>
-<span id="cb156-9"><a href="functions.html#cb156-9" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
-<span id="cb156-10"><a href="functions.html#cb156-10" tabindex="-1"></a>  </span>
-<span id="cb156-11"><a href="functions.html#cb156-11" tabindex="-1"></a>  z[<span class="fu">yyyymmdd.exists</span>(z<span class="sc">$</span>ReportDate) <span class="sc">==</span> F, <span class="st">&quot;ReportDate&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">yyyymmdd.ex.txt</span>(z[<span class="fu">yyyymmdd.exists</span>(z<span class="sc">$</span>ReportDate) <span class="sc">==</span> F, <span class="st">&quot;ReportDate&quot;</span>])</span>
-<span id="cb156-12"><a href="functions.html#cb156-12" tabindex="-1"></a>  z<span class="sc">$</span>ReportDate <span class="ot">&lt;-</span> <span class="fu">yyyymmdd.lag</span>(z<span class="sc">$</span>ReportDate, <span class="sc">-</span><span class="dv">2</span>)</span>
-<span id="cb156-13"><a href="functions.html#cb156-13" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">reshape</span>(z, <span class="at">idvar =</span> <span class="st">&quot;HSecurityId&quot;</span>, <span class="at">timevar =</span> <span class="st">&quot;ReportDate&quot;</span>, <span class="at">direction =</span> <span class="st">&quot;wide&quot;</span>, <span class="at">drop =</span> <span class="st">&quot;SecurityName&quot;</span>)</span>
-<span id="cb156-14"><a href="functions.html#cb156-14" tabindex="-1"></a>  <span class="fu">rownames</span>(z) <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(z<span class="sc">$</span>HSecurityId)</span>
-<span id="cb156-15"><a href="functions.html#cb156-15" tabindex="-1"></a>  z <span class="ot">&lt;-</span> z[,<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb156-16"><a href="functions.html#cb156-16" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="functions.html#cb229-1" tabindex="-1"></a>ftp.QuantFactor.format <span class="ot">&lt;-</span> <span class="cf">function</span>(z, <span class="at">n =</span> <span class="sc">-</span><span class="dv">2</span>) {</span>
+<span id="cb229-2"><a href="functions.html#cb229-2" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb229-3"><a href="functions.html#cb229-3" tabindex="-1"></a>  <span class="co"># Name        : ftp.QuantFactor.path</span></span>
+<span id="cb229-4"><a href="functions.html#cb229-4" tabindex="-1"></a>  <span class="co"># Author  : OB</span></span>
+<span id="cb229-5"><a href="functions.html#cb229-5" tabindex="-1"></a>  <span class="co"># Date        : 5/24/23</span></span>
+<span id="cb229-6"><a href="functions.html#cb229-6" tabindex="-1"></a>  <span class="co"># Args        : z = single quant factor file from ftp</span></span>
+<span id="cb229-7"><a href="functions.html#cb229-7" tabindex="-1"></a>  <span class="co">#         : n = delay in getting data</span></span>
+<span id="cb229-8"><a href="functions.html#cb229-8" tabindex="-1"></a>  <span class="co"># Output  : outputs formatted data frame - ID as rows, date as header </span></span>
+<span id="cb229-9"><a href="functions.html#cb229-9" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb229-10"><a href="functions.html#cb229-10" tabindex="-1"></a>  </span>
+<span id="cb229-11"><a href="functions.html#cb229-11" tabindex="-1"></a>  z[<span class="fu">yyyymmdd.exists</span>(z<span class="sc">$</span>ReportDate) <span class="sc">==</span> F, <span class="st">&quot;ReportDate&quot;</span>] <span class="ot">&lt;-</span> <span class="fu">yyyymmdd.ex.txt</span>(z[<span class="fu">yyyymmdd.exists</span>(z<span class="sc">$</span>ReportDate) <span class="sc">==</span> F, <span class="st">&quot;ReportDate&quot;</span>])</span>
+<span id="cb229-12"><a href="functions.html#cb229-12" tabindex="-1"></a>  z<span class="sc">$</span>ReportDate <span class="ot">&lt;-</span> <span class="fu">yyyymmdd.lag</span>(z<span class="sc">$</span>ReportDate, <span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb229-13"><a href="functions.html#cb229-13" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">reshape</span>(z, <span class="at">idvar =</span> <span class="st">&quot;HSecurityId&quot;</span>, <span class="at">timevar =</span> <span class="st">&quot;ReportDate&quot;</span>, <span class="at">direction =</span> <span class="st">&quot;wide&quot;</span>, <span class="at">drop =</span> <span class="st">&quot;SecurityName&quot;</span>)</span>
+<span id="cb229-14"><a href="functions.html#cb229-14" tabindex="-1"></a>  <span class="fu">rownames</span>(z) <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(z<span class="sc">$</span>HSecurityId)</span>
+<span id="cb229-15"><a href="functions.html#cb229-15" tabindex="-1"></a>  z <span class="ot">&lt;-</span> z[,<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb229-16"><a href="functions.html#cb229-16" tabindex="-1"></a>}</span></code></pre></div>
 <hr />
 </div>
 <div id="fetchs-file" class="section level3 unnumbered hasAnchor">
 <h3>Fetchs file<a href="functions.html#fetchs-file" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The function <code>fetch.ftp.QuantFactor()</code> was created to automatically fetch the desired stock factor data for a designated period of time, via the users EPFR ftp connection.</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="functions.html#cb157-1" tabindex="-1"></a>fetch.ftp.QuantFactor <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, n, <span class="at">w =</span> F, h, <span class="at">u =</span> <span class="st">&quot;Aggregate&quot;</span>) {</span>
-<span id="cb157-2"><a href="functions.html#cb157-2" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
-<span id="cb157-3"><a href="functions.html#cb157-3" tabindex="-1"></a>  <span class="co"># Name        : ftp.1y.QuantFactor</span></span>
-<span id="cb157-4"><a href="functions.html#cb157-4" tabindex="-1"></a>  <span class="co"># Author  : OB</span></span>
-<span id="cb157-5"><a href="functions.html#cb157-5" tabindex="-1"></a>  <span class="co"># Date        : 5/24/23</span></span>
-<span id="cb157-6"><a href="functions.html#cb157-6" tabindex="-1"></a>  <span class="co"># Args        : x = either a single variable or a vector of variable names</span></span>
-<span id="cb157-7"><a href="functions.html#cb157-7" tabindex="-1"></a>  <span class="co">#     : y = the YYYYMM or YYYYMMDD for which you want data</span></span>
-<span id="cb157-8"><a href="functions.html#cb157-8" tabindex="-1"></a>  <span class="co">#     : n = number of daily/monthly trailing periods</span></span>
-<span id="cb157-9"><a href="functions.html#cb157-9" tabindex="-1"></a>  <span class="co">#   : w = Custom ftp path before StockFlows folder</span></span>
-<span id="cb157-10"><a href="functions.html#cb157-10" tabindex="-1"></a>  <span class="co">#     : h = classif file</span></span>
-<span id="cb157-11"><a href="functions.html#cb157-11" tabindex="-1"></a>  <span class="co">#   : u = the name of a filter (Active, Aggregate, ETF, Mutual, Passive)</span></span>
-<span id="cb157-12"><a href="functions.html#cb157-12" tabindex="-1"></a>  <span class="co"># Output  : fetches &lt;x&gt; for the trailing &lt;n&gt; periods ending at &lt;y&gt;</span></span>
-<span id="cb157-13"><a href="functions.html#cb157-13" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
-<span id="cb157-14"><a href="functions.html#cb157-14" tabindex="-1"></a>  </span>
-<span id="cb157-15"><a href="functions.html#cb157-15" tabindex="-1"></a>  daily <span class="ot">&lt;-</span> <span class="fu">nchar</span>(y) <span class="sc">==</span> <span class="dv">8</span></span>
-<span id="cb157-16"><a href="functions.html#cb157-16" tabindex="-1"></a>  </span>
-<span id="cb157-17"><a href="functions.html#cb157-17" tabindex="-1"></a>  <span class="co"># PARAMETERS</span></span>
-<span id="cb157-18"><a href="functions.html#cb157-18" tabindex="-1"></a>  <span class="cf">if</span> (daily) {</span>
-<span id="cb157-19"><a href="functions.html#cb157-19" tabindex="-1"></a>    yyyy <span class="ot">&lt;-</span> <span class="fu">yyyymmdd.to.yyyymm</span>(y)</span>
-<span id="cb157-20"><a href="functions.html#cb157-20" tabindex="-1"></a>    mm <span class="ot">&lt;-</span> <span class="fu">txt.right</span>(y, <span class="dv">2</span>)</span>
-<span id="cb157-21"><a href="functions.html#cb157-21" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb157-22"><a href="functions.html#cb157-22" tabindex="-1"></a>    yyyy <span class="ot">&lt;-</span> <span class="fu">yyyymm.to.yyyy</span>(y)</span>
-<span id="cb157-23"><a href="functions.html#cb157-23" tabindex="-1"></a>    mm <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">txt.right</span>(y, <span class="dv">2</span>))</span>
-<span id="cb157-24"><a href="functions.html#cb157-24" tabindex="-1"></a>  }</span>
-<span id="cb157-25"><a href="functions.html#cb157-25" tabindex="-1"></a>  </span>
-<span id="cb157-26"><a href="functions.html#cb157-26" tabindex="-1"></a>  <span class="cf">if</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>) {</span>
-<span id="cb157-27"><a href="functions.html#cb157-27" tabindex="-1"></a>    w <span class="ot">&lt;-</span> <span class="fu">ftp.QuantFactor.name</span>(x, w, u)</span>
-<span id="cb157-28"><a href="functions.html#cb157-28" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, yyyy, <span class="st">&quot;.txt&quot;</span>) </span>
-<span id="cb157-29"><a href="functions.html#cb157-29" tabindex="-1"></a>    lCol <span class="ot">&lt;-</span> <span class="fu">paste</span>(x, y, <span class="at">sep =</span> <span class="st">&quot;.&quot;</span>)</span>
-<span id="cb157-30"><a href="functions.html#cb157-30" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">grepl</span>(<span class="st">&quot;C:&quot;</span>, w)){ z <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(z, <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="cn">NULL</span>)</span>
-<span id="cb157-31"><a href="functions.html#cb157-31" tabindex="-1"></a>    } <span class="cf">else</span> { z <span class="ot">&lt;-</span> <span class="fu">qa.mat.read</span>(z, <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">temp</span><span class="sc">\\</span><span class="st">crap&quot;</span>, <span class="at">v =</span> T) }</span>
-<span id="cb157-32"><a href="functions.html#cb157-32" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">ftp.QuantFactor.format</span>(z)</span>
-<span id="cb157-33"><a href="functions.html#cb157-33" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(z)[<span class="dv">2</span>]</span>
-<span id="cb157-34"><a href="functions.html#cb157-34" tabindex="-1"></a>    m <span class="ot">&lt;-</span> m[<span class="fu">dimnames</span>(z)[[<span class="dv">2</span>]] <span class="sc">==</span> lCol]</span>
-<span id="cb157-35"><a href="functions.html#cb157-35" tabindex="-1"></a>    </span>
-<span id="cb157-36"><a href="functions.html#cb157-36" tabindex="-1"></a>    <span class="cf">while</span> (m <span class="sc">&lt;</span> n) {</span>
-<span id="cb157-37"><a href="functions.html#cb157-37" tabindex="-1"></a>       <span class="cf">if</span> (daily) yyyy <span class="ot">&lt;-</span> <span class="fu">yyyymm.lag</span>(yyyy, <span class="dv">1</span>) <span class="cf">else</span> yyyy <span class="ot">&lt;-</span> yyyy <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb157-38"><a href="functions.html#cb157-38" tabindex="-1"></a>       df <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, yyyy, <span class="st">&quot;.txt&quot;</span>) </span>
-<span id="cb157-39"><a href="functions.html#cb157-39" tabindex="-1"></a>       <span class="cf">if</span>(<span class="fu">grepl</span>(<span class="st">&quot;C:&quot;</span>, w)){ df <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(df, <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="cn">NULL</span>)</span>
-<span id="cb157-40"><a href="functions.html#cb157-40" tabindex="-1"></a>       } <span class="cf">else</span> { df <span class="ot">&lt;-</span> <span class="fu">qa.mat.read</span>(df, <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">temp</span><span class="sc">\\</span><span class="st">crap&quot;</span>, <span class="at">v =</span> T) }</span>
-<span id="cb157-41"><a href="functions.html#cb157-41" tabindex="-1"></a>       df <span class="ot">&lt;-</span> <span class="fu">ftp.QuantFactor.format</span>(df)</span>
-<span id="cb157-42"><a href="functions.html#cb157-42" tabindex="-1"></a>       z <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(df, z)</span>
-<span id="cb157-43"><a href="functions.html#cb157-43" tabindex="-1"></a>       m <span class="ot">&lt;-</span> m <span class="sc">+</span> <span class="fu">dim</span>(df)[<span class="dv">2</span>]</span>
-<span id="cb157-44"><a href="functions.html#cb157-44" tabindex="-1"></a>    }</span>
-<span id="cb157-45"><a href="functions.html#cb157-45" tabindex="-1"></a>    </span>
-<span id="cb157-46"><a href="functions.html#cb157-46" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z[, <span class="fu">seq</span>(m <span class="sc">-</span> n <span class="sc">+</span> <span class="dv">1</span>, m)]</span>
-<span id="cb157-47"><a href="functions.html#cb157-47" tabindex="-1"></a>  }</span>
-<span id="cb157-48"><a href="functions.html#cb157-48" tabindex="-1"></a>  z</span>
-<span id="cb157-49"><a href="functions.html#cb157-49" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="functions.html#cb230-1" tabindex="-1"></a>fetch.ftp.QuantFactor <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, n, <span class="at">w =</span> F, h, <span class="at">u =</span> <span class="st">&quot;Aggregate&quot;</span>) {</span>
+<span id="cb230-2"><a href="functions.html#cb230-2" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb230-3"><a href="functions.html#cb230-3" tabindex="-1"></a>  <span class="co"># Name        : ftp.1y.QuantFactor</span></span>
+<span id="cb230-4"><a href="functions.html#cb230-4" tabindex="-1"></a>  <span class="co"># Author  : OB</span></span>
+<span id="cb230-5"><a href="functions.html#cb230-5" tabindex="-1"></a>  <span class="co"># Date        : 5/24/23</span></span>
+<span id="cb230-6"><a href="functions.html#cb230-6" tabindex="-1"></a>  <span class="co"># Args        : x = either a single variable or a vector of variable names</span></span>
+<span id="cb230-7"><a href="functions.html#cb230-7" tabindex="-1"></a>  <span class="co">#     : y = the YYYYMM or YYYYMMDD for which you want data</span></span>
+<span id="cb230-8"><a href="functions.html#cb230-8" tabindex="-1"></a>  <span class="co">#     : n = number of daily/monthly trailing periods</span></span>
+<span id="cb230-9"><a href="functions.html#cb230-9" tabindex="-1"></a>  <span class="co">#   : w = Custom ftp path before StockFlows folder</span></span>
+<span id="cb230-10"><a href="functions.html#cb230-10" tabindex="-1"></a>  <span class="co">#     : h = classif file</span></span>
+<span id="cb230-11"><a href="functions.html#cb230-11" tabindex="-1"></a>  <span class="co">#   : u = the name of a filter (Active, Aggregate, ETF, Mutual, Passive)</span></span>
+<span id="cb230-12"><a href="functions.html#cb230-12" tabindex="-1"></a>  <span class="co"># Output  : fetches &lt;x&gt; for the trailing &lt;n&gt; periods ending at &lt;y&gt;</span></span>
+<span id="cb230-13"><a href="functions.html#cb230-13" tabindex="-1"></a>  <span class="co"># -----------------------------------------------------------------</span></span>
+<span id="cb230-14"><a href="functions.html#cb230-14" tabindex="-1"></a>  </span>
+<span id="cb230-15"><a href="functions.html#cb230-15" tabindex="-1"></a>  daily <span class="ot">&lt;-</span> <span class="fu">nchar</span>(y) <span class="sc">==</span> <span class="dv">8</span></span>
+<span id="cb230-16"><a href="functions.html#cb230-16" tabindex="-1"></a>  </span>
+<span id="cb230-17"><a href="functions.html#cb230-17" tabindex="-1"></a>  <span class="co"># PARAMETERS</span></span>
+<span id="cb230-18"><a href="functions.html#cb230-18" tabindex="-1"></a>  <span class="cf">if</span> (daily) {</span>
+<span id="cb230-19"><a href="functions.html#cb230-19" tabindex="-1"></a>    yyyy <span class="ot">&lt;-</span> <span class="fu">yyyymmdd.to.yyyymm</span>(y)</span>
+<span id="cb230-20"><a href="functions.html#cb230-20" tabindex="-1"></a>    mm <span class="ot">&lt;-</span> <span class="fu">txt.right</span>(y, <span class="dv">2</span>)</span>
+<span id="cb230-21"><a href="functions.html#cb230-21" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb230-22"><a href="functions.html#cb230-22" tabindex="-1"></a>    yyyy <span class="ot">&lt;-</span> <span class="fu">yyyymm.to.yyyy</span>(y)</span>
+<span id="cb230-23"><a href="functions.html#cb230-23" tabindex="-1"></a>    mm <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">txt.right</span>(y, <span class="dv">2</span>))</span>
+<span id="cb230-24"><a href="functions.html#cb230-24" tabindex="-1"></a>  }</span>
+<span id="cb230-25"><a href="functions.html#cb230-25" tabindex="-1"></a>  </span>
+<span id="cb230-26"><a href="functions.html#cb230-26" tabindex="-1"></a>  <span class="cf">if</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>) {</span>
+<span id="cb230-27"><a href="functions.html#cb230-27" tabindex="-1"></a>    w <span class="ot">&lt;-</span> <span class="fu">ftp.QuantFactor.name</span>(x, w, u)</span>
+<span id="cb230-28"><a href="functions.html#cb230-28" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, yyyy, <span class="st">&quot;.txt&quot;</span>) </span>
+<span id="cb230-29"><a href="functions.html#cb230-29" tabindex="-1"></a>    lCol <span class="ot">&lt;-</span> <span class="fu">paste</span>(x, y, <span class="at">sep =</span> <span class="st">&quot;.&quot;</span>)</span>
+<span id="cb230-30"><a href="functions.html#cb230-30" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">grepl</span>(<span class="st">&quot;C:&quot;</span>, w)){ z <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(z, <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="cn">NULL</span>)</span>
+<span id="cb230-31"><a href="functions.html#cb230-31" tabindex="-1"></a>    } <span class="cf">else</span> { z <span class="ot">&lt;-</span> <span class="fu">qa.mat.read</span>(z, <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">temp</span><span class="sc">\\</span><span class="st">crap&quot;</span>, <span class="at">v =</span> T) }</span>
+<span id="cb230-32"><a href="functions.html#cb230-32" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">ftp.QuantFactor.format</span>(z)</span>
+<span id="cb230-33"><a href="functions.html#cb230-33" tabindex="-1"></a>    m <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(z)[<span class="dv">2</span>]</span>
+<span id="cb230-34"><a href="functions.html#cb230-34" tabindex="-1"></a>    m <span class="ot">&lt;-</span> m[<span class="fu">dimnames</span>(z)[[<span class="dv">2</span>]] <span class="sc">==</span> lCol]</span>
+<span id="cb230-35"><a href="functions.html#cb230-35" tabindex="-1"></a>    </span>
+<span id="cb230-36"><a href="functions.html#cb230-36" tabindex="-1"></a>    <span class="cf">while</span> (m <span class="sc">&lt;</span> n) {</span>
+<span id="cb230-37"><a href="functions.html#cb230-37" tabindex="-1"></a>       <span class="cf">if</span> (daily) yyyy <span class="ot">&lt;-</span> <span class="fu">yyyymm.lag</span>(yyyy, <span class="dv">1</span>) <span class="cf">else</span> yyyy <span class="ot">&lt;-</span> yyyy <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb230-38"><a href="functions.html#cb230-38" tabindex="-1"></a>       df <span class="ot">&lt;-</span> <span class="fu">paste0</span>(w, yyyy, <span class="st">&quot;.txt&quot;</span>) </span>
+<span id="cb230-39"><a href="functions.html#cb230-39" tabindex="-1"></a>       <span class="cf">if</span>(<span class="fu">grepl</span>(<span class="st">&quot;C:&quot;</span>, w)){ df <span class="ot">&lt;-</span> <span class="fu">mat.read</span>(df, <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>, <span class="cn">NULL</span>)</span>
+<span id="cb230-40"><a href="functions.html#cb230-40" tabindex="-1"></a>       } <span class="cf">else</span> { df <span class="ot">&lt;-</span> <span class="fu">qa.mat.read</span>(df, <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">temp</span><span class="sc">\\</span><span class="st">crap&quot;</span>, <span class="at">v =</span> T) }</span>
+<span id="cb230-41"><a href="functions.html#cb230-41" tabindex="-1"></a>       df <span class="ot">&lt;-</span> <span class="fu">ftp.QuantFactor.format</span>(df)</span>
+<span id="cb230-42"><a href="functions.html#cb230-42" tabindex="-1"></a>       z <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(df, z)</span>
+<span id="cb230-43"><a href="functions.html#cb230-43" tabindex="-1"></a>       m <span class="ot">&lt;-</span> m <span class="sc">+</span> <span class="fu">dim</span>(df)[<span class="dv">2</span>]</span>
+<span id="cb230-44"><a href="functions.html#cb230-44" tabindex="-1"></a>    }</span>
+<span id="cb230-45"><a href="functions.html#cb230-45" tabindex="-1"></a>    </span>
+<span id="cb230-46"><a href="functions.html#cb230-46" tabindex="-1"></a>    z <span class="ot">&lt;-</span> z[, <span class="fu">seq</span>(m <span class="sc">-</span> n <span class="sc">+</span> <span class="dv">1</span>, m)]</span>
+<span id="cb230-47"><a href="functions.html#cb230-47" tabindex="-1"></a>  }</span>
+<span id="cb230-48"><a href="functions.html#cb230-48" tabindex="-1"></a>  z</span>
+<span id="cb230-49"><a href="functions.html#cb230-49" tabindex="-1"></a>}</span></code></pre></div>
 <hr />
 </div>
 </div>

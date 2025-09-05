@@ -2,73 +2,65 @@
 <html lang="" xml:lang="">
 <head>
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7.1 Data | EPFR Strategy Notebooks</title>
-  <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
-  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="7.1 Data | EPFR Strategy Notebooks" />
-  <meta property="og:type" content="book" />
-  <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
-  <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
-  <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7.1 Data | EPFR Strategy Notebooks" />
-  
-  <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
-  <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="7.1 Data | EPFR Strategy Notebooks" />
+<meta property="og:type" content="book" />
+<meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
+<meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
+<meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
 
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="flow-percentage-dm-rates-strategy.html"/>
-<link rel="next" href="strategy-implementation-6.html"/>
+<meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value.">
+
+<title>7.1 Data | EPFR Strategy Notebooks</title>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
+<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -82,345 +74,346 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { font-weight: bold; } /* Alert */
-code span.an { font-style: italic; } /* Annotation */
-code span.cf { font-weight: bold; } /* ControlFlow */
-code span.co { font-style: italic; } /* Comment */
-code span.cv { font-style: italic; } /* CommentVar */
-code span.do { font-style: italic; } /* Documentation */
-code span.dt { text-decoration: underline; } /* DataType */
-code span.er { font-weight: bold; } /* Error */
-code span.in { font-style: italic; } /* Information */
-code span.kw { font-weight: bold; } /* Keyword */
-code span.pp { font-weight: bold; } /* Preprocessor */
-code span.wa { font-style: italic; } /* Warning */
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-
 <style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  pre:not([class]) {
+    background-color: white;
+  }
 </style>
 
-<link rel="stylesheet" href="assets/style.css" type="text/css" />
+
+
+<link rel="stylesheet" href="toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if bootstrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
 </head>
 
 <body>
 
+<div class="container-fluid main-container">
 
 
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="toc-logo"><a href="./"><img src="images/comingsoon.png"></a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
 <ul>
-<li class="chapter" data-level="" data-path="macro-strategy-signals.html"><a href="macro-strategy-signals.html"><i class="fa fa-check"></i>Macro Strategy Signals</a>
+<li class="has-sub"><a href="index.html#introduction" id="toc-introduction">Introduction</a>
 <ul>
-<li class="chapter" data-level="" data-path="macro-strategy-signals.html"><a href="macro-strategy-signals.html#flow-momentum"><i class="fa fa-check"></i>Flow Momentum</a></li>
-<li class="chapter" data-level="" data-path="macro-strategy-signals.html"><a href="macro-strategy-signals.html#activepassive-indicator"><i class="fa fa-check"></i>Active/Passive Indicator</a></li>
+<li class="has-sub"><a href="macro-strategy-signals.html#macro-strategy-signals" id="toc-macro-strategy-signals">Macro Strategy Signals</a>
+<ul>
+<li><a href="macro-strategy-signals.html#flow-momentum" id="toc-flow-momentum">Flow Momentum</a></li>
+<li><a href="macro-strategy-signals.html#activepassive-indicator" id="toc-activepassive-indicator">Active/Passive Indicator</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="epfr-stock-factors.html"><a href="epfr-stock-factors.html"><i class="fa fa-check"></i>EPFR Stock Factors</a>
+<li class="has-sub"><a href="epfr-stock-factors.html#epfr-stock-factors" id="toc-epfr-stock-factors">EPFR Stock Factors</a>
 <ul>
-<li class="chapter" data-level="" data-path="epfr-stock-factors.html"><a href="epfr-stock-factors.html#daily-factors"><i class="fa fa-check"></i>Daily Factors:</a></li>
-<li class="chapter" data-level="" data-path="epfr-stock-factors.html"><a href="epfr-stock-factors.html#monthly-factors"><i class="fa fa-check"></i>Monthly Factors:</a></li>
+<li><a href="epfr-stock-factors.html#daily-factors" id="toc-daily-factors">Daily Factors:</a></li>
+<li><a href="epfr-stock-factors.html#monthly-factors" id="toc-monthly-factors">Monthly Factors:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="epfr-api.html"><a href="epfr-api.html"><i class="fa fa-check"></i>EPFR API</a>
+<li class="has-sub"><a href="epfr.r-library.html#epfr.r-library" id="toc-epfr.r-library">EPFR.r Library</a>
 <ul>
-<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html"><i class="fa fa-check"></i>Quick Start</a>
+<li><a href="set-up.html#set-up" id="toc-set-up">Set-up</a></li>
+<li class="has-sub"><a href="strategy-functions.html#strategy-functions" id="toc-strategy-functions">Strategy Functions</a>
 <ul>
-<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-install"><i class="fa fa-check"></i>API Install</a></li>
-<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-login"><i class="fa fa-check"></i>API Login</a></li>
-<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-call"><i class="fa fa-check"></i>API Call</a></li>
-<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#example-api-call"><i class="fa fa-check"></i>Example API call</a></li>
-<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-date-format"><i class="fa fa-check"></i>API Date Format</a></li>
-<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#supplemental-libraries"><i class="fa fa-check"></i>Supplemental Libraries</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html"><i class="fa fa-check"></i>API Flow-Percentage</a>
-<ul>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-region-strategy"><i class="fa fa-check"></i>API Multi-Asset Region Strategy</a></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-fi-strategy"><i class="fa fa-check"></i>API Multi-Asset FI Strategy</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="api-dictionaries.html"><a href="api-dictionaries.html"><i class="fa fa-check"></i>API Dictionaries</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i>EPFR.r Library</a>
-<ul>
-<li class="chapter" data-level="" data-path="set-up.html"><a href="set-up.html"><i class="fa fa-check"></i>Set-up</a></li>
-<li class="chapter" data-level="" data-path="strategy-functions.html"><a href="strategy-functions.html"><i class="fa fa-check"></i>Strategy Functions</a>
-<ul>
-<li class="chapter" data-level="" data-path="strategy-functions.html"><a href="strategy-functions.html#total-return-index"><i class="fa fa-check"></i>Total Return Index</a></li>
-<li class="chapter" data-level="" data-path="strategy-functions.html"><a href="strategy-functions.html#compunding-flows"><i class="fa fa-check"></i>Compunding Flows</a></li>
-<li class="chapter" data-level="" data-path="strategy-functions.html"><a href="strategy-functions.html#model"><i class="fa fa-check"></i>Model</a></li>
-<li class="chapter" data-level="" data-path="strategy-functions.html"><a href="strategy-functions.html#example"><i class="fa fa-check"></i>Example</a></li>
+<li><a href="strategy-functions.html#total-return-index" id="toc-total-return-index">Total Return Index</a></li>
+<li><a href="strategy-functions.html#compunding-flows" id="toc-compunding-flows">Compunding Flows</a></li>
+<li><a href="strategy-functions.html#model" id="toc-model">Model</a></li>
+<li><a href="strategy-functions.html#example" id="toc-example">Example</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="epfr-data-filters.html"><a href="epfr-data-filters.html"><i class="fa fa-check"></i>EPFR Data &amp; Filters</a>
+<li class="has-sub"><a href="epfr-data-filters.html#epfr-data-filters" id="toc-epfr-data-filters">EPFR Data &amp; Filters</a>
 <ul>
-<li class="chapter" data-level="" data-path="video-explanations.html"><a href="video-explanations.html"><i class="fa fa-check"></i>Video Explanations</a>
+<li class="has-sub"><a href="video-explanations.html#video-explanations" id="toc-video-explanations">Video Explanations</a>
 <ul>
-<li class="chapter" data-level="" data-path="video-explanations.html"><a href="video-explanations.html#asset-class-focus"><i class="fa fa-check"></i>Asset class focus</a></li>
-<li class="chapter" data-level="" data-path="video-explanations.html"><a href="video-explanations.html#fund-type"><i class="fa fa-check"></i>Fund type</a></li>
-<li class="chapter" data-level="" data-path="video-explanations.html"><a href="video-explanations.html#investor-type"><i class="fa fa-check"></i>Investor type</a></li>
-<li class="chapter" data-level="" data-path="video-explanations.html"><a href="video-explanations.html#currency-of-flows"><i class="fa fa-check"></i>Currency of flows</a></li>
-<li class="chapter" data-level="" data-path="video-explanations.html"><a href="video-explanations.html#fund-domicile-or-geographic-focus"><i class="fa fa-check"></i>Fund domicile or Geographic focus</a></li>
-<li class="chapter" data-level="" data-path="video-explanations.html"><a href="video-explanations.html#theme"><i class="fa fa-check"></i>Theme</a></li>
-<li class="chapter" data-level="" data-path="video-explanations.html"><a href="video-explanations.html#sector"><i class="fa fa-check"></i>Sector</a></li>
-<li class="chapter" data-level="" data-path="video-explanations.html"><a href="video-explanations.html#style"><i class="fa fa-check"></i>Style</a></li>
-<li class="chapter" data-level="" data-path="video-explanations.html"><a href="video-explanations.html#duration"><i class="fa fa-check"></i>Duration</a></li>
-<li class="chapter" data-level="" data-path="video-explanations.html"><a href="video-explanations.html#individual-managers"><i class="fa fa-check"></i>Individual managers</a></li>
+<li><a href="video-explanations.html#asset-class-focus" id="toc-asset-class-focus">Asset class focus</a></li>
+<li><a href="video-explanations.html#fund-type" id="toc-fund-type">Fund type</a></li>
+<li><a href="video-explanations.html#investor-type" id="toc-investor-type">Investor type</a></li>
+<li><a href="video-explanations.html#currency-of-flows" id="toc-currency-of-flows">Currency of flows</a></li>
+<li><a href="video-explanations.html#fund-domicile-or-geographic-focus" id="toc-fund-domicile-or-geographic-focus">Fund domicile or Geographic focus</a></li>
+<li><a href="video-explanations.html#theme" id="toc-theme">Theme</a></li>
+<li><a href="video-explanations.html#sector" id="toc-sector">Sector</a></li>
+<li><a href="video-explanations.html#style" id="toc-style">Style</a></li>
+<li><a href="video-explanations.html#duration" id="toc-duration">Duration</a></li>
+<li><a href="video-explanations.html#individual-managers" id="toc-individual-managers">Individual managers</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>Macro Strategies</b></span></li>
-<li class="chapter" data-level="1" data-path="multi-asset-strategy.html"><a href="multi-asset-strategy.html"><i class="fa fa-check"></i><b>1</b> Multi-Asset Strategy</a>
+<li class="has-sub"><a href="1-multi-asset-strategy.html#multi-asset-strategy" id="toc-multi-asset-strategy"><span class="toc-section-number">1</span> Multi-Asset Strategy</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>1.1</b> Data</a>
+<li class="has-sub"><a href="1.1-data.html#data" id="toc-data"><span class="toc-section-number">1.1</span> Data</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="data.html"><a href="data.html#aggregations"><i class="fa fa-check"></i><b>1.1.1</b> Aggregations</a></li>
-<li class="chapter" data-level="1.1.2" data-path="data.html"><a href="data.html#daily-percentage-flow"><i class="fa fa-check"></i><b>1.1.2</b> Daily Percentage Flow</a></li>
-<li class="chapter" data-level="1.1.3" data-path="data.html"><a href="data.html#aggregate-flow-file"><i class="fa fa-check"></i><b>1.1.3</b> Aggregate Flow File</a></li>
-<li class="chapter" data-level="1.1.4" data-path="data.html"><a href="data.html#return-file"><i class="fa fa-check"></i><b>1.1.4</b> Return File</a></li>
+<li><a href="1.1-data.html#aggregations" id="toc-aggregations"><span class="toc-section-number">1.1.1</span> Aggregations</a></li>
+<li><a href="1.1-data.html#daily-percentage-flow" id="toc-daily-percentage-flow"><span class="toc-section-number">1.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="1.1-data.html#aggregate-flow-file" id="toc-aggregate-flow-file"><span class="toc-section-number">1.1.3</span> Aggregate Flow File</a></li>
+<li><a href="1.1-data.html#return-file" id="toc-return-file"><span class="toc-section-number">1.1.4</span> Return File</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="strategy-implementation.html"><a href="strategy-implementation.html"><i class="fa fa-check"></i><b>1.2</b> Strategy Implementation</a>
+<li class="has-sub"><a href="1.2-strategy-implementation.html#strategy-implementation" id="toc-strategy-implementation"><span class="toc-section-number">1.2</span> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="strategy-implementation.html"><a href="strategy-implementation.html#compounding-flows"><i class="fa fa-check"></i><b>1.2.1</b> Compounding Flows</a></li>
-<li class="chapter" data-level="1.2.2" data-path="strategy-implementation.html"><a href="strategy-implementation.html#total-return-index-1"><i class="fa fa-check"></i><b>1.2.2</b> Total Return Index</a></li>
-<li class="chapter" data-level="1.2.3" data-path="strategy-implementation.html"><a href="strategy-implementation.html#subset-files"><i class="fa fa-check"></i><b>1.2.3</b> Subset files</a></li>
-<li class="chapter" data-level="1.2.4" data-path="strategy-implementation.html"><a href="strategy-implementation.html#ranking-asset-classes"><i class="fa fa-check"></i><b>1.2.4</b> Ranking Asset Classes</a></li>
-<li class="chapter" data-level="1.2.5" data-path="strategy-implementation.html"><a href="strategy-implementation.html#model-1"><i class="fa fa-check"></i><b>1.2.5</b> Model</a></li>
-<li class="chapter" data-level="1.2.6" data-path="strategy-implementation.html"><a href="strategy-implementation.html#performance"><i class="fa fa-check"></i><b>1.2.6</b> Performance</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="fx-strategy.html"><a href="fx-strategy.html"><i class="fa fa-check"></i><b>2</b> FX Strategy</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="data-1.html"><a href="data-1.html"><i class="fa fa-check"></i><b>2.1</b> Data</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="data-1.html"><a href="data-1.html#aggregations-1"><i class="fa fa-check"></i><b>2.1.1</b> Aggregations</a></li>
-<li class="chapter" data-level="2.1.2" data-path="data-1.html"><a href="data-1.html#daily-percentage-flow-1"><i class="fa fa-check"></i><b>2.1.2</b> Daily Percentage Flow</a></li>
-<li class="chapter" data-level="2.1.3" data-path="data-1.html"><a href="data-1.html#aggregate-flow-file-1"><i class="fa fa-check"></i><b>2.1.3</b> Aggregate Flow File</a></li>
-<li class="chapter" data-level="2.1.4" data-path="data-1.html"><a href="data-1.html#return-file-1"><i class="fa fa-check"></i><b>2.1.4</b> Return File</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="strategy-implementation-1.html"><a href="strategy-implementation-1.html"><i class="fa fa-check"></i><b>2.2</b> Strategy Implementation</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="strategy-implementation-1.html"><a href="strategy-implementation-1.html#compounding-flows-1"><i class="fa fa-check"></i><b>2.2.1</b> Compounding Flows</a></li>
-<li class="chapter" data-level="2.2.2" data-path="strategy-implementation-1.html"><a href="strategy-implementation-1.html#ranking-currencies"><i class="fa fa-check"></i><b>2.2.2</b> Ranking Currencies</a></li>
-<li class="chapter" data-level="2.2.3" data-path="strategy-implementation-1.html"><a href="strategy-implementation-1.html#model-2"><i class="fa fa-check"></i><b>2.2.3</b> Model</a></li>
-<li class="chapter" data-level="2.2.4" data-path="strategy-implementation-1.html"><a href="strategy-implementation-1.html#performance-1"><i class="fa fa-check"></i><b>2.2.4</b> Performance</a></li>
+<li><a href="1.2-strategy-implementation.html#compounding-flows" id="toc-compounding-flows"><span class="toc-section-number">1.2.1</span> Compounding Flows</a></li>
+<li><a href="1.2-strategy-implementation.html#total-return-index-1" id="toc-total-return-index-1"><span class="toc-section-number">1.2.2</span> Total Return Index</a></li>
+<li><a href="1.2-strategy-implementation.html#subset-files" id="toc-subset-files"><span class="toc-section-number">1.2.3</span> Subset files</a></li>
+<li><a href="1.2-strategy-implementation.html#ranking-asset-classes" id="toc-ranking-asset-classes"><span class="toc-section-number">1.2.4</span> Ranking Asset Classes</a></li>
+<li><a href="1.2-strategy-implementation.html#model-1" id="toc-model-1"><span class="toc-section-number">1.2.5</span> Model</a></li>
+<li><a href="1.2-strategy-implementation.html#performance" id="toc-performance"><span class="toc-section-number">1.2.6</span> Performance</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="flow-percentage-country-strategy.html"><a href="flow-percentage-country-strategy.html"><i class="fa fa-check"></i><b>3</b> Flow-Percentage Country Strategy</a>
+<li class="has-sub"><a href="2-fx-strategy.html#fx-strategy" id="toc-fx-strategy"><span class="toc-section-number">2</span> FX Strategy</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data-2.html"><a href="data-2.html"><i class="fa fa-check"></i><b>3.1</b> Data</a>
+<li class="has-sub"><a href="2.1-data-1.html#data-1" id="toc-data-1"><span class="toc-section-number">2.1</span> Data</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="data-2.html"><a href="data-2.html#aggregations-2"><i class="fa fa-check"></i><b>3.1.1</b> Aggregations</a></li>
-<li class="chapter" data-level="3.1.2" data-path="data-2.html"><a href="data-2.html#daily-percentage-flow-2"><i class="fa fa-check"></i><b>3.1.2</b> Daily Percentage Flow</a></li>
-<li class="chapter" data-level="3.1.3" data-path="data-2.html"><a href="data-2.html#aggregate-flow-file-2"><i class="fa fa-check"></i><b>3.1.3</b> Aggregate Flow File</a></li>
-<li class="chapter" data-level="3.1.4" data-path="data-2.html"><a href="data-2.html#return-file-2"><i class="fa fa-check"></i><b>3.1.4</b> Return File</a></li>
+<li><a href="2.1-data-1.html#aggregations-1" id="toc-aggregations-1"><span class="toc-section-number">2.1.1</span> Aggregations</a></li>
+<li><a href="2.1-data-1.html#daily-percentage-flow-1" id="toc-daily-percentage-flow-1"><span class="toc-section-number">2.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="2.1-data-1.html#aggregate-flow-file-1" id="toc-aggregate-flow-file-1"><span class="toc-section-number">2.1.3</span> Aggregate Flow File</a></li>
+<li><a href="2.1-data-1.html#return-file-1" id="toc-return-file-1"><span class="toc-section-number">2.1.4</span> Return File</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html"><i class="fa fa-check"></i><b>3.2</b> Strategy Implementation</a>
+<li class="has-sub"><a href="2.2-strategy-implementation-1.html#strategy-implementation-1" id="toc-strategy-implementation-1"><span class="toc-section-number">2.2</span> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html#compounding-flows-2"><i class="fa fa-check"></i><b>3.2.1</b> Compounding Flows</a></li>
-<li class="chapter" data-level="3.2.2" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html#total-return-index-2"><i class="fa fa-check"></i><b>3.2.2</b> Total Return Index</a></li>
-<li class="chapter" data-level="3.2.3" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html#ranking-countries"><i class="fa fa-check"></i><b>3.2.3</b> Ranking Countries</a></li>
-<li class="chapter" data-level="3.2.4" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html#model-3"><i class="fa fa-check"></i><b>3.2.4</b> Model</a></li>
-<li class="chapter" data-level="3.2.5" data-path="strategy-implementation-2.html"><a href="strategy-implementation-2.html#performance-2"><i class="fa fa-check"></i><b>3.2.5</b> Performance</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="publications.html"><a href="publications.html"><i class="fa fa-check"></i><b>3.3</b> Publications</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="flow-percentage-sector-strategy.html"><a href="flow-percentage-sector-strategy.html"><i class="fa fa-check"></i><b>4</b> Flow-Percentage Sector Strategy</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="data-3.html"><a href="data-3.html"><i class="fa fa-check"></i><b>4.1</b> Data</a>
-<ul>
-<li class="chapter" data-level="4.1.1" data-path="data-3.html"><a href="data-3.html#aggregations-3"><i class="fa fa-check"></i><b>4.1.1</b> Aggregations</a></li>
-<li class="chapter" data-level="4.1.2" data-path="data-3.html"><a href="data-3.html#daily-percentage-flow-3"><i class="fa fa-check"></i><b>4.1.2</b> Daily Percentage Flow</a></li>
-<li class="chapter" data-level="4.1.3" data-path="data-3.html"><a href="data-3.html#aggregate-flow-file-3"><i class="fa fa-check"></i><b>4.1.3</b> Aggregate Flow File</a></li>
-<li class="chapter" data-level="4.1.4" data-path="data-3.html"><a href="data-3.html#return-file-3"><i class="fa fa-check"></i><b>4.1.4</b> Return File</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="strategy-implementation-3.html"><a href="strategy-implementation-3.html"><i class="fa fa-check"></i><b>4.2</b> Strategy Implementation</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="strategy-implementation-3.html"><a href="strategy-implementation-3.html#compounding-flows-3"><i class="fa fa-check"></i><b>4.2.1</b> Compounding Flows</a></li>
-<li class="chapter" data-level="4.2.2" data-path="strategy-implementation-3.html"><a href="strategy-implementation-3.html#total-return-index-3"><i class="fa fa-check"></i><b>4.2.2</b> Total Return Index</a></li>
-<li class="chapter" data-level="4.2.3" data-path="strategy-implementation-3.html"><a href="strategy-implementation-3.html#ranking-sectors"><i class="fa fa-check"></i><b>4.2.3</b> Ranking Sectors</a></li>
-<li class="chapter" data-level="4.2.4" data-path="strategy-implementation-3.html"><a href="strategy-implementation-3.html#model-4"><i class="fa fa-check"></i><b>4.2.4</b> Model</a></li>
-<li class="chapter" data-level="4.2.5" data-path="strategy-implementation-3.html"><a href="strategy-implementation-3.html#performance-3"><i class="fa fa-check"></i><b>4.2.5</b> Performance</a></li>
+<li><a href="2.2-strategy-implementation-1.html#compounding-flows-1" id="toc-compounding-flows-1"><span class="toc-section-number">2.2.1</span> Compounding Flows</a></li>
+<li><a href="2.2-strategy-implementation-1.html#ranking-currencies" id="toc-ranking-currencies"><span class="toc-section-number">2.2.2</span> Ranking Currencies</a></li>
+<li><a href="2.2-strategy-implementation-1.html#model-2" id="toc-model-2"><span class="toc-section-number">2.2.3</span> Model</a></li>
+<li><a href="2.2-strategy-implementation-1.html#performance-1" id="toc-performance-1"><span class="toc-section-number">2.2.4</span> Performance</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="activepassive-country-strategy.html"><a href="activepassive-country-strategy.html"><i class="fa fa-check"></i><b>5</b> Active/Passive Country Strategy</a>
+<li class="has-sub"><a href="3-flow-percentage-country-strategy.html#flow-percentage-country-strategy" id="toc-flow-percentage-country-strategy"><span class="toc-section-number">3</span> Flow-Percentage Country Strategy</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="data-4.html"><a href="data-4.html"><i class="fa fa-check"></i><b>5.1</b> Data</a>
+<li class="has-sub"><a href="3.1-data-2.html#data-2" id="toc-data-2"><span class="toc-section-number">3.1</span> Data</a>
 <ul>
-<li class="chapter" data-level="5.1.1" data-path="data-4.html"><a href="data-4.html#aggregations-4"><i class="fa fa-check"></i><b>5.1.1</b> Aggregations</a></li>
-<li class="chapter" data-level="5.1.2" data-path="data-4.html"><a href="data-4.html#activepassive-indicator-1"><i class="fa fa-check"></i><b>5.1.2</b> Active/Passive Indicator</a></li>
-<li class="chapter" data-level="5.1.3" data-path="data-4.html"><a href="data-4.html#aggregate-indicator-file"><i class="fa fa-check"></i><b>5.1.3</b> Aggregate Indicator File</a></li>
-<li class="chapter" data-level="5.1.4" data-path="data-4.html"><a href="data-4.html#return-file-4"><i class="fa fa-check"></i><b>5.1.4</b> Return File</a></li>
+<li><a href="3.1-data-2.html#aggregations-2" id="toc-aggregations-2"><span class="toc-section-number">3.1.1</span> Aggregations</a></li>
+<li><a href="3.1-data-2.html#daily-percentage-flow-2" id="toc-daily-percentage-flow-2"><span class="toc-section-number">3.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="3.1-data-2.html#aggregate-flow-file-2" id="toc-aggregate-flow-file-2"><span class="toc-section-number">3.1.3</span> Aggregate Flow File</a></li>
+<li><a href="3.1-data-2.html#return-file-2" id="toc-return-file-2"><span class="toc-section-number">3.1.4</span> Return File</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="strategy-implementation-4.html"><a href="strategy-implementation-4.html"><i class="fa fa-check"></i><b>5.2</b> Strategy Implementation</a>
+<li class="has-sub"><a href="3.2-strategy-implementation-2.html#strategy-implementation-2" id="toc-strategy-implementation-2"><span class="toc-section-number">3.2</span> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="strategy-implementation-4.html"><a href="strategy-implementation-4.html#moving-sum-of-indicator"><i class="fa fa-check"></i><b>5.2.1</b> Moving Sum of Indicator</a></li>
-<li class="chapter" data-level="5.2.2" data-path="strategy-implementation-4.html"><a href="strategy-implementation-4.html#total-return-index-4"><i class="fa fa-check"></i><b>5.2.2</b> Total Return Index</a></li>
-<li class="chapter" data-level="5.2.3" data-path="strategy-implementation-4.html"><a href="strategy-implementation-4.html#ranking-countries-1"><i class="fa fa-check"></i><b>5.2.3</b> Ranking Countries</a></li>
-<li class="chapter" data-level="5.2.4" data-path="strategy-implementation-4.html"><a href="strategy-implementation-4.html#model-5"><i class="fa fa-check"></i><b>5.2.4</b> Model</a></li>
-<li class="chapter" data-level="5.2.5" data-path="strategy-implementation-4.html"><a href="strategy-implementation-4.html#performance-4"><i class="fa fa-check"></i><b>5.2.5</b> Performance</a></li>
+<li><a href="3.2-strategy-implementation-2.html#compounding-flows-2" id="toc-compounding-flows-2"><span class="toc-section-number">3.2.1</span> Compounding Flows</a></li>
+<li><a href="3.2-strategy-implementation-2.html#total-return-index-2" id="toc-total-return-index-2"><span class="toc-section-number">3.2.2</span> Total Return Index</a></li>
+<li><a href="3.2-strategy-implementation-2.html#ranking-countries" id="toc-ranking-countries"><span class="toc-section-number">3.2.3</span> Ranking Countries</a></li>
+<li><a href="3.2-strategy-implementation-2.html#model-3" id="toc-model-3"><span class="toc-section-number">3.2.4</span> Model</a></li>
+<li><a href="3.2-strategy-implementation-2.html#performance-2" id="toc-performance-2"><span class="toc-section-number">3.2.5</span> Performance</a></li>
+</ul></li>
+<li><a href="3.3-publications.html#publications" id="toc-publications"><span class="toc-section-number">3.3</span> Publications</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" id="toc-flow-percentage-sector-strategy"><span class="toc-section-number">4</span> Flow-Percentage Sector Strategy</a>
+<ul>
+<li class="has-sub"><a href="4.1-data-3.html#data-3" id="toc-data-3"><span class="toc-section-number">4.1</span> Data</a>
+<ul>
+<li><a href="4.1-data-3.html#aggregations-3" id="toc-aggregations-3"><span class="toc-section-number">4.1.1</span> Aggregations</a></li>
+<li><a href="4.1-data-3.html#daily-percentage-flow-3" id="toc-daily-percentage-flow-3"><span class="toc-section-number">4.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="4.1-data-3.html#aggregate-flow-file-3" id="toc-aggregate-flow-file-3"><span class="toc-section-number">4.1.3</span> Aggregate Flow File</a></li>
+<li><a href="4.1-data-3.html#return-file-3" id="toc-return-file-3"><span class="toc-section-number">4.1.4</span> Return File</a></li>
+</ul></li>
+<li class="has-sub"><a href="4.2-strategy-implementation-3.html#strategy-implementation-3" id="toc-strategy-implementation-3"><span class="toc-section-number">4.2</span> Strategy Implementation</a>
+<ul>
+<li><a href="4.2-strategy-implementation-3.html#compounding-flows-3" id="toc-compounding-flows-3"><span class="toc-section-number">4.2.1</span> Compounding Flows</a></li>
+<li><a href="4.2-strategy-implementation-3.html#total-return-index-3" id="toc-total-return-index-3"><span class="toc-section-number">4.2.2</span> Total Return Index</a></li>
+<li><a href="4.2-strategy-implementation-3.html#ranking-sectors" id="toc-ranking-sectors"><span class="toc-section-number">4.2.3</span> Ranking Sectors</a></li>
+<li><a href="4.2-strategy-implementation-3.html#model-4" id="toc-model-4"><span class="toc-section-number">4.2.4</span> Model</a></li>
+<li><a href="4.2-strategy-implementation-3.html#performance-3" id="toc-performance-3"><span class="toc-section-number">4.2.5</span> Performance</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="activepassive-sector-strategy.html"><a href="activepassive-sector-strategy.html"><i class="fa fa-check"></i><b>6</b> Active/Passive Sector Strategy</a>
+<li class="has-sub"><a href="5-activepassive-country-strategy.html#activepassive-country-strategy" id="toc-activepassive-country-strategy"><span class="toc-section-number">5</span> Active/Passive Country Strategy</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="data-5.html"><a href="data-5.html"><i class="fa fa-check"></i><b>6.1</b> Data</a>
+<li class="has-sub"><a href="5.1-data-4.html#data-4" id="toc-data-4"><span class="toc-section-number">5.1</span> Data</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="data-5.html"><a href="data-5.html#aggregations-5"><i class="fa fa-check"></i><b>6.1.1</b> Aggregations</a></li>
-<li class="chapter" data-level="6.1.2" data-path="data-5.html"><a href="data-5.html#activepassive-indicator-2"><i class="fa fa-check"></i><b>6.1.2</b> Active/Passive Indicator</a></li>
-<li class="chapter" data-level="6.1.3" data-path="data-5.html"><a href="data-5.html#aggregate-indicator-file-1"><i class="fa fa-check"></i><b>6.1.3</b> Aggregate Indicator File</a></li>
-<li class="chapter" data-level="6.1.4" data-path="data-5.html"><a href="data-5.html#return-file-5"><i class="fa fa-check"></i><b>6.1.4</b> Return File</a></li>
+<li><a href="5.1-data-4.html#aggregations-4" id="toc-aggregations-4"><span class="toc-section-number">5.1.1</span> Aggregations</a></li>
+<li><a href="5.1-data-4.html#activepassive-indicator-1" id="toc-activepassive-indicator-1"><span class="toc-section-number">5.1.2</span> Active/Passive Indicator</a></li>
+<li><a href="5.1-data-4.html#aggregate-indicator-file" id="toc-aggregate-indicator-file"><span class="toc-section-number">5.1.3</span> Aggregate Indicator File</a></li>
+<li><a href="5.1-data-4.html#return-file-4" id="toc-return-file-4"><span class="toc-section-number">5.1.4</span> Return File</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="strategy-implementation-5.html"><a href="strategy-implementation-5.html"><i class="fa fa-check"></i><b>6.2</b> Strategy Implementation</a>
+<li class="has-sub"><a href="5.2-strategy-implementation-4.html#strategy-implementation-4" id="toc-strategy-implementation-4"><span class="toc-section-number">5.2</span> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="strategy-implementation-5.html"><a href="strategy-implementation-5.html#moving-sum-of-indicator-1"><i class="fa fa-check"></i><b>6.2.1</b> Moving Sum of Indicator</a></li>
-<li class="chapter" data-level="6.2.2" data-path="strategy-implementation-5.html"><a href="strategy-implementation-5.html#total-return-index-5"><i class="fa fa-check"></i><b>6.2.2</b> Total Return Index</a></li>
-<li class="chapter" data-level="6.2.3" data-path="strategy-implementation-5.html"><a href="strategy-implementation-5.html#ranking-sectors-1"><i class="fa fa-check"></i><b>6.2.3</b> Ranking Sectors</a></li>
-<li class="chapter" data-level="6.2.4" data-path="strategy-implementation-5.html"><a href="strategy-implementation-5.html#model-6"><i class="fa fa-check"></i><b>6.2.4</b> Model</a></li>
-<li class="chapter" data-level="6.2.5" data-path="strategy-implementation-5.html"><a href="strategy-implementation-5.html#performance-5"><i class="fa fa-check"></i><b>6.2.5</b> Performance</a></li>
+<li><a href="5.2-strategy-implementation-4.html#moving-sum-of-indicator" id="toc-moving-sum-of-indicator"><span class="toc-section-number">5.2.1</span> Moving Sum of Indicator</a></li>
+<li><a href="5.2-strategy-implementation-4.html#total-return-index-4" id="toc-total-return-index-4"><span class="toc-section-number">5.2.2</span> Total Return Index</a></li>
+<li><a href="5.2-strategy-implementation-4.html#ranking-countries-1" id="toc-ranking-countries-1"><span class="toc-section-number">5.2.3</span> Ranking Countries</a></li>
+<li><a href="5.2-strategy-implementation-4.html#model-5" id="toc-model-5"><span class="toc-section-number">5.2.4</span> Model</a></li>
+<li><a href="5.2-strategy-implementation-4.html#performance-4" id="toc-performance-4"><span class="toc-section-number">5.2.5</span> Performance</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="flow-percentage-dm-rates-strategy.html"><a href="flow-percentage-dm-rates-strategy.html"><i class="fa fa-check"></i><b>7</b> Flow-Percentage DM Rates Strategy</a>
+<li class="has-sub"><a href="6-activepassive-sector-strategy.html#activepassive-sector-strategy" id="toc-activepassive-sector-strategy"><span class="toc-section-number">6</span> Active/Passive Sector Strategy</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="data-6.html"><a href="data-6.html"><i class="fa fa-check"></i><b>7.1</b> Data</a>
+<li class="has-sub"><a href="6.1-data-5.html#data-5" id="toc-data-5"><span class="toc-section-number">6.1</span> Data</a>
 <ul>
-<li class="chapter" data-level="7.1.1" data-path="data-6.html"><a href="data-6.html#aggregations-6"><i class="fa fa-check"></i><b>7.1.1</b> Aggregations</a></li>
-<li class="chapter" data-level="7.1.2" data-path="data-6.html"><a href="data-6.html#daily-percentage-flow-4"><i class="fa fa-check"></i><b>7.1.2</b> Daily Percentage Flow</a></li>
-<li class="chapter" data-level="7.1.3" data-path="data-6.html"><a href="data-6.html#aggregate-flow-file-4"><i class="fa fa-check"></i><b>7.1.3</b> Aggregate Flow File</a></li>
-<li class="chapter" data-level="7.1.4" data-path="data-6.html"><a href="data-6.html#return-file-6"><i class="fa fa-check"></i><b>7.1.4</b> Return File</a></li>
+<li><a href="6.1-data-5.html#aggregations-5" id="toc-aggregations-5"><span class="toc-section-number">6.1.1</span> Aggregations</a></li>
+<li><a href="6.1-data-5.html#activepassive-indicator-2" id="toc-activepassive-indicator-2"><span class="toc-section-number">6.1.2</span> Active/Passive Indicator</a></li>
+<li><a href="6.1-data-5.html#aggregate-indicator-file-1" id="toc-aggregate-indicator-file-1"><span class="toc-section-number">6.1.3</span> Aggregate Indicator File</a></li>
+<li><a href="6.1-data-5.html#return-file-5" id="toc-return-file-5"><span class="toc-section-number">6.1.4</span> Return File</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="strategy-implementation-6.html"><a href="strategy-implementation-6.html"><i class="fa fa-check"></i><b>7.2</b> Strategy Implementation</a>
+<li class="has-sub"><a href="6.2-strategy-implementation-5.html#strategy-implementation-5" id="toc-strategy-implementation-5"><span class="toc-section-number">6.2</span> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="strategy-implementation-6.html"><a href="strategy-implementation-6.html#compounding-flows-4"><i class="fa fa-check"></i><b>7.2.1</b> Compounding Flows</a></li>
-<li class="chapter" data-level="7.2.2" data-path="strategy-implementation-6.html"><a href="strategy-implementation-6.html#ranking-countries-2"><i class="fa fa-check"></i><b>7.2.2</b> Ranking Countries</a></li>
-<li class="chapter" data-level="7.2.3" data-path="strategy-implementation-6.html"><a href="strategy-implementation-6.html#model-7"><i class="fa fa-check"></i><b>7.2.3</b> Model</a></li>
-<li class="chapter" data-level="7.2.4" data-path="strategy-implementation-6.html"><a href="strategy-implementation-6.html#performance-6"><i class="fa fa-check"></i><b>7.2.4</b> Performance</a></li>
+<li><a href="6.2-strategy-implementation-5.html#moving-sum-of-indicator-1" id="toc-moving-sum-of-indicator-1"><span class="toc-section-number">6.2.1</span> Moving Sum of Indicator</a></li>
+<li><a href="6.2-strategy-implementation-5.html#total-return-index-5" id="toc-total-return-index-5"><span class="toc-section-number">6.2.2</span> Total Return Index</a></li>
+<li><a href="6.2-strategy-implementation-5.html#ranking-sectors-1" id="toc-ranking-sectors-1"><span class="toc-section-number">6.2.3</span> Ranking Sectors</a></li>
+<li><a href="6.2-strategy-implementation-5.html#model-6" id="toc-model-6"><span class="toc-section-number">6.2.4</span> Model</a></li>
+<li><a href="6.2-strategy-implementation-5.html#performance-5" id="toc-performance-5"><span class="toc-section-number">6.2.5</span> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="7-flow-percentage-dm-rates-strategy.html#flow-percentage-dm-rates-strategy" id="toc-flow-percentage-dm-rates-strategy"><span class="toc-section-number">7</span> Flow-Percentage DM Rates Strategy</a>
+<ul>
+<li class="has-sub"><a href="7.1-data-6.html#data-6" id="toc-data-6"><span class="toc-section-number">7.1</span> Data</a>
+<ul>
+<li><a href="7.1-data-6.html#aggregations-6" id="toc-aggregations-6"><span class="toc-section-number">7.1.1</span> Aggregations</a></li>
+<li><a href="7.1-data-6.html#daily-percentage-flow-4" id="toc-daily-percentage-flow-4"><span class="toc-section-number">7.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="7.1-data-6.html#aggregate-flow-file-4" id="toc-aggregate-flow-file-4"><span class="toc-section-number">7.1.3</span> Aggregate Flow File</a></li>
+<li><a href="7.1-data-6.html#return-file-6" id="toc-return-file-6"><span class="toc-section-number">7.1.4</span> Return File</a></li>
+</ul></li>
+<li class="has-sub"><a href="7.2-strategy-implementation-6.html#strategy-implementation-6" id="toc-strategy-implementation-6"><span class="toc-section-number">7.2</span> Strategy Implementation</a>
+<ul>
+<li><a href="7.2-strategy-implementation-6.html#compounding-flows-4" id="toc-compounding-flows-4"><span class="toc-section-number">7.2.1</span> Compounding Flows</a></li>
+<li><a href="7.2-strategy-implementation-6.html#ranking-countries-2" id="toc-ranking-countries-2"><span class="toc-section-number">7.2.2</span> Ranking Countries</a></li>
+<li><a href="7.2-strategy-implementation-6.html#model-7" id="toc-model-7"><span class="toc-section-number">7.2.3</span> Model</a></li>
+<li><a href="7.2-strategy-implementation-6.html#performance-6" id="toc-performance-6"><span class="toc-section-number">7.2.4</span> Performance</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>Alternative Macro Strategies</b></span></li>
-<li class="chapter" data-level="8" data-path="flow-percentage-daily-fixed-income-strategy.html"><a href="flow-percentage-daily-fixed-income-strategy.html"><i class="fa fa-check"></i><b>8</b> Flow-Percentage Daily Fixed-Income Strategy</a>
+<li class="has-sub"><a href="8-flow-percentage-daily-fixed-income-strategy.html#flow-percentage-daily-fixed-income-strategy" id="toc-flow-percentage-daily-fixed-income-strategy"><span class="toc-section-number">8</span> Flow-Percentage Daily Fixed-Income Strategy</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="data-7.html"><a href="data-7.html"><i class="fa fa-check"></i><b>8.1</b> Data</a>
+<li class="has-sub"><a href="8.1-data-7.html#data-7" id="toc-data-7"><span class="toc-section-number">8.1</span> Data</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="data-7.html"><a href="data-7.html#aggregations-7"><i class="fa fa-check"></i><b>8.1.1</b> Aggregations</a></li>
-<li class="chapter" data-level="8.1.2" data-path="data-7.html"><a href="data-7.html#daily-percentage-flow-5"><i class="fa fa-check"></i><b>8.1.2</b> Daily Percentage Flow</a></li>
-<li class="chapter" data-level="8.1.3" data-path="data-7.html"><a href="data-7.html#aggregate-flow-file-5"><i class="fa fa-check"></i><b>8.1.3</b> Aggregate Flow File</a></li>
-<li class="chapter" data-level="8.1.4" data-path="data-7.html"><a href="data-7.html#return-file-7"><i class="fa fa-check"></i><b>8.1.4</b> Return File</a></li>
+<li><a href="8.1-data-7.html#aggregations-7" id="toc-aggregations-7"><span class="toc-section-number">8.1.1</span> Aggregations</a></li>
+<li><a href="8.1-data-7.html#daily-percentage-flow-5" id="toc-daily-percentage-flow-5"><span class="toc-section-number">8.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="8.1-data-7.html#aggregate-flow-file-5" id="toc-aggregate-flow-file-5"><span class="toc-section-number">8.1.3</span> Aggregate Flow File</a></li>
+<li><a href="8.1-data-7.html#return-file-7" id="toc-return-file-7"><span class="toc-section-number">8.1.4</span> Return File</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="strategy-implementation-7.html"><a href="strategy-implementation-7.html"><i class="fa fa-check"></i><b>8.2</b> Strategy Implementation</a>
+<li class="has-sub"><a href="8.2-strategy-implementation-7.html#strategy-implementation-7" id="toc-strategy-implementation-7"><span class="toc-section-number">8.2</span> Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="strategy-implementation-7.html"><a href="strategy-implementation-7.html#total-return-index-6"><i class="fa fa-check"></i><b>8.2.1</b> Total Return Index</a></li>
-<li class="chapter" data-level="8.2.2" data-path="strategy-implementation-7.html"><a href="strategy-implementation-7.html#ranking-asset-classes-1"><i class="fa fa-check"></i><b>8.2.2</b> Ranking Asset Classes</a></li>
-<li class="chapter" data-level="8.2.3" data-path="strategy-implementation-7.html"><a href="strategy-implementation-7.html#model-8"><i class="fa fa-check"></i><b>8.2.3</b> Model</a></li>
-<li class="chapter" data-level="8.2.4" data-path="strategy-implementation-7.html"><a href="strategy-implementation-7.html#performance-7"><i class="fa fa-check"></i><b>8.2.4</b> Performance</a></li>
+<li><a href="8.2-strategy-implementation-7.html#total-return-index-6" id="toc-total-return-index-6"><span class="toc-section-number">8.2.1</span> Total Return Index</a></li>
+<li><a href="8.2-strategy-implementation-7.html#ranking-asset-classes-1" id="toc-ranking-asset-classes-1"><span class="toc-section-number">8.2.2</span> Ranking Asset Classes</a></li>
+<li><a href="8.2-strategy-implementation-7.html#model-8" id="toc-model-8"><span class="toc-section-number">8.2.3</span> Model</a></li>
+<li><a href="8.2-strategy-implementation-7.html#performance-7" id="toc-performance-7"><span class="toc-section-number">8.2.4</span> Performance</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>Stock Factors</b></span></li>
-<li class="chapter" data-level="9" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>9</b> Overview</a>
+<li class="has-sub"><a href="9-overview.html#overview" id="toc-overview"><span class="toc-section-number">9</span> Overview</a>
 <ul>
-<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#data-location"><i class="fa fa-check"></i>Data Location</a></li>
-<li class="chapter" data-level="" data-path="overview.html"><a href="overview.html#data-derivation"><i class="fa fa-check"></i>Data Derivation</a></li>
+<li><a href="9-overview.html#data-location" id="toc-data-location">Data Location</a></li>
+<li><a href="9-overview.html#data-derivation" id="toc-data-derivation">Data Derivation</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="flow-momentum-1.html"><a href="flow-momentum-1.html"><i class="fa fa-check"></i><b>10</b> Flow Momentum</a>
+<li class="has-sub"><a href="10-flow-momentum-1.html#flow-momentum-1" id="toc-flow-momentum-1"><span class="toc-section-number">10</span> Flow Momentum</a>
 <ul>
-<li class="chapter" data-level="" data-path="flow-momentum-1.html"><a href="flow-momentum-1.html#flomo"><i class="fa fa-check"></i>FloMo</a></li>
+<li><a href="10-flow-momentum-1.html#flomo" id="toc-flomo">FloMo</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="smart-money.html"><a href="smart-money.html"><i class="fa fa-check"></i><b>11</b> Smart Money</a>
+<li class="has-sub"><a href="11-smart-money.html#smart-money" id="toc-smart-money"><span class="toc-section-number">11</span> Smart Money</a>
 <ul>
-<li class="chapter" data-level="" data-path="smart-money.html"><a href="smart-money.html#references"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="" data-path="smart-money.html"><a href="smart-money.html#flotrend"><i class="fa fa-check"></i>FloTrend</a></li>
-<li class="chapter" data-level="" data-path="smart-money.html"><a href="smart-money.html#flodiff"><i class="fa fa-check"></i>FloDiff</a></li>
-<li class="chapter" data-level="" data-path="smart-money.html"><a href="smart-money.html#flodiff2"><i class="fa fa-check"></i>FloDiff2</a></li>
-<li class="chapter" data-level="" data-path="smart-money.html"><a href="smart-money.html#actwttrend"><i class="fa fa-check"></i>ActWtTrend</a></li>
-<li class="chapter" data-level="" data-path="smart-money.html"><a href="smart-money.html#actwtdiff"><i class="fa fa-check"></i>ActWtDiff</a></li>
-<li class="chapter" data-level="" data-path="smart-money.html"><a href="smart-money.html#actwtdiff2"><i class="fa fa-check"></i>ActWtDiff2</a></li>
+<li><a href="11-smart-money.html#references" id="toc-references">References</a></li>
+<li><a href="11-smart-money.html#flotrend" id="toc-flotrend">FloTrend</a></li>
+<li><a href="11-smart-money.html#flodiff" id="toc-flodiff">FloDiff</a></li>
+<li><a href="11-smart-money.html#flodiff2" id="toc-flodiff2">FloDiff2</a></li>
+<li><a href="11-smart-money.html#actwttrend" id="toc-actwttrend">ActWtTrend</a></li>
+<li><a href="11-smart-money.html#actwtdiff" id="toc-actwtdiff">ActWtDiff</a></li>
+<li><a href="11-smart-money.html#actwtdiff2" id="toc-actwtdiff2">ActWtDiff2</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="manager-momentum.html"><a href="manager-momentum.html"><i class="fa fa-check"></i><b>12</b> Manager momentum</a>
+<li class="has-sub"><a href="12-manager-momentum.html#manager-momentum" id="toc-manager-momentum"><span class="toc-section-number">12</span> Manager momentum</a>
 <ul>
-<li class="chapter" data-level="" data-path="manager-momentum.html"><a href="manager-momentum.html#allocmo"><i class="fa fa-check"></i>AllocMo</a></li>
-<li class="chapter" data-level="" data-path="manager-momentum.html"><a href="manager-momentum.html#alloctrend"><i class="fa fa-check"></i>AllocTrend</a></li>
-<li class="chapter" data-level="" data-path="manager-momentum.html"><a href="manager-momentum.html#allocdiff"><i class="fa fa-check"></i>AllocDiff</a></li>
+<li><a href="12-manager-momentum.html#allocmo" id="toc-allocmo">AllocMo</a></li>
+<li><a href="12-manager-momentum.html#alloctrend" id="toc-alloctrend">AllocTrend</a></li>
+<li><a href="12-manager-momentum.html#allocdiff" id="toc-allocdiff">AllocDiff</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="ownership-dispersion.html"><a href="ownership-dispersion.html"><i class="fa fa-check"></i><b>13</b> Ownership Dispersion</a>
+<li class="has-sub"><a href="13-ownership-dispersion.html#ownership-dispersion" id="toc-ownership-dispersion"><span class="toc-section-number">13</span> Ownership Dispersion</a>
 <ul>
-<li class="chapter" data-level="" data-path="ownership-dispersion.html"><a href="ownership-dispersion.html#herfindahl"><i class="fa fa-check"></i>Herfindahl</a></li>
-<li class="chapter" data-level="" data-path="ownership-dispersion.html"><a href="ownership-dispersion.html#fund-count"><i class="fa fa-check"></i>Fund Count</a></li>
-<li class="chapter" data-level="" data-path="ownership-dispersion.html"><a href="ownership-dispersion.html#references-1"><i class="fa fa-check"></i>References</a></li>
+<li><a href="13-ownership-dispersion.html#herfindahl" id="toc-herfindahl">Herfindahl</a></li>
+<li><a href="13-ownership-dispersion.html#fund-count" id="toc-fund-count">Fund Count</a></li>
+<li><a href="13-ownership-dispersion.html#references-1" id="toc-references-1">References</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="conviction.html"><a href="conviction.html"><i class="fa fa-check"></i><b>14</b> Conviction</a>
+<li class="has-sub"><a href="14-conviction.html#conviction" id="toc-conviction"><span class="toc-section-number">14</span> Conviction</a>
 <ul>
-<li class="chapter" data-level="" data-path="conviction.html"><a href="conviction.html#allocskew"><i class="fa fa-check"></i>AllocSkew</a></li>
+<li><a href="14-conviction.html#allocskew" id="toc-allocskew">AllocSkew</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="index-curse-share-suprise.html"><a href="index-curse-share-suprise.html"><i class="fa fa-check"></i><b>15</b> Index Curse (Share Suprise)</a>
+<li class="has-sub"><a href="15-backtest-example.html#backtest-example" id="toc-backtest-example"><span class="toc-section-number">15</span> Backtest Example</a>
 <ul>
-<li class="chapter" data-level="" data-path="index-curse-share-suprise.html"><a href="index-curse-share-suprise.html#shssurp"><i class="fa fa-check"></i>ShsSurp</a></li>
+<li class="has-sub"><a href="functions.html#functions" id="toc-functions">Functions</a>
+<ul>
+<li><a href="functions.html#file-name" id="toc-file-name">File name</a></li>
+<li><a href="functions.html#format-file" id="toc-format-file">Format file</a></li>
+<li><a href="functions.html#fetchs-file" id="toc-fetchs-file">Fetchs file</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="backtest-example.html"><a href="backtest-example.html"><i class="fa fa-check"></i><b>16</b> Backtest Example</a>
+<li class="has-sub"><a href="import-data.html#import-data" id="toc-import-data">Import Data</a>
 <ul>
-<li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a>
-<ul>
-<li class="chapter" data-level="" data-path="functions.html"><a href="functions.html#file-name"><i class="fa fa-check"></i>File name</a></li>
-<li class="chapter" data-level="" data-path="functions.html"><a href="functions.html#format-file"><i class="fa fa-check"></i>Format file</a></li>
-<li class="chapter" data-level="" data-path="functions.html"><a href="functions.html#fetchs-file"><i class="fa fa-check"></i>Fetchs file</a></li>
+<li><a href="import-data.html#epfr-stock-factor-data" id="toc-epfr-stock-factor-data">EPFR Stock Factor data</a></li>
+<li><a href="import-data.html#returns-data" id="toc-returns-data">Returns data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i>Import Data</a>
+<li class="has-sub"><a href="strategy-implementation-8.html#strategy-implementation-8" id="toc-strategy-implementation-8">Strategy Implementation</a>
 <ul>
-<li class="chapter" data-level="" data-path="import-data.html"><a href="import-data.html#epfr-stock-factor-data"><i class="fa fa-check"></i>EPFR Stock Factor data</a></li>
-<li class="chapter" data-level="" data-path="import-data.html"><a href="import-data.html#returns-data"><i class="fa fa-check"></i>Returns data</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="strategy-implementation-8.html"><a href="strategy-implementation-8.html"><i class="fa fa-check"></i>Strategy Implementation</a>
-<ul>
-<li class="chapter" data-level="" data-path="strategy-implementation-8.html"><a href="strategy-implementation-8.html#results"><i class="fa fa-check"></i>Results</a></li>
+<li><a href="strategy-implementation-8.html#results" id="toc-results">Results</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>FAQ</b></span></li>
-<li class="chapter" data-level="" data-path="epfr-macro-strategey-files.html"><a href="epfr-macro-strategey-files.html"><i class="fa fa-check"></i>EPFR Macro Strategey Files</a></li>
-<li class="chapter" data-level="" data-path="returns-information.html"><a href="returns-information.html"><i class="fa fa-check"></i>Returns Information</a></li>
-<li class="chapter" data-level="" data-path="country-flows.html"><a href="country-flows.html"><i class="fa fa-check"></i>Country Flows</a></li>
-<li class="chapter" data-level="" data-path="stock-flows.html"><a href="stock-flows.html"><i class="fa fa-check"></i>Stock Flows</a></li>
-<li class="chapter" data-level="" data-path="geographic-focus-breakdown.html"><a href="geographic-focus-breakdown.html"><i class="fa fa-check"></i>Geographic Focus Breakdown</a>
+<li><a href="epfr-macro-strategey-files.html#epfr-macro-strategey-files" id="toc-epfr-macro-strategey-files">EPFR Macro Strategey Files</a></li>
+<li><a href="returns-information.html#returns-information" id="toc-returns-information">Returns Information</a></li>
+<li><a href="country-flows.html#country-flows" id="toc-country-flows">Country Flows</a></li>
+<li><a href="stock-flows.html#stock-flows" id="toc-stock-flows">Stock Flows</a></li>
+<li class="has-sub"><a href="geographic-focus-breakdown.html#geographic-focus-breakdown" id="toc-geographic-focus-breakdown">Geographic Focus Breakdown</a>
 <ul>
-<li class="chapter" data-level="" data-path="geographic-focus-breakdown.html"><a href="geographic-focus-breakdown.html#stock-flows-geofocus-breakdown"><i class="fa fa-check"></i>Stock Flows GeoFocus Breakdown</a></li>
+<li><a href="geographic-focus-breakdown.html#stock-flows-geofocus-breakdown" id="toc-stock-flows-geofocus-breakdown">Stock Flows GeoFocus Breakdown</a></li>
 </ul></li>
-<li class="divider"></li>
-<li><a href="https://epfr.com/" target="blank">EPFR</a></li>
-
 </ul>
-
-      </nav>
-    </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">EPFR Strategy Notebooks</a>
-          </h1>
-        </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="data-6" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Data<a href="data-6.html#data-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="data-6" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Data</h2>
 <p>The <em>Flow-Percentage DM Rates Strategy</em> developed by EPFR is based on the percentage flow into countries via cross-border bond funds. In this section, the reader will gain an understanding of the aggregations which can be used to create a signal as well as the methodology behind daily percentage flow calculations.</p>
 <hr />
-<div id="aggregations-6" class="section level3 hasAnchor" number="7.1.1">
-<h3><span class="header-section-number">7.1.1</span> Aggregations<a href="data-6.html#aggregations-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="aggregations-6" class="section level3" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Aggregations</h3>
 <p>The first step is defining a subset of data to capture in calculating our signal.</p>
 <p>This strategy requires:</p>
 <ul>
@@ -707,8 +700,8 @@ Daily Flows &amp; Ctry Alloc
 <p>This can be achieved using fund-level flow and allocation files or by reaching out to EPFR’s Quant Team for customized aggregations.</p>
 <hr />
 </div>
-<div id="daily-percentage-flow-4" class="section level3 hasAnchor" number="7.1.2">
-<h3><span class="header-section-number">7.1.2</span> Daily Percentage Flow<a href="data-6.html#daily-percentage-flow-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="daily-percentage-flow-4" class="section level3" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Daily Percentage Flow</h3>
 <p>To begin calculating the daily percentage flow, we start with our subset of cross-border bond funds. To calculate the dollar flow into a country, we scale a fund’s flow by multiplying it against its stated country allocation, on that day. We then apply the same procedure to all funds with fund flow and country allocation information and then sum the flows for each country across all funds, to get the total dollar flow into a country. <em>EPFR releases country allocations of all funds on the <span class="math inline">\(23^{\text{rd}}\)</span> of each month (or the next available business day) at a monthly frequency. Hence, our calculation assumes constant country weightings between two consecutive release dates within the month.</em></p>
 <p><span class="math display">\[\text{Total Flow}_{c,t} = \sum^{N}_{i=m}{\text{Flow}_{i,c,t} \times \text{Country Allocation}_{i,c}}\]</span>
 Where:</p>
@@ -730,15 +723,14 @@ Where:</p>
 <p>We repeat this across all different countries for the entire history.</p>
 <hr />
 </div>
-<div id="aggregate-flow-file-4" class="section level3 hasAnchor" number="7.1.3">
-<h3><span class="header-section-number">7.1.3</span> Aggregate Flow File<a href="data-6.html#aggregate-flow-file-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="aggregate-flow-file-4" class="section level3" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Aggregate Flow File</h3>
 <p>Users may create flow percentages for their desired country aggregations and granularity using the methodology described in the previous section.</p>
 <p>Users also have the option to use the <em>Flow-Percentage DM Strategy</em> file EPFR provides, which is updated daily at 5:00 PM EST with a T+1 day lag, and is <strong>available in the user’s EPFR FTP connection under the Strategies folder</strong>. The <em>Flow-Percentage DM Strategy</em> file contains aggregate percentage flow data for 52 countries in the ACWI, EAFE and Emerging Market country universes.</p>
 <hr />
 <p>For this demonstration, we will be using the file <code>FloPctCtry-B-daily.csv</code>, which can be downloaded from the user’s FTP under the folder <code>Strategies/daily</code> and can be stored in the user’s local folder <code>EPFR/daily</code>.</p>
 <p>Below shows a snippet of what this file contains:</p>
 <p><code>Strategies/daily/FloPctCtry-B-daily.csv</code></p>
-<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -989,10 +981,9 @@ US
 </tr>
 </tbody>
 </table>
-</div>
 <hr />
 <p>For convenience, save the path to the flow file you choose to use as <code>flow.file</code>. Example shown below:</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="data-6.html#cb198-1" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily</span><span class="sc">\\</span><span class="st">FloPctCtry-B-daily.csv&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="7.1-data-6.html#cb125-1" tabindex="-1"></a>flow.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">daily</span><span class="sc">\\</span><span class="st">FloPctCtry-B-daily.csv&quot;</span></span></code></pre></div>
 <!-- --- -->
 <!-- To follow along the user can download the _Flow-Percentage DM Strategy_ files using the code below, which contains ftp functions ( \@ref(ftp) ) from `library('EPFR.r')`:  -->
 <!-- ```{r, eval=F, echo=T} -->
@@ -1006,8 +997,8 @@ US
 <!-- ``` -->
 <hr />
 </div>
-<div id="return-file-6" class="section level3 hasAnchor" number="7.1.4">
-<h3><span class="header-section-number">7.1.4</span> Return File<a href="data-6.html#return-file-6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="return-file-6" class="section level3" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> Return File</h3>
 <p>The return file for this strategy should contain data for the 10-year rates for each G10 country in the flow file, over the period of time the user wants to backtest. However, EPFR is not able to provide this data, so users must find this data though their own third-party resources.</p>
 <hr />
 <p>For the purpose of creating backtest results in this notebook, we have used an internal file containing historical daily 10-year rates, and stored locally in the folder <code>EPFR/returns</code>.</p>
@@ -1265,84 +1256,28 @@ US
 </table>
 <hr />
 <p>For convenience, save the path to the return file you choose to use as <code>ret.file</code>. Example shown below:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="data-6.html#cb199-1" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">g10rates.csv&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="7.1-data-6.html#cb126-1" tabindex="-1"></a>ret.file <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR</span><span class="sc">\\</span><span class="st">returns</span><span class="sc">\\</span><span class="st">g10rates.csv&quot;</span></span></code></pre></div>
 <hr />
 </div>
 </div>
-            </section>
+<p style="text-align: center;">
+<a href="7-flow-percentage-dm-rates-strategy.html"><button class="btn btn-default">Previous</button></a>
+<a href="7.2-strategy-implementation-6.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
 
-          </div>
-        </div>
-      </div>
-<a href="flow-percentage-dm-rates-strategy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="strategy-implementation-6.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
-  </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+
+</div>
+
 <script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-  "sharing": {
-    "github": true,
-    "facebook": false,
-    "twitter": false,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": false
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/01-Macro.Rmd",
-    "text": "Suggest an edit"
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "section"
-  }
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 });
-});
+
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
-
 </html>

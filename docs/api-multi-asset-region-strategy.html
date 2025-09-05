@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>EPFR Data &amp; Filters | EPFR Strategy Notebooks</title>
+  <title>API Multi Asset Region Strategy | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="EPFR Data &amp; Filters | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="API Multi Asset Region Strategy | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="EPFR Data &amp; Filters | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="API Multi Asset Region Strategy | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-functions.html"/>
-<link rel="next" href="video-explanations.html"/>
+<link rel="prev" href="flow-percentage.html"/>
+<link rel="next" href="multi-asset-fi-strategy.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -148,12 +148,15 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-date-format"><i class="fa fa-check"></i>API Date Format</a></li>
 <li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#supplemental-libraries"><i class="fa fa-check"></i>Supplemental Libraries</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html"><i class="fa fa-check"></i>API Flow-Percentage</a>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html"><i class="fa fa-check"></i>Flow-Percentage</a>
 <ul>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-region-strategy"><i class="fa fa-check"></i>API Multi-Asset Region Strategy</a></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-fi-strategy"><i class="fa fa-check"></i>API Multi-Asset FI Strategy</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#api-country-allocations"><i class="fa fa-check"></i>API Country Allocations</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#api-fund-flows"><i class="fa fa-check"></i>API Fund Flows</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#calculating-flow-percentage-country"><i class="fa fa-check"></i>Calculating Flow-Percentage Country</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="api-multi-asset-region-strategy.html"><a href="api-multi-asset-region-strategy.html"><i class="fa fa-check"></i>API Multi Asset Region Strategy</a></li>
+<li class="chapter" data-level="" data-path="multi-asset-fi-strategy.html"><a href="multi-asset-fi-strategy.html"><i class="fa fa-check"></i>Multi Asset FI Strategy</a></li>
 <li class="chapter" data-level="" data-path="api-dictionaries.html"><a href="api-dictionaries.html"><i class="fa fa-check"></i>API Dictionaries</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i>EPFR.r Library</a>
@@ -415,31 +418,98 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="epfr-data-filters" class="section level1 unnumbered hasAnchor">
-<h1>EPFR Data &amp; Filters<a href="epfr-data-filters.html#epfr-data-filters" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>EPFR has an extensive list of over two dozen filters that can be applied to our data sets, therefore the signals we can get can be fine-tuned.</p>
-<p>For example EPFR data can be filtered by:</p>
-<ul>
-<li><a href="https://vimeo.com/802705702">Asset class focus</a>: ability to select equity mandate, bond mandate, multi-asset mandate, balanced mandate, money market funds, and alternative funds.</li>
-<li><a href="https://vimeo.com/802703225">Fund type</a>: ability to separate by active versus passive, and ETF versus mutual funds.</li>
-<li><a href="https://vimeo.com/802701861">Investor type</a>: ability to separate retail funds (&lt;100,000 USD investment or Mutual Fund) from institutional funds (&gt;100,000 USD investment or ETF).</li>
-<li><a href="https://vimeo.com/802704377">Fund domicile or geographic focus</a>: domicile refers to where the fund is based and where it is registered. Geographic focus refers to the assets that are bought within the fund.</li>
-<li><a href="https://vimeo.com/802708072">Currency of flows</a>: allows you to filter by the currency-type share class the fund denominates in, regardless of the domicile or location of the investment.</li>
-<li><a href="https://vimeo.com/802706613">Theme</a>: allows you to segment funds that invest in specific themes. These can include different commodities, bear/leverage, SRI/ESG, Sharia, Frontier, MLP, Dividend, Insurance, CIT, Crypto, or Hedge Funds.</li>
-<li><a href="https://vimeo.com/802710659">Duration</a>: refers to specific mandated maturities of bond funds.</li>
-<li><a href="https://vimeo.com/802711983">Style</a>: on the equities’ side, it ranges from the traditional blend, growth, and value mandate style to splitting out market caps.</li>
-<li><a href="https://vimeo.com/802715830">Sector</a>: allows you to filter for sector specific funds (ex: energy, real estate, health care, technology).</li>
-</ul>
-<!-- * [Individual managers](https://vimeo.com/802710080): ability to separate aggregate flow data into individual manager buckets -->
-<p><em>More definitions can be found in the FAQ section on EPFR’s UI</em></p>
+<div id="api-multi-asset-region-strategy" class="section level2 unnumbered hasAnchor">
+<h2>API Multi Asset Region Strategy<a href="api-multi-asset-region-strategy.html#api-multi-asset-region-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This is a Multi-Asset Strategy, where we are essentially rotating between asset classes within equity and fixed-income universes. The following code recreates the Multi-Asset region flow strategy using the API. To learn more about this strategy you can read <a href="multi-asset-strategy.html#multi-asset-strategy">Multi-Asset Strategy</a> section of this notebook.</p>
+<p>This strategy is calculated at the aggregate level for equity geographic focuses. The API returns data aggregated by asset class and geographic focus meaning that only 1 API call is needed to return the data for this strategy.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="api-multi-asset-region-strategy.html#cb38-1" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="st">&quot;FF&quot;</span>  </span>
+<span id="cb38-2"><a href="api-multi-asset-region-strategy.html#cb38-2" tabindex="-1"></a>from_date <span class="ot">&lt;-</span> <span class="st">&quot;04-24-2007&quot;</span>  </span>
+<span id="cb38-3"><a href="api-multi-asset-region-strategy.html#cb38-3" tabindex="-1"></a>to_date <span class="ot">&lt;-</span> <span class="st">&quot;07-28-2025&quot;</span> <span class="co"># TODAYS DATE</span></span>
+<span id="cb38-4"><a href="api-multi-asset-region-strategy.html#cb38-4" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="api-multi-asset-region-strategy.html#cb38-5" tabindex="-1"></a>asset_classes <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;FF121000&quot;</span>, <span class="co"># ASIA EX JAPAN</span></span>
+<span id="cb38-6"><a href="api-multi-asset-region-strategy.html#cb38-6" tabindex="-1"></a>                      <span class="st">&quot;FF114004&quot;</span>, <span class="co"># EUROPE EX UK</span></span>
+<span id="cb38-7"><a href="api-multi-asset-region-strategy.html#cb38-7" tabindex="-1"></a>                      <span class="st">&quot;FF111003&quot;</span>, <span class="co"># JAPAN</span></span>
+<span id="cb38-8"><a href="api-multi-asset-region-strategy.html#cb38-8" tabindex="-1"></a>                      <span class="st">&quot;FF124000&quot;</span>, <span class="co"># LATAM</span></span>
+<span id="cb38-9"><a href="api-multi-asset-region-strategy.html#cb38-9" tabindex="-1"></a>                      <span class="st">&quot;FF114017&quot;</span>, <span class="co"># UK</span></span>
+<span id="cb38-10"><a href="api-multi-asset-region-strategy.html#cb38-10" tabindex="-1"></a>                      <span class="st">&quot;FF113002&quot;</span>, <span class="co"># USA</span></span>
+<span id="cb38-11"><a href="api-multi-asset-region-strategy.html#cb38-11" tabindex="-1"></a>                      <span class="st">&quot;FF111001&quot;</span>, <span class="co"># AUSTRALIA</span></span>
+<span id="cb38-12"><a href="api-multi-asset-region-strategy.html#cb38-12" tabindex="-1"></a>                      <span class="st">&quot;FF111002&quot;</span>, <span class="co"># HONG KONG</span></span>
+<span id="cb38-13"><a href="api-multi-asset-region-strategy.html#cb38-13" tabindex="-1"></a>                      <span class="st">&quot;FF111004&quot;</span>, <span class="co"># PACIFIC REGIONAL</span></span>
+<span id="cb38-14"><a href="api-multi-asset-region-strategy.html#cb38-14" tabindex="-1"></a>                      <span class="st">&quot;FF111005&quot;</span>, <span class="co"># SINGAPORE</span></span>
+<span id="cb38-15"><a href="api-multi-asset-region-strategy.html#cb38-15" tabindex="-1"></a>                      <span class="st">&quot;FF111006&quot;</span>  <span class="co"># NEW ZELAND</span></span>
+<span id="cb38-16"><a href="api-multi-asset-region-strategy.html#cb38-16" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="api-multi-asset-region-strategy.html#cb38-17" tabindex="-1"></a>)</span>
+<span id="cb38-18"><a href="api-multi-asset-region-strategy.html#cb38-18" tabindex="-1"></a></span>
+<span id="cb38-19"><a href="api-multi-asset-region-strategy.html#cb38-19" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> <span class="st">&quot;Daily&quot;</span>  </span>
+<span id="cb38-20"><a href="api-multi-asset-region-strategy.html#cb38-20" tabindex="-1"></a>level  <span class="ot">&lt;-</span> <span class="dv">0</span>  <span class="co"># AGGREGATE</span></span>
+<span id="cb38-21"><a href="api-multi-asset-region-strategy.html#cb38-21" tabindex="-1"></a>categories <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">13</span>, <span class="dv">3</span>) <span class="co"># ASSETS START, FLOW USD</span></span>
+<span id="cb38-22"><a href="api-multi-asset-region-strategy.html#cb38-22" tabindex="-1"></a>assets <span class="ot">&lt;-</span> <span class="st">&quot;true&quot;</span>  </span>
+<span id="cb38-23"><a href="api-multi-asset-region-strategy.html#cb38-23" tabindex="-1"></a>universal_filters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;U100005&quot;</span>) <span class="co"># ACTIVE FUNDS</span></span>
+<span id="cb38-24"><a href="api-multi-asset-region-strategy.html#cb38-24" tabindex="-1"></a>equity_filters <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
+<p>The steps for calling data from the API remains the same: create the report, wait for completion, and then return the data.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="api-multi-asset-region-strategy.html#cb39-1" tabindex="-1"></a><span class="co"># create the report</span></span>
+<span id="cb39-2"><a href="api-multi-asset-region-strategy.html#cb39-2" tabindex="-1"></a>report <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportid</span>(dataset, from_date, to_date, asset_classes, frequency, level,</span>
+<span id="cb39-3"><a href="api-multi-asset-region-strategy.html#cb39-3" tabindex="-1"></a>                            categories, <span class="cn">NULL</span>, <span class="cn">NULL</span>, assets, universal_filters, equity_filters, <span class="cn">NULL</span>, <span class="cn">NULL</span>)</span>
+<span id="cb39-4"><a href="api-multi-asset-region-strategy.html#cb39-4" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="api-multi-asset-region-strategy.html#cb39-5" tabindex="-1"></a><span class="co"># extract report id</span></span>
+<span id="cb39-6"><a href="api-multi-asset-region-strategy.html#cb39-6" tabindex="-1"></a>report_id <span class="ot">&lt;-</span> report<span class="sc">$</span>data<span class="sc">$</span>reportId</span>
+<span id="cb39-7"><a href="api-multi-asset-region-strategy.html#cb39-7" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="api-multi-asset-region-strategy.html#cb39-8" tabindex="-1"></a><span class="fu">wait_for_completion</span>(report_id, <span class="st">&quot;FF&quot;</span>, <span class="dv">30</span>, <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 30&quot;</code></pre>
+<pre><code>## [1] &quot;Report Incomplete time taken: 60&quot;</code></pre>
+<pre><code>## [1] &quot;Report Incomplete time taken: 90&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 90 seconds taken&quot;</code></pre>
+<p>After getting the report output calculate the percent flow to each of the country categories following the methodology laid out in the <a href="multi-asset-strategy.html#multi-asset-strategy">Multi-Asset Strategy</a> section of this notebook.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="api-multi-asset-region-strategy.html#cb44-1" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportoutput</span>(dataset, report_id)</span>
+<span id="cb44-2"><a href="api-multi-asset-region-strategy.html#cb44-2" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="api-multi-asset-region-strategy.html#cb44-3" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="api-multi-asset-region-strategy.html#cb44-4" tabindex="-1"></a>result_multiAsset_Rgn_daily <span class="ot">&lt;-</span> result <span class="sc">%&gt;%</span></span>
+<span id="cb44-5"><a href="api-multi-asset-region-strategy.html#cb44-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Ctry =</span> <span class="fu">recode</span>(<span class="st">`</span><span class="at">Asset Class</span><span class="st">`</span>,</span>
+<span id="cb44-6"><a href="api-multi-asset-region-strategy.html#cb44-6" tabindex="-1"></a>                  <span class="st">&quot;Asia Ex-Japan-FF-Equity&quot;</span> <span class="ot">=</span> <span class="st">&quot;AsiaXJP&quot;</span>,</span>
+<span id="cb44-7"><a href="api-multi-asset-region-strategy.html#cb44-7" tabindex="-1"></a>                  <span class="st">&quot;Europe ex-UK Regional-Western Europe-FF-Equity&quot;</span> <span class="ot">=</span> <span class="st">&quot;EurXGB&quot;</span>,</span>
+<span id="cb44-8"><a href="api-multi-asset-region-strategy.html#cb44-8" tabindex="-1"></a>                  <span class="st">&quot;Japan-Asia Pacific-FF-Equity&quot;</span> <span class="ot">=</span> <span class="st">&quot;Japan&quot;</span>,</span>
+<span id="cb44-9"><a href="api-multi-asset-region-strategy.html#cb44-9" tabindex="-1"></a>                  <span class="st">&quot;LatAm-FF-Equity&quot;</span> <span class="ot">=</span> <span class="st">&quot;LatAm&quot;</span>,</span>
+<span id="cb44-10"><a href="api-multi-asset-region-strategy.html#cb44-10" tabindex="-1"></a>                  <span class="st">&quot;United Kingdom-Western Europe-FF-Equity&quot;</span> <span class="ot">=</span> <span class="st">&quot;UK&quot;</span>,</span>
+<span id="cb44-11"><a href="api-multi-asset-region-strategy.html#cb44-11" tabindex="-1"></a>                  <span class="st">&quot;USA-North America-FF-Equity&quot;</span> <span class="ot">=</span> <span class="st">&quot;USA&quot;</span>,</span>
+<span id="cb44-12"><a href="api-multi-asset-region-strategy.html#cb44-12" tabindex="-1"></a>                  <span class="st">&quot;Australia-Asia Pacific-FF-Equity&quot;</span> <span class="ot">=</span> <span class="st">&quot;PacXJP&quot;</span>,</span>
+<span id="cb44-13"><a href="api-multi-asset-region-strategy.html#cb44-13" tabindex="-1"></a>                  <span class="st">&quot;Hong Kong Special Administrative Region of China-Asia Pacific-FF-Equity&quot;</span> <span class="ot">=</span> <span class="st">&quot;PacXJP&quot;</span>,</span>
+<span id="cb44-14"><a href="api-multi-asset-region-strategy.html#cb44-14" tabindex="-1"></a>                  <span class="st">&quot;Singapore-Asia Pacific-FF-Equity&quot;</span> <span class="ot">=</span> <span class="st">&quot;PacXJP&quot;</span>,</span>
+<span id="cb44-15"><a href="api-multi-asset-region-strategy.html#cb44-15" tabindex="-1"></a>                  <span class="st">&quot;Pacific Regional-Asia Pacific-FF-Equity&quot;</span> <span class="ot">=</span> <span class="st">&quot;PacXJP&quot;</span>,</span>
+<span id="cb44-16"><a href="api-multi-asset-region-strategy.html#cb44-16" tabindex="-1"></a>                  <span class="st">&quot;New Zealand-Asia Pacific-FF-Equity&quot;</span> <span class="ot">=</span> <span class="st">&quot;PacXJP&quot;</span>,</span>
+<span id="cb44-17"><a href="api-multi-asset-region-strategy.html#cb44-17" tabindex="-1"></a>                  <span class="at">.default =</span> <span class="st">`</span><span class="at">Asset Class</span><span class="st">`</span>) </span>
+<span id="cb44-18"><a href="api-multi-asset-region-strategy.html#cb44-18" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb44-19"><a href="api-multi-asset-region-strategy.html#cb44-19" tabindex="-1"></a>  <span class="fu">group_by</span>(Date, Ctry) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-20"><a href="api-multi-asset-region-strategy.html#cb44-20" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Flow US$ mill</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">Flow US$ mill</span><span class="st">`</span>), </span>
+<span id="cb44-21"><a href="api-multi-asset-region-strategy.html#cb44-21" tabindex="-1"></a>            <span class="st">`</span><span class="at">Total Net Assets Start</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">Total Net Assets Start</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb44-22"><a href="api-multi-asset-region-strategy.html#cb44-22" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">floPct =</span> <span class="dv">100</span> <span class="sc">*</span><span class="st">`</span><span class="at">Flow US$ mill</span><span class="st">`</span> <span class="sc">/</span> <span class="st">`</span><span class="at">Total Net Assets Start</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-23"><a href="api-multi-asset-region-strategy.html#cb44-23" tabindex="-1"></a>  <span class="fu">select</span>(Date, Ctry, floPct) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-24"><a href="api-multi-asset-region-strategy.html#cb44-24" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Ctry, <span class="at">values_from =</span> floPct) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-25"><a href="api-multi-asset-region-strategy.html#cb44-25" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">as.Date</span>(Date, <span class="at">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb44-26"><a href="api-multi-asset-region-strategy.html#cb44-26" tabindex="-1"></a>  <span class="fu">arrange</span>(Date)</span></code></pre></div>
+<p>Examine the top rows of the output</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="api-multi-asset-region-strategy.html#cb45-1" tabindex="-1"></a><span class="fu">print</span>(result_multiAsset_Rgn_daily <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(Date)) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>## Selecting by Total Net Assets Start</code></pre>
+<pre><code>##         Date FundID Flow US$ mill Total Net Assets Start
+## 1   7/7/2025  14460       84.7347               164311.4
+## 2   7/4/2025  14460        0.0000               164311.4
+## 3   7/3/2025  14460        1.1156               164137.9
+## 4  7/22/2025  14460        0.5472               164576.2
+## 5  7/18/2025  14460        0.7913               163995.9
+## 6  7/15/2025  14460        1.1877               164019.1
+## 7  7/14/2025  14460        0.3411               163990.0
+## 8  7/11/2025  14460        0.6604               165373.9
+## 9  7/10/2025  14460        0.5022               165113.8
+## 10  7/1/2025  14460        1.2995               163790.9</code></pre>
+<p>Save resulting dataframe to disk</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="api-multi-asset-region-strategy.html#cb48-1" tabindex="-1"></a><span class="fu">write.csv</span>(result_multiAsset_Rgn_daily, <span class="fu">paste0</span>(dir, <span class="st">&quot;MultiAsset-Rgn-daily-API.csv&quot;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="video-explanations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="flow-percentage.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multi-asset-fi-strategy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -470,7 +540,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-Filters.Rmd",
+    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-EPFRAPI.Rmd",
     "text": "Suggest an edit"
   },
   "history": {

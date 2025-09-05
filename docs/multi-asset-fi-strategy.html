@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>EPFR Data &amp; Filters | EPFR Strategy Notebooks</title>
+  <title>Multi Asset FI Strategy | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="EPFR Data &amp; Filters | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="Multi Asset FI Strategy | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="EPFR Data &amp; Filters | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="Multi Asset FI Strategy | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-functions.html"/>
-<link rel="next" href="video-explanations.html"/>
+<link rel="prev" href="api-multi-asset-region-strategy.html"/>
+<link rel="next" href="api-dictionaries.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -148,12 +148,15 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-date-format"><i class="fa fa-check"></i>API Date Format</a></li>
 <li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#supplemental-libraries"><i class="fa fa-check"></i>Supplemental Libraries</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html"><i class="fa fa-check"></i>API Flow-Percentage</a>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html"><i class="fa fa-check"></i>Flow-Percentage</a>
 <ul>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-region-strategy"><i class="fa fa-check"></i>API Multi-Asset Region Strategy</a></li>
-<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-fi-strategy"><i class="fa fa-check"></i>API Multi-Asset FI Strategy</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#api-country-allocations"><i class="fa fa-check"></i>API Country Allocations</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#api-fund-flows"><i class="fa fa-check"></i>API Fund Flows</a></li>
+<li class="chapter" data-level="" data-path="flow-percentage.html"><a href="flow-percentage.html#calculating-flow-percentage-country"><i class="fa fa-check"></i>Calculating Flow-Percentage Country</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="api-multi-asset-region-strategy.html"><a href="api-multi-asset-region-strategy.html"><i class="fa fa-check"></i>API Multi Asset Region Strategy</a></li>
+<li class="chapter" data-level="" data-path="multi-asset-fi-strategy.html"><a href="multi-asset-fi-strategy.html"><i class="fa fa-check"></i>Multi Asset FI Strategy</a></li>
 <li class="chapter" data-level="" data-path="api-dictionaries.html"><a href="api-dictionaries.html"><i class="fa fa-check"></i>API Dictionaries</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i>EPFR.r Library</a>
@@ -415,31 +418,214 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="epfr-data-filters" class="section level1 unnumbered hasAnchor">
-<h1>EPFR Data &amp; Filters<a href="epfr-data-filters.html#epfr-data-filters" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>EPFR has an extensive list of over two dozen filters that can be applied to our data sets, therefore the signals we can get can be fine-tuned.</p>
-<p>For example EPFR data can be filtered by:</p>
-<ul>
-<li><a href="https://vimeo.com/802705702">Asset class focus</a>: ability to select equity mandate, bond mandate, multi-asset mandate, balanced mandate, money market funds, and alternative funds.</li>
-<li><a href="https://vimeo.com/802703225">Fund type</a>: ability to separate by active versus passive, and ETF versus mutual funds.</li>
-<li><a href="https://vimeo.com/802701861">Investor type</a>: ability to separate retail funds (&lt;100,000 USD investment or Mutual Fund) from institutional funds (&gt;100,000 USD investment or ETF).</li>
-<li><a href="https://vimeo.com/802704377">Fund domicile or geographic focus</a>: domicile refers to where the fund is based and where it is registered. Geographic focus refers to the assets that are bought within the fund.</li>
-<li><a href="https://vimeo.com/802708072">Currency of flows</a>: allows you to filter by the currency-type share class the fund denominates in, regardless of the domicile or location of the investment.</li>
-<li><a href="https://vimeo.com/802706613">Theme</a>: allows you to segment funds that invest in specific themes. These can include different commodities, bear/leverage, SRI/ESG, Sharia, Frontier, MLP, Dividend, Insurance, CIT, Crypto, or Hedge Funds.</li>
-<li><a href="https://vimeo.com/802710659">Duration</a>: refers to specific mandated maturities of bond funds.</li>
-<li><a href="https://vimeo.com/802711983">Style</a>: on the equities’ side, it ranges from the traditional blend, growth, and value mandate style to splitting out market caps.</li>
-<li><a href="https://vimeo.com/802715830">Sector</a>: allows you to filter for sector specific funds (ex: energy, real estate, health care, technology).</li>
-</ul>
-<!-- * [Individual managers](https://vimeo.com/802710080): ability to separate aggregate flow data into individual manager buckets -->
-<p><em>More definitions can be found in the FAQ section on EPFR’s UI</em></p>
+<div id="multi-asset-fi-strategy" class="section level2 unnumbered hasAnchor">
+<h2>Multi Asset FI Strategy<a href="multi-asset-fi-strategy.html#multi-asset-fi-strategy" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This is a Multi-Asset Strategy, where we are essentially rotating between asset classes within equity and fixed-income universes. The following code recreates the Multi-Asset fixed income flow strategy using the API. To learn more about this strategy you can read <a href="multi-asset-strategy.html#multi-asset-strategy">Multi-Asset Strategy</a> section of this notebook.<br></p>
+<p>The API returns data grouped by asset class and geographic focus, but this strategy the data is divided by other filters (e.g. short, medium, or long term bonds). For non asset class and geographic focus categories require separate API calls will need to be made for each category. <br></p>
+<p>Each category is defined in a list with 3 elements: category name, asset class, and bond filter.</p>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="24%" />
+<col width="13%" />
+<col width="26%" />
+<col width="21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Asset Class</th>
+<th>AC ID</th>
+<th>Bond Filter</th>
+<th>Bond Filter ID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GLOBEM</td>
+<td>global EMs bond</td>
+<td>FF223002</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>HYIELD</td>
+<td>all bonds</td>
+<td>FF200000</td>
+<td>high yield</td>
+<td>B100013</td>
+</tr>
+<tr class="odd">
+<td>FLOATS</td>
+<td>all bonds</td>
+<td>FF200000</td>
+<td>bank loan</td>
+<td>B100016</td>
+</tr>
+<tr class="even">
+<td>USTRIN</td>
+<td>usa bonds</td>
+<td>FF213002</td>
+<td>intermediate term</td>
+<td>B100009</td>
+</tr>
+<tr class="odd">
+<td>USTRLT</td>
+<td>usa bonds</td>
+<td>FF213002</td>
+<td>long term</td>
+<td>B100008</td>
+</tr>
+<tr class="even">
+<td>USTRST</td>
+<td>usa bonds</td>
+<td>FF213002</td>
+<td>short term</td>
+<td>B100010</td>
+</tr>
+<tr class="odd">
+<td>Cash</td>
+<td>all money market</td>
+<td>FF400000</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>USMUNI</td>
+<td>usa bonds</td>
+<td>FF213002</td>
+<td>municipal</td>
+<td>B100019</td>
+</tr>
+<tr class="odd">
+<td>GLOFIX</td>
+<td>global bond</td>
+<td>FF212000</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="multi-asset-fi-strategy.html#cb49-1" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="st">&quot;FF&quot;</span></span>
+<span id="cb49-2"><a href="multi-asset-fi-strategy.html#cb49-2" tabindex="-1"></a>from_date <span class="ot">&lt;-</span> <span class="st">&quot;05-04-2007&quot;</span></span>
+<span id="cb49-3"><a href="multi-asset-fi-strategy.html#cb49-3" tabindex="-1"></a>to_date <span class="ot">&lt;-</span> <span class="st">&quot;07-28-2025&quot;</span>  <span class="co"># TODAY&#39;S DATE</span></span>
+<span id="cb49-4"><a href="multi-asset-fi-strategy.html#cb49-4" tabindex="-1"></a>frequency <span class="ot">&lt;-</span> <span class="st">&quot;Daily&quot;</span></span>
+<span id="cb49-5"><a href="multi-asset-fi-strategy.html#cb49-5" tabindex="-1"></a>level  <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb49-6"><a href="multi-asset-fi-strategy.html#cb49-6" tabindex="-1"></a>categories <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">13</span>, <span class="dv">3</span>) <span class="co"># ASSETS START, FLOW USD</span></span>
+<span id="cb49-7"><a href="multi-asset-fi-strategy.html#cb49-7" tabindex="-1"></a>assets <span class="ot">&lt;-</span> <span class="st">&quot;true&quot;</span></span>
+<span id="cb49-8"><a href="multi-asset-fi-strategy.html#cb49-8" tabindex="-1"></a></span>
+<span id="cb49-9"><a href="multi-asset-fi-strategy.html#cb49-9" tabindex="-1"></a>filters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="st">&quot;GLOBEM&quot;</span>, <span class="st">&quot;FF223002&quot;</span>, <span class="cn">NULL</span>), </span>
+<span id="cb49-10"><a href="multi-asset-fi-strategy.html#cb49-10" tabindex="-1"></a>                <span class="fu">list</span>(<span class="st">&quot;HYIELD&quot;</span>, <span class="st">&quot;FF200000&quot;</span>, <span class="st">&quot;B100013&quot;</span>), </span>
+<span id="cb49-11"><a href="multi-asset-fi-strategy.html#cb49-11" tabindex="-1"></a>                <span class="fu">list</span>(<span class="st">&quot;FLOATS&quot;</span>, <span class="st">&quot;FF200000&quot;</span>, <span class="st">&quot;B100016&quot;</span>), </span>
+<span id="cb49-12"><a href="multi-asset-fi-strategy.html#cb49-12" tabindex="-1"></a>                <span class="fu">list</span>(<span class="st">&quot;USTRIN&quot;</span>, <span class="st">&quot;FF213002&quot;</span>, <span class="st">&quot;B100009&quot;</span>), </span>
+<span id="cb49-13"><a href="multi-asset-fi-strategy.html#cb49-13" tabindex="-1"></a>                <span class="fu">list</span>(<span class="st">&quot;USTRLT&quot;</span>, <span class="st">&quot;FF213002&quot;</span>, <span class="st">&quot;B100008&quot;</span>), </span>
+<span id="cb49-14"><a href="multi-asset-fi-strategy.html#cb49-14" tabindex="-1"></a>                <span class="fu">list</span>(<span class="st">&quot;USTRST&quot;</span>, <span class="st">&quot;FF213002&quot;</span>, <span class="st">&quot;B100010&quot;</span>), </span>
+<span id="cb49-15"><a href="multi-asset-fi-strategy.html#cb49-15" tabindex="-1"></a>                <span class="fu">list</span>(<span class="st">&quot;CASH&quot;</span>, <span class="st">&quot;FF400000&quot;</span>, <span class="cn">NULL</span>), </span>
+<span id="cb49-16"><a href="multi-asset-fi-strategy.html#cb49-16" tabindex="-1"></a>                <span class="fu">list</span>(<span class="st">&quot;USMUNI&quot;</span>, <span class="st">&quot;FF213002&quot;</span>, <span class="st">&quot;B100019&quot;</span>), </span>
+<span id="cb49-17"><a href="multi-asset-fi-strategy.html#cb49-17" tabindex="-1"></a>                <span class="fu">list</span>(<span class="st">&quot;GLOFIX&quot;</span>, <span class="st">&quot;FF212000&quot;</span>, <span class="cn">NULL</span>))</span></code></pre></div>
+<p>Rather than 1 API call like the multi-asset region strategy this code will loop over the categories which were set in the filters list and make an API call for each category individually.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="multi-asset-fi-strategy.html#cb50-1" tabindex="-1"></a>result_multiAsset_FI_daily <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb50-2"><a href="multi-asset-fi-strategy.html#cb50-2" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="multi-asset-fi-strategy.html#cb50-3" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(filters)) {</span>
+<span id="cb50-4"><a href="multi-asset-fi-strategy.html#cb50-4" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="multi-asset-fi-strategy.html#cb50-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Calling data for: &quot;</span>, filters[[i]][[<span class="dv">1</span>]]))</span>
+<span id="cb50-6"><a href="multi-asset-fi-strategy.html#cb50-6" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="multi-asset-fi-strategy.html#cb50-7" tabindex="-1"></a>  report <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportid</span>(dataset,</span>
+<span id="cb50-8"><a href="multi-asset-fi-strategy.html#cb50-8" tabindex="-1"></a>                              from_date,</span>
+<span id="cb50-9"><a href="multi-asset-fi-strategy.html#cb50-9" tabindex="-1"></a>                              to_date,</span>
+<span id="cb50-10"><a href="multi-asset-fi-strategy.html#cb50-10" tabindex="-1"></a>                              <span class="fu">list</span>(filters[[i]][[<span class="dv">2</span>]]), <span class="co"># ASSET CLASS</span></span>
+<span id="cb50-11"><a href="multi-asset-fi-strategy.html#cb50-11" tabindex="-1"></a>                              frequency,</span>
+<span id="cb50-12"><a href="multi-asset-fi-strategy.html#cb50-12" tabindex="-1"></a>                              level,</span>
+<span id="cb50-13"><a href="multi-asset-fi-strategy.html#cb50-13" tabindex="-1"></a>                              categories,</span>
+<span id="cb50-14"><a href="multi-asset-fi-strategy.html#cb50-14" tabindex="-1"></a>                              <span class="cn">NULL</span>,</span>
+<span id="cb50-15"><a href="multi-asset-fi-strategy.html#cb50-15" tabindex="-1"></a>                              <span class="cn">NULL</span>,</span>
+<span id="cb50-16"><a href="multi-asset-fi-strategy.html#cb50-16" tabindex="-1"></a>                              assets,</span>
+<span id="cb50-17"><a href="multi-asset-fi-strategy.html#cb50-17" tabindex="-1"></a>                              <span class="cn">NULL</span>,</span>
+<span id="cb50-18"><a href="multi-asset-fi-strategy.html#cb50-18" tabindex="-1"></a>                              <span class="cn">NULL</span>,</span>
+<span id="cb50-19"><a href="multi-asset-fi-strategy.html#cb50-19" tabindex="-1"></a>                              <span class="cf">if</span> (<span class="fu">is.null</span>(filters[[i]][[<span class="dv">3</span>]])) <span class="cn">NULL</span> <span class="cf">else</span> <span class="fu">list</span>(filters[[i]][[<span class="dv">3</span>]]),</span>
+<span id="cb50-20"><a href="multi-asset-fi-strategy.html#cb50-20" tabindex="-1"></a>                              <span class="cn">NULL</span>) <span class="co"># BOND FILTER</span></span>
+<span id="cb50-21"><a href="multi-asset-fi-strategy.html#cb50-21" tabindex="-1"></a></span>
+<span id="cb50-22"><a href="multi-asset-fi-strategy.html#cb50-22" tabindex="-1"></a>  report_id <span class="ot">&lt;-</span> report<span class="sc">$</span>data<span class="sc">$</span>reportId</span>
+<span id="cb50-23"><a href="multi-asset-fi-strategy.html#cb50-23" tabindex="-1"></a>  <span class="fu">wait_for_completion</span>(report_id, dataset, <span class="dv">20</span>, <span class="dv">30</span>)</span>
+<span id="cb50-24"><a href="multi-asset-fi-strategy.html#cb50-24" tabindex="-1"></a>  result_catagory <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportoutput</span>(<span class="at">dataset =</span> <span class="st">&quot;FF&quot;</span>,  <span class="at">report_id =</span> <span class="fu">toString</span>(report_id))</span>
+<span id="cb50-25"><a href="multi-asset-fi-strategy.html#cb50-25" tabindex="-1"></a></span>
+<span id="cb50-26"><a href="multi-asset-fi-strategy.html#cb50-26" tabindex="-1"></a>  restult_catagory_clean <span class="ot">&lt;-</span>  result_catagory <span class="sc">%&gt;%</span></span>
+<span id="cb50-27"><a href="multi-asset-fi-strategy.html#cb50-27" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">FloPct =</span> <span class="dv">100</span> <span class="sc">*</span><span class="st">`</span><span class="at">Flow US$ mill</span><span class="st">`</span> <span class="sc">/</span> <span class="st">`</span><span class="at">Total Net Assets Start</span><span class="st">`</span>,</span>
+<span id="cb50-28"><a href="multi-asset-fi-strategy.html#cb50-28" tabindex="-1"></a>           <span class="at">Date =</span> <span class="fu">as.Date</span>(Date, <span class="at">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb50-29"><a href="multi-asset-fi-strategy.html#cb50-29" tabindex="-1"></a>    <span class="fu">select</span>(Date, FloPct) <span class="sc">%&gt;%</span></span>
+<span id="cb50-30"><a href="multi-asset-fi-strategy.html#cb50-30" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="sc">!!</span>filters[[i]][[<span class="dv">1</span>]] <span class="sc">:=</span> FloPct)</span>
+<span id="cb50-31"><a href="multi-asset-fi-strategy.html#cb50-31" tabindex="-1"></a></span>
+<span id="cb50-32"><a href="multi-asset-fi-strategy.html#cb50-32" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.null</span>(result_multiAsset_FI_daily)) {</span>
+<span id="cb50-33"><a href="multi-asset-fi-strategy.html#cb50-33" tabindex="-1"></a>    result_multiAsset_FI_daily <span class="ot">&lt;-</span> restult_catagory_clean</span>
+<span id="cb50-34"><a href="multi-asset-fi-strategy.html#cb50-34" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb50-35"><a href="multi-asset-fi-strategy.html#cb50-35" tabindex="-1"></a>    result_multiAsset_FI_daily <span class="ot">&lt;-</span> result_multiAsset_FI_daily <span class="sc">%&gt;%</span> <span class="fu">inner_join</span>(restult_catagory_clean, <span class="at">by =</span> <span class="st">&quot;Date&quot;</span>)</span>
+<span id="cb50-36"><a href="multi-asset-fi-strategy.html#cb50-36" tabindex="-1"></a>  }</span>
+<span id="cb50-37"><a href="multi-asset-fi-strategy.html#cb50-37" tabindex="-1"></a></span>
+<span id="cb50-38"><a href="multi-asset-fi-strategy.html#cb50-38" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Calling data for: GLOBEM&quot;</code></pre>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 20&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 20 seconds taken&quot;</code></pre>
+<pre><code>## [1] &quot;Calling data for: HYIELD&quot;</code></pre>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 20&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 20 seconds taken&quot;</code></pre>
+<pre><code>## [1] &quot;Calling data for: FLOATS&quot;</code></pre>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 20&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 20 seconds taken&quot;</code></pre>
+<pre><code>## [1] &quot;Calling data for: USTRIN&quot;</code></pre>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 20&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 20 seconds taken&quot;</code></pre>
+<pre><code>## [1] &quot;Calling data for: USTRLT&quot;</code></pre>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 20&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 20 seconds taken&quot;</code></pre>
+<pre><code>## [1] &quot;Calling data for: USTRST&quot;</code></pre>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 20&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 20 seconds taken&quot;</code></pre>
+<pre><code>## [1] &quot;Calling data for: CASH&quot;</code></pre>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 20&quot;</code></pre>
+<pre><code>## [1] &quot;Report Incomplete time taken: 50&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 50 seconds taken&quot;</code></pre>
+<pre><code>## [1] &quot;Calling data for: USMUNI&quot;</code></pre>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 20&quot;</code></pre>
+<pre><code>## [1] &quot;Report Incomplete time taken: 50&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 50 seconds taken&quot;</code></pre>
+<pre><code>## [1] &quot;Calling data for: GLOFIX&quot;</code></pre>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 20&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 20 seconds taken&quot;</code></pre>
+<p>Check top rows of output</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="multi-asset-fi-strategy.html#cb80-1" tabindex="-1"></a><span class="fu">print</span>(result_multiAsset_FI_daily <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(Date)) <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>## Selecting by GLOFIX</code></pre>
+<pre><code>##          Date       GLOBEM       HYIELD        FLOATS       USTRIN
+## 1  2019-06-05 -0.027973673  0.095349939 -1.986875e-01  0.017754130
+## 2  2014-05-26  0.052150203 -0.009375418 -4.833925e-05  0.002452491
+## 3  2010-04-27  0.337626898  0.102939204  2.648442e-01  0.003090153
+## 4  2010-04-16  0.412729663  0.071102211  4.498816e-01 -0.010467910
+## 5  2010-03-03  0.241326277  0.080321108  2.213384e-01  0.086721195
+## 6  2010-01-20  0.336657121  0.061601315  2.117595e-01  0.033362382
+## 7  2009-10-27  0.378240427  0.057028006  6.040198e-02  0.013198485
+## 8  2009-10-19  0.004537369  0.059400831 -1.519629e-01  0.120914681
+## 9  2009-07-16  0.258998344  0.038666555  1.033427e-01  0.125271758
+## 10 2009-07-06  0.013040701  0.032163965  3.548821e-01 -0.252164132
+##           USTRLT       USTRST        CASH       USMUNI    GLOFIX
+## 1   0.0094597003  0.161545751  0.07296099  0.041762856 0.4192535
+## 2  -0.0004529216 -0.001894318 -0.18786452 -0.001107607 0.3851974
+## 3   0.1746803397  0.060233419  0.09827931  0.008093416 0.3946408
+## 4   0.0531455393  0.084548698 -0.13591913  0.005558984 0.3806760
+## 5   0.0254124393  0.297141051  0.09449447  0.047171225 0.4351618
+## 6   0.0255387233  0.216424610 -0.04047568  0.059016325 0.3594302
+## 7  -0.0056885979  0.260901866  0.14915884  0.077428898 0.3631106
+## 8   0.0139185586  0.304233598  0.07399531  0.084478738 0.4147324
+## 9  -0.0324791901  0.234874767  0.22492439  0.072136681 0.3610647
+## 10  0.0004447055  0.363236243  0.23548421  0.078464357 0.5482938</code></pre>
+<p>Write the resulting dataframe to disk</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="multi-asset-fi-strategy.html#cb83-1" tabindex="-1"></a><span class="fu">write.csv</span>(result_multiAsset_FI_daily, <span class="fu">paste0</span>(dir, <span class="st">&quot;result_multiAsset_FI_daily.csv&quot;</span>), <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="video-explanations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="api-multi-asset-region-strategy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="api-dictionaries.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -470,7 +656,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-Filters.Rmd",
+    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-EPFRAPI.Rmd",
     "text": "Suggest an edit"
   },
   "history": {

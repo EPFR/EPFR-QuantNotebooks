@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>EPFR Data &amp; Filters | EPFR Strategy Notebooks</title>
+  <title>Quick Start | EPFR Strategy Notebooks</title>
   <meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="EPFR Data &amp; Filters | EPFR Strategy Notebooks" />
+  <meta property="og:title" content="Quick Start | EPFR Strategy Notebooks" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
   <meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="EPFR Data &amp; Filters | EPFR Strategy Notebooks" />
+  <meta name="twitter:title" content="Quick Start | EPFR Strategy Notebooks" />
   
   <meta name="twitter:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
   <meta name="twitter:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="strategy-functions.html"/>
-<link rel="next" href="video-explanations.html"/>
+<link rel="prev" href="epfr-api.html"/>
+<link rel="next" href="api-flow-percentage.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -415,31 +415,290 @@ code span.wa { font-style: italic; } /* Warning */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="epfr-data-filters" class="section level1 unnumbered hasAnchor">
-<h1>EPFR Data &amp; Filters<a href="epfr-data-filters.html#epfr-data-filters" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>EPFR has an extensive list of over two dozen filters that can be applied to our data sets, therefore the signals we can get can be fine-tuned.</p>
-<p>For example EPFR data can be filtered by:</p>
-<ul>
-<li><a href="https://vimeo.com/802705702">Asset class focus</a>: ability to select equity mandate, bond mandate, multi-asset mandate, balanced mandate, money market funds, and alternative funds.</li>
-<li><a href="https://vimeo.com/802703225">Fund type</a>: ability to separate by active versus passive, and ETF versus mutual funds.</li>
-<li><a href="https://vimeo.com/802701861">Investor type</a>: ability to separate retail funds (&lt;100,000 USD investment or Mutual Fund) from institutional funds (&gt;100,000 USD investment or ETF).</li>
-<li><a href="https://vimeo.com/802704377">Fund domicile or geographic focus</a>: domicile refers to where the fund is based and where it is registered. Geographic focus refers to the assets that are bought within the fund.</li>
-<li><a href="https://vimeo.com/802708072">Currency of flows</a>: allows you to filter by the currency-type share class the fund denominates in, regardless of the domicile or location of the investment.</li>
-<li><a href="https://vimeo.com/802706613">Theme</a>: allows you to segment funds that invest in specific themes. These can include different commodities, bear/leverage, SRI/ESG, Sharia, Frontier, MLP, Dividend, Insurance, CIT, Crypto, or Hedge Funds.</li>
-<li><a href="https://vimeo.com/802710659">Duration</a>: refers to specific mandated maturities of bond funds.</li>
-<li><a href="https://vimeo.com/802711983">Style</a>: on the equities’ side, it ranges from the traditional blend, growth, and value mandate style to splitting out market caps.</li>
-<li><a href="https://vimeo.com/802715830">Sector</a>: allows you to filter for sector specific funds (ex: energy, real estate, health care, technology).</li>
-</ul>
-<!-- * [Individual managers](https://vimeo.com/802710080): ability to separate aggregate flow data into individual manager buckets -->
-<p><em>More definitions can be found in the FAQ section on EPFR’s UI</em></p>
+<div id="quick-start" class="section level2 unnumbered hasAnchor">
+<h2>Quick Start<a href="quick-start.html#quick-start" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This chapter goes over installation instructions and one example call using the EPFR API.</p>
+<div id="api-install" class="section level3 unnumbered hasAnchor">
+<h3>API Install<a href="quick-start.html#api-install" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To install the EPFR API library <code>epfr</code>, you can find the code to do this below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="quick-start.html#cb1-1" tabindex="-1"></a><span class="co"># to install the EPFR API package run this line</span></span>
+<span id="cb1-2"><a href="quick-start.html#cb1-2" tabindex="-1"></a><span class="fu">install.packages</span> (<span class="st">&quot;epfr&quot;</span>, <span class="at">repos =</span> <span class="st">&quot;https://downloads.epfrglobal.com/sdks/R/&quot;</span>, <span class="at">type =</span> <span class="st">&quot;source&quot;</span>)   </span>
+<span id="cb1-3"><a href="quick-start.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(epfr)</span></code></pre></div>
+</div>
+<div id="api-login" class="section level3 unnumbered hasAnchor">
+<h3>API Login<a href="quick-start.html#api-login" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Please use your EPFR credentials to login to the <code>epfr</code> API. <br>
+If you need help with your credentials you can contact the <a href="mailto:EPFRSupport@isimarkets.com">EPFR support team</a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="quick-start.html#cb2-1" tabindex="-1"></a>username <span class="ot">&lt;-</span> <span class="st">&quot;EPFR username&quot;</span></span>
+<span id="cb2-2"><a href="quick-start.html#cb2-2" tabindex="-1"></a>password <span class="ot">&lt;-</span> <span class="st">&quot;EPFR password&quot;</span></span>
+<span id="cb2-3"><a href="quick-start.html#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="quick-start.html#cb2-4" tabindex="-1"></a><span class="fu">epfr.login</span>(username, password)</span></code></pre></div>
+<pre><code>## [1] &quot;Environment set to: PROD&quot;</code></pre>
+<pre><code>## [1] &quot;Previous session closed.&quot;</code></pre>
+<pre><code>## [1] &quot;Login successful.&quot;</code></pre>
+</div>
+<div id="api-call" class="section level3 unnumbered hasAnchor">
+<h3>API Call<a href="quick-start.html#api-call" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The process of pulling data from the EPFR API follows 3 steps, <br>
+1. Create a report using the function <code>epfr.get.reportid()</code>. Parameter inputs can be tailored for desired output. <br>
+2. Wait for the API to complete the report. <br>
+3. Retrieve data from the report using the function <code>epfr.get.reportoutput()</code>. <br><br></p>
+<p>Below is the function which which checks if a report has been completed and if it’s data is ready to be retrieved.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="quick-start.html#cb6-1" tabindex="-1"></a>wait_for_completion <span class="ot">&lt;-</span> <span class="cf">function</span>(report_id, dataset, <span class="at">inital_time_offset=</span><span class="dv">5</span>, <span class="at">time_offset=</span><span class="dv">10</span>) {</span>
+<span id="cb6-2"><a href="quick-start.html#cb6-2" tabindex="-1"></a>  </span>
+<span id="cb6-3"><a href="quick-start.html#cb6-3" tabindex="-1"></a>  time_taken <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb6-4"><a href="quick-start.html#cb6-4" tabindex="-1"></a>  </span>
+<span id="cb6-5"><a href="quick-start.html#cb6-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Inital wait for report to complete, delay &quot;</span>, inital_time_offset))</span>
+<span id="cb6-6"><a href="quick-start.html#cb6-6" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(inital_time_offset)</span>
+<span id="cb6-7"><a href="quick-start.html#cb6-7" tabindex="-1"></a>  time_taken <span class="ot">&lt;-</span> time_taken <span class="sc">+</span> inital_time_offset</span>
+<span id="cb6-8"><a href="quick-start.html#cb6-8" tabindex="-1"></a>  </span>
+<span id="cb6-9"><a href="quick-start.html#cb6-9" tabindex="-1"></a>  st <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportstatus</span>(dataset, report_id)<span class="sc">$</span>data<span class="sc">$</span>status <span class="co"># CHECK STATUS</span></span>
+<span id="cb6-10"><a href="quick-start.html#cb6-10" tabindex="-1"></a>  </span>
+<span id="cb6-11"><a href="quick-start.html#cb6-11" tabindex="-1"></a>  <span class="cf">while</span> (st <span class="sc">!=</span> <span class="st">&quot;Completed&quot;</span>) {</span>
+<span id="cb6-12"><a href="quick-start.html#cb6-12" tabindex="-1"></a>    st <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportstatus</span>(dataset, report_id)<span class="sc">$</span>data<span class="sc">$</span>status</span>
+<span id="cb6-13"><a href="quick-start.html#cb6-13" tabindex="-1"></a>    </span>
+<span id="cb6-14"><a href="quick-start.html#cb6-14" tabindex="-1"></a>    <span class="cf">if</span> (st<span class="sc">==</span><span class="st">&quot;Completed&quot;</span>) { </span>
+<span id="cb6-15"><a href="quick-start.html#cb6-15" tabindex="-1"></a>      <span class="cf">break</span> <span class="co"># REPORT COMPLETE</span></span>
+<span id="cb6-16"><a href="quick-start.html#cb6-16" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (st <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Errored&quot;</span>,<span class="st">&quot;Failed&quot;</span>)) {</span>
+<span id="cb6-17"><a href="quick-start.html#cb6-17" tabindex="-1"></a>      <span class="fu">stop</span>(<span class="st">&quot;EPFR job failed&quot;</span>) <span class="co"># REPORT FAILED</span></span>
+<span id="cb6-18"><a href="quick-start.html#cb6-18" tabindex="-1"></a>    }</span>
+<span id="cb6-19"><a href="quick-start.html#cb6-19" tabindex="-1"></a>    </span>
+<span id="cb6-20"><a href="quick-start.html#cb6-20" tabindex="-1"></a>    <span class="fu">Sys.sleep</span>(time_offset)</span>
+<span id="cb6-21"><a href="quick-start.html#cb6-21" tabindex="-1"></a>    time_taken <span class="ot">&lt;-</span> time_taken <span class="sc">+</span> time_offset</span>
+<span id="cb6-22"><a href="quick-start.html#cb6-22" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Report &quot;</span>, st, <span class="st">&quot; time taken: &quot;</span>, time_taken))</span>
+<span id="cb6-23"><a href="quick-start.html#cb6-23" tabindex="-1"></a>  } </span>
+<span id="cb6-24"><a href="quick-start.html#cb6-24" tabindex="-1"></a>  </span>
+<span id="cb6-25"><a href="quick-start.html#cb6-25" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">&quot;Report complete: &quot;</span>, time_taken, <span class="st">&quot; seconds taken&quot;</span>))</span>
+<span id="cb6-26"><a href="quick-start.html#cb6-26" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+<div id="example-api-call" class="section level3 unnumbered hasAnchor">
+<h3>Example API call<a href="quick-start.html#example-api-call" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Below is a call to get the total net assets for all equity ETFs in the energy sector from the fund flows database between January 2025 and May 2025. <br>
+More information about the available filters, categories, and asset classes in the <a href="api-dictionaries.html#api-dictionaries">API Dictionaries</a> section of this notebook.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="quick-start.html#cb7-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-2"><a href="quick-start.html#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="quick-start.html#cb7-3" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="st">&quot;FF&quot;</span></span>
+<span id="cb7-4"><a href="quick-start.html#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="quick-start.html#cb7-5" tabindex="-1"></a>report <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportid</span>(<span class="at">dataset =</span> dataset, </span>
+<span id="cb7-6"><a href="quick-start.html#cb7-6" tabindex="-1"></a>                            <span class="at">from_date =</span> <span class="st">&quot;01-01-2025&quot;</span>,</span>
+<span id="cb7-7"><a href="quick-start.html#cb7-7" tabindex="-1"></a>                            <span class="at">to_date =</span> <span class="st">&quot;05-01-2025&quot;</span>,</span>
+<span id="cb7-8"><a href="quick-start.html#cb7-8" tabindex="-1"></a>                            <span class="at">asset_classes =</span> <span class="fu">list</span>(<span class="st">&quot;FF100000&quot;</span>), <span class="co"># ALL EQUITY</span></span>
+<span id="cb7-9"><a href="quick-start.html#cb7-9" tabindex="-1"></a>                            <span class="at">frequency =</span> <span class="st">&quot;Daily&quot;</span>, </span>
+<span id="cb7-10"><a href="quick-start.html#cb7-10" tabindex="-1"></a>                            <span class="at">level =</span> <span class="dv">0</span>, <span class="co"># AGGREGATE</span></span>
+<span id="cb7-11"><a href="quick-start.html#cb7-11" tabindex="-1"></a>                            <span class="at">categories =</span> <span class="fu">list</span>(<span class="dv">1</span>), <span class="co"># TOTAL NET ASSETS </span></span>
+<span id="cb7-12"><a href="quick-start.html#cb7-12" tabindex="-1"></a>                            <span class="at">average_type =</span> <span class="cn">NULL</span>, </span>
+<span id="cb7-13"><a href="quick-start.html#cb7-13" tabindex="-1"></a>                            <span class="at">allocation_ids =</span> <span class="cn">NULL</span>, </span>
+<span id="cb7-14"><a href="quick-start.html#cb7-14" tabindex="-1"></a>                            <span class="at">assets =</span> <span class="cn">NULL</span>, </span>
+<span id="cb7-15"><a href="quick-start.html#cb7-15" tabindex="-1"></a>                            <span class="at">universal_filters =</span> <span class="fu">list</span>(<span class="st">&quot;U100001&quot;</span>), <span class="co"># ETF</span></span>
+<span id="cb7-16"><a href="quick-start.html#cb7-16" tabindex="-1"></a>                            <span class="at">equity_filters =</span> <span class="fu">list</span>(<span class="st">&quot;E100006&quot;</span>), <span class="co"># ENERGY</span></span>
+<span id="cb7-17"><a href="quick-start.html#cb7-17" tabindex="-1"></a>                            <span class="at">bond_filters =</span> <span class="cn">NULL</span>, </span>
+<span id="cb7-18"><a href="quick-start.html#cb7-18" tabindex="-1"></a>                            <span class="at">alternative_filters =</span> <span class="cn">NULL</span>)  </span>
+<span id="cb7-19"><a href="quick-start.html#cb7-19" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="quick-start.html#cb7-20" tabindex="-1"></a>report_id <span class="ot">&lt;-</span> report<span class="sc">$</span>data<span class="sc">$</span>reportId  </span>
+<span id="cb7-21"><a href="quick-start.html#cb7-21" tabindex="-1"></a><span class="fu">wait_for_completion</span>(report_id, dataset)</span>
+<span id="cb7-22"><a href="quick-start.html#cb7-22" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">epfr.get.reportoutput</span>(dataset, report_id)  </span></code></pre></div>
+<pre><code>## [1] &quot;Inital wait for report to complete, delay 5&quot;</code></pre>
+<pre><code>## [1] &quot;Report complete: 5 seconds taken&quot;</code></pre>
+<p>Output from the example API call.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="quick-start.html#cb10-1" tabindex="-1"></a><span class="fu">print</span>(result <span class="sc">%&gt;%</span> <span class="fu">top_n</span>(<span class="dv">10</span>))  </span></code></pre></div>
+<table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
+Date
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
+Asset Class
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
+Filters
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;font-weight: bold;color: white !important;background-color: rgba(181, 78, 214, 255) !important;">
+Total Net Assets
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+2/20/2025
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+All Equity-FF-Equity
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+ETF Only, Energy
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+104413.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+2/19/2025
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+All Equity-FF-Equity
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+ETF Only, Energy
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+103783.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+1/24/2025
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+All Equity-FF-Equity
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+ETF Only, Energy
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+103957.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+1/23/2025
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+All Equity-FF-Equity
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+ETF Only, Energy
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+104698.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+1/22/2025
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+All Equity-FF-Equity
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+ETF Only, Energy
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+104484.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+1/21/2025
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+All Equity-FF-Equity
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+ETF Only, Energy
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+105826.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+1/20/2025
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+All Equity-FF-Equity
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+ETF Only, Energy
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+106284.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+1/17/2025
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+All Equity-FF-Equity
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+ETF Only, Energy
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+106260.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+1/16/2025
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+All Equity-FF-Equity
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+ETF Only, Energy
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+105720.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+1/15/2025
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+All Equity-FF-Equity
+</td>
+<td style="text-align:left;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+ETF Only, Energy
+</td>
+<td style="text-align:right;font-weight: bold;color: rgba(44, 31, 110, 255) !important;">
+104548.1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="api-date-format" class="section level3 unnumbered hasAnchor">
+<h3>API Date Format<a href="quick-start.html#api-date-format" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The API accepts dates in the form “mm-dd-YYYY” whereas flow dates are written “YYYYmmdd”. <br>
+and The API outputs dates in the form “m/d/YYYY” which does not sort chronologically. <br>
+Below are 2 helper functions to convert flow dates to the api input dates and api output dates to flow dates.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="quick-start.html#cb11-1" tabindex="-1"></a>flow_to_api_date <span class="ot">&lt;-</span> <span class="cf">function</span>(flow_date) {</span>
+<span id="cb11-2"><a href="quick-start.html#cb11-2" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">substr</span>(flow_date, <span class="dv">1</span>, <span class="dv">4</span>) <span class="co"># INPUT FORMAT &quot;YYYYMMDD&quot;</span></span>
+<span id="cb11-3"><a href="quick-start.html#cb11-3" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">substr</span>(flow_date, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb11-4"><a href="quick-start.html#cb11-4" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">substr</span>(flow_date, <span class="dv">7</span>, <span class="dv">8</span>)</span>
+<span id="cb11-5"><a href="quick-start.html#cb11-5" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">paste0</span>(m, <span class="st">&quot;-&quot;</span>, d, <span class="st">&quot;-&quot;</span>, y)) <span class="co">#OUTPUT FORMAT &quot;MM-DD-YYYY&quot;</span></span>
+<span id="cb11-6"><a href="quick-start.html#cb11-6" tabindex="-1"></a>}</span>
+<span id="cb11-7"><a href="quick-start.html#cb11-7" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="quick-start.html#cb11-8" tabindex="-1"></a>chrdate_to_flowdate <span class="ot">&lt;-</span> <span class="cf">function</span>(date) {</span>
+<span id="cb11-9"><a href="quick-start.html#cb11-9" tabindex="-1"></a>  split <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(date, <span class="at">split=</span><span class="st">&quot;/&quot;</span>)[[<span class="dv">1</span>]] <span class="co"># INPUT FORMAT &quot;M/D/YYYY&quot;</span></span>
+<span id="cb11-10"><a href="quick-start.html#cb11-10" tabindex="-1"></a>  y <span class="ot">&lt;-</span> split[<span class="dv">3</span>]</span>
+<span id="cb11-11"><a href="quick-start.html#cb11-11" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">nchar</span>(split[<span class="dv">1</span>]) <span class="sc">==</span> <span class="dv">1</span>, <span class="fu">paste0</span>(<span class="st">&quot;0&quot;</span>, split[<span class="dv">1</span>]), split[<span class="dv">1</span>])</span>
+<span id="cb11-12"><a href="quick-start.html#cb11-12" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">nchar</span>(split[<span class="dv">2</span>]) <span class="sc">==</span> <span class="dv">1</span>, <span class="fu">paste0</span>(<span class="st">&quot;0&quot;</span>, split[<span class="dv">2</span>]), split[<span class="dv">2</span>])</span>
+<span id="cb11-13"><a href="quick-start.html#cb11-13" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">paste0</span>(y, m, d)) <span class="co"># OUTPUT FORMATT &quot;YYYYMMDD&quot;</span></span>
+<span id="cb11-14"><a href="quick-start.html#cb11-14" tabindex="-1"></a>}</span>
+<span id="cb11-15"><a href="quick-start.html#cb11-15" tabindex="-1"></a>chrdate_to_flowdate_vec <span class="ot">&lt;-</span> <span class="fu">Vectorize</span>(chrdate_to_flowdate)</span></code></pre></div>
+</div>
+<div id="supplemental-libraries" class="section level3 unnumbered hasAnchor">
+<h3>Supplemental Libraries<a href="quick-start.html#supplemental-libraries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We use the below libraries from tidyverse and EPFR. Please see <a href="epfr.r-library.html#epfr.r-library">EPFR.r Library</a> for more information on installing the EPFR.r library.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="quick-start.html#cb12-1" tabindex="-1"></a><span class="fu">library</span>(EPFR.r)</span>
+<span id="cb12-2"><a href="quick-start.html#cb12-2" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb12-3"><a href="quick-start.html#cb12-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<hr />
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="strategy-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="video-explanations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="epfr-api.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="api-flow-percentage.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -470,7 +729,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-Filters.Rmd",
+    "link": "https://github.com/EPFR/EPFR-QuantNotebooks/docs/00-EPFRAPI.Rmd",
     "text": "Suggest an edit"
   },
   "history": {

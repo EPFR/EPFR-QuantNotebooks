@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="8 Flow-Percentage Daily Fixed-Income Strategy | EPFR Strategy Notebooks" />
+<meta property="og:type" content="book" />
+<meta property="og:image" content="https://epfr.github.io/EPFR-QuantNotebooks/images/EPFR_Icon.png" />
+<meta property="og:description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value." />
+<meta name="github-repo" content="EPFR/EPFR-QuantNotebooks" />
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="The objective of this book is to present EPFRs proof of concept strategies so that readers have a profound understanding of how to use our EPFR’s flow and allocation dataset, construct a signal, and find initial value.">
+
+<title>8 Flow-Percentage Daily Fixed-Income Strategy | EPFR Strategy Notebooks</title>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+<link rel="stylesheet" href="toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if bootstrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="index.html#introduction" id="toc-introduction">Introduction</a>
+<ul>
+<li class="has-sub"><a href="macro-strategy-signals.html#macro-strategy-signals" id="toc-macro-strategy-signals">Macro Strategy Signals</a>
+<ul>
+<li><a href="macro-strategy-signals.html#flow-momentum" id="toc-flow-momentum">Flow Momentum</a></li>
+<li><a href="macro-strategy-signals.html#activepassive-indicator" id="toc-activepassive-indicator">Active/Passive Indicator</a></li>
+</ul></li>
+<li class="has-sub"><a href="epfr-stock-factors.html#epfr-stock-factors" id="toc-epfr-stock-factors">EPFR Stock Factors</a>
+<ul>
+<li><a href="epfr-stock-factors.html#daily-factors" id="toc-daily-factors">Daily Factors:</a></li>
+<li><a href="epfr-stock-factors.html#monthly-factors" id="toc-monthly-factors">Monthly Factors:</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="epfr.r-library.html#epfr.r-library" id="toc-epfr.r-library">EPFR.r Library</a>
+<ul>
+<li><a href="set-up.html#set-up" id="toc-set-up">Set-up</a></li>
+<li class="has-sub"><a href="strategy-functions.html#strategy-functions" id="toc-strategy-functions">Strategy Functions</a>
+<ul>
+<li><a href="strategy-functions.html#total-return-index" id="toc-total-return-index">Total Return Index</a></li>
+<li><a href="strategy-functions.html#compunding-flows" id="toc-compunding-flows">Compunding Flows</a></li>
+<li><a href="strategy-functions.html#model" id="toc-model">Model</a></li>
+<li><a href="strategy-functions.html#example" id="toc-example">Example</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="epfr-data-filters.html#epfr-data-filters" id="toc-epfr-data-filters">EPFR Data &amp; Filters</a>
+<ul>
+<li class="has-sub"><a href="video-explanations.html#video-explanations" id="toc-video-explanations">Video Explanations</a>
+<ul>
+<li><a href="video-explanations.html#asset-class-focus" id="toc-asset-class-focus">Asset class focus</a></li>
+<li><a href="video-explanations.html#fund-type" id="toc-fund-type">Fund type</a></li>
+<li><a href="video-explanations.html#investor-type" id="toc-investor-type">Investor type</a></li>
+<li><a href="video-explanations.html#currency-of-flows" id="toc-currency-of-flows">Currency of flows</a></li>
+<li><a href="video-explanations.html#fund-domicile-or-geographic-focus" id="toc-fund-domicile-or-geographic-focus">Fund domicile or Geographic focus</a></li>
+<li><a href="video-explanations.html#theme" id="toc-theme">Theme</a></li>
+<li><a href="video-explanations.html#sector" id="toc-sector">Sector</a></li>
+<li><a href="video-explanations.html#style" id="toc-style">Style</a></li>
+<li><a href="video-explanations.html#duration" id="toc-duration">Duration</a></li>
+<li><a href="video-explanations.html#individual-managers" id="toc-individual-managers">Individual managers</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Macro Strategies</b></span></li>
+<li class="has-sub"><a href="1-multi-asset-strategy.html#multi-asset-strategy" id="toc-multi-asset-strategy"><span class="toc-section-number">1</span> Multi-Asset Strategy</a>
+<ul>
+<li class="has-sub"><a href="1.1-data.html#data" id="toc-data"><span class="toc-section-number">1.1</span> Data</a>
+<ul>
+<li><a href="1.1-data.html#aggregations" id="toc-aggregations"><span class="toc-section-number">1.1.1</span> Aggregations</a></li>
+<li><a href="1.1-data.html#daily-percentage-flow" id="toc-daily-percentage-flow"><span class="toc-section-number">1.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="1.1-data.html#aggregate-flow-file" id="toc-aggregate-flow-file"><span class="toc-section-number">1.1.3</span> Aggregate Flow File</a></li>
+<li><a href="1.1-data.html#return-file" id="toc-return-file"><span class="toc-section-number">1.1.4</span> Return File</a></li>
+</ul></li>
+<li class="has-sub"><a href="1.2-strategy-implementation.html#strategy-implementation" id="toc-strategy-implementation"><span class="toc-section-number">1.2</span> Strategy Implementation</a>
+<ul>
+<li><a href="1.2-strategy-implementation.html#compounding-flows" id="toc-compounding-flows"><span class="toc-section-number">1.2.1</span> Compounding Flows</a></li>
+<li><a href="1.2-strategy-implementation.html#total-return-index-1" id="toc-total-return-index-1"><span class="toc-section-number">1.2.2</span> Total Return Index</a></li>
+<li><a href="1.2-strategy-implementation.html#subset-files" id="toc-subset-files"><span class="toc-section-number">1.2.3</span> Subset files</a></li>
+<li><a href="1.2-strategy-implementation.html#ranking-asset-classes" id="toc-ranking-asset-classes"><span class="toc-section-number">1.2.4</span> Ranking Asset Classes</a></li>
+<li><a href="1.2-strategy-implementation.html#model-1" id="toc-model-1"><span class="toc-section-number">1.2.5</span> Model</a></li>
+<li><a href="1.2-strategy-implementation.html#performance" id="toc-performance"><span class="toc-section-number">1.2.6</span> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="2-fx-strategy.html#fx-strategy" id="toc-fx-strategy"><span class="toc-section-number">2</span> FX Strategy</a>
+<ul>
+<li class="has-sub"><a href="2.1-data-1.html#data-1" id="toc-data-1"><span class="toc-section-number">2.1</span> Data</a>
+<ul>
+<li><a href="2.1-data-1.html#aggregations-1" id="toc-aggregations-1"><span class="toc-section-number">2.1.1</span> Aggregations</a></li>
+<li><a href="2.1-data-1.html#daily-percentage-flow-1" id="toc-daily-percentage-flow-1"><span class="toc-section-number">2.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="2.1-data-1.html#aggregate-flow-file-1" id="toc-aggregate-flow-file-1"><span class="toc-section-number">2.1.3</span> Aggregate Flow File</a></li>
+<li><a href="2.1-data-1.html#return-file-1" id="toc-return-file-1"><span class="toc-section-number">2.1.4</span> Return File</a></li>
+</ul></li>
+<li class="has-sub"><a href="2.2-strategy-implementation-1.html#strategy-implementation-1" id="toc-strategy-implementation-1"><span class="toc-section-number">2.2</span> Strategy Implementation</a>
+<ul>
+<li><a href="2.2-strategy-implementation-1.html#compounding-flows-1" id="toc-compounding-flows-1"><span class="toc-section-number">2.2.1</span> Compounding Flows</a></li>
+<li><a href="2.2-strategy-implementation-1.html#ranking-currencies" id="toc-ranking-currencies"><span class="toc-section-number">2.2.2</span> Ranking Currencies</a></li>
+<li><a href="2.2-strategy-implementation-1.html#model-2" id="toc-model-2"><span class="toc-section-number">2.2.3</span> Model</a></li>
+<li><a href="2.2-strategy-implementation-1.html#performance-1" id="toc-performance-1"><span class="toc-section-number">2.2.4</span> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="3-flow-percentage-country-strategy.html#flow-percentage-country-strategy" id="toc-flow-percentage-country-strategy"><span class="toc-section-number">3</span> Flow-Percentage Country Strategy</a>
+<ul>
+<li class="has-sub"><a href="3.1-data-2.html#data-2" id="toc-data-2"><span class="toc-section-number">3.1</span> Data</a>
+<ul>
+<li><a href="3.1-data-2.html#aggregations-2" id="toc-aggregations-2"><span class="toc-section-number">3.1.1</span> Aggregations</a></li>
+<li><a href="3.1-data-2.html#daily-percentage-flow-2" id="toc-daily-percentage-flow-2"><span class="toc-section-number">3.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="3.1-data-2.html#aggregate-flow-file-2" id="toc-aggregate-flow-file-2"><span class="toc-section-number">3.1.3</span> Aggregate Flow File</a></li>
+<li><a href="3.1-data-2.html#return-file-2" id="toc-return-file-2"><span class="toc-section-number">3.1.4</span> Return File</a></li>
+</ul></li>
+<li class="has-sub"><a href="3.2-strategy-implementation-2.html#strategy-implementation-2" id="toc-strategy-implementation-2"><span class="toc-section-number">3.2</span> Strategy Implementation</a>
+<ul>
+<li><a href="3.2-strategy-implementation-2.html#compounding-flows-2" id="toc-compounding-flows-2"><span class="toc-section-number">3.2.1</span> Compounding Flows</a></li>
+<li><a href="3.2-strategy-implementation-2.html#total-return-index-2" id="toc-total-return-index-2"><span class="toc-section-number">3.2.2</span> Total Return Index</a></li>
+<li><a href="3.2-strategy-implementation-2.html#ranking-countries" id="toc-ranking-countries"><span class="toc-section-number">3.2.3</span> Ranking Countries</a></li>
+<li><a href="3.2-strategy-implementation-2.html#model-3" id="toc-model-3"><span class="toc-section-number">3.2.4</span> Model</a></li>
+<li><a href="3.2-strategy-implementation-2.html#performance-2" id="toc-performance-2"><span class="toc-section-number">3.2.5</span> Performance</a></li>
+</ul></li>
+<li><a href="3.3-publications.html#publications" id="toc-publications"><span class="toc-section-number">3.3</span> Publications</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-flow-percentage-sector-strategy.html#flow-percentage-sector-strategy" id="toc-flow-percentage-sector-strategy"><span class="toc-section-number">4</span> Flow-Percentage Sector Strategy</a>
+<ul>
+<li class="has-sub"><a href="4.1-data-3.html#data-3" id="toc-data-3"><span class="toc-section-number">4.1</span> Data</a>
+<ul>
+<li><a href="4.1-data-3.html#aggregations-3" id="toc-aggregations-3"><span class="toc-section-number">4.1.1</span> Aggregations</a></li>
+<li><a href="4.1-data-3.html#daily-percentage-flow-3" id="toc-daily-percentage-flow-3"><span class="toc-section-number">4.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="4.1-data-3.html#aggregate-flow-file-3" id="toc-aggregate-flow-file-3"><span class="toc-section-number">4.1.3</span> Aggregate Flow File</a></li>
+<li><a href="4.1-data-3.html#return-file-3" id="toc-return-file-3"><span class="toc-section-number">4.1.4</span> Return File</a></li>
+</ul></li>
+<li class="has-sub"><a href="4.2-strategy-implementation-3.html#strategy-implementation-3" id="toc-strategy-implementation-3"><span class="toc-section-number">4.2</span> Strategy Implementation</a>
+<ul>
+<li><a href="4.2-strategy-implementation-3.html#compounding-flows-3" id="toc-compounding-flows-3"><span class="toc-section-number">4.2.1</span> Compounding Flows</a></li>
+<li><a href="4.2-strategy-implementation-3.html#total-return-index-3" id="toc-total-return-index-3"><span class="toc-section-number">4.2.2</span> Total Return Index</a></li>
+<li><a href="4.2-strategy-implementation-3.html#ranking-sectors" id="toc-ranking-sectors"><span class="toc-section-number">4.2.3</span> Ranking Sectors</a></li>
+<li><a href="4.2-strategy-implementation-3.html#model-4" id="toc-model-4"><span class="toc-section-number">4.2.4</span> Model</a></li>
+<li><a href="4.2-strategy-implementation-3.html#performance-3" id="toc-performance-3"><span class="toc-section-number">4.2.5</span> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="5-activepassive-country-strategy.html#activepassive-country-strategy" id="toc-activepassive-country-strategy"><span class="toc-section-number">5</span> Active/Passive Country Strategy</a>
+<ul>
+<li class="has-sub"><a href="5.1-data-4.html#data-4" id="toc-data-4"><span class="toc-section-number">5.1</span> Data</a>
+<ul>
+<li><a href="5.1-data-4.html#aggregations-4" id="toc-aggregations-4"><span class="toc-section-number">5.1.1</span> Aggregations</a></li>
+<li><a href="5.1-data-4.html#activepassive-indicator-1" id="toc-activepassive-indicator-1"><span class="toc-section-number">5.1.2</span> Active/Passive Indicator</a></li>
+<li><a href="5.1-data-4.html#aggregate-indicator-file" id="toc-aggregate-indicator-file"><span class="toc-section-number">5.1.3</span> Aggregate Indicator File</a></li>
+<li><a href="5.1-data-4.html#return-file-4" id="toc-return-file-4"><span class="toc-section-number">5.1.4</span> Return File</a></li>
+</ul></li>
+<li class="has-sub"><a href="5.2-strategy-implementation-4.html#strategy-implementation-4" id="toc-strategy-implementation-4"><span class="toc-section-number">5.2</span> Strategy Implementation</a>
+<ul>
+<li><a href="5.2-strategy-implementation-4.html#moving-sum-of-indicator" id="toc-moving-sum-of-indicator"><span class="toc-section-number">5.2.1</span> Moving Sum of Indicator</a></li>
+<li><a href="5.2-strategy-implementation-4.html#total-return-index-4" id="toc-total-return-index-4"><span class="toc-section-number">5.2.2</span> Total Return Index</a></li>
+<li><a href="5.2-strategy-implementation-4.html#ranking-countries-1" id="toc-ranking-countries-1"><span class="toc-section-number">5.2.3</span> Ranking Countries</a></li>
+<li><a href="5.2-strategy-implementation-4.html#model-5" id="toc-model-5"><span class="toc-section-number">5.2.4</span> Model</a></li>
+<li><a href="5.2-strategy-implementation-4.html#performance-4" id="toc-performance-4"><span class="toc-section-number">5.2.5</span> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="6-activepassive-sector-strategy.html#activepassive-sector-strategy" id="toc-activepassive-sector-strategy"><span class="toc-section-number">6</span> Active/Passive Sector Strategy</a>
+<ul>
+<li class="has-sub"><a href="6.1-data-5.html#data-5" id="toc-data-5"><span class="toc-section-number">6.1</span> Data</a>
+<ul>
+<li><a href="6.1-data-5.html#aggregations-5" id="toc-aggregations-5"><span class="toc-section-number">6.1.1</span> Aggregations</a></li>
+<li><a href="6.1-data-5.html#activepassive-indicator-2" id="toc-activepassive-indicator-2"><span class="toc-section-number">6.1.2</span> Active/Passive Indicator</a></li>
+<li><a href="6.1-data-5.html#aggregate-indicator-file-1" id="toc-aggregate-indicator-file-1"><span class="toc-section-number">6.1.3</span> Aggregate Indicator File</a></li>
+<li><a href="6.1-data-5.html#return-file-5" id="toc-return-file-5"><span class="toc-section-number">6.1.4</span> Return File</a></li>
+</ul></li>
+<li class="has-sub"><a href="6.2-strategy-implementation-5.html#strategy-implementation-5" id="toc-strategy-implementation-5"><span class="toc-section-number">6.2</span> Strategy Implementation</a>
+<ul>
+<li><a href="6.2-strategy-implementation-5.html#moving-sum-of-indicator-1" id="toc-moving-sum-of-indicator-1"><span class="toc-section-number">6.2.1</span> Moving Sum of Indicator</a></li>
+<li><a href="6.2-strategy-implementation-5.html#total-return-index-5" id="toc-total-return-index-5"><span class="toc-section-number">6.2.2</span> Total Return Index</a></li>
+<li><a href="6.2-strategy-implementation-5.html#ranking-sectors-1" id="toc-ranking-sectors-1"><span class="toc-section-number">6.2.3</span> Ranking Sectors</a></li>
+<li><a href="6.2-strategy-implementation-5.html#model-6" id="toc-model-6"><span class="toc-section-number">6.2.4</span> Model</a></li>
+<li><a href="6.2-strategy-implementation-5.html#performance-5" id="toc-performance-5"><span class="toc-section-number">6.2.5</span> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="7-flow-percentage-dm-rates-strategy.html#flow-percentage-dm-rates-strategy" id="toc-flow-percentage-dm-rates-strategy"><span class="toc-section-number">7</span> Flow-Percentage DM Rates Strategy</a>
+<ul>
+<li class="has-sub"><a href="7.1-data-6.html#data-6" id="toc-data-6"><span class="toc-section-number">7.1</span> Data</a>
+<ul>
+<li><a href="7.1-data-6.html#aggregations-6" id="toc-aggregations-6"><span class="toc-section-number">7.1.1</span> Aggregations</a></li>
+<li><a href="7.1-data-6.html#daily-percentage-flow-4" id="toc-daily-percentage-flow-4"><span class="toc-section-number">7.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="7.1-data-6.html#aggregate-flow-file-4" id="toc-aggregate-flow-file-4"><span class="toc-section-number">7.1.3</span> Aggregate Flow File</a></li>
+<li><a href="7.1-data-6.html#return-file-6" id="toc-return-file-6"><span class="toc-section-number">7.1.4</span> Return File</a></li>
+</ul></li>
+<li class="has-sub"><a href="7.2-strategy-implementation-6.html#strategy-implementation-6" id="toc-strategy-implementation-6"><span class="toc-section-number">7.2</span> Strategy Implementation</a>
+<ul>
+<li><a href="7.2-strategy-implementation-6.html#compounding-flows-4" id="toc-compounding-flows-4"><span class="toc-section-number">7.2.1</span> Compounding Flows</a></li>
+<li><a href="7.2-strategy-implementation-6.html#ranking-countries-2" id="toc-ranking-countries-2"><span class="toc-section-number">7.2.2</span> Ranking Countries</a></li>
+<li><a href="7.2-strategy-implementation-6.html#model-7" id="toc-model-7"><span class="toc-section-number">7.2.3</span> Model</a></li>
+<li><a href="7.2-strategy-implementation-6.html#performance-6" id="toc-performance-6"><span class="toc-section-number">7.2.4</span> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Alternative Macro Strategies</b></span></li>
+<li class="has-sub"><a href="8-flow-percentage-daily-fixed-income-strategy.html#flow-percentage-daily-fixed-income-strategy" id="toc-flow-percentage-daily-fixed-income-strategy"><span class="toc-section-number">8</span> Flow-Percentage Daily Fixed-Income Strategy</a>
+<ul>
+<li class="has-sub"><a href="8.1-data-7.html#data-7" id="toc-data-7"><span class="toc-section-number">8.1</span> Data</a>
+<ul>
+<li><a href="8.1-data-7.html#aggregations-7" id="toc-aggregations-7"><span class="toc-section-number">8.1.1</span> Aggregations</a></li>
+<li><a href="8.1-data-7.html#daily-percentage-flow-5" id="toc-daily-percentage-flow-5"><span class="toc-section-number">8.1.2</span> Daily Percentage Flow</a></li>
+<li><a href="8.1-data-7.html#aggregate-flow-file-5" id="toc-aggregate-flow-file-5"><span class="toc-section-number">8.1.3</span> Aggregate Flow File</a></li>
+<li><a href="8.1-data-7.html#return-file-7" id="toc-return-file-7"><span class="toc-section-number">8.1.4</span> Return File</a></li>
+</ul></li>
+<li class="has-sub"><a href="8.2-strategy-implementation-7.html#strategy-implementation-7" id="toc-strategy-implementation-7"><span class="toc-section-number">8.2</span> Strategy Implementation</a>
+<ul>
+<li><a href="8.2-strategy-implementation-7.html#total-return-index-6" id="toc-total-return-index-6"><span class="toc-section-number">8.2.1</span> Total Return Index</a></li>
+<li><a href="8.2-strategy-implementation-7.html#ranking-asset-classes-1" id="toc-ranking-asset-classes-1"><span class="toc-section-number">8.2.2</span> Ranking Asset Classes</a></li>
+<li><a href="8.2-strategy-implementation-7.html#model-8" id="toc-model-8"><span class="toc-section-number">8.2.3</span> Model</a></li>
+<li><a href="8.2-strategy-implementation-7.html#performance-7" id="toc-performance-7"><span class="toc-section-number">8.2.4</span> Performance</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Stock Factors</b></span></li>
+<li class="has-sub"><a href="9-overview.html#overview" id="toc-overview"><span class="toc-section-number">9</span> Overview</a>
+<ul>
+<li><a href="9-overview.html#data-location" id="toc-data-location">Data Location</a></li>
+<li><a href="9-overview.html#data-derivation" id="toc-data-derivation">Data Derivation</a></li>
+</ul></li>
+<li class="has-sub"><a href="10-flow-momentum-1.html#flow-momentum-1" id="toc-flow-momentum-1"><span class="toc-section-number">10</span> Flow Momentum</a>
+<ul>
+<li><a href="10-flow-momentum-1.html#flomo" id="toc-flomo">FloMo</a></li>
+</ul></li>
+<li class="has-sub"><a href="11-smart-money.html#smart-money" id="toc-smart-money"><span class="toc-section-number">11</span> Smart Money</a>
+<ul>
+<li><a href="11-smart-money.html#references" id="toc-references">References</a></li>
+<li><a href="11-smart-money.html#flotrend" id="toc-flotrend">FloTrend</a></li>
+<li><a href="11-smart-money.html#flodiff" id="toc-flodiff">FloDiff</a></li>
+<li><a href="11-smart-money.html#flodiff2" id="toc-flodiff2">FloDiff2</a></li>
+<li><a href="11-smart-money.html#actwttrend" id="toc-actwttrend">ActWtTrend</a></li>
+<li><a href="11-smart-money.html#actwtdiff" id="toc-actwtdiff">ActWtDiff</a></li>
+<li><a href="11-smart-money.html#actwtdiff2" id="toc-actwtdiff2">ActWtDiff2</a></li>
+</ul></li>
+<li class="has-sub"><a href="12-manager-momentum.html#manager-momentum" id="toc-manager-momentum"><span class="toc-section-number">12</span> Manager momentum</a>
+<ul>
+<li><a href="12-manager-momentum.html#allocmo" id="toc-allocmo">AllocMo</a></li>
+<li><a href="12-manager-momentum.html#alloctrend" id="toc-alloctrend">AllocTrend</a></li>
+<li><a href="12-manager-momentum.html#allocdiff" id="toc-allocdiff">AllocDiff</a></li>
+</ul></li>
+<li class="has-sub"><a href="13-ownership-dispersion.html#ownership-dispersion" id="toc-ownership-dispersion"><span class="toc-section-number">13</span> Ownership Dispersion</a>
+<ul>
+<li><a href="13-ownership-dispersion.html#herfindahl" id="toc-herfindahl">Herfindahl</a></li>
+<li><a href="13-ownership-dispersion.html#fund-count" id="toc-fund-count">Fund Count</a></li>
+<li><a href="13-ownership-dispersion.html#references-1" id="toc-references-1">References</a></li>
+</ul></li>
+<li class="has-sub"><a href="14-conviction.html#conviction" id="toc-conviction"><span class="toc-section-number">14</span> Conviction</a>
+<ul>
+<li><a href="14-conviction.html#allocskew" id="toc-allocskew">AllocSkew</a></li>
+</ul></li>
+<li class="has-sub"><a href="15-backtest-example.html#backtest-example" id="toc-backtest-example"><span class="toc-section-number">15</span> Backtest Example</a>
+<ul>
+<li class="has-sub"><a href="functions.html#functions" id="toc-functions">Functions</a>
+<ul>
+<li><a href="functions.html#file-name" id="toc-file-name">File name</a></li>
+<li><a href="functions.html#format-file" id="toc-format-file">Format file</a></li>
+<li><a href="functions.html#fetchs-file" id="toc-fetchs-file">Fetchs file</a></li>
+</ul></li>
+<li class="has-sub"><a href="import-data.html#import-data" id="toc-import-data">Import Data</a>
+<ul>
+<li><a href="import-data.html#epfr-stock-factor-data" id="toc-epfr-stock-factor-data">EPFR Stock Factor data</a></li>
+<li><a href="import-data.html#returns-data" id="toc-returns-data">Returns data</a></li>
+</ul></li>
+<li class="has-sub"><a href="strategy-implementation-8.html#strategy-implementation-8" id="toc-strategy-implementation-8">Strategy Implementation</a>
+<ul>
+<li><a href="strategy-implementation-8.html#results" id="toc-results">Results</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>FAQ</b></span></li>
+<li><a href="epfr-macro-strategey-files.html#epfr-macro-strategey-files" id="toc-epfr-macro-strategey-files">EPFR Macro Strategey Files</a></li>
+<li><a href="returns-information.html#returns-information" id="toc-returns-information">Returns Information</a></li>
+<li><a href="country-flows.html#country-flows" id="toc-country-flows">Country Flows</a></li>
+<li><a href="stock-flows.html#stock-flows" id="toc-stock-flows">Stock Flows</a></li>
+<li class="has-sub"><a href="geographic-focus-breakdown.html#geographic-focus-breakdown" id="toc-geographic-focus-breakdown">Geographic Focus Breakdown</a>
+<ul>
+<li><a href="geographic-focus-breakdown.html#stock-flows-geofocus-breakdown" id="toc-stock-flows-geofocus-breakdown">Stock Flows GeoFocus Breakdown</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="flow-percentage-daily-fixed-income-strategy" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Flow-Percentage Daily Fixed-Income Strategy</h1>
+<!-- ## Overview -->
+<p>The <em>Flow-Percentage Daily Fixed-Income Strategy</em> ranks asset classes within the fixed-income universe of geographic regions, based on a percentage flow indicator. This approach uses Premium Daily fund flows, delivered before market open.</p>
+<p><a href="r%20downloads/Daily%20Fixed%20Income.r">Download the R Script source for this chapter</a></p>
+<hr />
+</div>
+<p style="text-align: center;">
+<a href="7.2-strategy-implementation-6.html"><button class="btn btn-default">Previous</button></a>
+<a href="8.1-data-7.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

@@ -137,6 +137,25 @@ code span.wa { font-style: italic; } /* Warning */
 <li class="chapter" data-level="" data-path="epfr-stock-factors.html"><a href="epfr-stock-factors.html#monthly-factors"><i class="fa fa-check"></i>Monthly Factors:</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="epfr-api.html"><a href="epfr-api.html"><i class="fa fa-check"></i>EPFR API</a>
+<ul>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html"><i class="fa fa-check"></i>Quick Start</a>
+<ul>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-install"><i class="fa fa-check"></i>API Install</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-login"><i class="fa fa-check"></i>API Login</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-call"><i class="fa fa-check"></i>API Call</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#example-api-call"><i class="fa fa-check"></i>Example API call</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#api-date-format"><i class="fa fa-check"></i>API Date Format</a></li>
+<li class="chapter" data-level="" data-path="quick-start.html"><a href="quick-start.html#supplemental-libraries"><i class="fa fa-check"></i>Supplemental Libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html"><i class="fa fa-check"></i>API Flow-Percentage</a>
+<ul>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-flow-percentage-country-strategy"><i class="fa fa-check"></i>API Flow-Percentage Country Strategy</a></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-region-strategy"><i class="fa fa-check"></i>API Multi-Asset Region Strategy</a></li>
+<li class="chapter" data-level="" data-path="api-flow-percentage.html"><a href="api-flow-percentage.html#api-multi-asset-fi-strategy"><i class="fa fa-check"></i>API Multi-Asset FI Strategy</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="api-dictionaries.html"><a href="api-dictionaries.html"><i class="fa fa-check"></i>API Dictionaries</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="epfr.r-library.html"><a href="epfr.r-library.html"><i class="fa fa-check"></i>EPFR.r Library</a>
 <ul>
 <li class="chapter" data-level="" data-path="set-up.html"><a href="set-up.html"><i class="fa fa-check"></i>Set-up</a></li>
@@ -401,37 +420,34 @@ code span.wa { font-style: italic; } /* Warning */
 <div id="epfr-stock-factor-data" class="section level3 unnumbered hasAnchor">
 <h3>EPFR Stock Factor data<a href="import-data.html#epfr-stock-factor-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For efficiency while importing EPFR stock factor data, we will create the function below called <code>fetch.fcn()</code>, which combines functions from <code>library('EPFR.r')</code> as well as <a href="functions.html#functions">Functions</a> discussed earlier in this section, <code>fetch.ftp.QuantFactor()</code>, <code>ftp.QuantFactor.format()</code>, <code>ftp.QuantFactor.name()</code>. This will seamlessly fetch and format data directly from the users EPFR ftp connection or from a local directory, for a desired period. This function also performs any necessary compounding or summing of the specified factor over the desired period.</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="import-data.html#cb158-1" tabindex="-1"></a>fetch.fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, n, <span class="at">w =</span> <span class="st">&quot;&quot;</span>, classif) {       </span>
-<span id="cb158-2"><a href="import-data.html#cb158-2" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">yyyymm.lag</span>(x, <span class="dv">1</span>)</span>
-<span id="cb158-3"><a href="import-data.html#cb158-3" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">yyyymmdd.ex.yyyymm</span>(z)</span>
-<span id="cb158-4"><a href="import-data.html#cb158-4" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">fetch.ftp.QuantFactor</span>(y, z, n, w, classif)</span>
-<span id="cb158-5"><a href="import-data.html#cb158-5" tabindex="-1"></a>  </span>
-<span id="cb158-6"><a href="import-data.html#cb158-6" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>(y <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;fundct&quot;</span>, <span class="st">&quot;Herfindahl&quot;</span>, <span class="st">&quot;FloAlpha&quot;</span>))){</span>
-<span id="cb158-7"><a href="import-data.html#cb158-7" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">compound.sf</span>(z, <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="st">&quot;FloMo&quot;</span>, F, T))</span>
-<span id="cb158-8"><a href="import-data.html#cb158-8" tabindex="-1"></a>  }</span>
-<span id="cb158-9"><a href="import-data.html#cb158-9" tabindex="-1"></a>  z</span>
-<span id="cb158-10"><a href="import-data.html#cb158-10" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="import-data.html#cb231-1" tabindex="-1"></a>fetch.fcn <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, n, <span class="at">w =</span> <span class="st">&quot;&quot;</span>, classif) {       </span>
+<span id="cb231-2"><a href="import-data.html#cb231-2" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">yyyymm.lag</span>(x, <span class="dv">1</span>)</span>
+<span id="cb231-3"><a href="import-data.html#cb231-3" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">yyyymmdd.ex.yyyymm</span>(z)</span>
+<span id="cb231-4"><a href="import-data.html#cb231-4" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">fetch.ftp.QuantFactor</span>(y, z, n, w, classif)</span>
+<span id="cb231-5"><a href="import-data.html#cb231-5" tabindex="-1"></a>  </span>
+<span id="cb231-6"><a href="import-data.html#cb231-6" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>(y <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;fundct&quot;</span>, <span class="st">&quot;Herfindahl&quot;</span>, <span class="st">&quot;FloAlpha&quot;</span>))){</span>
+<span id="cb231-7"><a href="import-data.html#cb231-7" tabindex="-1"></a>    z <span class="ot">&lt;-</span> <span class="fu">compound.sf</span>(z, <span class="fu">ifelse</span>(y <span class="sc">==</span> <span class="st">&quot;FloMo&quot;</span>, F, T))</span>
+<span id="cb231-8"><a href="import-data.html#cb231-8" tabindex="-1"></a>  }</span>
+<span id="cb231-9"><a href="import-data.html#cb231-9" tabindex="-1"></a>  z</span>
+<span id="cb231-10"><a href="import-data.html#cb231-10" tabindex="-1"></a>}</span></code></pre></div>
 <p>The function <code>fetch.fcn()</code> requires inputs being the period of data <code>x</code> we are looking for, the stock factor name we want to test <code>y</code>. The number of tailing periods or the lookback period <code>n</code>.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="import-data.html#cb159-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">&quot;202301&quot;</span> <span class="co">#period of data</span></span>
-<span id="cb159-2"><a href="import-data.html#cb159-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="st">&quot;FloMo&quot;</span> <span class="co">#stock factor name - FloMo, FloTrend, FloDiff, FloDiff2, ActWtTrend, ActWtDiff, ActWtDiff2, AllocMo, AllocTrend, AllocDiff, Herfindahl, AllocSkew</span></span>
-<span id="cb159-3"><a href="import-data.html#cb159-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co">#lookback period</span></span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="import-data.html#cb232-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">&quot;202301&quot;</span> <span class="co">#period of data</span></span>
+<span id="cb232-2"><a href="import-data.html#cb232-2" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="st">&quot;FloMo&quot;</span> <span class="co">#stock factor name - FloMo, FloTrend, FloDiff, FloDiff2, ActWtTrend, ActWtDiff, ActWtDiff2, AllocMo, AllocTrend, AllocDiff, Herfindahl, AllocSkew</span></span>
+<span id="cb232-3"><a href="import-data.html#cb232-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co">#lookback period</span></span></code></pre></div>
 <!-- If a user wants to subset to a  -->
 <!-- ```{r} -->
 <!-- classif <- NA #TBD -->
 <!-- ``` -->
 <p>An optional input the user can add is their customized location of the StockFlows5.0 folder within their EPFR ftp connection. If there is no additional string before <code>/StockFlows5.0/</code>, this variable can be left as empty.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="import-data.html#cb160-1" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="import-data.html#cb233-1" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="st">&quot;&quot;</span></span></code></pre></div>
 <!-- ```{r, echo=F} -->
 <!-- w <- "/EPFR/Informa Financial Intelligence/1043507_Web_admin" -->
 <!-- ``` -->
 <p>Another option if the user is having issues connecting to ftp via r, they can manually download history from the <code>/StockFlows5.0/QuantitativeFactors</code> folder in ftp. The user would then just want to include the full path of where the files sit in their local device as <code>w</code>. For example if the full location of files we want to backtest are <code>'C:\\EPFR\\StockFlows5.0\\QuantitativeFactors\\Daily\\FloMo\\Aggregate'</code>, we only write:</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="import-data.html#cb161-1" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="import-data.html#cb162-1" tabindex="-1"></a>w <span class="ot">&lt;-</span> loc</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="import-data.html#cb234-1" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">EPFR&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="import-data.html#cb235-1" tabindex="-1"></a>w <span class="ot">&lt;-</span> loc</span></code></pre></div>
 <p>To fetch the data we can now execute <code>fetch.fcn()</code> and below shows a snippet of how this function formats the data before compounding/summing over period:</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="import-data.html#cb163-1" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">fetch.fcn</span>(x, y, n, w, <span class="at">classif =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning in attr(x, &quot;align&quot;): &#39;xfun::attr()&#39; is deprecated.
-## Use &#39;xfun::attr2()&#39; instead.
-## See help(&quot;Deprecated&quot;)</code></pre>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="import-data.html#cb236-1" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">fetch.fcn</span>(x, y, n, w, <span class="at">classif =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -605,9 +621,6 @@ FloMo.20221216
 <p>For the purpose of creating backtest results in this notebook, we have used an internal file containing historical daily stock returns, stored locally in the folder EPFR/returns.</p>
 <p>Below shows a snippet of what this file contains:</p>
 <p><code>EPFR/StockRets/Sp500_2022.csv</code></p>
-<pre><code>## Warning in attr(x, &quot;align&quot;): &#39;xfun::attr()&#39; is deprecated.
-## Use &#39;xfun::attr2()&#39; instead.
-## See help(&quot;Deprecated&quot;)</code></pre>
 <table class=" lightable-paper lightable-hover table" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>

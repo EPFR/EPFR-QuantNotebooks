@@ -1,6 +1,7 @@
   @import url('https://fonts.googleapis.com/css?family=Muli:400,400i,700&display=swap');
   @import url('https://fonts.googleapis.com/css?family=Prata&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  /* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); */
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap');
 
 p.caption {
   color: #777;
@@ -42,23 +43,31 @@ pre code {
 /*------------- Body and header text---------------- */
 
 .book.font-family-1 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
-h1, h2, h3, h4 {
-  font-family: 'Poppins', sans-serif;
-  color: #3a8bf5;
+h1 {
+  font-family: Georgia, serif;
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: #FF5315;
+} 
+
+h2, h3, h4 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: #000000;
 }
 
 .title {
-  font-family: 'Poppins', sans-serif;
+  font-family: Georgia, serif;
+  font-weight: bold;
   font-size: 3em !important;
-  color: #2c1f6e;
+  color: #FF5315;
  }
 
 .subtitle {
-  font-family: 'Poppins', sans-serif;
-  color: #2c1f6e;
+  font-family: Georgia, serif;
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: #FF5315;
 }
 
 /*--- LOGO ---*/
@@ -80,7 +89,7 @@ h1, h2, h3, h4 {
 }
 
 .summary{
-font-family: 'Poppins', sans-serif;
+font-family: 'IBM Plex Sans', sans-serif;
 }
 
 
@@ -92,25 +101,25 @@ font-family: 'Poppins', sans-serif;
   padding-bottom: 8px;
   padding-left: 15px;
   padding-right: 15px;
-  color: #2c1f6e;
+  color: #000000;
 }
 
 
 .summary a:hover {
-  color: #3a8bf5 !important;
+  color: #FF5315 !important;
 } 
 
 
 .book .book-summary ul.summary li.active>a { /*active TOC links*/
-  color: #3a8bf5 !important;
+  color: #FF5315 !important;
   border-left: solid 4px;
-  border-color: #7766f3;
+  border-color: #FF5315;
   padding-left: 11px !important;
 }  
 
 li.appendix span, li.part span { /* for TOC part names */
   margin-top: 1em;
-  color: color: #3a8bf5 !important;
+  color: #FF5315 !important;
   opacity: 1 !important;
   text-transform: uppercase;
 }
